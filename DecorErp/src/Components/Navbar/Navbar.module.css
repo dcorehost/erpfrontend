@@ -1,16 +1,22 @@
 /* Navbar Container */
 .navbar {
-    background-color: #000;
-    color: #fff;
+    background-color: transparent;
+
+    background-color: rgb(248, 238, 238);
+    color:#C0C0C0;
+    max-width: 100%;
     padding: 1rem 2rem;
+    
     display: flex;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 20%;
+    margin-top: 0px;
+    padding-top: 0px;
   }
   
   .container {
     width: 100%;
-    max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,62 +24,11 @@
   
   /* Logo */
   .logo {
-    font-size: 1.8rem;
+    text-decoration: none;
+    font-size: 30px;
     font-weight: bold;
-    color: #ff5733;
-  }
-  
-  /* Navigation Links */
-  .navLinks {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navLinks li {
-    margin: 0 1rem;
-    position: relative; /* Needed for dropdown */
-  }
-  
-  .navLinks a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  
-  /* Dropdown Menu */
-  .dropdownMenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #333;
-    padding: 0.5rem 0;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-    transition: all 0.3s ease-in-out;
-
-  }
-  
-  .dropdownMenu li {
-    margin: 0;
-    padding: 0.5rem 1rem;
-  }
-  
-  .dropdownMenu li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .dropdownMenu li a:hover {
-    background-color: #444;
-    border-radius: 3px;
+    color: #C0C0C0;
+    margin-left: 30%;
   }
   
   /* Buttons */
@@ -82,27 +37,30 @@
     gap: 1rem;
   }
   
-  .getStarted {
-    background-color: #ff5733;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-  
-  .getStarted:hover {
-    background-color: #ff7633;
-  }
-  
-  .login {
-    background-color: transparent;
-    color: #fff;
+  .signup {
+    background-color: black;
+    /* background-color: transparent; */
+    color:#C0C0C0;
     padding: 0.5rem 1rem;
     border: 1px solid #fff;
     border-radius: 5px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .signup:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .login {
+    background-color: black;
+    /* background-color: transparent; */
+    color:#C0C0C0;
+    padding: 0.5rem 1rem;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
   }
   
