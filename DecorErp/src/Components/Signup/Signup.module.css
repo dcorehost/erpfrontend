@@ -1,0 +1,101 @@
+/* CreateAccount.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f4f8;
+    padding: 1rem;
+  }
+  
+  .form {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .formGroup {
+    margin-bottom: 1.25rem;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .inputGroup {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0rem 0.5rem;
+    background-color: #fff;
+    transition: border-color 0.3s;
+  }
+  
+  .inputGroup:hover {
+    border-color: #007bff;
+  }
+  
+  .icon {
+    color: #888;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .input:focus {
+    border: none;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .form {
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form {
+      padding: 1rem;
+    }
+  
+    .input {
+      font-size: 0.9rem;
+    }
+  }
+  
