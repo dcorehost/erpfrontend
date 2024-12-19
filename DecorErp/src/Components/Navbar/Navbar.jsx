@@ -9,16 +9,16 @@ const Navbar = () => {
       <div className={styles.container}>
         {/* Logo */}
         <h1 className={styles.logo}>
-          <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Decore</Link>
+          <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Dcore</Link>
         </h1>
 
 
         {/* Buttons */}
         <div className={styles.buttons}>
-          <Link to="/sign-up">
+          <Link to="/SignIn">
             <button className={styles.signup}>SignUp</button>
           </Link>
-          <Link to="/sign-in">
+          <Link to="/Signup">
             <button className={styles.login}>Sign In</button>
           </Link>
         </div>

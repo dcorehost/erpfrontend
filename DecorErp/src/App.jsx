@@ -13,8 +13,8 @@ import SignIn from './Components/SignIn/SignIn';
 const App = () => {
   return (
     <Router>
-      {/* <Navbar />
-      <SideBar /> */}
+      <Navbar />
+      <SideBar />
 
       <Routes>
         {/* <Route path="/" element={<h1>Welcome to Gymfluence</h1>} /> */}
@@ -22,7 +22,7 @@ const App = () => {
            <Route path='/SignIn' element={<SignIn></SignIn>}></Route>
           <Route path='/Signup' element={<Signup></Signup>}></Route>
       </Routes>
-      {/* <Footer /> */}
+   {/* <Footer /> */}
     </Router>
   );
 };
