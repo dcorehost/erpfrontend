@@ -3,65 +3,23 @@ import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-  const [showDietDropdown, setShowDietDropdown] = useState(false);
-  const [showWorkoutDropdown, setShowWorkoutDropdown] = useState(false);
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
         {/* Logo */}
         <h1 className={styles.logo}>
-          <Link to="/">Decore</Link>
+          <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Dcore</Link>
         </h1>
 
-        {/* Navigation Links */}
-        <ul className={styles.navLinks}>
-          <li><Link to="/features">Features</Link></li>
-
-          {/* Dropdown for Diet Plan */}
-          <li
-            className={styles.dropdown}
-            onMouseEnter={() => setShowDietDropdown(true)}
-            onMouseLeave={() => setShowDietDropdown(false)}
-          >
-            <Link to="/diet-plan">Diet Plan</Link>
-            {showDietDropdown && (
-              <ul className={styles.dropdownMenu}>
-                <li><Link to="/diet-plan/keto">Keto</Link></li>
-                <li><Link to="/diet-plan/vegan">Vegan</Link></li>
-                <li><Link to="/diet-plan/paleo">Paleo</Link></li>
-              </ul>
-            )}
-          </li>
-
-          {/* Dropdown for Workout Plans */}
-          <li
-            className={styles.dropdown}
-            onMouseEnter={() => setShowWorkoutDropdown(true)}
-            onMouseLeave={() => setShowWorkoutDropdown(false)}
-          >
-            <Link to="/workout-plans">Workout Plans</Link>
-            {showWorkoutDropdown && (
-              <ul className={styles.dropdownMenu}>
-                <li><Link to="/workout-plans/beginner">Beginner</Link></li>
-                <li><Link to="/workout-plans/intermediate">Intermediate</Link></li>
-                <li><Link to="/workout-plans/advanced">Advanced</Link></li>
-              </ul>
-            )}
-          </li>
-
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/faqs">FAQs</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-        </ul>
 
         {/* Buttons */}
         <div className={styles.buttons}>
-          <Link to="/get-started">
-            <button className={styles.getStarted}>Get Started</button>
+          <Link to="/SignIn">
+            <button className={styles.signup}>SignUp</button>
           </Link>
-          <Link to="/login">
-            <button className={styles.login}>Login</button>
+          <Link to="/Signup">
+            <button className={styles.login}>Sign In</button>
           </Link>
         </div>
       </div>
@@ -70,3 +28,77 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+// import React, { useState } from 'react'; 
+// import { Link } from 'react-router-dom'; 
+// import styles from './Navbar.module.css';
+
+// const Navbar = () => {
+//   const [showModulesDropdown, setShowModulesDropdown] = useState(false);
+//   const [showReportsDropdown, setShowReportsDropdown] = useState(false);
+
+//   return (
+//     <nav className={styles.navbar} style={{ backgroundColor: '#000', color: '#C0C0C0' }}>
+//       <div className={styles.container}>
+//         {/* Logo */}
+        // <h1 className={styles.logo}>
+        //   <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Decore</Link>
+        // </h1>
+
+//         {/* Navigation Links */}
+//         <ul className={styles.navLinks}>
+//           <li><Link to="/dashboard" style={{ color: '#C0C0C0' }}>Dashboard</Link></li>
+
+//           {/* Dropdown for Modules */}
+//           <li
+//             className={styles.dropdown}
+//             onMouseEnter={() => setShowModulesDropdown(true)}
+//             onMouseLeave={() => setShowModulesDropdown(false)}
+//           >
+//             <Link to="/modules" style={{ color: '#C0C0C0' }}>Modules</Link>
+//             {showModulesDropdown && (
+//               <ul className={styles.dropdownMenu} style={{ backgroundColor: '#000', border: '1px solid #C0C0C0' }}>
+//                 <li><Link to="/modules/hr" style={{ color: '#C0C0C0' }}>Human Resources</Link></li>
+//                 <li><Link to="/modules/finance" style={{ color: '#C0C0C0' }}>Finance</Link></li>
+//                 <li><Link to="/modules/inventory" style={{ color: '#C0C0C0' }}>Inventory</Link></li>
+//               </ul>
+//             )}
+//           </li>
+
+//           {/* Dropdown for Reports */}
+//           <li
+//             className={styles.dropdown}
+//             onMouseEnter={() => setShowReportsDropdown(true)}
+//             onMouseLeave={() => setShowReportsDropdown(false)}
+//           >
+//             <Link to="/reports" style={{ color: '#C0C0C0' }}>Reports</Link>
+//             {showReportsDropdown && (
+//               <ul className={styles.dropdownMenu} style={{ backgroundColor: '#000', border: '1px solid #C0C0C0' }}>
+//                 <li><Link to="/reports/sales" style={{ color: '#C0C0C0' }}>Sales Reports</Link></li>
+//                 <li><Link to="/reports/employee" style={{ color: '#C0C0C0' }}>Employee Reports</Link></li>
+//                 <li><Link to="/reports/inventory" style={{ color: '#C0C0C0' }}>Inventory Reports</Link></li>
+//               </ul>
+//             )}
+//           </li>
+
+//           <li><Link to="/settings" style={{ color: '#C0C0C0' }}>Settings</Link></li>
+//           <li><Link to="/support" style={{ color: '#C0C0C0' }}>Support</Link></li>
+//         </ul>
+
+//         {/* Buttons */}
+//         <div className={styles.buttons}>
+//           <Link to="/profile">
+//             <button className={styles.profile} style={{ backgroundColor: '#C0C0C0', color: '#000' }}>Profile</button>
+//           </Link>
+//           <Link to="/logout">
+//             <button className={styles.logout} style={{ backgroundColor: '#C0C0C0', color: '#000' }}>Logout</button>
+//           </Link>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
