@@ -15,10 +15,10 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className={styles.buttons}>
-          <Link to="/SignIn">
+          <Link to="/Signup">
             <button className={styles.signup}>SignUp</button>
           </Link>
-          <Link to="/Signup">
+          <Link to="/SignIn">
             <button className={styles.login}>Sign In</button>
           </Link>
         </div>

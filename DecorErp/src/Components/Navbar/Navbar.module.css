@@ -1,18 +1,18 @@
 /* Navbar Container */
 .navbar {
     background-color: transparent;
-
     background-color: rgb(248, 238, 238);
     color:#C0C0C0;
     max-width: 100%;
     padding: 1rem 2rem;
-    
     display: flex;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     margin-left: 20%;
     margin-top: 0px;
     padding-top: 0px;
+    /* position: fixed; */
+    /* border: 1px solid black; */
   }
   
   .container {

@@ -53,7 +53,7 @@ const Signup = () => {
               value={formData.username}
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter your username"
+              placeholder="Username"
               required
             />
           </div>
@@ -69,7 +69,7 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter your email"
+              placeholder="Email"
               required
             />
           </div>
@@ -85,7 +85,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter your password"
+              placeholder="Password"
               required
             />
             <span
@@ -107,7 +107,7 @@ const Signup = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               className={styles.input}
-              placeholder="Confirm your password"
+              placeholder="Confirm password"
               required
             />
             <span
