@@ -1,4 +1,3 @@
-// src/components/UserProfile.jsx
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,7 +10,7 @@ const UserProfile = () => {
     // Fetch attendance data from the backend
     const fetchAttendance = async () => {
       try {
-        const response = await fetch('/api/attendance'); // Replace with your backend API URL
+        const response = await fetch('/api/attendance'); //API URL
         const data = await response.json();
         setAttendance(data);
       } catch (error) {
