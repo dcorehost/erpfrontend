@@ -19,8 +19,8 @@ const App = () => {
       <Routes>
         {/* <Route path="/" element={<h1>Welcome to Gymfluence</h1>} /> */}
         {/* <Route path="/features" element={<Features />} /> */}
-           <Route path='/SignIn' element={<SignIn></SignIn>}></Route>
-          <Route path='/Signup' element={<Signup></Signup>}></Route>
+           <Route path='/Signup' element={<SignIn></SignIn>}></Route>
+          <Route path='/SignIn' element={<Signup></Signup>}></Route>
       </Routes>
    {/* <Footer /> */}
     </Router>
