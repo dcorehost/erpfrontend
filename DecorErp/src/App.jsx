@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar/Navbar';
 import SideBar from './Components/SideBar/Sidebar';
 import Signup from './Components/SignUp/SignUp';
 import SignIn from './Components/SignIn/SignIn';
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 
 // import Navbar from './Navbar/Navbar';
 
@@ -19,8 +20,9 @@ const App = () => {
       <Routes>
         {/* <Route path="/" element={<h1>Welcome to Gymfluence</h1>} /> */}
         {/* <Route path="/features" element={<Features />} /> */}
-           <Route path='/SignIn' element={<SignIn></SignIn>}></Route>
-          <Route path='/Signup' element={<Signup></Signup>}></Route>
+         <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
+           <Route path='/Signup' element={<SignIn></SignIn>}></Route>
+          <Route path='/SignIn' element={<Signup></Signup>}></Route>
       </Routes>
    {/* <Footer /> */}
     </Router>
