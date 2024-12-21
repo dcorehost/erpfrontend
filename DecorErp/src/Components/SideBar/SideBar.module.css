@@ -1,62 +1,4 @@
-/* .sidebarContainer {
-    position: relative;
-  }
-  
-  
-  
-  .sidebar {
-   
-    position: fixed;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    background-color: gray;
-    color: #fff;
-    transition: left 0.3s;
-    padding: 20px;
-  }
-  
-
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 20px 0;
-  }
-  
-  .sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  
-  .menu{
-    font-size:25px;
-    color: silver;
-    cursor: pointer;
-  }
-  .menuItem{
-    text-decoration: underline;
-  }
-  .menuItem:hover{
-    background-color: #fff;
-  }
-  .icon{
-    margin-left: 5px;
-  }
- 
-  
- 
-
- */
-
-
-
-
+/* 
  .sidebarContainer {
   position: relative;
 }
@@ -136,53 +78,23 @@
   height: 1px;
   background: #555;
   margin: 10px 0;
-} 
+}  */
 
-/* 
+
+
+/* General Sidebar Styling */
 .sidebarContainer {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  transition: width 0.3s;
-  margin-top: 0px;
-}
-
-.sidebarContainer.open {
-  width: 300px;
-}
-
-.sidebarContainer.closed {
-  width: 80px;
-}
-
-.logoSection {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: gray;
-  padding: 20px;
-  color: white;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.toggleButton {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 1.5rem;
 }
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 100%;
   background-color: gray;
   color: #fff;
-  flex: 1;
-  overflow-y: auto;
+  transition: left 0.3s;
   padding: 20px;
 }
 
@@ -222,15 +134,10 @@
 
 .icon {
   margin-right: 10px;
-  font-size: 1.2rem;
 }
 
 .title {
   flex: 1;
-}
-
-.hidden {
-  display: none;
 }
 
 .submenu {
@@ -243,11 +150,11 @@
 }
 
 .submenuItem a {
-  color: #ffa500; 
+  color: #ffa500;
 }
 
 .submenuItem:hover a {
-  color: #fff; 
+  color: #fff;
 }
 
 .menuDivider {
@@ -255,4 +162,105 @@
   height: 1px;
   background: #555;
   margin: 10px 0;
-} */
+}
+
+/* Media Queries for Responsiveness */
+
+/* Mobile (small screens, up to 480px) */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 80%; /* Sidebar takes up 80% of the screen width */
+    position: fixed;
+    left: -100%; /* Hide sidebar by default */
+    transition: left 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar when open */
+  }
+
+  .sidebar ul {
+    padding: 10px;
+  }
+
+  .menuItem {
+    font-size: 16px; /* Smaller font size for mobile */
+    padding: 10px 5px;
+  }
+
+  .icon {
+    font-size: 18px; /* Slightly smaller icons */
+  }
+
+  .title {
+    font-size: 16px; /* Adjust title size */
+  }
+
+  .submenu {
+    margin-left: 10px;
+  }
+
+  .submenuItem {
+    font-size: 14px; /* Smaller submenu font size */
+  }
+}
+
+/* Tablet (between 481px to 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  .sidebar {
+    width: 250px; /* Adjust sidebar width */
+  }
+
+  .sidebar ul {
+    padding: 20px;
+  }
+
+  .menuItem {
+    font-size: 18px; /* Adjust font size for tablets */
+    padding: 15px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .submenu {
+    margin-left: 15px;
+  }
+
+  .submenuItem {
+    font-size: 16px;
+  }
+}
+
+/* Desktop (larger screens, 769px and above) */
+@media (min-width: 769px) {
+  .sidebar {
+    width: 300px; /* Sidebar takes up full width on larger screens */
+  }
+
+  .menuItem {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .submenu {
+    margin-left: 20px;
+  }
+
+  .submenuItem {
+    font-size: 18px;
+  }
+}

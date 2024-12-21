@@ -29,6 +29,14 @@ const AdminDashboard = () => {
           <h2>User Management</h2>
           <button className={styles.button}>View All Users</button>
         </section>
+        <section className={styles.section}>
+          <h2>Customer Date Managment</h2>
+          <button className={styles.button}>View All Customer & Date</button>
+        </section>
+        <section className={styles.section}>
+          <h2>Pipeline and Workflow Managemen</h2>
+          <button className={styles.button}>View All Workflow Managemen</button>
+        </section>
 
         <section className={styles.section}>
           <h2>System Configuration</h2>
@@ -38,6 +46,10 @@ const AdminDashboard = () => {
         <section className={styles.section}>
           <h2>Reporting & Analytics</h2>
           <button className={styles.button}>Generate Report</button>
+        </section>
+        <section className={styles.section}>
+          <h2>Notifications and Alerts</h2>
+          <button className={styles.button}>View Notification</button>
         </section>
 
         <section className={styles.section}>
