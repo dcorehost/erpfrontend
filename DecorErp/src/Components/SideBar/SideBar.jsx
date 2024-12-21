@@ -32,7 +32,7 @@ const SideBar = () => {
         { title: "Option 3", link: "/option-3" },
       ],
     },
-    { title: "Sells Management", icon: <LiaBuysellads />, link: "/sells managment", submenus: [
+    { title: "Sales Management", icon: <LiaBuysellads />, link: "/sells managment", submenus: [
       { title: "option 1", link: "/option 1" }, 
       { title: "option 2", link: "/option 2" }, 
       { title: "option 3", link: "/option 3" }, 
