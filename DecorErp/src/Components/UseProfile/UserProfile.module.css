@@ -1,17 +1,13 @@
-/* src/components/UserProfile.module.css */
 
 .userProfileContainer {
     max-width: 1000px;
-    /* margin: 0 100px 0 300px; */
     margin-left: 21%;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: Arial;
-    /* border: 1px solid black; */
   }
-  /* src/components/UserProfile.module.css */
 
 .profileImageContainer {
     display: flex;
@@ -118,3 +114,60 @@
     background-color: #c82333;
   }
   
+
+
+
+   .markButton {
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .markButton:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .subHeading{
+    background-color: gray;
+  }
+  .lunchButton{
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+  }
+  .lunchButton:hover {
+    background-color: #1e9c22;
+      color: #fff;
+  }
+  .stopButton{
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+  }
+  .stopButton:hover {
+    background-color: rgb(204, 28, 28) !important;  
+      color: #fff;
+  }
+ 
