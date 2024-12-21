@@ -1,0 +1,257 @@
+/* General Layout and Container */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Form Styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+  }
+  
+  .input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .button {
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Table Styling */
+  .tableContainer {
+    overflow-x: auto;
+    margin-top: 30px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .invoiceButton,
+  .deleteButton {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .invoiceButton {
+    background-color: #28a745;
+    margin-right: 10px;
+  }
+  
+  .invoiceButton:hover {
+    background-color: #218838;
+  }
+  
+  .deleteButton {
+    background-color: #dc3545;
+  }
+  
+  .deleteButton:hover {
+    background-color: #c82333;
+  }
+  
+  /* Invoice Section Styling */
+  .invoice {
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .invoice h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .invoice p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  /* Edit and Cancel Buttons Styling */
+.editButton,
+.cancelButton {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.editButton {
+  background-color: #ffc107; /* Yellow for Edit */
+  margin-right: 10px;
+}
+
+.editButton:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+}
+
+.cancelButton {
+  background-color: #6c757d; /* Grey for Cancel */
+}
+
+.cancelButton:hover {
+  background-color: #5a6268; /* Darker grey on hover */
+}
+
+  
+  /* Responsive Design */
+  @media screen and (max-width: 1024px) {
+    .title {
+      font-size: 1.8rem;
+    }
+  
+    .form {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+  
+    .input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .invoice {
+      padding: 15px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 1.6rem;
+    }
+  
+    .form {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+  
+    .input {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    .invoice {
+      padding: 12px;
+    }
+  
+    .invoice h2 {
+      font-size: 1.6rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .title {
+      font-size: 1.4rem;
+    }
+  
+    .form {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+  
+    .input {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .invoice {
+      padding: 10px;
+    }
+  
+    .invoice h2 {
+      font-size: 1.4rem;
+    }
+  }
+  

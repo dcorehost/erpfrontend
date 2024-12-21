@@ -7,6 +7,8 @@ import Signup from './Components/SignUp/SignUp';
 import SignIn from './Components/SignIn/SignIn';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 import UserProfile from './Components/UseProfile/UserProfile';
+import ResetPassword from './Components/ResetPassword/ResetPassword';
+import SalesManagementPage from './Components/SalesManagement/Salesmanagement';
 
 // import Navbar from './Navbar/Navbar';
 
@@ -15,8 +17,8 @@ import UserProfile from './Components/UseProfile/UserProfile';
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <SideBar />
+       {/* <Navbar /> */}
+      {/* <SideBar /> */}
 
       <Routes>
         {/* <Route path="/" element={<h1>Welcome to Gymfluence</h1>} /> */}
@@ -25,6 +27,8 @@ const App = () => {
            <Route path='/Signup' element={<SignIn></SignIn>}></Route>
           <Route path='/SignIn' element={<Signup></Signup>}></Route>
           <Route path='/UserProfile' element={<UserProfile></UserProfile>}></Route>
+          <Route path='/Reset'  element={<ResetPassword></ResetPassword>}></Route>
+          <Route path='/Sales' element={<SalesManagementPage></SalesManagementPage>}></Route>
       </Routes>
    {/* <Footer /> */}
     </Router>
