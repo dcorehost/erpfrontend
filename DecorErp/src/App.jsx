@@ -16,8 +16,8 @@ import UserManagement from './Components/UserManagement/UserManagement';
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <SideBar />
+       {/* <Navbar /> */}
+      {/* <SideBar /> */}
 
       <Routes>
       
@@ -26,6 +26,8 @@ const App = () => {
            <Route path='/Signin' element={<SignIn></SignIn>}></Route>
           <Route path='/Signup' element={<Signup></Signup>}></Route>
           <Route path='/UserProfile' element={<UserProfile></UserProfile>}></Route>
+          <Route path='/Reset'  element={<ResetPassword></ResetPassword>}></Route>
+          <Route path='/Sales' element={<SalesManagementPage></SalesManagementPage>}></Route>
       </Routes>
    {/* <Footer /> */}
     </Router>
