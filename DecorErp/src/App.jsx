@@ -17,9 +17,9 @@ import SalesManagement from './Components/SalesManagement/Salesmanagement';
 const App = () => {
   return (
     <Router>
-       <Navbar />
+       {/* <Navbar /> */}
       {/* <SideBar /> */}
-      <SideBar />
+      {/* <SideBar /> */}
 
       <Routes>
       

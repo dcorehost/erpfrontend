@@ -154,7 +154,7 @@ const SignIn = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Sign In</h2>
+      <h2 className={styles.heading}>Login</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="username" className={styles.label}>
@@ -217,7 +217,7 @@ const SignIn = () => {
           className={styles.button}
           disabled={loading}
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {loading ? "Signing In..." : "Login"}
         </button>
       </form>
       <div className={styles.linksContainer}>
