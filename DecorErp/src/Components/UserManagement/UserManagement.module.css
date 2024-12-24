@@ -1,11 +1,17 @@
 /* General container styles */
 .container {
+    width: 100%;
+    max-width: 900px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     margin-left: 20%;
+    
+  }
+  .searchSection{
+    margin-bottom: 10px;
   }
   
   /* Title styles */
@@ -24,14 +30,22 @@
   }
   
   .input {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 150px;
+    width: 180px;
   }
+  /* Placeholder text */
+  .input::placeholder {
+   color: #000; /* Light gray for placeholder text */
+   font-size: 13px;
+   font-weight: 500;
+  }
+
+   
   
   .addButton {
-    background-color: #28a745;
+    background-color: #714b67;
     color: white;
     border: none;
     border-radius: 4px;
@@ -41,7 +55,7 @@
   }
   
   .addButton:hover {
-    background-color: #218838;
+    background-color: #b98aad;
   }
   
   /* Table styles */
@@ -52,7 +66,7 @@
   }
   
   .tableHeader {
-    background-color: #007bff;
+    background-color: #714b67;
     color: white;
     padding: 10px;
     text-align: left;

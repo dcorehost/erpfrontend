@@ -19,7 +19,7 @@ const Navbar = ({isOpen}) => {
             <button className={styles.signup}>SignUp</button>
           </Link>
           <Link to="/SignIn">
-            <button className={styles.login}>Sign In</button>
+            <button className={styles.login}>Log In</button>
           </Link>
         </div>
       </div>

@@ -108,12 +108,12 @@
 }
 
 .editButton {
-  background-color: #ffc107;
-  color: #212529;
+  background-color: #007bff;
+  color: white;
 }
 
 .editButton:hover {
-  background-color: #e0a800;
+  background-color: #27415c;
 }
 
 .deleteButton {

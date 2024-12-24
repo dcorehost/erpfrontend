@@ -1,71 +1,22 @@
-/* Container */
+/* Centering the table */
 .container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Heading */
-  .heading {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  /* Form */
-  .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  
-  .input,
-  .textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .textarea {
-    height: 100px;
-    resize: none;
-  }
-  
-  .button {
-    padding: 10px;
-    background-color: #714b67;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .button:hover {
-    background-color: #5a3c53; /* Adjust hover color */
-  }
-  
-  /* Enquiries Section */
-  .enquiries {
+    align-items: center;
     margin-top: 20px;
   }
   
-  /* Table Styling */
   .table {
-    width: 100%;
+    width: 80%; /* Adjust table width */
+    margin: 0 auto; /* Center the table */
     border-collapse: collapse;
-    margin-top: 20px;
   }
   
   .table th,
   .table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
     text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
   }
   
   .table th {
@@ -74,10 +25,39 @@
   }
   
   .table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
   }
   
   .table tr:hover {
-    background-color: #f9f9f9;
+    background-color: #f1f1f1;
+  }
+  
+  /* Checkbox styling */
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  /* Delete Button Styling */
+  .deleteButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .deleteButton:hover {
+    background-color: #c0392b;
   }
   

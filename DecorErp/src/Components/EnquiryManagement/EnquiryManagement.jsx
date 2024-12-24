@@ -12,15 +12,18 @@ const EnquiryManagement = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.mobile && formData.message) {
+      const timestamp = new Date().toLocaleString(); // Add timestamp
+      const enquiryWithStatus = { ...formData, timestamp, status: "Unseen" }; // Add status
+
       // Get existing enquiries from localStorage
       const existingEnquiries = JSON.parse(localStorage.getItem("enquiries")) || [];
-      // Add the new enquiry to the list
-      const updatedEnquiries = [...existingEnquiries, formData];
+      const updatedEnquiries = [...existingEnquiries, enquiryWithStatus];
+
       // Save updated enquiries to localStorage
       localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries));
+
       alert("Your data has been submitted successfully!");
-      // Reset the form
-      setFormData({ name: "", email: "", mobile: "", message: "" });
+      setFormData({ name: "", email: "", mobile: "", message: "" }); // Reset form
     } else {
       alert("All fields are required!");
     }
@@ -30,7 +33,6 @@ const EnquiryManagement = () => {
     <div className={styles.container}>
       <h1 className={styles.heading}>Enquiry Management</h1>
 
-      {/* Enquiry Form */}
       <form onSubmit={handleFormSubmit} className={styles.form}>
         <input
           type="text"
