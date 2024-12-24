@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import styles from "./EnquiryManagement.module.css";
 
 const EnquiryManagement = () => {
-  const [enquiries, setEnquiries] = useState([]);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", mobile: "", message: "" });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -12,9 +11,16 @@ const EnquiryManagement = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setEnquiries([...enquiries, formData]);
-      setFormData({ name: "", email: "", message: "" });
+    if (formData.name && formData.email && formData.mobile && formData.message) {
+      // Get existing enquiries from localStorage
+      const existingEnquiries = JSON.parse(localStorage.getItem("enquiries")) || [];
+      // Add the new enquiry to the list
+      const updatedEnquiries = [...existingEnquiries, formData];
+      // Save updated enquiries to localStorage
+      localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries));
+      alert("Your data has been submitted successfully!");
+      // Reset the form
+      setFormData({ name: "", email: "", mobile: "", message: "" });
     } else {
       alert("All fields are required!");
     }
@@ -42,6 +48,14 @@ const EnquiryManagement = () => {
           onChange={handleInputChange}
           className={styles.input}
         />
+        <input
+          type="text"
+          name="mobile"
+          placeholder="Mobile Number"
+          value={formData.mobile}
+          onChange={handleInputChange}
+          className={styles.input}
+        />
         <textarea
           name="message"
           placeholder="Your enquiry"
@@ -53,22 +67,6 @@ const EnquiryManagement = () => {
           Submit
         </button>
       </form>
-
-      {/* Display Enquiries */}
-      <div className={styles.enquiries}>
-        <h2>Submitted Enquiries</h2>
-        {enquiries.length > 0 ? (
-          <ul className={styles.list}>
-            {enquiries.map((enquiry, index) => (
-              <li key={index} className={styles.listItem}>
-                <strong>{enquiry.name}</strong> ({enquiry.email}): {enquiry.message}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No enquiries yet.</p>
-        )}
-      </div>
     </div>
   );
 };
