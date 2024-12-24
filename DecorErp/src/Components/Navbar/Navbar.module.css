@@ -59,7 +59,7 @@
 
 .signup,
 .login {
-  background-color: black;
+  background-color: #714b67;
   color: #C0C0C0;
   padding: 0.5rem 1rem;
   border: 1px solid #fff;
@@ -71,8 +71,8 @@
 
 .signup:hover,
 .login:hover {
-  background-color: #fff;
-  color: #000;
+  background-color: #a07a96;
+  /* color: #000; */
 }
 
 /* Media Queries */

@@ -220,7 +220,7 @@ const SalesManagement = () => {
               <tr key={index}>
                 <td>{sale.productName}</td>
                 <td>{sale.quantity}</td>
-                <td>${sale.price}</td>
+                <td>₹{sale.price}</td>
                 <td>{new Date(sale.saleDate).toLocaleString()}</td>
                 <td>{sale.customerName}</td>
                 <td>{sale.customerId}</td>
@@ -274,14 +274,14 @@ const SalesManagement = () => {
                     <tr key={idx}>
                       <td>{product.productName}</td>
                       <td>{product.quantity}</td>
-                      <td>${product.price}</td>
-                      <td>${product.totalAmount}</td>
+                      <td>₹{product.price}</td>
+                      <td>₹{product.totalAmount}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
               <p>
-                <strong>Total Amount:</strong> ${customerInvoice.totalAmount}
+                <strong>Total Amount:</strong> ₹{customerInvoice.totalAmount}
               </p>
             </div>
           ))}

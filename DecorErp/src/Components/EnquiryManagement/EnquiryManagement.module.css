@@ -34,7 +34,7 @@
   
   .button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #714b67;
     color: white;
     border: none;
     border-radius: 4px;
@@ -43,7 +43,7 @@
   }
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #a07a96;
   }
   
   .enquiries {

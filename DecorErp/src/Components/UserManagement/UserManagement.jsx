@@ -158,28 +158,31 @@
 // export default UserManagement;
 
 
+
+
 import React, { useState } from "react";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([
-    { id: 1, name: "Rahul Jha", role: "Admin", email: "rahul.jha@example.com" },
-    { id: 2, name: "Surjeet Yadav", role: "User", email: "surjeet.yadav@example.com" },
-    { id: 3, name: "Rajoo Yadav", role: "Manager", email: "rajoo.yadav@example.com" },
+    { id: 1, name: "Rahul", role: "Admin", email: "rahul.jha@example.com" },
+    { id: 2, name: "Surjeet ", role: "Manager", email: "surjeet.yadav@example.com" },
+    { id: 3, name: "SHYAM ", role: "User", email: "shyam.yadav@example.com" },
   ]);
 
-  const [newUser, setNewUser] = useState({ name: "", role: "", email: "" });
+  const [newUser, setNewUser] = useState({ name: "", role: "", email: "", password: "" });
   const [editingUser, setEditingUser] = useState(null);
   const [editedData, setEditedData] = useState({ name: "", role: "", email: "" });
   const [selectedUser, setSelectedUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleAddUser = () => {
-    if (newUser.name.trim() && newUser.role.trim() && newUser.email.trim()) {
+    if (newUser.name.trim() && newUser.role.trim() && newUser.email.trim() && newUser.password.trim()) {
       const newId = users.length > 0 ? users[users.length - 1].id + 1 : 1;
       setUsers([...users, { id: newId, ...newUser }]);
-      setNewUser({ name: "", role: "", email: "" });
+      setNewUser({ name: "", role: "", email: "", password: "" });
     } else {
-      alert("All fields are required!");
+      alert("All fields are required, including password!");
     }
   };
 
@@ -190,9 +193,7 @@ const UserManagement = () => {
 
   const handleSave = (id) => {
     setUsers(
-      users.map((user) =>
-        user.id === id ? { ...user, ...editedData } : user
-      )
+      users.map((user) => (user.id === id ? { ...user, ...editedData } : user))
     );
     setEditingUser(null);
     setEditedData({ name: "", role: "", email: "" });
@@ -211,9 +212,30 @@ const UserManagement = () => {
     setSelectedUser(user);
   };
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>User Management</h1>
+
+      {/* Search Bar */}
+      <div className={styles.searchSection}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="Search by name or email"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </div>
 
       {/* Add User Section */}
       <div className={styles.addUserSection}>
@@ -224,19 +246,33 @@ const UserManagement = () => {
           value={newUser.name}
           onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
         />
-        <input
-          type="text"
+        <select
           className={styles.input}
-          placeholder="Enter Role"
           value={newUser.role}
           onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-        />
+        >
+          <option value="">Select Role</option>
+          <option value="Admin">Admin</option>
+          <option value="Manager">Manager</option>
+          <option value="Sales-Manager">Sales Manager</option>
+          <option value="H.R">H.R</option>
+          <option value="User">User</option>
+          <option value="Team-Lead">Team Lead</option>
+
+        </select>
         <input
           type="email"
           className={styles.input}
           placeholder="Enter Email"
           value={newUser.email}
           onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+        />
+        <input
+          type="password"
+          className={styles.input}
+          placeholder="Enter Password"
+          value={newUser.password}
+          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
         />
         <button className={styles.addButton} onClick={handleAddUser}>
           Add User
@@ -254,7 +290,7 @@ const UserManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {filteredUsers.map((user) => (
             <tr key={user.id} className={styles.tableRow}>
               <td className={styles.tableCell}>{user.id}</td>
               <td className={styles.tableCell}>
@@ -273,14 +309,19 @@ const UserManagement = () => {
               </td>
               <td className={styles.tableCell}>
                 {editingUser === user.id ? (
-                  <input
-                    type="text"
+                  <select      
                     className={styles.input}
                     value={editedData.role}
                     onChange={(e) =>
                       setEditedData({ ...editedData, role: e.target.value })
-                    }
-                  />
+                    }            >
+                    <option value="Admin">Admin</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Sales-Manager">Sales Manager</option>
+                    <option value="H.R">H.R</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="User">User</option>
+                  </select>
                 ) : (
                   user.role
                 )}
@@ -345,7 +386,10 @@ const UserManagement = () => {
           <p>
             <strong>Email:</strong> {selectedUser.email}
           </p>
-          <button className={styles.closeButton} onClick={() => setSelectedUser(null)}>
+          <button
+            className={styles.closeButton}
+            onClick={() => setSelectedUser(null)}
+          >
             Close
           </button>
         </div>
