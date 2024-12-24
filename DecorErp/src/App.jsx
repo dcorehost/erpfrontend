@@ -10,20 +10,16 @@ import UserProfile from './Components/UseProfile/UserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
+import './App.css';
 import EnquiryManagement from './Components/EnquiryManagement/Enquirymanagement';
-
-
 
 
 const App = () => {
   return (
     <Router>
        {/* <Navbar /> */}
-      {/* <SideBar /> */}
-      {/* <SideBar /> */}
-
+      <SideBar>
       <Routes>
-      
          <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
          <Route path="/user-management" element={<UserManagement />} /> 
          <Route path="/user-management" element={<ResetPassword />} /> 
@@ -31,8 +27,10 @@ const App = () => {
          <Route path='/Signup' element={<Signup></Signup>}></Route>
          <Route path='/UserProfile' element={<UserProfile></UserProfile>}></Route>
          <Route path='/Sales' element={<SalesManagement />}></Route>
-         <Route path='/Enquiry' element={<EnquiryManagement></EnquiryManagement>}></Route>
+          <Route path='/enquiry' element={<EnquiryManagement></EnquiryManagement>}></Route>
       </Routes>
+      </SideBar>
+
    {/* <Footer /> */}
     </Router>
   );
