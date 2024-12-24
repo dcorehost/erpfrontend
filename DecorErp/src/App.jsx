@@ -13,6 +13,7 @@ import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
 import EnquiryManagement from './Components/EnquiryManagement/Enquirymanagement';
 import TaskManager    from './Components/TaskManager/TaskManager'
+import EnquiryDetails from './Components/EnquiryDetails/EnquiryDetails';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
          <Route path='/sales-management' element={<SalesManagement />}></Route>
          <Route path='/enquiry-management' element={<EnquiryManagement />}></Route>
          <Route path='/task-manager' element={<TaskManager />}></Route>
+         <Route path='/enquiries' element={<EnquiryDetails></EnquiryDetails>}></Route>
       </Routes>
       </SideBar>
 
