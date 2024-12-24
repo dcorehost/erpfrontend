@@ -9,7 +9,7 @@ const SalesManagement = () => {
     price: "",
     saleDate: "",
     customerName: "",
-    customerId: "", // Added customer ID
+    customerId: "",
   });
   const [invoice, setInvoice] = useState(null); // Holds invoice data for display
   const [editingIndex, setEditingIndex] = useState(null); // To track which sale is being edited
@@ -41,7 +41,7 @@ const SalesManagement = () => {
       price: "",
       saleDate: "",
       customerName: "",
-      customerId: "", // Clear customer ID field
+      customerId: "",
     });
     setEditingIndex(null); // Reset editing state
   };
@@ -61,7 +61,7 @@ const SalesManagement = () => {
       price: "",
       saleDate: "",
       customerName: "",
-      customerId: "", // Clear customer ID field
+      customerId: "",
     });
     setEditingIndex(null); // Reset editing state
   };
@@ -71,9 +71,32 @@ const SalesManagement = () => {
     setSales(sales.filter((_, i) => i !== index));
   };
 
-  // Generate an invoice for all products bought by a single customer
+  // Generate an invoice for a specific customer
+  const generateInvoiceForCustomer = (customerId) => {
+    const filteredSales = sales.filter((sale) => sale.customerId === customerId);
+    if (filteredSales.length === 0) return;
+
+    const customerInvoice = {
+      customerId: filteredSales[0].customerId,
+      customerName: filteredSales[0].customerName,
+      products: filteredSales.map((sale) => ({
+        productName: sale.productName,
+        quantity: sale.quantity,
+        price: sale.price,
+        totalAmount: sale.quantity * sale.price,
+      })),
+      totalAmount: filteredSales.reduce(
+        (total, sale) => total + sale.quantity * sale.price,
+        0
+      ),
+    };
+
+    // Set the invoice for display
+    setInvoice([customerInvoice]);
+  };
+
+  // Generate an invoice for all customers
   const generateInvoice = () => {
-    // Group sales by customerId
     const groupedSales = sales.reduce((acc, sale) => {
       const customerId = sale.customerId;
       if (!acc[customerId]) {
@@ -95,7 +118,6 @@ const SalesManagement = () => {
       return acc;
     }, {});
 
-    // Get the invoice data for each customer
     const customerInvoice = Object.values(groupedSales).map((customer) => ({
       customerId: customer.customerId,
       customerName: customer.customerName,
@@ -103,8 +125,7 @@ const SalesManagement = () => {
       totalAmount: customer.totalAmount,
     }));
 
-    // Set the invoice for display
-    setInvoice(customerInvoice); // Set the invoice
+    setInvoice(customerInvoice);
   };
 
   return (
@@ -170,7 +191,11 @@ const SalesManagement = () => {
           {editingIndex !== null ? "Save Changes" : "Add Sale"}
         </button>
         {editingIndex !== null && (
-          <button type="button" className={styles.cancelButton} onClick={handleCancel}>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={handleCancel}
+          >
             Cancel
           </button>
         )}
@@ -212,6 +237,12 @@ const SalesManagement = () => {
                   >
                     Delete
                   </button>
+                  <button
+                    onClick={() => generateInvoiceForCustomer(sale.customerId)}
+                    className={styles.invoiceButton}
+                  >
+                    Invoice
+                  </button>
                 </td>
               </tr>
             ))}
@@ -226,7 +257,9 @@ const SalesManagement = () => {
           {invoice.map((customerInvoice, idx) => (
             <div key={idx}>
               <h3>Customer ID: {customerInvoice.customerId}</h3>
-              <p><strong>Customer Name:</strong> {customerInvoice.customerName}</p>
+              <p>
+                <strong>Customer Name:</strong> {customerInvoice.customerName}
+              </p>
               <table className={styles.invoiceTable}>
                 <thead>
                   <tr>
@@ -247,7 +280,9 @@ const SalesManagement = () => {
                   ))}
                 </tbody>
               </table>
-              <p><strong>Total Amount:</strong> ${customerInvoice.totalAmount}</p>
+              <p>
+                <strong>Total Amount:</strong> ${customerInvoice.totalAmount}
+              </p>
             </div>
           ))}
         </div>
