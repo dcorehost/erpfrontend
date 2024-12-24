@@ -7,6 +7,9 @@
     font-family: Arial, sans-serif;
     margin-left: 20%;
   }
+  .searchSection{
+    margin-bottom: 10px;
+  }
   
   /* Title styles */
   .title {
@@ -24,7 +27,7 @@
   }
   
   .input {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 150px;

@@ -10,6 +10,7 @@ import UserProfile from './Components/UseProfile/UserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
+import TaskManager from './Components/TaskManager/TaskManager';
 
 
 
@@ -18,18 +19,19 @@ const App = () => {
   return (
     <Router>
        <Navbar />
-      {/* <SideBar /> */}
       <SideBar />
 
       <Routes>
       
          <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
          <Route path="/user-management" element={<UserManagement />} /> 
-         <Route path="/user-management" element={<ResetPassword />} /> 
-         <Route path='/Signin' element={<SignIn></SignIn>}></Route>
-         <Route path='/Signup' element={<Signup></Signup>}></Route>
-         <Route path='/UserProfile' element={<UserProfile></UserProfile>}></Route>
-         <Route path='/Sales' element={<SalesManagement />}></Route>
+         <Route path="/reset-password" element={<ResetPassword />} /> 
+         <Route path='/signin' element={<SignIn />}></Route>
+         <Route path='/signup' element={<Signup />}></Route>
+         <Route path='/userProfile' element={<UserProfile />}></Route>
+         <Route path='/sales' element={<SalesManagement />}></Route>
+         <Route path='/task-manager' element={<TaskManager />}></Route>
+          
       </Routes>
    {/* <Footer /> */}
     </Router>
