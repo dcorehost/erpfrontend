@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-const Navbar = () => {
+const Navbar = ({isOpen}) => {
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${isOpen? styles.open : ""}`}>
       <div className={styles.container}>
         {/* Logo */}
         <h1 className={styles.logo}>
@@ -31,8 +31,8 @@ export default Navbar;
 
 
 
-// import React, { useState } from 'react'; 
-// import { Link } from 'react-router-dom'; 
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
 // import styles from './Navbar.module.css';
 
 // const Navbar = () => {
@@ -43,9 +43,9 @@ export default Navbar;
 //     <nav className={styles.navbar} style={{ backgroundColor: '#000', color: '#C0C0C0' }}>
 //       <div className={styles.container}>
 //         {/* Logo */}
-        // <h1 className={styles.logo}>
-        //   <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Decore</Link>
-        // </h1>
+// <h1 className={styles.logo}>
+//   <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Decore</Link>
+// </h1>
 
 //         {/* Navigation Links */}
 //         <ul className={styles.navLinks}>
