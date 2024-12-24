@@ -1,7 +1,7 @@
 
 .userProfileContainer {
     max-width: 1000px;
-    margin-left: 21%;
+    margin-left: 20%;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -113,13 +113,9 @@
   .logoutLink:hover {
     background-color: #c82333;
   }
-  
-
-
-
    .markButton {
     padding: 10px 20px;
-    background-color: green;
+    background-color: #714b67;
     color: white;
     border: none;
     border-radius: 5px;
@@ -129,7 +125,7 @@
   }
   
   .markButton:hover {
-    background-color: #45a049;
+    background-color: #a07a96;
   }
   
   .error {
@@ -142,7 +138,7 @@
   }
   .lunchButton{
     padding: 10px 20px;
-    background-color: green;
+    background-color: #714b67;
     color: white;
     border: none;
     border-radius: 5px;
@@ -152,12 +148,12 @@
     margin-left: 10px;
   }
   .lunchButton:hover {
-    background-color: #1e9c22;
+    background-color: #a07a96;
       color: #fff;
   }
   .stopButton{
     padding: 10px 20px;
-    background-color: green;
+    background-color: #714b67;
     color: white;
     border: none;
     border-radius: 5px;

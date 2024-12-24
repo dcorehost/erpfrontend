@@ -83,23 +83,34 @@
 
 
 /* General Sidebar Styling */
-.sidebarContainer {
+
+/* .sidebarContainer {
   position: relative;
+} */
+
+.sidebarWrapper{
+  margin-top: 70px;
 }
 
 .sidebar {
   position: fixed;
   top: 0;
-  width: 300px;
+  width: 250px;
   height: 100%;
   background-color: gray;
   color: #fff;
   transition: left 0.3s;
-  padding: 20px;
+  padding: 8px;
+}
+
+.contentMenu {
+  /* width: calc(100% - 240px); */
+  width: 100%;
 }
 
 .sidebar ul {
   list-style: none;
+  margin-top: 30px;
   padding: 0;
 }
 
@@ -108,7 +119,8 @@
 }
 
 .sidebar ul li a {
-  color: #fff;
+  /* color: #fff; */
+  color: #000;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -152,6 +164,17 @@
 .submenuItem a {
   color: #ffa500;
 }
+.hamburgerButton {
+  position: fixed;
+  top: 10px;
+  left: 25px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
 
 .submenuItem:hover a {
   color: #fff;
@@ -164,15 +187,48 @@
   margin: 10px 0;
 }
 
+.menuItem.logout {
+  margin-top: auto; /* Push to the bottom */
+  color: #ff4d4d; /* Highlight in red */
+}
+
+.menuItem.logout:hover {
+  background-color: #660000; /* Darker red on hover */
+}
+
+
+.sidebar_custom{
+  display: flex;
+}
+
+.sidebar.open {
+  left: 0; /* Sidebar appears */
+  width: 55px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
+}
+
+.sidebar.hidden {
+  left: -100%; /* Sidebar hides */
+}
+
+
 /* Media Queries for Responsiveness */
 
 /* Mobile (small screens, up to 480px) */
 @media (max-width: 480px) {
   .sidebar {
-    width: 80%; /* Sidebar takes up 80% of the screen width */
+    width: 50px; /* Sidebar takes up 80% of the screen width */
     position: fixed;
-    left: -100%; /* Hide sidebar by default */
+    /* left: -100%; Hide sidebar by default */
     transition: left 0.3s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .hamburgerButton{
+    left: 10px;
   }
 
   .sidebar.open {
@@ -206,41 +262,51 @@
 }
 
 /* Tablet (between 481px to 768px) */
+/* Tablet (between 481px to 768px) */
 @media (max-width: 768px) and (min-width: 481px) {
   .sidebar {
-    width: 250px; /* Adjust sidebar width */
+    width: 40px; /* Adjust sidebar width for tablets */
+    position: fixed;
+    left: 0; /* Ensure it stays visible */
+    transition: left 0.3s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
-  .sidebar ul {
-    padding: 20px;
+  .hamburgerButton{
+    left: 10px;
+  }
+  .contentMenu {
+    width: calc(100% - 55px); /* Adjust content width */
   }
 
   .menuItem {
-    font-size: 18px; /* Adjust font size for tablets */
-    padding: 15px;
+    font-size: 18px; /* Moderate font size for tablets */
   }
 
   .icon {
-    font-size: 20px;
+    font-size: 20px; /* Adjust icon size */
   }
 
   .title {
-    font-size: 18px;
+    font-size: 18px; /* Adjust title size */
   }
 
   .submenu {
-    margin-left: 15px;
+    margin-left: 15px; /* Slightly larger indentation for submenus */
   }
 
   .submenuItem {
-    font-size: 16px;
+    font-size: 16px; /* Adjust submenu font size */
   }
 }
+
 
 /* Desktop (larger screens, 769px and above) */
 @media (min-width: 769px) {
   .sidebar {
-    width: 300px; /* Sidebar takes up full width on larger screens */
+    width: 250px; /* Sidebar takes up full width on larger screens */
+
   }
 
   .menuItem {
@@ -264,3 +330,78 @@
     font-size: 18px;
   }
 }
+.sidebarContainer {
+  position: relative;
+}
+
+
+/* .sidebarContainer.open .sidebar {
+  left: 0;
+} */
+
+/* .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} */
+
+/* .menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} */
+
+/* .menuItem:hover {
+  background-color: #444;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+.submenu {
+  margin-left: 20px;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.submenuItem {
+  padding: 5px 0;
+}
+
+.submenuItem a {
+  text-decoration: none;
+  color: #ffa500;
+}
+
+.submenuItem:hover a {
+  color: #fff;
+}
+
+.hamburgerButton {
+  position: absolute;
+  top: -100px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.menuDivider {
+  border: none;
+  height: 1px;
+  background: #555;
+  margin: 10px 0;
+} */
+
+

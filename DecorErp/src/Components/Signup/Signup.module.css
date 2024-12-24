@@ -18,7 +18,6 @@
     /* background-color: #f0f4f8; */
     padding: 1rem;
     /* border: 1px solid black; */
-    margin-top: -30px;
   }
   
   .form {
@@ -61,7 +60,7 @@
   }
   
   .inputGroup:hover {
-    border-color: #007bff;
+    border-color: #714b67;
   }
   
   .icon {
@@ -98,7 +97,26 @@
   }
   
   .button:hover {
-    background-color: #0056b3;
+    background-color: #a07a96;
+  }
+  .linksContainer {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .link {
+    color: #017e84;
+    text-decoration: none;
+
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .text {
+    margin-top: 10px;
+    color: #555;
   }
   
   @media (max-width: 768px) {
