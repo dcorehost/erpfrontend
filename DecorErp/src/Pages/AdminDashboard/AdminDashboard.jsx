@@ -84,7 +84,7 @@ const AdminDashboard = () => {
           <h2>Key Metrics</h2>
           <div className={styles.cardContainer}>
             <div className={styles.card}>Number Of Users: 1,200</div>
-            <div className={styles.card}>Revenue: $34,500</div>
+            <div className={styles.card}>Revenue: ₹34,500</div>
             <div className={styles.card}>New Signups: 35</div>
           </div>
         </section>

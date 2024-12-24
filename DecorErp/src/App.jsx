@@ -14,6 +14,7 @@ import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
 import EnquiryManagement from './Components/EnquiryManagement/Enquirymanagement';
 import TaskManager    from './Components/TaskManager/TaskManager'
+import EnquiryDetails from './Components/EnquiryDetails/EnquiryDetails';
 
 
 
@@ -27,15 +28,14 @@ const App = () => {
          <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
          <Route path="/user-management" element={<UserManagement />} /> 
          <Route path="/resetpassword" element={<ResetPassword />} /> 
-         {/* <Route path="/logout" element={<Logout />} />  */}
          <Route path="/logout" element={<Logout />} /> 
-
          <Route path='/signin' element={<SignIn />}></Route>
          <Route path='/signup' element={<Signup />}></Route>
          <Route path='/userProfile' element={<UserProfile />}></Route>
          <Route path='/sales-management' element={<SalesManagement />}></Route>
          <Route path='/enquiry-management' element={<EnquiryManagement />}></Route>
          <Route path='/task-manager' element={<TaskManager />}></Route>
+         <Route path='/enquiries-details' element={<EnquiryDetails />}></Route>
       </Routes>
       </SideBar>
 
