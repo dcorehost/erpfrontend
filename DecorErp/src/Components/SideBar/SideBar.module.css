@@ -1,0 +1,407 @@
+/* 
+ .sidebarContainer {
+  position: relative;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: gray;
+  color: #fff;
+  transition: left 0.3s;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu {
+  font-size: 20px;
+  color: silver;
+  cursor: pointer;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #444;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+.submenu {
+  margin-left: 20px;
+}
+
+.submenuItem {
+  padding: 5px 0;
+  color: #f0f0f0;
+}
+
+.submenuItem a {
+  color: #ffa500; 
+}
+
+.submenuItem:hover a {
+  color: #fff; 
+}
+
+.menuDivider {
+  border: 0;
+  height: 1px;
+  background: #555;
+  margin: 10px 0;
+}  */
+
+
+
+/* General Sidebar Styling */
+
+/* .sidebarContainer {
+  position: relative;
+} */
+
+.sidebarWrapper{
+  margin-top: 70px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background-color: gray;
+  color: #fff;
+  transition: left 0.3s;
+  padding: 8px;
+}
+
+.contentMenu {
+  /* width: calc(100% - 240px); */
+  width: 100%;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  /* color: #fff; */
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu {
+  font-size: 20px;
+  color: silver;
+  cursor: pointer;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #444;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+.submenu {
+  margin-left: 20px;
+}
+
+.submenuItem {
+  padding: 5px 0;
+  color: #f0f0f0;
+}
+
+.submenuItem a {
+  color: #ffa500;
+}
+.hamburgerButton {
+  position: fixed;
+  top: 10px;
+  left: 25px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.submenuItem:hover a {
+  color: #fff;
+}
+
+.menuDivider {
+  border: 0;
+  height: 1px;
+  background: #555;
+  margin: 10px 0;
+}
+
+.menuItem.logout {
+  margin-top: auto; /* Push to the bottom */
+  color: #ff4d4d; /* Highlight in red */
+}
+
+.menuItem.logout:hover {
+  background-color: #660000; /* Darker red on hover */
+}
+
+
+.sidebar_custom{
+  display: flex;
+}
+
+.sidebar.open {
+  left: 0; /* Sidebar appears */
+  width: 55px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
+}
+
+.sidebar.hidden {
+  left: -100%; /* Sidebar hides */
+}
+
+
+/* Media Queries for Responsiveness */
+
+/* Mobile (small screens, up to 480px) */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 50px; /* Sidebar takes up 80% of the screen width */
+    position: fixed;
+    /* left: -100%; Hide sidebar by default */
+    transition: left 0.3s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .hamburgerButton{
+    left: 10px;
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar when open */
+  }
+
+  .sidebar ul {
+    padding: 10px;
+  }
+
+  .menuItem {
+    font-size: 16px; /* Smaller font size for mobile */
+    padding: 10px 5px;
+  }
+
+  .icon {
+    font-size: 18px; /* Slightly smaller icons */
+  }
+
+  .title {
+    font-size: 16px; /* Adjust title size */
+  }
+
+  .submenu {
+    margin-left: 10px;
+  }
+
+  .submenuItem {
+    font-size: 14px; /* Smaller submenu font size */
+  }
+}
+
+/* Tablet (between 481px to 768px) */
+/* Tablet (between 481px to 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  .sidebar {
+    width: 40px; /* Adjust sidebar width for tablets */
+    position: fixed;
+    left: 0; /* Ensure it stays visible */
+    transition: left 0.3s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .hamburgerButton{
+    left: 10px;
+  }
+  .contentMenu {
+    width: calc(100% - 55px); /* Adjust content width */
+  }
+
+  .menuItem {
+    font-size: 18px; /* Moderate font size for tablets */
+  }
+
+  .icon {
+    font-size: 20px; /* Adjust icon size */
+  }
+
+  .title {
+    font-size: 18px; /* Adjust title size */
+  }
+
+  .submenu {
+    margin-left: 15px; /* Slightly larger indentation for submenus */
+  }
+
+  .submenuItem {
+    font-size: 16px; /* Adjust submenu font size */
+  }
+}
+
+
+/* Desktop (larger screens, 769px and above) */
+@media (min-width: 769px) {
+  .sidebar {
+    width: 250px; /* Sidebar takes up full width on larger screens */
+
+  }
+
+  .menuItem {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .submenu {
+    margin-left: 20px;
+  }
+
+  .submenuItem {
+    font-size: 18px;
+  }
+}
+.sidebarContainer {
+  position: relative;
+}
+
+
+/* .sidebarContainer.open .sidebar {
+  left: 0;
+} */
+
+/* .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} */
+
+/* .menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+} */
+
+/* .menuItem:hover {
+  background-color: #444;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+.submenu {
+  margin-left: 20px;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.submenuItem {
+  padding: 5px 0;
+}
+
+.submenuItem a {
+  text-decoration: none;
+  color: #ffa500;
+}
+
+.submenuItem:hover a {
+  color: #fff;
+}
+
+.hamburgerButton {
+  position: absolute;
+  top: -100px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.menuDivider {
+  border: none;
+  height: 1px;
+  background: #555;
+  margin: 10px 0;
+} */
+
+

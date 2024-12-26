@@ -1,0 +1,146 @@
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial;
+    /* border: 1px solid black; */
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    /* font-family: Arial; */
+  }
+  
+  .input {
+    width: 95%;
+    padding: 8px;
+    margin-top: 5px ;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .input:focus {
+    border-color: #714b67;
+    outline: none;
+  }
+  
+  .button {
+    padding: 10px;
+    background-color: #714b67;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+   
+    
+  }
+  
+  .button:hover {
+    background-color: #a07a96;
+  }
+
+
+  .passwordWrapper {
+    position: relative;
+  }
+  
+  .eyeButton {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 18px;
+    color: #555;
+    
+  }
+  
+  .eyeButton:focus {
+    outline: none;
+  }
+  
+  .linksContainer {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .link {
+    color: #017e84;
+    text-decoration: none;
+
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .text {
+    margin-top: 10px;
+    color: #555;
+  }
+  
+  
+  /* Responsive Design */
+  
+  /* For tablets */
+  @media (max-width: 768px) {
+    .container {
+      max-width: 90%;
+      padding: 15px;
+    }
+  
+    .button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  
+  /* For mobile devices */
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .heading {
+      font-size: 18px;
+    }
+  
+    .button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  

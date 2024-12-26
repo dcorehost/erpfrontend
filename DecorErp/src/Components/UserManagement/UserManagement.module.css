@@ -1,0 +1,165 @@
+/* General container styles */
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-left: 20%;
+    
+  }
+  .searchSection{
+    margin-bottom: 10px;
+  }
+  
+  /* Title styles */
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Add User Section */
+  .addUserSection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 180px;
+  }
+  /* Placeholder text */
+  .input::placeholder {
+   color: #000; /* Light gray for placeholder text */
+   font-size: 13px;
+   font-weight: 500;
+  }
+
+   
+  
+  .addButton {
+    background-color: #714b67;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addButton:hover {
+    background-color: #b98aad;
+  }
+  
+  /* Table styles */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .tableHeader {
+    background-color: #714b67;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .tableRow:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .tableCell {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Button styles */
+  .viewButton,
+  .editButton,
+  .saveButton,
+  .cancelButton,
+  .deleteButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .editButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .saveButton {
+    background-color: #28a745;
+  }
+  
+  .saveButton:hover {
+    background-color: #218838;
+  }
+  
+  .cancelButton {
+    background-color: #6c757d;
+  }
+  
+  .cancelButton:hover {
+    background-color: #5a6268;
+  }
+  
+  .deleteButton {
+    background-color: #e74c3c;
+  }
+  
+  .deleteButton:hover {
+    background-color: #c0392b;
+  }
+  
+
+
+  /* Details Section */
+.detailsSection {
+    padding: 20px;
+    background-color: #f0f8ff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .detailsSection h2 {
+    margin-bottom: 10px;
+  }
+  
+  .closeButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: #c0392b;
+  }
+  
+  /* View Button */
+  .viewButton {
+    background-color: #17a2b8;
+  }
+  
+  .viewButton:hover {
+    background-color: #138496;
+  }
+  
