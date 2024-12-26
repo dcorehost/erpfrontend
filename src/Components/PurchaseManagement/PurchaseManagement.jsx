@@ -15,6 +15,8 @@ const PurchaseManagement = () => {
   });
   const [addingIndex, setAddingIndex] = useState(null); // To track which purchase is being edited
 
+
+  //handle
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
