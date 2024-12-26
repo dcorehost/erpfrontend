@@ -1,217 +1,52 @@
-/* General Layout */
+/* Styles for the SalesManagement component */
 .container {
-  max-width: 900px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title {
+.heading {
   text-align: center;
-  color: #333;
   font-size: 2rem;
   margin-bottom: 20px;
-  font-weight: bold;
 }
 
-/* Form Styling */
 .form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .input {
-  flex: 1 1 30%;
-  padding: 12px;
-  font-size: 14px;
+  padding: 10px;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
+  border-radius: 5px;
+  outline: none;
 }
 
 .input:focus {
-  outline: none;
   border-color: #007bff;
 }
 
-.button,
-.cancelButton {
-  flex: 1 1 100%;
-  background-color: #714b67;
-  color: #fff;
+.button {
   padding: 12px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #714b67;
+  background-color: #0056b3;
 }
 
-.cancelButton {
-  background-color: #6c757d;
-}
-
-.cancelButton:hover {
-  background-color: #5a6268;
-}
-
-/* Table Styling */
-.tableContainer {
-  margin-top: 20px;
-  overflow-x: auto;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.table th,
-.table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-  font-size: 14px;
-}
-
-.table th {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-.table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-/* Buttons in Table */
-.editButton,
-.deleteButton,
-.invoiceButton {
-  padding: 8px 12px;
-  margin: 0 2px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.editButton {
-  background-color: #007bff;
-  color: white;
-}
-
-.editButton:hover {
-  background-color: #27415c;
-}
-
-.deleteButton {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.deleteButton:hover {
-  background-color: #c82333;
-}
-
-.invoiceButton {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.invoiceButton:hover {
-  background-color: #218838;
-}
-
-/* Invoice Section */
-.invoice {
-  margin-top: 30px;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.invoice h2 {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 1.8rem;
-}
-
-.invoiceTable {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.invoiceTable th,
-.invoiceTable td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.invoiceTable th {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .input {
-    flex: 1 1 100%;
-  }
-
-  .button,
-  .cancelButton {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .table th,
-  .table td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .invoice h2 {
-    font-size: 1.6rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .input {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .button,
-  .cancelButton {
-    padding: 8px;
-  }
-
-  .table th,
-  .table td {
-    font-size: 10px;
-    padding: 6px;
-  }
-
-  .invoice h2 {
-    font-size: 1.4rem;
-  }
+button:focus {
+  outline: none;
 }
