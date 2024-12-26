@@ -271,8 +271,14 @@ const UserProfile = () => {
       <div className={styles.salarySection}>
         <h2 className={styles.subHeading}>Salary</h2>
         <p className={styles.salaryInfo}>
-          Salary based on attendance: ₹{salary} (for {attendance.filter((entry) => entry.status === "Present").length} days present)
-        </p>
+          Salary based on attendance:
+           {/* ₹{salary} (for {attendance.filter((entry) => entry.status === "Present").length} days present) */}
+
+          <span className={styles.amount}> ₹{salary} </span>
+         (for {attendance.filter((entry) => entry.status === "Present").length} days present)
+  
+        </p> 
+        
       </div>
 
       <button className={styles.editButton}>Edit Profile</button>
