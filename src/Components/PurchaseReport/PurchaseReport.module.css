@@ -1,0 +1,166 @@
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #0d0d0d;
+    text-align: center;
+  }
+  
+  .backLink {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #0d0d0d;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .backLink:hover {
+    color: #0056b3;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+  }
+  
+  .table thead tr {
+    background-color: #ef9273;
+    color: #0d0d0d;
+    text-align: left;
+  }
+  
+  .table th, 
+  .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #eaf3ff;
+  }
+  
+  .table th {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .table td {
+    color: #0d0d0d;
+  }
+  /* Save Button */
+.saveButton {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: #45a049; /* Darker Green */
+}
+
+/* Cancel Button */
+.cancelButton {
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #e53935; /* Darker Red */
+}
+
+  
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .backLink {
+      font-size: 0.9rem;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 0.8rem;
+      padding: 10px;
+    }
+  }
+   
+  .editButton,
+  .deleteButton,
+  .invoiceButton {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  
+  .editButton {
+    background-color: #4caf50;
+    color: #0d0d0d;
+  }
+  
+  .editButton:hover {
+    background-color: #45a049;
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+    color: #0d0d0d;
+  }
+  
+  .deleteButton:hover {
+    background-color: #e53935;
+  }
+  
+  .invoiceButton {
+    background-color: #2196f3;
+    color: #0d0d0d;
+  }
+  
+  .invoiceButton:hover {
+    background-color: #1e88e5;
+  }
+  
+
+
+
