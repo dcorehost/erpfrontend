@@ -72,7 +72,7 @@ const SideBar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "User Profile",     icon: <FaUser />         ,           link: "/userProfile" },
-        { title: "Option 2",       icon: <FaBuildingUser /> ,             link: "/option-2" },
+        { title: "Leave Management",       icon: <FaBuildingUser /> ,             link: "/leave-management" },
         { title: "Option 3",       icon: <FaBuildingUser /> ,             link: "/option-3" },
       ],
     },

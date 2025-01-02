@@ -142,7 +142,7 @@ const SalesDetails = () => {
             className={styles.input}
           />
           <button onClick={handleEditSave} className={styles.button}>
-            Save Changes
+            Save 
           </button>
         </div>
       )}
