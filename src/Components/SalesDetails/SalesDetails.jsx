@@ -17,7 +17,9 @@ const SalesDetails = () => {
 
   useEffect(() => {
     const storedSales = JSON.parse(localStorage.getItem("salesRecords")) || [];
-    setSalesRecords(storedSales);
+    // Sort sales records by customerId
+    const sortedSales = storedSales.sort((a, b) => a.customerId.localeCompare(b.customerId));
+    setSalesRecords(sortedSales);
   }, []);
 
   const handleDelete = (indexToDelete) => {
@@ -140,7 +142,7 @@ const SalesDetails = () => {
             className={styles.input}
           />
           <button onClick={handleEditSave} className={styles.button}>
-            Save 
+            Save Changes
           </button>
         </div>
       )}
