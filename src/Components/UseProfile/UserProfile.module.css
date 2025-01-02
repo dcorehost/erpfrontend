@@ -24,7 +24,7 @@
 
 .heading {
   text-align: center;
-  color: #ef9273;
+  color: #0d0d0d;
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -42,7 +42,7 @@
 
 .label {
   font-weight: bold;
-  color: #ef9273;
+  color: #0d0d0d;
 }
 
 .value {
@@ -54,17 +54,20 @@
 }
 
 .subHeading {
-  color: #ef9273;
+  color: #0d0d0d;
   font-size: 20px;
   margin-bottom: 10px;
   border-bottom: 2px solid #ef9273;
   padding-bottom: 5px;
+  text-align: start;
 }
 
 .markButton,
 .lunchButton,
 .stopButton,
-.editButton {
+.editButton ,
+.overtimeButton,
+.overtimeStopButton{
   background-color: #ef9273;
   color: #0d0d0d;
   border: none;
@@ -74,9 +77,10 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s;
-  /* gap: 20px; */
 }
-
+.overtimeStopButton{
+  margin-left: 10px;
+}
 
 .markButton:hover,
 .lunchButton:hover,
@@ -116,11 +120,15 @@
 }
 
 .lunchTimer {
-  color: #ef9273;
+  color: #0d0d0d;
   font-weight: bold;
   margin: 10px 0;
 }
-
+.overtimeTimer{
+  color: #0d0d0d;
+  font-weight: bold;
+  margin: 10px 0;
+}
 .lunchInfo {
   color: #0d0d0d;
 }
@@ -142,7 +150,7 @@
 .logoutLink {
   display: inline-block;
   margin-top: 20px;
-  color: #ef9273;
+  color: #0d0d0d;
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
@@ -155,3 +163,7 @@
 .stopButton{
   margin-left: 10px;
 }
+
+
+
+

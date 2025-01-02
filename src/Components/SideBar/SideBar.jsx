@@ -50,7 +50,7 @@ const SideBar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Generate Sales",   icon: <FcSalesPerformance /> ,         link: "/sales-management" },
-        { title: "Generate Purchase ", icon: <BiSolidCoinStack /> ,         link: "/purchase-report" },
+        { title: "Generate Purchase ", icon: <BiSolidCoinStack /> ,         link: "/purchase-management" },
         { title: "User Profile",     icon: <FaUser />         ,             link: "/userProfile" },
         { title: "Option 3",         icon: <FaBuildingUser /> ,             link: "/option-3" },
       ],
@@ -61,7 +61,7 @@ const SideBar = ({ children }) => {
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "/Generate-Purchase" },
+        { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "/purchase-management" },
         { title: "Option 2",           icon: <FaBuildingUser /> , link: "/option-2" },
         { title: "Option 3",           icon: <FaBuildingUser /> , link: "/option-3" },
       ],
