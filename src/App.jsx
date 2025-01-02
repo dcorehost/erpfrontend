@@ -17,6 +17,7 @@ import TaskManager    from './Components/TaskManager/TaskManager'
 import EnquiryDetails from './Components/EnquiryDetails/EnquiryDetails';
 import PurchaseManagement from './Components/PurchaseManagement/PurchaseManagement';
 import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
+import SalesDetails from './Components/SalesDetails/SalesDetails';
 
 
 
@@ -35,6 +36,7 @@ const App = () => {
          {/* <Route path='/signup' element={<Signup />}></Route> */}
          <Route path='/userProfile' element={<UserProfile />}></Route>
          <Route path='/sales-management' element={<SalesManagement />}></Route>
+         <Route path='/sales-report'  element={<SalesDetails/>}></Route>
          <Route path='/enquiry-management' element={<EnquiryManagement />}></Route>
          <Route path='/task-manager' element={<TaskManager />}></Route>
          <Route path='/enquiries-details' element={<EnquiryDetails />}></Route>
