@@ -5,7 +5,6 @@ import styles from "./SalesDetails.module.css";
 
 const SalesDetails = () => {
   const [salesRecords, setSalesRecords] = useState([]);
-  const [invoiceData, setInvoiceData] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editData, setEditData] = useState({
     productName: "",
@@ -18,7 +17,9 @@ const SalesDetails = () => {
 
   useEffect(() => {
     const storedSales = JSON.parse(localStorage.getItem("salesRecords")) || [];
-    setSalesRecords(storedSales);
+    // Sort sales records by customerId
+    const sortedSales = storedSales.sort((a, b) => a.customerId.localeCompare(b.customerId));
+    setSalesRecords(sortedSales);
   }, []);
 
   const handleDelete = (indexToDelete) => {
@@ -47,23 +48,41 @@ const SalesDetails = () => {
     setEditingIndex(null); // Exit edit mode
   };
 
-  const generatePDF = async (record) => {
-    const element = document.getElementById("invoice");
-    const canvas = await html2canvas(element);
-    const imgData = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF();
-    pdf.addImage(imgData, "PNG", 10, 10, 190, 0);
-    pdf.save(`${record.customerName}_invoice.pdf`);
-  };
-
-  const handleGenerateInvoice = (customerId) => {
+  const generatePDF = async (customerId) => {
     // Aggregate all products by customerId
     const customerSales = salesRecords.filter((record) => record.customerId === customerId);
 
     if (customerSales.length > 0) {
-      setInvoiceData({ customerSales });
-      setTimeout(() => generatePDF(customerSales[0]), 500);
+      const pdf = new jsPDF();
+
+      // Add Invoice header
+      pdf.setFontSize(16);
+      pdf.text(`Invoice for Customer: ${customerSales[0].customerName}`, 10, 10);
+      pdf.setFontSize(12);
+      pdf.text(`Customer ID: ${customerSales[0].customerId}`, 10, 20);
+
+      // Add table headers
+      pdf.text("Product Name", 10, 30);
+      pdf.text("Quantity", 60, 30);
+      pdf.text("Price", 110, 30);
+      pdf.text("Total", 150, 30);
+
+      // Add table rows
+      let y = 40; // Start adding rows from y = 40
+      customerSales.forEach((record) => {
+        pdf.text(record.productName, 10, y);
+        pdf.text(record.quantity.toString(), 60, y);
+        pdf.text(`$${record.price}`, 110, y);
+        pdf.text(`$${record.quantity * record.price}`, 150, y);
+        y += 10; // Move to the next row
+      });
+
+      // Add Total amount
+      const totalAmount = customerSales.reduce((total, record) => total + (record.quantity * record.price), 0);
+      pdf.text(`Total Amount: $${totalAmount}`, 10, y + 10);
+
+      // Save PDF
+      pdf.save(`${customerSales[0].customerName}_invoice.pdf`);
     }
   };
 
@@ -123,7 +142,7 @@ const SalesDetails = () => {
             className={styles.input}
           />
           <button onClick={handleEditSave} className={styles.button}>
-            Save Changes
+            Save 
           </button>
         </div>
       )}
@@ -152,7 +171,6 @@ const SalesDetails = () => {
                 <td>{record.customerId}</td>
                 <td>
                   <div className={styles.buttonContainer}>
-                   
                     <button
                       onClick={() => handleEditClick(record, index)}
                       className={styles.editButton}
@@ -167,10 +185,10 @@ const SalesDetails = () => {
                     </button>
 
                     <button
-                      onClick={() => handleGenerateInvoice(record.customerId)}
+                      onClick={() => generatePDF(record.customerId)}
                       className={styles.invoiceButton}
                     >
-                      Invoice
+                       Invoice 
                     </button>
                   </div>
                 </td>
@@ -180,45 +198,6 @@ const SalesDetails = () => {
         </table>
       ) : (
         <p>No sales records submitted yet.</p>
-      )}
-
-      {invoiceData && (
-        <div id="invoice" className={styles.invoiceContainer}>
-          <h2 className={styles.heading}>Invoice</h2>
-
-          <div className={styles.invoiceHeader}>
-            <h3>Customer ID: {invoiceData.customerSales[0].customerId}</h3>
-            <h3>Customer Name: {invoiceData.customerSales[0].customerName}</h3>
-          </div>
-
-          <table className={styles.invoiceTable}>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoiceData.customerSales.map((record, index) => (
-                <tr key={index}>
-                  <td>{record.productName}</td>
-                  <td>{record.quantity}</td>
-                  <td>${record.price}</td>
-                  <td>${record.quantity * record.price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className={styles.invoiceFooter}>
-            <p>
-              <strong>Total Amount: </strong>
-              ${invoiceData.customerSales.reduce((total, record) => total + (record.quantity * record.price), 0)}
-            </p>
-          </div>
-        </div>
       )}
     </div>
   );
