@@ -1,222 +1,207 @@
-/* General Layout */
+/* Container */
 .container {
-  max-width: 900px;
-  margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.title {
+/* Heading */
+.heading {
   text-align: center;
-  color: #0d0d0d;
-  font-size: 2rem;
   margin-bottom: 20px;
-  font-weight: bold;
+  color: #0d0d0d;
 }
 
-/* Form Styling */
+/* Form */
 .form {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
 }
 
-.input {
-  flex: 1 1 30%;
-  padding: 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+.input,
+.textarea {
+  padding: 10px;
+  border: 1px solid #ef9273;
   border-radius: 4px;
-  transition: border-color 0.3s ease;
+  font-size: 16px;
 }
 
-.input:focus {
-  outline: none;
-  border-color: #ef9273;
+.textarea {
+  height: 100px;
+  resize: none;
 }
 
-.button,
-.cancelButton {
-  flex: 1 1 100%;
+.button {
+  padding: 10px;
   background-color: #ef9273;
   color: #0d0d0d;
-  padding: 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
 .button:hover {
   background-color: #633222;
-    color: #fff;
-}
-
-.cancelButton {
-  background-color: #6c757d;
-}
-
-.cancelButton:hover {
-  background-color: #633222;
   color: #fff;
 }
 
-/* Table Styling */
-.tableContainer {
+/* Enquiries Section */
+.enquiries {
   margin-top: 20px;
-  overflow-x: auto;
 }
 
+/* Table Styling */
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .table th,
 .table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px 15px;
+  border: 1px solid #ef9273;
   text-align: left;
-  font-size: 14px;
 }
 
 .table th {
-  background-color: #f4f4f4;
-  color: #0d0d0d;
+  background-color: #633222;
+  color: #fff;
 }
 
 .table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
 }
 
-/* Buttons in Table */
+.table tr:hover {
+  background-color: #633222;
+  color: #fff;
+}
+
+/* Button Container (Flexbox) */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Invoice, Edit, Delete Buttons */
+.invoiceButton,
 .editButton,
-.deleteButton,
-.invoiceButton {
-  padding: 8px 12px;
-  margin: 0 2px;
-  font-size: 14px;
+.deleteButton {
+  padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  font-size: 16px;
 
-.editButton {
-  background-color: #007bff;
-  color: #0d0d0d;
-}
-
-.editButton:hover {
-  background-color: #633222;
-  color: #fff;
-}
-
-.deleteButton {
-  background-color: #dc3545;
-  color: #0d0d0d;
-}
-
-.deleteButton:hover {
-  background-color: #633222;
-  color: #fff;
 }
 
 .invoiceButton {
-  background-color: #28a745;
-  color: #0d0d0d;
+  background-color: #2196f3;
+  color: white;
 }
 
 .invoiceButton:hover {
-  background-color: #633222;
-  color: #fff;
+  background-color: #1e87e1;
 }
 
-/* Invoice Section */
-.invoice {
-  margin-top: 30px;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.editButton {
+  background-color: #4caf50;
+  color: white;
 }
 
-.invoice h2 {
+.editButton:hover {
+  background-color: #45a049;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #e53935;
+}
+
+/* Success Message */
+.successMessage {
+  background-color: #d4edda;
   color: #0d0d0d;
-  margin-bottom: 10px;
-  font-size: 1.8rem;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Additional Styling for Invoice */
+.invoiceContainer {
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-top: 30px;
+}
+
+.invoiceHeading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d0d0d;
+  font-size: 24px;
 }
 
 .invoiceTable {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .invoiceTable th,
 .invoiceTable td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px 15px;
+  border: 1px solid #ef9273;
   text-align: left;
 }
 
 .invoiceTable th {
-  background-color: #f4f4f4;
-  color: #0d0d0d;
+  background-color: #633222;
+  color: #fff;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .input {
-    flex: 1 1 100%;
-  }
-
-  .button,
-  .cancelButton {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .table th,
-  .table td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .invoice h2 {
-    font-size: 1.6rem;
-  }
+.invoiceTable tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-@media screen and (max-width: 480px) {
-  .title {
-    font-size: 1.5rem;
-  }
+.invoiceTable tr:hover {
+  background-color: #633222;
+  color: #fff;
+}
 
-  .input {
-    font-size: 12px;
-    padding: 8px;
-  }
+.invoiceDetails {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
 
-  .button,
-  .cancelButton {
-    padding: 8px;
-  }
+.invoiceDetails .customerInfo,
+.invoiceDetails .totalAmount {
+  width: 48%;
+}
 
-  .table th,
-  .table td {
-    font-size: 10px;
-    padding: 6px;
-  }
-
-  .invoice h2 {
-    font-size: 1.4rem;
-  }
+.invoiceDetails .customerInfo p,
+.invoiceDetails .totalAmount p {
+  font-size: 16px;
+  margin: 5px 0;
 }
