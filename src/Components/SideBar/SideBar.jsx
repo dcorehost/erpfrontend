@@ -62,8 +62,8 @@ const SideBar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "/purchase-management" },
+        { title: "Option 1",           icon: <FaBuildingUser /> , link: "/option-1" },
         { title: "Option 2",           icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",           icon: <FaBuildingUser /> , link: "/option-3" },
       ],
     },
     {
