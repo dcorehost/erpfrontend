@@ -68,6 +68,8 @@ const EnquiryManagement = () => {
         <button type="submit" className={styles.button}>
           Submit
         </button>
+
+        
       </form>
     </div>
   );
