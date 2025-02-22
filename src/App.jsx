@@ -19,6 +19,8 @@ import PurchaseManagement from './Components/PurchaseManagement/PurchaseManageme
 import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
 import SalesDetails from './Components/SalesDetails/SalesDetails';
 import LeaveManagement from './Components/LeaveManagement/LeaveManagement';
+import UserSidebar from './Components/UserSidebar/UserSidebar';
+import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminsidebar';
 
 
 
@@ -44,9 +46,15 @@ const App = () => {
          <Route path='/purchase-management' element={<PurchaseManagement />}></Route>
          <Route path='/purchase-report' element={<PurchaseReport />}></Route>
          <Route path='/leave-management'  element={<LeaveManagement/>}></Route>
+         
       </Routes>
       </SideBar>
-
+      <Routes>
+      <Route path="/user-sidebar" element={<UserSidebar />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="/Super-Admin-sidebar" element={<SuperAdminSidebar />}></Route>
+      </Routes>
    {/* <Footer /> */}
     </Router>
   );
