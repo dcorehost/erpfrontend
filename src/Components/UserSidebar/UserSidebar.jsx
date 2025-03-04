@@ -20,23 +20,34 @@ const UserSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: "Home",
+      title: "Dashboard",
       icon: <RiAdminFill />,
       link: "/#",
       submenus: [
-        { title: "Overview", icon: <FaBuildingUser />, link: "/user-management" },
-        { title: "Dashboard", icon: <GrTasks />, link: "/task-manager" }
+        { title: "Overview", icon: <FaBuildingUser />, link: "##"},
+        { title: "Dashboard", icon: <GrTasks />, link: "##" }
       ],
     },
     {
-      title: "Team Leads",
+      title: "Task & Project Management",
       icon: <RiTeamFill />,
       link: "/#",
       submenus: [
-        { title: "User Profile",    icon: <FaUser />         , link: "/userProfile" },
-        { title: "Option 1",        icon: <FaBuildingUser /> , link: "/option-1" },
-        { title: "Option 2",        icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",        icon: <FaBuildingUser /> , link: "/option-3" },
+        { title: "Assigned Task & Project Details",    icon: <FaUser />         , link: "###" },
+        { title: "update taks progress & completion status",        icon: <FaBuildingUser /> , link: "##" },
+        { title: "upload ducuments & project created files",        icon: <FaBuildingUser /> , link: "##" },
+        { title: "Option 3",        icon: <FaBuildingUser /> , link: "##" },
+      ],
+    },
+    {
+      title: "Attendence & Leave",
+      icon: <RiTeamFill />,
+      link: "/#",
+      submenus: [
+        { title: "Leave Summary",    icon: <FaUser />         , link: "/##" },
+        { title: "Leave Balance ",        icon: <FaBuildingUser /> , link: "##" },
+        { title: "Leave Requests",        icon: <FaBuildingUser /> , link: "##" },
+        { title: "Compensatory Request",        icon: <FaBuildingUser /> , link: "##" },
       ],
     },
     {
@@ -44,10 +55,10 @@ const UserSidebar = ({ children }) => {
       icon: <LiaBuysellads />,
       link: "/#",
       submenus: [
-        { title: "Generate Sales",   icon: <FcSalesPerformance /> ,         link: "/sales-management" },
-        { title: "Generate Purchase ", icon: <BiSolidCoinStack /> ,         link: "/purchase-management" },
-        { title: "User Profile",     icon: <FaUser />         ,             link: "/userProfile" },
-        { title: "Option 3",         icon: <FaBuildingUser /> ,             link: "/option-3" },
+        { title: "Generate Sales",   icon: <FcSalesPerformance /> ,         link: "##" },
+        { title: "Generate Purchase ", icon: <BiSolidCoinStack /> ,         link: "##" },
+        { title: "User Profile",     icon: <FaUser />         ,             link: "##" },
+        { title: "Option 3",         icon: <FaBuildingUser /> ,             link: "##" },
       ],
     },
     
@@ -56,9 +67,9 @@ const UserSidebar = ({ children }) => {
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "/purchase-management" },
-        { title: "Option 2",           icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",           icon: <FaBuildingUser /> , link: "/option-3" },
+        { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "##" },
+        { title: "Option 2",           icon: <FaBuildingUser /> , link: "##" },
+        { title: "Option 3",           icon: <FaBuildingUser /> , link: "##" },
       ],
     },
     {
@@ -66,9 +77,9 @@ const UserSidebar = ({ children }) => {
       icon: <FaChalkboardTeacher />,
       link: "/#",
       submenus: [
-        { title: "User Profile",     icon: <FaUser />         ,           link: "/userProfile" },
-        { title: "Leave Management",       icon: <FaBuildingUser /> ,             link: "/leave-management" },
-        { title: "Option 3",       icon: <FaBuildingUser /> ,             link: "/option-3" },
+        { title: "User Profile",     icon: <FaUser />         ,           link: "##" },
+        { title: "Leave Management",       icon: <FaBuildingUser /> ,             link: "##" },
+        { title: "Option 3",       icon: <FaBuildingUser /> ,             link: "##" },
       ],
     },
     {

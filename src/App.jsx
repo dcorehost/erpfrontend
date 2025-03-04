@@ -46,9 +46,9 @@ const App = () => {
          <Route path='/purchase-management' element={<PurchaseManagement />}></Route>
          <Route path='/purchase-report' element={<PurchaseReport />}></Route>
          <Route path='/leave-management'  element={<LeaveManagement/>}></Route>
-         
       </Routes>
       </SideBar>
+      
       <Routes>
       <Route path="/user-sidebar" element={<UserSidebar />}></Route>
       </Routes>
