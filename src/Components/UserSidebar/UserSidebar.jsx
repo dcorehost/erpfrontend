@@ -24,7 +24,7 @@ const UserSidebar = ({ children }) => {
       icon: <RiAdminFill />,
       link: "/#",
       submenus: [
-        { title: "Overview", icon: <FaBuildingUser />, link: "##"},
+        { title: "Myspace", icon: <FaBuildingUser />, link: "##"},
         { title: "Dashboard", icon: <GrTasks />, link: "##" }
       ],
     },
