@@ -307,7 +307,7 @@ const SignIn = () => {
       <h2 className={styles.heading}>Log In</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="username" className={styles.label}>
+          {/* <label htmlFor="username" className={styles.label}>
             Username
           </label>
           <input
@@ -319,7 +319,7 @@ const SignIn = () => {
             onChange={handleChange}
             className={styles.input}
             required
-          />
+          /> */}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.label}>

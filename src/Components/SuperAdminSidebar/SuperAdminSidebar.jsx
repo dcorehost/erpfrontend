@@ -20,7 +20,7 @@ const SuperAdminSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: "Admin",
+      title: "Dashboard",
       icon: <RiAdminFill />,
       link: "/#",
       submenus: [
@@ -34,7 +34,7 @@ const SuperAdminSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Team Leads",
+      title: "Admin Management",
       icon: <RiTeamFill />,
       link: "/#",
       submenus: [
@@ -45,7 +45,7 @@ const SuperAdminSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Sales Management",
+      title: "Role & Permission",
       icon: <LiaBuysellads />,
       link: "/#",
       submenus: [
@@ -57,7 +57,7 @@ const SuperAdminSidebar = ({ children }) => {
     },
     
     {
-      title: "Purchase Managment",
+      title: "System Setting",
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
@@ -67,7 +67,7 @@ const SuperAdminSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Employee Management",
+      title: "Security & packing",
       icon: <FaChalkboardTeacher />,
       link: "/#",
       submenus: [
@@ -77,7 +77,7 @@ const SuperAdminSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Attendance Management",
+      title: "Subscription  & Billing",
       icon: <MdPlayLesson />,
       link: "/#",
       submenus: [
@@ -87,7 +87,7 @@ const SuperAdminSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Master Data",
+      title: "Reports & Analytics",
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
