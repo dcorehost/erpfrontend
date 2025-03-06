@@ -5,7 +5,7 @@ import { FaChartLine, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from "re
 import { MdPlayLesson } from "react-icons/md";
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import { LiaBuysellads } from "react-icons/lia";
-import styles from "./Sidebar.module.css";
+import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
 import { FaBuildingUser } from "react-icons/fa6";
 import { GrTasks } from "react-icons/gr";
@@ -14,7 +14,7 @@ import { FcSalesPerformance } from "react-icons/fc";
 import { BiSolidCoinStack } from "react-icons/bi";
 import { BiSolidMessageSquareDots } from "react-icons/bi";
 
-const SideBar = ({ children }) => {
+const AdminSideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
 
@@ -172,7 +172,7 @@ const SideBar = ({ children }) => {
   );
 };
 
-export default SideBar;
+export default AdminSideBar;
 
 
 
