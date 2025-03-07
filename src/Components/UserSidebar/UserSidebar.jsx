@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChartLine, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Fixed import issue
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import styles from "./UserSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -9,6 +10,10 @@ const UserSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false); // New state
+  const navigate = useNavigate(); // Highlighted: Initialize useNavigate
+  const token = localStorage.getItem("token"); // Get token from localStorage
+
 
   const menus = [
     {
@@ -57,6 +62,19 @@ const UserSidebar = ({ children }) => {
     setActiveSubmenu(subIndex);
   };
 
+  const handleLogout = () => {
+    console.log("Logout clicked! Clearing localStorage...");
+    localStorage.clear();
+    sessionStorage.clear();
+    setIsLoggedOut(true); // Trigger re-render
+    window.location.href = "/"; // Full page reload
+  };
+  
+  // Redirect after logout state is set
+  if (isLoggedOut) {
+    navigate("/"); // Redirect to login page
+  }
+  
   return (
     <div className={`${styles.sidebarWrapper}`}>
       <div className={`${styles.sidebarContainer}`}>
@@ -129,12 +147,17 @@ const UserSidebar = ({ children }) => {
               </React.Fragment>
             ))}
             <li>
-              <Link to="/logout" className={`${styles.menuItem} ${styles.logout}`}>
+              
+            <button // Highlighted: Changed Link to button
+                onClick={handleLogout} // Highlighted: Calls handleLogout
+                className={`${styles.menuItem} ${styles.logout}`}
+              >
                 <FaChartLine />
                 <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
                   Logout
                 </span>
-              </Link>
+              </button>
+
             </li>
           </ul>
         </div>
