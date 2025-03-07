@@ -19,7 +19,10 @@ import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
 import SalesDetails from './Components/SalesDetails/SalesDetails';
 import LeaveManagement from './Components/LeaveManagement/LeaveManagement';
 import UserSidebar from './Components/UserSidebar/UserSidebar';
-import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
+import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminsidebar';
+
+
+
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -27,44 +30,34 @@ const App = () => {
 
   return (
     <Router>
-      {!token ? (
-        <>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<SignIn />} />
-            {/* <Route path="/signup" element={<Signup />} /> */}
-            <Route path="*" element={<Navigate to="/signin" />} />
-          </Routes>
-        </>
-      ) : (
-        <>
-          {/* Show Sidebar based on user type */}
-          {typeOfUser === "SuperAdmin" && <SuperAdminSidebar />}
-          {typeOfUser === "Admin" && <SideBar />}
-          {typeOfUser === "User" && <UserSidebar />}
-          
-          <Routes>
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/user-management" element={<UserManagement />} />
-            <Route path="/resetpassword" element={<ResetPassword />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/userProfile" element={<UserProfile />} />
-            <Route path="/sales-management" element={<SalesManagement />} />
-            <Route path="/sales-report" element={<SalesDetails />} />
-            <Route path="/enquiry-management" element={<EnquiryManagement />} />
-            <Route path="/task-manager" element={<TaskManager />} />
-            <Route path="/enquiries-details" element={<EnquiryDetails />} />
-            <Route path="/purchase-management" element={<PurchaseManagement />} />
-            <Route path="/purchase-report" element={<PurchaseReport />} />
-            <Route path="/leave-management" element={<LeaveManagement />} />
-            
-            {/* Redirect users to their respective dashboards */}
-            {typeOfUser === "SuperAdmin" && <Route path="*" element={<Navigate to="/superadmin/dashboard" />} />}
-            {typeOfUser === "Admin" && <Route path="*" element={<Navigate to="/admin-dashboard" />} />}
-            {typeOfUser === "User" && <Route path="*" element={<Navigate to="/user/dashboard" />} />}
-          </Routes>
-        </>
-      )}
+       {/* <Navbar /> */}
+      <SideBar>
+      <Routes>
+         <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
+         <Route path="/user-management" element={<UserManagement />} /> 
+         <Route path="/resetpassword" element={<ResetPassword />} /> 
+         <Route path="/logout" element={<Logout />} /> 
+         <Route path='/signin' element={<SignIn />}></Route>
+         {/* <Route path='/signup' element={<Signup />}></Route> */}
+         <Route path='/userProfile' element={<UserProfile />}></Route>
+         <Route path='/sales-management' element={<SalesManagement />}></Route>
+         <Route path='/sales-report'  element={<SalesDetails/>}></Route>
+         <Route path='/enquiry-management' element={<EnquiryManagement />}></Route>
+         <Route path='/task-manager' element={<TaskManager />}></Route>
+         <Route path='/enquiries-details' element={<EnquiryDetails />}></Route>
+         <Route path='/purchase-management' element={<PurchaseManagement />}></Route>
+         <Route path='/purchase-report' element={<PurchaseReport />}></Route>
+         <Route path='/leave-management'  element={<LeaveManagement/>}></Route>
+      </Routes>
+      </SideBar>
+      
+      <Routes>
+      <Route path="/user-sidebar" element={<UserSidebar />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="/Super-Admin-sidebar" element={<SuperAdminSidebar />}></Route>
+      </Routes>
+   {/* <Footer /> */}
     </Router>
   );
 };

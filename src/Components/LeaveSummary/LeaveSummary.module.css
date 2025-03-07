@@ -1,0 +1,215 @@
+/* LeaveTracker.module.css */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+   
+   
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .applyButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .summary {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    border: 2px solid;
+    padding: 15px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .available {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .booked {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .noData {
+    text-align: center;
+    color: gray;
+    margin-top: 10px;
+  }
+  
+  .popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 800px;
+
+  }
+  select{
+    width: 700px;
+    margin: 20px 0px;
+  }
+  input{
+    width: 700px;
+    margin: 20px 0px;
+  }
+  textarea {
+    width: 700px;
+    margin: 20px 0px;
+    height: 100px;
+  }
+  .popupHeader {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .popupHeader h3{
+    font-size: 30px;
+  }
+ 
+  .closeIcon {
+    position: absolute;
+    right: 28%;
+    top: 20%;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .popupActions {
+  
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .submitButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .cancelButton {
+    background-color: #ccc;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .headerContainer {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .statsText {
+    font-size: 14px;
+    color: #333;
+   
+  }
+  
+  .dateNavigator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .navButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .applyButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .headerContainer {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .dateNavigator {
+      margin-top: 5px;
+    }
+  }
+  .statsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .leftIcons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .iconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .calendarPopup {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
