@@ -11,7 +11,7 @@ import UserProfile from './Components/UseProfile/UserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
-import EnquiryManagement from './Components/EnquiryManagement/Enquirymanagement';
+import EnquiryManagement from './Components/EnquiryManagement/EnquiryManagement';
 import TaskManager from './Components/TaskManager/TaskManager';
 import EnquiryDetails from './Components/EnquiryDetails/EnquiryDetails';
 import PurchaseManagement from './Components/PurchaseManagement/PurchaseManagement';
