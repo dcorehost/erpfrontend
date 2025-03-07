@@ -24,7 +24,7 @@
     text-align: center;
   }
   
-  .loginButton {
+  .signButton {
     display: inline-block;
     padding: 10px 20px;
     font-size: 1.2rem;
@@ -36,7 +36,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .loginButton:hover {
+  .signButton:hover {
     background-color: #633222;
     color: #fff;
   }

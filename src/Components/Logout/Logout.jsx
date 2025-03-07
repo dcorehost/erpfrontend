@@ -17,8 +17,8 @@
 //         // Clear user data from local storage or context
 //         localStorage.clear();
 
-//         // Redirect to login page
-//         navigate('/login');
+//         // Redirect to sign page
+//         navigate('/sign');
 //       } catch (error) {
 //         console.error('Logout failed:', error);
 //       }
@@ -48,8 +48,8 @@ const Logout = () => {
     <div className={styles.logoutContainer}>
       <h1 className={styles.heading}>You have been logged out</h1>
       <p className={styles.message}>Thank you for using our platform. Please log in again to continue.</p>
-      <Link to="/signin" className={styles.loginButton}>
-        Login Again
+      <Link to="/sign" className={styles.signButton}>
+        sign Again
       </Link>
     </div>
   );

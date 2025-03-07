@@ -1,24 +1,35 @@
 .errorMessage {
   color: red;
-  font-size: 14px;
-  margin-top: 10px;
+  font-size: 13px;
+  margin-top: 5px;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+}
 
 .container {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 120%;
+    max-width: 450px;
+    /* margin: 0 auto; */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial;
     /* border: 1px solid black; */
   }
   
   .heading {
-    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    /* text-align: center; */
     margin-bottom: 20px;
     color: #0d0d0d;
   }
@@ -26,26 +37,33 @@
   .form {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   
   .formGroup {
+    width: 100%;
     margin-bottom: 15px;
+    text-align: left;
+
   }
   
   .label {
+    font-size: 14px;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: bold;
     color: #0d0d0d;
-    /* font-family: Arial; */
+    font-family: Arial;
   }
   
   .input {
-    width: 95%;
-    padding: 8px;
-    margin-top: 5px ;
+    width: 100%;
+    padding: 12px;
+    /* margin-top: 5px ; */
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
   }
   
   .input:focus {
@@ -54,15 +72,16 @@
   }
   
   .button {
-    padding: 10px;
-    background-color: #ef9273;
-    color: #0d0d0d;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-   
-    
+    width: 100%;
+  padding: 14px;
+  background-color: #ef9273;
+  color: #0d0d0d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
   }
   
   .button:hover {
@@ -77,8 +96,8 @@
   
   .eyeButton {
     position: absolute;
-    right: 10px;
-    top: 65%;
+    right: 12px;
+    top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -96,12 +115,13 @@
   .linksContainer {
     margin-top: 15px;
     text-align: center;
+    font-size: 14px;
   }
   
   .link {
     color: #017e84;
     text-decoration: none;
-
+    font-weight: bold;
   }
   
   .link:hover {
@@ -120,28 +140,28 @@
   @media (max-width: 768px) {
     .container {
       max-width: 90%;
-      padding: 15px;
+      padding: 25px;
     }
   
     .button {
       font-size: 14px;
-      padding: 8px;
+      padding: 12px;
     }
   }
   
   /* For mobile devices */
   @media (max-width: 480px) {
     .container {
-      padding: 10px;
+      padding: 20px;
     }
   
     .heading {
-      font-size: 18px;
+      font-size: 22px;
     }
   
     .button {
       font-size: 14px;
-      padding: 8px;
+      padding: 12px;
     }
   }
   

@@ -285,12 +285,12 @@ const Signup = () => {
         </div>
 
         <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? 'Signing Up...' : 'Sign Up'}
+          {loading ? 'signg Up...' : 'Sign Up'}
         </button>
         <div className={styles.linksContainer}>                
                 <p className={styles.text}>
                   Already have an account?{" "}
-                  <a href="/signin" className={styles.link}>
+                  <a href="/sign" className={styles.link}>
                     Login
                   </a>
                 </p>

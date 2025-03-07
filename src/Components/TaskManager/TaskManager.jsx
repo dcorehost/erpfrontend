@@ -44,7 +44,7 @@ const TaskManager = () => {
       setTasks((prev) => [...prev, task]);
       setNewTask({ name: "", userId: "" });
     } catch (error) {
-      console.error("Error assigning task:", error);
+      console.error("Error assigng task:", error);
       setError("Failed to assign task.");
     }
   };
@@ -139,7 +139,7 @@ export default TaskManager;
 
 //       setNewTask({ name: "", userId: "" });
 //     } catch (error) {
-//       console.error("Error assigning task:", error);
+//       console.error("Error assigng task:", error);
 //       setError("Failed to assign task.");
 //     }
 //   };
