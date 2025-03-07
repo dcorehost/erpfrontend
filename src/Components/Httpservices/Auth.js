@@ -1,7 +1,7 @@
 // // auth.js
 
 // const auth = {
-//     login: (data) => {
+//     sign: (data) => {
 //       try {
 //         // Convert data to string and store in localStorage
 //         localStorage.setItem("authData", JSON.stringify(data));
@@ -29,7 +29,7 @@
 
 
 const auth = {
-  login: (data) => {
+  sign: (data) => {
     try {
       // Store authentication data in localStorage
       localStorage.setItem("authData", JSON.stringify(data));
