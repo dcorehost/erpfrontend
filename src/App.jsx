@@ -54,9 +54,9 @@ const App = () => {
             <Route path="/admin-sidebar" element={<SideBar />} />
             <Route path="/user-sidebar" element={<UserSidebar />} />
             <Route path="/superadmin-sidebar" element={<SuperAdminSidebar />} />
-          </Routes>
+          {/* </Routes>
 
-          <Routes>
+          <Routes> */}
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/user-management" element={<UserManagement />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
