@@ -1,497 +1,88 @@
-// import React, { useState } from "react";
-// import styles from "./sign.module.css";
-// import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons from react-icons
-
-// const sign = () => {
-//   const [formData, setFormData] = useState({
-//     username: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     })); 
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("Form submitted with data: ", formData);
-//     // Add your form submission logic here (e.g., API call)
-//   };
-
-//   const togglePasswordVisibility = () => {
-//     setShowPassword((prevShowPassword) => !prevShowPassword);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.heading}>Sign In</h2>
-//       <form onSubmit={handleSubmit} className={styles.form}>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="username" className={styles.label}>Username</label>
-//           <input
-//             type="text"
-//             id="username"
-//             name="username"
-//             placeholder=" Username"
-//             value={formData.username}
-//             onChange={handleChange}
-//             className={styles.input}
-//             required
-//           />
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="email" className={styles.label}>Email/Phone</label>
-//           <input
-//             type="email"
-//             id="email"
-//             name="email"
-//              placeholder="Email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className={styles.input}
-//             required
-//           />
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="password" className={styles.label}>Password</label>
-//           <div className={styles.passwordWrapper}>
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               id="password"
-//               name="password"
-//                placeholder="Passowrd"
-//               value={formData.password}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//             />
-//             <button
-//               type="button"
-//               onClick={togglePasswordVisibility}
-//               className={styles.eyeButton}
-//               aria-label="Toggle password visibility"
-//             >
-//               {showPassword ? <FaEyeSlash /> : <FaEye />}
-//             </button>
-//           </div>
-//         </div>
-//         <button type="submit" className={styles.button}>Sign In</button>
-//       </form>
-//       <div className={styles.linksContainer}>
-//         <a href="/forgot-password" className={styles.link}>Forgot Password?</a>
-//         <p className={styles.text}>Don’t have an account? <a href="/signup" className={styles.link}></a></p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default sign;
-
-
-// import React, { useState } from "react";
-// import axios from "axios"; // Import Axios for API calls
-// import styles from "./sign.module.css";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
-
-// const sign = () => {
-//   const [formData, setFormData] = useState({
-//     username: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-//   const [loading, setLoading] = useState(false); // State for loading indicator
-//   const [errorMessage, setErrorMessage] = useState(""); // State for API error messages
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setErrorMessage(""); // Reset error message on form submission
-
-//     try {
-//       const response = await axios.post(
-//         "https://amediagencyonline.com/erp/sign-in",
-//         formData
-//       );
-
-//       if (response.data.success) {
-//         // Handle successful sign
-//         console.log("sign successful:", response.data);
-//         alert("Sign-in successful!");
-//         // Redirect or perform further actions here
-//       } else {
-//         // Handle API error response
-//         setErrorMessage(response.data.message || "Sign-in failed!");
-//       }
-//     } catch (error) {
-//       // Handle network or unexpected errors
-//       console.error("Error signg in:", error);
-//       setErrorMessage("An unexpected error occurred. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const togglePasswordVisibility = () => {
-//     setShowPassword((prevShowPassword) => !prevShowPassword);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.heading}>Sign In</h2>
-//       <form onSubmit={handleSubmit} className={styles.form}>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="username" className={styles.label}>
-//             Username
-//           </label>
-//           <input
-//             type="text"
-//             id="username"
-//             name="username"
-//             placeholder="Username"
-//             value={formData.username}
-//             onChange={handleChange}
-//             className={styles.input}
-//             required
-//           />
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="email" className={styles.label}>
-//             Email/Phone
-//           </label>
-//           <input
-//             type="email"
-//             id="email"
-//             name="email"
-//             placeholder="Email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className={styles.input}
-//             required
-//           />
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="password" className={styles.label}>
-//             Password
-//           </label>
-//           <div className={styles.passwordWrapper}>
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               id="password"
-//               name="password"
-//               placeholder="Password"
-//               value={formData.password}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//             />
-//             <button
-//               type="button"
-//               onClick={togglePasswordVisibility}
-//               className={styles.eyeButton}
-//               aria-label="Toggle password visibility"
-//             >
-//               {showPassword ? <FaEyeSlash /> : <FaEye />}
-//             </button>
-//           </div>
-//         </div>
-//         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-//         <button
-//           type="submit"
-//           className={styles.button}
-//           disabled={loading}
-//         >
-//           {loading ? "signg In..." : "Sign In"}
-//         </button>
-//       </form>
-//       <div className={styles.linksContainer}>
-//         <a href="/forgot-password" className={styles.link}>
-//           Forgot Password?
-//         </a>
-//         <p className={styles.text}>
-//           Don’t have an account?{" "}
-//           <a href="/signup" className={styles.link}>
-//             Sign Up
-//           </a>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default sign;
-
-
-// import React, { useState } from "react";
-// import axios from "axios"; // Import Axios for API calls
-// import styles from "./sign.module.css";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
-
-// const sign = () => {
-//   const [formData, setFormData] = useState({
-//     username: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-//   const [loading, setLoading] = useState(false); // State for loading indicator
-//   const [errorMessage, setErrorMessage] = useState(""); // State for API error messages
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setErrorMessage(""); // Reset error message on form submission
-
-//     // Simple client-side validation
-//     if (!formData.username || !formData.email || !formData.password) {
-//       setLoading(false);
-//       setErrorMessage("All fields are required!");
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post(
-//         "https://amediagencyonline.com/erp/sign-in",
-//         formData
-//       );
-
-//       if (response.data.success) {
-//         // Handle successful sign
-//         console.log("sign successful:", response.data);
-//         alert("Sign-in successful!");
-//         // Redirect or perform further actions here
-//       } else {
-//         // Handle API error response
-//         setErrorMessage(response.data.message || "Sign-in failed!");
-//       }
-//     } catch (error) {
-//       // Handle network or unexpected errors
-//       console.error("Error signg in:", error);
-//       setErrorMessage("An unexpected error occurred. Please try again.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const togglePasswordVisibility = () => {
-//     setShowPassword((prevShowPassword) => !prevShowPassword);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.heading}>Log In</h2>
-//       <form onSubmit={handleSubmit} className={styles.form}>
-//         <div className={styles.formGroup}>
-//           {/* <label htmlFor="username" className={styles.label}>
-//             Username
-//           </label>
-//           <input
-//             type="text"
-//             id="username"
-//             name="username"
-//             placeholder="Username"
-//             value={formData.username}
-//             onChange={handleChange}
-//             className={styles.input}
-//             required
-//           /> */}
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="email" className={styles.label}>
-//             Email/Phone
-//           </label>
-//           <input
-//             type="email"
-//             id="email"
-//             name="email"
-//             placeholder="Email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className={styles.input} 
-//             required
-//           />
-//         </div>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="password" className={styles.label}>
-//             Password
-//           </label>
-//           <div className={styles.passwordWrapper}>
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               id="password"
-//               name="password"
-//               placeholder="Password"
-//               value={formData.password}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//             />
-//             <button
-//               type="button"
-//               onClick={togglePasswordVisibility}
-//               className={styles.eyeButton}
-//               aria-label="Toggle password visibility"
-//             >
-//               {showPassword ? <FaEyeSlash /> : <FaEye />}
-//             </button>
-//           </div>
-//         </div>
-//         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-//         <button
-//           type="submit"
-//           className={styles.button}
-//           disabled={loading}
-//         >
-//           {loading ? "signg In..." : "sign"}
-//         </button>
-//       </form>
-//       <div className={styles.linksContainer}>
-//         <a href="/forgot-password" className={styles.link}>
-//           Forgot Password?
-//         </a>
-//         <p className={styles.text}>
-//           Don’t have an account?{" "}
-//           <a href="/signup" className={styles.link}>
-//             Sign Up
-//           </a>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default sign;
-
-
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react"
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import httpServices from "../Services/Httpservices";
+import Auth from "../Services/Auth.js";
+import logo from "../../assets/logo.jpeg"
 
-const SignIn = () => {
-  const [formData, setFormData] = useState({
-    identifier: "", // Either email or phone
-    password: "",
-  });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const Login = () => {
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userType = localStorage.getItem("typeOfUser");
-    if (token && userType) {
-      setIsAuthenticated(true);
-      if (userType === "SuperAdmin") {
-        navigate("/superadmin/dashboard");
-      } else if (userType === "Admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/user/dashboard");
-      }
-    }
-  }, [navigate]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setErrorMessage("");
-
-    const { identifier, password } = formData;
-    
-    if (!identifier || !password) {
-      setLoading(false);
-      setErrorMessage("Email or Phone and Password are required!");
-      return;
-    }
-
-    const payload = {
-      emailId: identifier.includes("@") ? identifier : undefined,
-      phone: identifier.match(/^\d{10}$/) ? identifier : undefined,
-      password,
-    };
+    setError(null);
+    setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "https://amediagencyonline.com/erp/sign-in",
-        payload
+      const response = await httpServices.post(
+        "http://209.74.89.83/erpbackend/log-in", // ✅ Updated API URL
+        { emailId, password }
       );
 
-      if (response.data.token) {
-        console.log("Sign-in successful:", response.data);
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("typeOfUser", response.data.typeOfUser);
-        setIsAuthenticated(true);
+      console.log("Login API Response:", response);
 
-        // Redirect based on user type
-        if (response.data.typeOfUser === "SuperAdmin") {
-          navigate("/superadmin/dashboard");
-        } else if (response.data.typeOfUser === "Admin") {
-          navigate("/admin/dashboard");
-        } else {
-          navigate("/user/dashboard");
+
+      if (response.status === 200) {
+        const { token, typeOfUser } = response.data || {};
+
+        console.log("Received Token:", token);
+        console.log("User Type:", typeOfUser);
+
+        if (!token) {
+          setError("Invalid response from server. Please try again.");
+          return;
         }
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("typeOfUser", typeOfUser);
+        localStorage.setItem("emailId", emailId);
+       
+
+        Auth.login({ token, typeOfUser, emailId });
+
+        setTimeout(() => {
+        // ✅ Redirect to the correct sidebar based on user type
+        const storedType = localStorage.getItem("typeOfUser");
+        console.log("Redirecting user type:", storedType);
+
+        if (storedType === "Admin") {
+          console.log("Redirecting to Admin Sidebar...");
+          window.location.href = "/admin-sidebar"; // 🔄 Full Page Reload
+        } else if (storedType === "User") {
+          console.log("Redirecting to User Sidebar...");
+          window.location.href = "/user-sidebar";
+        } else if (storedType === "superadmin") {
+          console.log("Redirecting to SuperAdmin Sidebar...");
+          window.location.href = "/superadmin-sidebar";
+        }
+      }, 500);
+
+
       } else {
-        setErrorMessage(response.data.message || "Sign-in failed!");
+        setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      console.error("Error signing in:", error);
-      setErrorMessage("An unexpected error occurred. Please try again.");
+      console.error("Login request failed:", error);
+      setError("An error occurred during login. Please try again.");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
-  if (isAuthenticated) {
-    return null; // Prevent rendering sign-in form if already authenticated
-  }
 
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Log In</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleLogin} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="identifier" className={styles.label}>
             Email or Phone
@@ -501,8 +92,8 @@ const SignIn = () => {
             id="identifier"
             name="identifier"
             placeholder="Enter email or phone"
-            value={formData.identifier}
-            onChange={handleChange}
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
             className={styles.input}
             required
           />
@@ -517,14 +108,14 @@ const SignIn = () => {
               id="password"
               name="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className={styles.input}
               required
             />
             <button
               type="button"
-              onClick={togglePasswordVisibility}
+              onClick={() => setShowPassword(!showPassword)}
               className={styles.eyeButton}
               aria-label="Toggle password visibility"
             >
@@ -532,9 +123,9 @@ const SignIn = () => {
             </button>
           </div>
         </div>
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-        <button type="submit" className={styles.button} disabled={loading}>
-          {loading ? "Signing In..." : "Sign In"}
+        {error && <p className={styles.error}>{error}</p>}
+        <button type="submit" className={styles.button} disabled={isLoading}>
+          {isLoading ? "Signing In..." : "Sign In"}
         </button>
       </form>
       <div className={styles.linksContainer}>
@@ -549,4 +140,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;
