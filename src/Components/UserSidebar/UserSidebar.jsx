@@ -21,20 +21,20 @@ const UserSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Task & Project Management",
+      title: "Task & Project Managemen",
       icon: <RiTeamFill />,
       link: "/#",
       submenus: [
-        { title: "Assigned Task & Project Details", link: "###" },
-        { title: "Update Task Progress & Completion Status", link: "##" },
-        { title: "Upload Documents & Project Created Files", link: "##" },
-        { title: "Option 3", link: "##" },
+        { title: "My Data", link: "###" },
+        { title: "Team", link: "##" },
+        { title: "Holidays", link: "##" },
+       
       ],
     },
   ];
 
   const mySpaceSubmenus = [
-    { title: "Overview", link: "#" },
+    { title: "Overview", link: "/Leave-Tracker" },
     { title: "Dashboard", link: "#" },
   ];
 
