@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import logo from '../../assets/logo.jpeg'
 
 const Navbar = ({isOpen}) => {
 
@@ -8,9 +9,9 @@ const Navbar = ({isOpen}) => {
     <nav className={`${styles.navbar} ${isOpen? styles.open : ""}`}>
       <div className={styles.container}>
         {/* Logo */}
-        <h1 className={styles.logo}>
-          <Link to="/" style={{ color: '#C0C0C0', textDecoration: 'none' }}>Dcore</Link>
-        </h1>
+        <Link to="/">
+          <img src={logo} alt="Dcore Logo" className={styles.logo} />
+        </Link>        
 
 
         {/* Buttons */}
@@ -18,9 +19,10 @@ const Navbar = ({isOpen}) => {
           {/* <Link to="/Signup">
             <button className={styles.signup}>SignUp</button>
           </Link> */}
-          <Link to="/SignIn">
-            <button className={styles.login}>Log In</button>
+          <Link to="/sign">
+            <button className={styles.button }>Log In</button>
           </Link>
+          
         </div>
       </div>
     </nav>

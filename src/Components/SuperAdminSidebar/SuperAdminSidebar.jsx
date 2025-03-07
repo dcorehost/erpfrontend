@@ -30,7 +30,7 @@ const SuperAdminSidebar = ({ children }) => {
         { title: "User Profile", icon: <FaUser />, link: "/userProfile" },
         { title: "Sales Report", icon: <FcSalesPerformance />, link: "/sales-report" },
         { title: "Purchase Report", icon: <BiSolidCoinStack />, link: "/purchase-report" },
-        { title: "Option", icon: <FaBuildingUser />, link: "/SignIn" },
+        { title: "Option", icon: <FaBuildingUser />, link: "/sign" },
       ],
     },
     {

@@ -10,128 +10,157 @@
   margin-bottom: 10px;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* min-height: 100vh; */
-    /* background-color: #f0f4f8; */
-    padding: 1rem;
-    /* border: 1px solid black; */
-  }
-  
-  .form {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 300px;
-    background-color: #f0f4f8;
-  }
-  
-  .heading {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-family: Arial;
-  }
-  
-  .formGroup {
-    margin-bottom: 1.25rem;
-  }
-  
-  .label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #555;
-    font-family: Arial;
-  }
-  
-  .inputGroup {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0rem 0.5rem;
-    background-color: #fff;
-    transition: border-color 0.3s;
-  }
-  
-  .inputGroup:hover {
-    border-color: #714b67;
-  }
-  
-  .icon {
-    color: #888;
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 0.75rem;
-    border: none;
-    font-size: 1rem;
-    outline: none;
-    font-family: Arial;
-  }
-  
-  .input:focus {
-    border: none;
-  }
-  
-  .button {
-    font-family: Arial;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #714b67;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .button:hover {
-    background-color: #a07a96;
-  }
-  .linksContainer {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
-  .link {
-    color: #017e84;
-    text-decoration: none;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+}
 
+.container {
+  width: 140%;
+  max-width: 450px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-family: Arial;
+  font-size: 30px;
+}
+
+.formGroup {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #0d0d0d;
+  font-family: Arial;
+  font-size: 14px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+  position: relative;
+}
+
+.inputGroup:hover {
+  border-color: #ef9273;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  background: transparent;
+}
+
+.input:focus {
+  border-color: #ef9273;
+  outline: none;
+}
+
+.iconToggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 20px;
+  color: #633222;
+  transition: color 0.3s ease;
+}
+
+.iconToggle:hover {
+  color: #ef9273;
+}
+
+.iconToggle:focus {
+  outline: none;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  background-color: #ef9273;
+  color: #0d0d0d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #633222;
+  color: #fff;
+}
+
+.linksContainer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.link {
+  color: #017e84;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.text {
+  margin-top: 10px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: 1.5rem;
   }
-  
-  .link:hover {
-    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 1rem;
   }
-  
-  .text {
-    margin-top: 10px;
-    color: #555;
+
+  .input {
+    font-size: 0.9rem;
   }
-  
-  @media (max-width: 768px) {
-    .form {
-      padding: 1.5rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .form {
-      padding: 1rem;
-    }
-  
-    .input {
-      font-size: 0.9rem;
-    }
-  }
-  
+} 
