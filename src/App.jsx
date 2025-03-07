@@ -19,7 +19,7 @@ import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
 import SalesDetails from './Components/SalesDetails/SalesDetails';
 import LeaveManagement from './Components/LeaveManagement/LeaveManagement';
 import UserSidebar from './Components/UserSidebar/UserSidebar';
-import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminsidebar';
+import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
 
 const App = () => {
   const token = localStorage.getItem("token");
