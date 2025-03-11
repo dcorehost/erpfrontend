@@ -12,6 +12,9 @@
   color: #0d0d0d;
   transition: left 0.3s;
   padding: 8px;
+  /* border: 1px solid black; */
+  margin-left: -840px;
+  margin-top: 60px;
 }
 
 .contentMenu {
@@ -254,4 +257,27 @@
     font-size: 18px;
   }
 }
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+}
 
+.logout {
+  background-color: #ff7f7f;
+  color: white;
+  text-align: center;
+  border: none;
+  width: 100%; /* Ensure it takes full width */
+  padding: 10px;
+  border-radius: 5px;
+}
+.sidebar {
+  width: 250px; /* Ensure correct width */
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  width: 250px;
+}

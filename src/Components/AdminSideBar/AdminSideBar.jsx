@@ -1,107 +1,80 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaChartLine, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from "react-icons/fa";
-import { MdPlayLesson } from "react-icons/md";
+import { FaChartLine, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Fixed import issue
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
-import { LiaBuysellads } from "react-icons/lia";
 import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
-import { FaBuildingUser } from "react-icons/fa6";
-import { GrTasks } from "react-icons/gr";
-import { FaUser } from "react-icons/fa";
-import { FcSalesPerformance } from "react-icons/fc";
-import { BiSolidCoinStack } from "react-icons/bi";
-import { BiSolidMessageSquareDots } from "react-icons/bi";
 
-const AdminSideBar = ({ children }) => {
+const AdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false); // New state
+  const navigate = useNavigate(); // Highlighted: Initialize useNavigate
+  const token = localStorage.getItem("token"); // Get token from localStorage
+
 
   const menus = [
     {
-      title: "Admin",
+      title: "Dashboard",
       icon: <RiAdminFill />,
       link: "/#",
       submenus: [
-        { title: "User Management", icon: <FaBuildingUser />, link: "/user-management" },
-        { title: "Task Manager", icon: <GrTasks />, link: "/task-manager" },
-        { title: "Enquiry Table", icon: <BiSolidMessageSquareDots />, link: "/enquiries-details" },
-        { title: "User Profile", icon: <FaUser />, link: "/userProfile" },
-        { title: "Sales Report", icon: <FcSalesPerformance />, link: "/sales-report" },
-        { title: "Purchase Report", icon: <BiSolidCoinStack />, link: "/purchase-report" },
-        { title: "Option", icon: <FaBuildingUser />, link: "/sign" },
+        { title: "My Space", link: "##", hasNested: true },
+        { title: "Organization", link: "##", hasNested: true },
       ],
     },
     {
-      title: "Team Leads",
+      title: "Task & Project Managemen",
       icon: <RiTeamFill />,
       link: "/#",
       submenus: [
-        { title: "User Profile",    icon: <FaUser />         , link: "/userProfile" },
-        { title: "Option 1",        icon: <FaBuildingUser /> , link: "/option-1" },
-        { title: "Option 2",        icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",        icon: <FaBuildingUser /> , link: "/option-3" },
+        { title: "My Data", link: "###" },
+        { title: "Team", link: "##" },
+        { title: "Holidays", link: "##" },
+       
       ],
     },
-    {
-      title: "Sales Management",
-      icon: <LiaBuysellads />,
-      link: "/#",
-      submenus: [
-        { title: "Generate Sales",   icon: <FcSalesPerformance /> ,         link: "/sales-management" },
-        { title: "Generate Purchase ", icon: <BiSolidCoinStack /> ,         link: "/purchase-management" },
-        { title: "User Profile",     icon: <FaUser />         ,             link: "/userProfile" },
-        { title: "Option 3",         icon: <FaBuildingUser /> ,             link: "/option-3" },
-      ],
-    },
-    
-    {
-      title: "Purchase Managment",
-      icon: <FaChartLine />,
-      link: "/#",
-      submenus: [
-        { title: "Generate Purchase ", icon: <FaBuildingUser /> , link: "/purchase-management" },
-        { title: "Option 1",           icon: <FaBuildingUser /> , link: "/option-1" },
-        { title: "Option 2",           icon: <FaBuildingUser /> , link: "/option-2" },
-      ],
-    },
-    {
-      title: "Employee Management",
-      icon: <FaChalkboardTeacher />,
-      link: "/#",
-      submenus: [
-        { title: "User Profile",     icon: <FaUser />         ,           link: "/userProfile" },
-        { title: "Leave Management",       icon: <FaBuildingUser /> ,             link: "/leave-management" },
-        { title: "Option 3",       icon: <FaBuildingUser /> ,             link: "/option-3" },
-      ],
-    },
-    {
-      title: "Attendance Management",
-      icon: <MdPlayLesson />,
-      link: "/#",
-      submenus: [
-        { title: "Option 1",   icon: <FaBuildingUser /> , link: "/option-1" },
-        { title: "Option 2",   icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",   icon: <FaBuildingUser /> , link: "/option-3" },
-      ],
-    },
-    {
-      title: "Master Data",
-      icon: <FaChartLine />,
-      link: "/#",
-      submenus: [
-        { title: "Option 1",   icon: <FaBuildingUser /> , link: "/option-1" },
-        { title: "Option 2",   icon: <FaBuildingUser /> , link: "/option-2" },
-        { title: "Option 3",   icon: <FaBuildingUser /> , link: "/option-3" },
-      ],
-    },
-    // Additional menus here
+  ];
+
+  const mySpaceSubmenus = [
+    { title: "Overview", link: "/Leave-Tracker" },
+    { title: "Dashboard", link: "#" },
+  ];
+
+  const organizationSubmenus = [
+    { title: "Overview", link: "#" },
+    { title: "Announcements", link: "#" },
+    { title: "Policies", link: "#" },
+    { title: "Employee Tree", link: "#" },
+    { title: "Birthday Folks", link: "#" },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
-  const toggleSubmenu = (index) => setActiveMenu(activeMenu === index ? null : index);
 
+  const toggleSubmenu = (index) => {
+    setActiveMenu(activeMenu === index ? null : index);
+    setActiveSubmenu(null);
+  };
+
+  const handleSubmenuClick = (subIndex, submenuTitle) => {
+    setActiveSubmenu(subIndex);
+  };
+
+  const handleLogout = () => {
+    console.log("Logout clicked! Clearing localStorage...");
+    localStorage.clear();
+    sessionStorage.clear();
+    setIsLoggedOut(true); // Trigger re-render
+    window.location.href = "/"; // Full page reload
+  };
+  
+  // Redirect after logout state is set
+  if (isLoggedOut) {
+    navigate("/"); // Redirect to login page
+  }
+  
   return (
     <div className={`${styles.sidebarWrapper}`}>
       <div className={`${styles.sidebarContainer}`}>
@@ -124,9 +97,9 @@ const AdminSideBar = ({ children }) => {
                     onClick={() => toggleSubmenu(index)}
                   >
                     <div className={styles.icon}>{menu.icon}</div>
-                      <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`} >
-                        {menu.title}
-                     </span>
+                    <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
+                      {menu.title}
+                    </span>
                     {menu.submenus.length > 0 && (
                       <span className={styles.dropdownIcon}>
                         {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
@@ -137,12 +110,34 @@ const AdminSideBar = ({ children }) => {
                     <ul className={styles.submenu}>
                       {menu.submenus.map((submenu, subIndex) => (
                         <li key={subIndex} className={styles.submenuItem}>
-                          <div className={styles.submenuItemWrapper}>
-                            <span className={styles.icon}>{submenu.icon}</span>
-                            <Link to={submenu.link} className={styles.submenuLink}>
-                              {submenu.title}
-                            </Link>
-                          </div>
+                          <button
+                            className={styles.submenuButton}
+                            onClick={() => handleSubmenuClick(subIndex, submenu.title)}
+                          >
+                            {submenu.title}
+                          </button>
+
+                          {/* Show "My Space" Submenu */}
+                          {activeSubmenu === subIndex && submenu.title === "My Space" && (
+                            <div className={styles.nestedSubmenuContainer}>
+                              {mySpaceSubmenus.map((item, idx) => (
+                                <button key={idx} className={styles.submenuButton}>
+                                  {item.title}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Show "Organization" Submenu */}
+                          {activeSubmenu === subIndex && submenu.title === "Organization" && (
+                            <div className={styles.nestedSubmenuContainer}>
+                              {organizationSubmenus.map((item, idx) => (
+                                <button key={idx} className={styles.submenuButton}>
+                                  {item.title}
+                                </button>
+                              ))}
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -152,14 +147,17 @@ const AdminSideBar = ({ children }) => {
               </React.Fragment>
             ))}
             <li>
-              <Link to="/logout" className={`${styles.menuItem} ${styles.logout}`}>
+              
+            <button // Highlighted: Changed Link to button
+                onClick={handleLogout} // Highlighted: Calls handleLogout
+                className={`${styles.menuItem} ${styles.logout}`}
+              >
                 <FaChartLine />
-                <span
-                  className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}
-                >
+                <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
                   Logout
                 </span>
-              </Link>
+              </button>
+
             </li>
           </ul>
         </div>
@@ -172,9 +170,4 @@ const AdminSideBar = ({ children }) => {
   );
 };
 
-export default AdminSideBar;
-
-
-
-
-
+export default AdminSidebar;
