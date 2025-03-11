@@ -45,12 +45,14 @@ const UserSidebar = ({ children }) => {
     { title: "Employee Tree", link: "#" },
     { title: "Birthday Folks", link: "#" },
   ];
-
   const myDataSubmenus = [
+    
     { title: "Leave Summary", link: "/leave-summary"},
     { title: "Leave Balance", link: "#" },
     { title: "Leave Requests", link: "#" },
   ];
+  console.log("data",myDataSubmenus)
+
 
   const toggleSidebar = () => setIsOpen(!isOpen);
   const toggleSubmenu = (index) => {
