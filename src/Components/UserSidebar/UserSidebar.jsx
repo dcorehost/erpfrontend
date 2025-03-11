@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChartLine, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import styles from "./UserSidebar.module.css";
@@ -21,20 +22,19 @@ const UserSidebar = ({ children }) => {
       ],
     },
     {
-      title: "Task & Project Managemen",
+      title: "Leave Summary",
       icon: <RiTeamFill />,
       link: "/#",
       submenus: [
-        { title: "My Data", link: "###" },
-        { title: "Team", link: "##" },
-        { title: "Holidays", link: "##" },
-       
+        { title: "My Data", link: "###", hasNested: true },
+        { title: "Team", link: "##", hasNested: true },
+        { title: "Holidays", link: "##", hasNested: true },
       ],
     },
   ];
 
   const mySpaceSubmenus = [
-    { title: "Overview", link: "/Leave-Tracker" },
+    { title: "Overview", link: "#" },
     { title: "Dashboard", link: "#" },
   ];
 
@@ -46,20 +46,29 @@ const UserSidebar = ({ children }) => {
     { title: "Birthday Folks", link: "#" },
   ];
 
-  const toggleSidebar = () => setIsOpen(!isOpen);
+  const myDataSubmenus = [
+    { title: "Leave Summary", link: "/leave-summary"},
+    { title: "Leave Balance", link: "#" },
+    { title: "Leave Requests", link: "#" },
+  ];
 
+  const toggleSidebar = () => setIsOpen(!isOpen);
   const toggleSubmenu = (index) => {
     setActiveMenu(activeMenu === index ? null : index);
     setActiveSubmenu(null);
   };
+  const handleSubmenuClick = (subIndex) => setActiveSubmenu(subIndex);
 
-  const handleSubmenuClick = (subIndex, submenuTitle) => {
-    setActiveSubmenu(subIndex);
+  const handleLogout = () => {
+    console.log("Logout clicked! Clearing localStorage...");
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "/"; // ✅ Instant Logout Redirect
   };
 
   return (
-    <div className={`${styles.sidebarWrapper}`}>
-      <div className={`${styles.sidebarContainer}`}>
+    <div className={styles.sidebarWrapper}>
+      <div className={styles.sidebarContainer}>
         <button
           className={styles.hamburgerButton}
           onClick={toggleSidebar}
@@ -94,12 +103,11 @@ const UserSidebar = ({ children }) => {
                         <li key={subIndex} className={styles.submenuItem}>
                           <button
                             className={styles.submenuButton}
-                            onClick={() => handleSubmenuClick(subIndex, submenu.title)}
+                            onClick={() => handleSubmenuClick(subIndex)}
                           >
                             {submenu.title}
                           </button>
 
-                          {/* Show "My Space" Submenu */}
                           {activeSubmenu === subIndex && submenu.title === "My Space" && (
                             <div className={styles.nestedSubmenuContainer}>
                               {mySpaceSubmenus.map((item, idx) => (
@@ -110,10 +118,19 @@ const UserSidebar = ({ children }) => {
                             </div>
                           )}
 
-                          {/* Show "Organization" Submenu */}
                           {activeSubmenu === subIndex && submenu.title === "Organization" && (
                             <div className={styles.nestedSubmenuContainer}>
                               {organizationSubmenus.map((item, idx) => (
+                                <button key={idx} className={styles.submenuButton}>
+                                  {item.title}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+
+                          {activeSubmenu === subIndex && submenu.title === "My Data" && (
+                            <div className={styles.nestedSubmenuContainer}>
+                              {myDataSubmenus.map((item, idx) => (
                                 <button key={idx} className={styles.submenuButton}>
                                   {item.title}
                                 </button>
@@ -128,13 +145,15 @@ const UserSidebar = ({ children }) => {
                 <hr className={styles.menuDivider} />
               </React.Fragment>
             ))}
-            <li>
-              <Link to="/logout" className={`${styles.menuItem} ${styles.logout}`}>
+
+            {/* Logout Button */}
+            <li className={styles.logoutContainer}>
+              <button onClick={handleLogout} className={styles.logout}>
                 <FaChartLine />
                 <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
                   Logout
                 </span>
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

@@ -11,6 +11,9 @@
   color: #0d0d0d;
   transition: left 0.3s;
   padding: 8px;
+  /* border: 1px solid black; */
+  margin-left: -840px;
+  margin-top: 50px;
 }
 
 .contentMenu {
@@ -40,7 +43,7 @@
   /* border: 1px solid black; */
   position: absolute;
   left: 100%;
-  top: 4%;
+  top: 0%;
   background-color: #fef9f8;
   padding: 10px;
   display: flex;  /* Makes submenu items appear in a row */
@@ -49,21 +52,34 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
   z-index: 1000;
+  /* border: 1px solid black; */
+ 
+}
+.nestedSubmenuContainer {
+  /* border: 1px solid black; */
+  position: absolute;
+  top: 50px; /* Moves the submenu 50px from the top */
+  left: 0; /* Aligns it to the left */
 }
 
-.submenuItem {
+.submenuItem { 
+
   display: flex;
   align-items: center;
   padding: 5px 10px;
+ 
+ 
 }
 
 .submenuButton {
+  
   background: none;
   border: none;
   color: #0d0d0d;
   cursor: pointer;
   padding: 5px 10px;
   transition: color 0.3s;
+  
 }
 
 .submenuButton:hover {
@@ -128,6 +144,7 @@
     width: 50px;
     position: fixed;
     transition: left 0.3s ease-in-out;
+    margin-left: 0px;
   }
 
   .hamburgerButton {
@@ -150,6 +167,7 @@
     position: fixed;
     left: 0;
     transition: left 0.3s ease-in-out;
+    margin-left: 0px;
   }
 
   .hamburgerButton {
@@ -168,6 +186,7 @@
 @media (min-width: 769px) {
   .sidebar {
     width: 250px;
+   
   }
 
   .menuItem {
@@ -180,3 +199,27 @@
   }
 }
 
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.logout {
+  background-color: #ff7f7f;
+  color: white;
+  text-align: center;
+  border: none;
+  width: 100%; /* Ensure it takes full width */
+  padding: 10px;
+  border-radius: 5px;
+}
+.sidebar {
+  width: 250px; /* Ensure correct width */
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  width: 250px;
+}
