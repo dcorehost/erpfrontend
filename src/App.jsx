@@ -19,18 +19,18 @@ import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
 import SalesDetails from './Components/SalesDetails/SalesDetails';
 import LeaveManagement from './Components/LeaveManagement/LeaveManagement';
 import UserSidebar from './Components/UserSidebar/UserSidebar';
-import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
+import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminsidebar';
+import LeaveSummary from './Components/LeaveSummary/LeaveSummary';
+
+
+
 
 const App = () => {
   const token = localStorage.getItem("token");
-  console.log("Stored Token:", token);
-
   const typeOfUser = localStorage.getItem("typeOfUser");
-  console.log("Stored User Type:", typeOfUser);
-
 
   return (
-    <Router>
+    <Router>[]
       {!token ? (
         <>
           <Navbar />
@@ -70,7 +70,7 @@ const App = () => {
             <Route path="/purchase-management" element={<PurchaseManagement />} />
             <Route path="/purchase-report" element={<PurchaseReport />} />
             <Route path="/leave-management" element={<LeaveManagement />} />
-            
+            <Route path="/leave-summary" element={<LeaveSummary />} />
           
           </Routes>
         </>
