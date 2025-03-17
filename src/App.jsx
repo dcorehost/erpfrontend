@@ -30,7 +30,7 @@ const App = () => {
   const typeOfUser = localStorage.getItem("typeOfUser");
 
   return (
-    <Router>[]
+    <Router>
       {!token ? (
         <>
           <Navbar />
