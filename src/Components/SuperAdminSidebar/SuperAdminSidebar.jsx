@@ -223,11 +223,15 @@ const SuperAdminSidebar = ({ children }) => {
   return (
     <div className={`${styles.sidebarWrapper}`}>
       <div className={`${styles.sidebarContainer}`}>
-        <button className={styles.hamburgerButton} onClick={toggleSidebar}>
+        {/* <button className={styles.hamburgerButton} onClick={toggleSidebar}>
           ☰
-        </button>
-
-        <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+        </button> */}
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+          {/* ☰ (Open) / ✖ (Close) Button */}
+          <button className={styles.hamburgerButton} onClick={toggleSidebar}>
+            {isOpen ? "✖" : "☰"}
+          </button>
+        {/* <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}> */}
           <ul className={styles.menu}>
             {menus.map((menu, index) => (
               <React.Fragment key={index}>
