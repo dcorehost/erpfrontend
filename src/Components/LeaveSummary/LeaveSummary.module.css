@@ -1,17 +1,27 @@
-LeaveTracker.module.css
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-   
-   
-  }
-  
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern font */
+  border: 2px solid #007BFF; /* Solid border with a professional color */
+  border-radius: 12px; /* Slightly larger radius for a softer appearance */
+  background-color: #f8f9fa; /* Light grey background for a subtle contrast */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  margin: 20px auto; /* Centers the container with margin */
+  max-width: 1000px; /* Slightly narrower for better readability */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions for interactivity */
+}
+
+.container:hover {
+  transform: scale(1.02); /* Slightly scales up on hover for an interactive effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Intensifies shadow on hover */
+}
+
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
   }
+  
   
   .applyButton {
     background-color: #007bff;
@@ -21,7 +31,82 @@ LeaveTracker.module.css
     cursor: pointer;
     border-radius: 5px;
   }
+  .calendarPopup { /* Ensure it only shows when calendar is toggled */
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none; /* Change to hidden by default */
+  }
   
+  .calendarPopup.show { /* Class to display when needed */
+    display: block;
+  }
+  
+  .applyButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .applyButton:hover { /* Optional hover effect */
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  /* Ensure the calendar does not conflict with popups */
+  .popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* Higher z-index to overlay correctly */
+  }
+  /* 👇 Styles for the holiday calendar wrapper */
+.holidayCalendarWrapper {
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Add some padding */
+  margin-top: 20px; /* Add margin to separate from other sections */
+  background-color: #f9f9f9; /* Light background color */
+}
+
+/* Existing styles for HolidayCalendar */
+.holidayCalendarContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.calendarSection {
+  flex: 1;
+}
+
+.holidayDetailsSection {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.holiday {
+  background-color: #ffcccc; /* Light red for holidays */
+  color: #cc0000;
+}
+
+
   .summary {
     display: flex;
     gap: 20px;
@@ -106,10 +191,11 @@ LeaveTracker.module.css
  
   .closeIcon {
     position: absolute;
-    right: 28%;
-    top: 20%;
+    right: 50px; /* Adjusted to fit better */
+    top: 20px; /* Adjusted for better vertical alignment */
     cursor: pointer;
     font-size: 20px;
+    z-index: 1100; 
   }
   
   .popupActions {

@@ -152,6 +152,15 @@ const LeaveSummary = () => {
   const openPopup = (leaveType) => {
     setSelectedLeaveType(leaveType);
     setShowPopup(true);
+    setShowCalendar(false); // Close the calendar when opening the popup
+  };
+
+  const toggleCalendar = () => {
+    // Ensure the calendar doesn't show when opening the popup
+    if (showPopup) {
+      setShowPopup(false);
+    }
+    setShowCalendar((prev) => !prev);
   };
 
   return (
@@ -171,7 +180,7 @@ const LeaveSummary = () => {
         <div className={styles.actionButtons}>
           <button className={styles.iconButton}><FaBars /></button>
           {/* Calendar Icon to Open Date Picker */}
-          <button className={styles.iconButton} onClick={() => setShowCalendar(!showCalendar)}>
+          <button className={styles.iconButton} onClick={toggleCalendar}>
             <FaCalendarAlt />
           </button>
           {showCalendar && (
@@ -180,7 +189,7 @@ const LeaveSummary = () => {
                 selected={selectedDate}
                 onChange={(date) => {
                   setSelectedDate(date);
-                  setShowCalendar(false);
+                  setShowCalendar(false); // Close calendar on date select
                 }}
                 inline
               />
@@ -200,13 +209,59 @@ const LeaveSummary = () => {
       <div className={styles.summary}>
         <LeaveCard type="Casual Leave" available={12} booked={0} color="blue" onClick={() => openPopup("Casual Leave")} />
         <LeaveCard type="Sick Leave" available={0} booked={0} color="green" onClick={() => openPopup("Sick Leave")} />
-        {/* <LeaveCard type="Leave Without Pay" available={0} booked={0} color="red" onClick={() => openPopup("Leave Without Pay")} /> */}
       </div>
 
-      <LeaveSection title="" options={["Upcoming Leave & Holidays", "Upcoming Leave", "Upcoming Holidays"]} />
-      <LeaveSection title="" options={["Past Leave & Holidays", "Past Leave", "Past Holidays"]} />
-
       {showPopup && <ApplyLeavePopup leaveType={selectedLeaveType} onClose={() => setShowPopup(false)} />}
+
+      <div className={styles.holidayContainer}>
+        <HolidayCalendar />
+      </div>
+    </div>
+  );
+};
+
+// 👇 New HolidayCalendar Component
+const HolidayCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // Define holidays (you can fetch this from the backend)
+  const holidays = [
+    { date: new Date(2025, 0, 1), name: "New Year's Day" },
+    { date: new Date(2025, 6, 4), name: "Independence Day" },
+    { date: new Date(2025, 11, 25), name: "Christmas Day" },
+  ];
+
+  const isHoliday = (date) => {
+    return holidays.some(holiday => holiday.date.toDateString() === date.toDateString());
+  };
+
+  const getHolidayDetails = (date) => {
+    return holidays.find(holiday => holiday.date.toDateString() === date.toDateString());
+  };
+
+  return (
+    <div className={styles.holidayCalendarWrapper}>
+      <div className={styles.holidayCalendarContainer}>
+        <div className={styles.calendarSection}>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            inline
+            dayClassName={(date) => (isHoliday(date) ? styles.holiday : null)}
+          />
+        </div>
+        <div className={styles.holidayDetailsSection}>
+          <h3>Holiday Details</h3>
+          {isHoliday(selectedDate) ? (
+            <div>
+              <p><strong>Date:</strong> {selectedDate.toDateString()}</p>
+              <p><strong>Holiday:</strong> {getHolidayDetails(selectedDate).name}</p>
+            </div>
+          ) : (
+            <p>No holiday on this date.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -218,21 +273,6 @@ const LeaveCard = ({ type, available, booked, color, onClick }) => {
       <h3>{type}</h3>
       <p>Available: <span className={styles.available}>{available}</span></p>
       <p>Booked: <span className={styles.booked}>{booked}</span></p>
-    </div>
-  );
-};
-
-// Leave Section Component
-const LeaveSection = ({ title, options }) => {
-  return (
-    <div className={styles.section}>
-      <h4>{title}</h4>
-      <select className={styles.dropdown}>
-        {options.map((option, index) => (
-          <option key={index} value={option}>{option}</option>
-        ))}
-      </select>
-      <div className={styles.noData}>No Data Found</div>
     </div>
   );
 };
