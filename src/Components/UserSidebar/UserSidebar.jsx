@@ -186,6 +186,7 @@ import { GrTasks } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
 import { FcSalesPerformance } from "react-icons/fc";
 import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
+import { link } from "framer-motion/client";
 
 const UserSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -199,10 +200,52 @@ const UserSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-        { title: "Leave Summary", icon: <FaBuildingUser />, link: "/leave-summary" },
-        { title: "Leave Management", icon: <GrTasks />, link: "/leave-management" },
+        { title: "Leave Summary", link: "/leave-summary" },
+        { title: "Leave Management",  link: "/leave-management" },
       ],
     },
+    {
+      title:"Task & Project Management",
+      icon:<FaChartLine />,
+      link:"/#",
+      submenus:[
+        {title:"Assigned Task & Project Details" ,  link:"/"},
+        {title:"Update Task Progress & Completion Status" , link:"/"},
+        {title:"Upload Documents &  Project Related Files" , link:"/"},
+        {title:"View Deadlines  Set By Admin " , link:"/"},
+
+
+      ]
+
+    },
+    {
+      title:"Attandance & Leave",
+      icon:<FaChartLine />,
+      link:"/#",
+      submenus:[
+        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/"},
+        {title:"View Daily &  Weekly Monthly " , link:"/"},
+        {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
+        {title:"Leave Approval Status  " , link:"/"},
+
+
+      ]
+
+    },
+    {
+      title:"Payroll &  PaySlips",
+      icon:<FaChartLine />,
+      link:"/#",
+      submenus:[
+        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/"},
+        {title:"View Daily &  Weekly Monthly " , link:"/"},
+        {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
+        {title:"Leave Approval Status  " , link:"/"},
+
+
+      ]
+
+    }
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
