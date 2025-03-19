@@ -4,23 +4,27 @@
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 60px;
+  left: -100%;
   width: 250px;
-  height: 100%;
+  height: calc(100% - 60px); /* Ensure it doesn’t overlap navbar */
   background-color: #fef9f8;
   color: #0d0d0d;
-  transition: left 0.3s;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
   padding: 8px;
-  /* border: 1px solid black; */
-  margin-left: -770px;
-  margin-top: 50px;
+  overflow-x: hidden;
+  z-index: 100;
 }
 
-.contentMenu {
-  width: 100%;
+.sidebar.open {
+  left: 0;
+  width: 250px;
 }
 
-/* Sidebar menu styles */
+.sidebar.hidden {
+  left: -100%;
+}
+
 .sidebar ul {
   list-style: none;
   margin-top: 30px;
@@ -28,70 +32,19 @@
 }
 
 .sidebar ul li {
-  margin: 0;
+  margin: 10px 0;
 }
 
 .sidebar ul li a {
   color: #0d0d0d;
   text-decoration: none;
   transition: color 0.3s;
-  display: flex;
 }
 
-/* Submenu styles */
-.submenu {
-  /* border: 1px solid black; */
-  position: absolute;
-  left: 100%;
-  top: 0%;
-  background-color: #fef9f8;
-  padding: 10px;
-  display: flex;  /* Makes submenu items appear in a row */
-  flex-direction: row; 
-  gap: 10px; /* Space between submenu items */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  white-space: nowrap;
-  z-index: 1000;
-  /* border: 1px solid black; */
- 
-}
-.nestedSubmenuContainer {
-  /* border: 1px solid black; */
-  position: absolute;
-  top: 50px; /* Moves the submenu 50px from the top */
-  left: 0; /* Aligns it to the left */
-}
-
-.submenuItem { 
-
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
- 
- 
-}
-
-.submenuButton {
-  
-  background: none;
-  border: none;
-  color: #0d0d0d;
-  cursor: pointer;
-  padding: 5px 10px;
-  transition: color 0.3s;
-  
-}
-
-.submenuButton:hover {
-  color: #ef9273;
-}
-
-/* Sidebar menu item */
 .menuItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -108,27 +61,20 @@
   flex: 1;
 }
 
-/* Sidebar toggle button */
+/* Hamburger Menu */
 .hamburgerButton {
   position: fixed;
-  top: 10px;
+  top: 70px;
   left: 25px;
   background: transparent;
-  border: none;
+  border: none; 
   color: #0d0d0d;
   font-size: 20px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
 }
 
-/* Divider */
-.menuDivider {
-  border: 0;
-  height: 1px;
-  background: #555;
-  margin: 10px 0;
-}
-
+/* Logout Button */
 .menuItem.logout {
   margin-top: auto;
   color: #ff4d4d;
@@ -138,17 +84,14 @@
   background-color: #660000;
 }
 
-/* Responsive styles */
+/* Responsive Design */
 @media (max-width: 480px) {
   .sidebar {
-    width: 50px;
-    position: fixed;
-    transition: left 0.3s ease-in-out;
-    margin-left: 0px;
+    width: 60px;
   }
 
-  .hamburgerButton {
-    left: 10px;
+  .sidebar.open {
+    width: 200px;
   }
 
   .menuItem {
@@ -156,18 +99,30 @@
     padding: 10px 5px;
   }
 
+  .icon {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
   .submenu {
-    flex-direction: row;
+    margin-left: 10px;
+  }
+
+  .submenuItem {
+    font-size: 14px;
   }
 }
 
 @media (max-width: 768px) and (min-width: 481px) {
   .sidebar {
-    width: 40px;
-    position: fixed;
-    left: 0;
-    transition: left 0.3s ease-in-out;
-    margin-left: 0px;
+    width: 70px;
+  }
+
+  .sidebar.open {
+    width: 220px;
   }
 
   .hamburgerButton {
@@ -175,18 +130,33 @@
   }
 
   .contentMenu {
-    width: calc(100% - 55px);
+    width: calc(100% - 70px);
+  }
+
+  .menuItem {
+    font-size: 18px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 16px;
   }
 
   .submenu {
-    flex-direction: row;
+    margin-left: 15px;
+  }
+
+  .submenuItem {
+    font-size: 16px;
   }
 }
 
 @media (min-width: 769px) {
   .sidebar {
     width: 250px;
-   
   }
 
   .menuItem {
@@ -194,32 +164,19 @@
     padding: 20px 15px;
   }
 
-  .submenu {
-    flex-direction: row;
+  .icon {
+    font-size: 24px;
   }
-}
 
-.menuItem {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  cursor: pointer;
-}
+  .title {
+    font-size: 20px;
+  }
 
-.logout {
-  background-color: #ff7f7f;
-  color: white;
-  text-align: center;
-  border: none;
-  width: 100%; /* Ensure it takes full width */
-  padding: 10px;
-  border-radius: 5px;
-}
-.sidebar {
-  width: 250px; /* Ensure correct width */
-  transition: width 0.3s ease-in-out;
-}
+  .submenu {
+    margin-left: 20px;
+  }
 
-.sidebar.open {
-  width: 250px;
+  .submenuItem {
+    font-size: 18px;
+  }
 }
