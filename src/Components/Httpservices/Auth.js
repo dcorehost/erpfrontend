@@ -28,45 +28,24 @@
 //   export default auth;
 
 
+// auth.js
 const auth = {
-  sign: (data) => {
-    try {
-      // Store authentication data in localStorage
-      localStorage.setItem("authData", JSON.stringify(data));
-      console.log("Data saved in localStorage:", data); // Debugging log
-    } catch (error) {
-      console.error("Error saving to localStorage:", error);
-    }
+  isAuthenticated: () => {
+    const token = localStorage.getItem("token");
+    return !!token; // Return true if token exists, false otherwise
+  },
+
+  getToken: () => {
+    return localStorage.getItem("token");
+  },
+
+  setToken: (token) => {
+    localStorage.setItem("token", token);
   },
 
   logout: () => {
-    try {
-      // Remove authentication data from localStorage
-      localStorage.removeItem("authData");
-    } catch (error) {
-      console.error("Error removing from localStorage:", error);
-    }
-  },
-
-  isAuthenticated: () => {
-    try {
-      // Check if authData exists in localStorage
-      return localStorage.getItem("authData") !== null;
-    } catch (error) {
-      console.error("Error checking authentication status:", error);
-      return false;
-    }
-  },
-
-  getAuthData: () => {
-    try {
-      // Retrieve auth data from localStorage
-      const authData = localStorage.getItem("authData");
-      return authData ? JSON.parse(authData) : null;
-    } catch (error) {
-      console.error("Error retrieving auth data:", error);
-      return null;
-    }
+    localStorage.removeItem("token");
+    // Redirect to login page or perform other cleanup
   },
 };
 
