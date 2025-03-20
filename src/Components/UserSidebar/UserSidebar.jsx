@@ -201,7 +201,8 @@ const UserSidebar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Leave Summary", link: "/leave-summary" },
-        { title: "Leave Management",  link: "/leave-management" },
+        { title: "Upcoming Leave",  link: "/ApplyLeaveTable" },
+        { title: "Past Leave",  link: "/PastLeaveTable" },
       ],
     },
     {
