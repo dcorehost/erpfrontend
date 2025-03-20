@@ -1,11 +1,11 @@
-
-
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaChevronLeft, FaChevronRight, FaBars, FaCalendarAlt } from "react-icons/fa";
 import styles from "./LeaveSummary.module.css";
+import httpServices from "../Httpservices/httpservices"; // Import the httpServices
+
 
 const LeaveSummary = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -16,6 +16,15 @@ const LeaveSummary = () => {
   const openPopup = (leaveType) => {
     setSelectedLeaveType(leaveType);
     setShowPopup(true);
+    setShowCalendar(false); // Close the calendar when opening the popup
+  };
+
+  const toggleCalendar = () => {
+    // Ensure the calendar doesn't show when opening the popup
+    if (showPopup) {
+      setShowPopup(false);
+    }
+    setShowCalendar((prev) => !prev);
   };
 
   return (
@@ -35,7 +44,7 @@ const LeaveSummary = () => {
         <div className={styles.actionButtons}>
           <button className={styles.iconButton}><FaBars /></button>
           {/* Calendar Icon to Open Date Picker */}
-          <button className={styles.iconButton} onClick={() => setShowCalendar(!showCalendar)}>
+          <button className={styles.iconButton} onClick={toggleCalendar}>
             <FaCalendarAlt />
           </button>
           {showCalendar && (
@@ -44,7 +53,7 @@ const LeaveSummary = () => {
                 selected={selectedDate}
                 onChange={(date) => {
                   setSelectedDate(date);
-                  setShowCalendar(false);
+                  setShowCalendar(false); // Close calendar on date select
                 }}
                 inline
               />
@@ -64,13 +73,59 @@ const LeaveSummary = () => {
       <div className={styles.summary}>
         <LeaveCard type="Casual Leave" available={12} booked={0} color="blue" onClick={() => openPopup("Casual Leave")} />
         <LeaveCard type="Sick Leave" available={0} booked={0} color="green" onClick={() => openPopup("Sick Leave")} />
-        {/* <LeaveCard type="Leave Without Pay" available={0} booked={0} color="red" onClick={() => openPopup("Leave Without Pay")} /> */}
       </div>
 
-      <LeaveSection title="" options={["Upcoming Leave & Holidays", "Upcoming Leave", "Upcoming Holidays"]} />
-      <LeaveSection title="" options={["Past Leave & Holidays", "Past Leave", "Past Holidays"]} />
-
       {showPopup && <ApplyLeavePopup leaveType={selectedLeaveType} onClose={() => setShowPopup(false)} />}
+
+      <div className={styles.holidayContainer}>
+        <HolidayCalendar />
+      </div>
+    </div>
+  );
+};
+
+// 👇 New HolidayCalendar Component
+const HolidayCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // Define holidays (you can fetch this from the backend)
+  const holidays = [
+    { date: new Date(2025, 0, 1), name: "New Year's Day" },
+    { date: new Date(2025, 6, 4), name: "Independence Day" },
+    { date: new Date(2025, 11, 25), name: "Christmas Day" },
+  ];
+
+  const isHoliday = (date) => {
+    return holidays.some(holiday => holiday.date.toDateString() === date.toDateString());
+  };
+
+  const getHolidayDetails = (date) => {
+    return holidays.find(holiday => holiday.date.toDateString() === date.toDateString());
+  };
+
+  return (
+    <div className={styles.holidayCalendarWrapper}>
+      <div className={styles.holidayCalendarContainer}>
+        <div className={styles.calendarSection}>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            inline
+            dayClassName={(date) => (isHoliday(date) ? styles.holiday : null)}
+          />
+        </div>
+        <div className={styles.holidayDetailsSection}>
+          <h3>Holiday Details</h3>
+          {isHoliday(selectedDate) ? (
+            <div>
+              <p><strong>Date:</strong> {selectedDate.toDateString()}</p>
+              <p><strong>Holiday:</strong> {getHolidayDetails(selectedDate).name}</p>
+            </div>
+          ) : (
+            <p>No holiday on this date.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -86,22 +141,11 @@ const LeaveCard = ({ type, available, booked, color, onClick }) => {
   );
 };
 
-// Leave Section Component
-const LeaveSection = ({ title, options }) => {
-  return (
-    <div className={styles.section}>
-      <h4>{title}</h4>
-      <select className={styles.dropdown}>
-        {options.map((option, index) => (
-          <option key={index} value={option}>{option}</option>
-        ))}
-      </select>
-      <div className={styles.noData}>No Data Found</div>
-    </div>
-  );
-};
-
 // Apply Leave Popup
+
+
+// ApplyLeavePopup Component
+// ApplyLeavePopup Component
 const ApplyLeavePopup = ({ leaveType, onClose }) => {
   const [formData, setFormData] = useState({
     from: null, // Use null for DatePicker
@@ -112,6 +156,7 @@ const ApplyLeavePopup = ({ leaveType, onClose }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [successMessage, setSuccessMessage] = useState(null); // Success message
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -133,37 +178,32 @@ const ApplyLeavePopup = ({ leaveType, onClose }) => {
 
     setIsSubmitting(true); // Set loading state
     setError(null); // Clear previous errors
+    setSuccessMessage(null); // Clear previous success messages
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 120000); // 120-second timeout
 
     try {
-      const response = await fetch("http://209.74.89.83/erpbackend/apply-leave", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: formData.from ? formData.from.toISOString().split("T")[0] : "",
-          to: formData.to ? formData.to.toISOString().split("T")[0] : "",
-          leaveType: formData.leaveType,
-          reason: formData.reason,
-        }),
-        signal: controller.signal,
-      });
+      // Prepare the data to be sent
+      const requestData = {
+        from: formData.from ? formData.from.toISOString().split("T")[0] : "", // Format date as "YYYY-MM-DD"
+        to: formData.to ? formData.to.toISOString().split("T")[0] : "", // Format date as "YYYY-MM-DD"
+        leaveType: formData.leaveType,
+        reason: formData.reason,
+      };
+
+      console.log("Sending request data:", requestData); // Log the request data
+
+      // Send the request
+      const response = await httpServices.post("/apply-leave", requestData, controller.signal);
 
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        // Handle non-JSON responses
-        const text = await response.text();
-        throw new Error(text || "Failed to submit leave application");
-      }
-
-      const data = await response.json();
-      console.log("Leave application successful:", data);
+      // Handle the response
+      console.log("Leave application successful:", response);
+      setSuccessMessage(response.message || "Leave request sent for approval.");
       alert("Leave request sent for approval.");
-      onClose();
+      onClose(); // Close the popup
     } catch (error) {
       console.error("Error submitting leave application:", error);
       setError(error.message || "Failed to submit leave application. Please try again later.");
@@ -225,6 +265,9 @@ const ApplyLeavePopup = ({ leaveType, onClose }) => {
 
           {/* Display error message */}
           {error && <div className={styles.errorMessage}>{error}</div>}
+
+          {/* Display success message */}
+          {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
 
           <div className={styles.popupActions}>
             <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
