@@ -196,7 +196,7 @@ const UserSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: "Dashboard",
+      title: "Leave",
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
@@ -222,11 +222,11 @@ const UserSidebar = ({ children }) => {
 
     },
     {
-      title:"Attandance & Leave",
+      title:"Attandance",
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/"},
+        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/Attendance"},
         {title:"View Daily &  Weekly Monthly " , link:"/"},
         {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
         {title:"Leave Approval Status  " , link:"/"},
