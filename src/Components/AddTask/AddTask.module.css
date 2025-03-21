@@ -1,0 +1,134 @@
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif; /* Modern font */
+}
+
+.container {
+  padding: 20px;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background-color: #ffffff; /* Background color */
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.taskForm {
+  display: flex;
+  flex-direction: column; /* Column layout for form */
+  gap: 15px; /* Space between elements */
+}
+.createdTasksContainer {
+  display: flex;
+  flex-direction: column; /* Stack tasks vertically */
+  margin-top: 20px;
+}
+
+.createdTask {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0; /* Space between tasks */
+  background-color: #f9f9f9; /* Light background for clarity */
+}
+
+
+
+.taskRow {
+  display: flex;
+  gap: 15px; /* Space between project select and task input */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.projectSelect,
+.taskInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  flex: 1; /* Allow inputs to grow and fill space */
+  min-width: 150px; /* Minimum width for better layout */
+}
+
+.taskTextarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical; /* Allow vertical resizing */
+  height: 150px; /* Fixed height */
+  width: 100%;
+}
+
+button {
+  padding: 10px 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 200px;
+}
+
+button:hover {
+  background: #218838;
+}
+
+.timer {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.viewTasks {
+  margin-top: 20px; /* Space above button */
+  background: #007bff;
+}
+
+.viewTasks:hover {
+  background: #0056b3;
+}
+
+.timerControls {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between button and timer text */
+}
+
+.timerButton {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.timerButton:hover {
+  color: black; /* Darker green on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .taskRow {
+    flex-direction: column; /* Stack items on small screens */
+  }
+
+  .projectSelect,
+  .taskInput {
+    width: 100%; /* Full width on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px; /* Smaller heading on very small screens */
+  }
+
+  button {
+    width: 100%; /* Full-width buttons on small screens */
+  }
+}

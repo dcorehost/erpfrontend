@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -22,7 +20,8 @@ import SalesDetails from './Components/SalesDetails/SalesDetails';
 import UserSidebar from './Components/UserSidebar/UserSidebar';
 import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
 import LeaveSummary from './Components/LeaveSummary/LeaveSummary';
-import TaskManagement from './Components/TaskManagement/TaskManagement';
+import AddTask from './Components/AddTask/AddTask';
+import TaskList from './Components/TaskList/TaskList';
 import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
 import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
 import Attendance from './Components/Attendance/Attendance';
@@ -57,7 +56,7 @@ const App = () => {
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/userProfile" element={<UserProfile />} />
-            <Route path="/task-manager" element={<TaskManagement />} />
+            <Route path="/add-task" element={<AddTask />} />
 
             {/* Admin-specific routes */}
             {typeOfUser === "Admin" && (
@@ -84,7 +83,8 @@ const App = () => {
               <>
                 <Route path="/leave-summary" element={<LeaveSummary />} />
                 {/* // <Route path="/leave-management" element={<LeaveManagement />} /> */}
-                <Route path="/task-manager" element={<TaskManagement />} />
+                <Route path="/add-task" element={<AddTask />} />
+                <Route path="/task-list" element={<TaskList />} />
                 <Route path='/ApplyLeaveTable' element={<ApplyLeaveTable />}></Route>
                 <Route path='/PastLeaveTable'  element={<PastLeaveTable />}></Route>
                 <Route path='/Attendance' element={<Attendance />}></Route>
@@ -95,7 +95,7 @@ const App = () => {
             {typeOfUser === "superadmin" && (
               <>
                 <Route path="/user-management" element={<UserManagement />} />
-                <Route path="/task-manager" element={<TaskManager />} />
+                <Route path="/add-task" element={<TaskManager />} />
               </>
             )}
 

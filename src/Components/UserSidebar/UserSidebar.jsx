@@ -210,6 +210,8 @@ const UserSidebar = ({ children }) => {
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
+        { title: "Add Task", link: "/add-task" }, // Add actual routes
+        { title: "All Tasks Status", link: "/task-list" }, // Add actual routes
         { title: "Assigned Task & Project Details", link: "/task-details" }, // Add actual routes
         { title: "Update Task Progress & Completion Status", link: "/task-update" },
         { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
