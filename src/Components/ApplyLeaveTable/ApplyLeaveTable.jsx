@@ -1,7 +1,3 @@
-
-
-
-// src/Components/ApplyLeaveTable/ApplyLeaveTable.jsx
 import React, { useEffect, useState } from "react";
 import styles from "./ApplyLeaveTable.module.css"; // Import CSS module
 import httpServices from "../Httpservices/httpservices"; // Import httpServices
@@ -40,27 +36,6 @@ const ApplyLeaveTable = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Handle approve/reject actions
-  const handleAction = async (leaveId, action) => {
-    try {
-      // Send a PATCH request to update the leave status
-      const response = await httpServices.patch(`/update-leave/${leaveId}`, {
-        status: action === "approve" ? "Approved" : "Rejected",
-      });
-
-      // Update the leaveApplications state
-      setLeaveApplications((prev) =>
-        prev.map((leave) =>
-          leave._id === leaveId ? { ...leave, state: response.leave.state } : leave
-        )
-      );
-
-      console.log(`Leave ${action}d successfully:`, response);
-    } catch (error) {
-      console.error(`Failed to ${action} leave:`, error);
-    }
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -75,48 +50,25 @@ const ApplyLeaveTable = () => {
       <table className={styles.leaveTable}>
         <thead>
           <tr>
-          <th>Username</th>
-          <th>Email</th>
+            <th>Username</th>
+            <th>Email</th>
             <th>From</th>
             <th>To</th>
             <th>Leave Type</th>
             <th>Reason</th>
             <th>Status</th>
-           
-           
-            <th>Actions</th> {/* New column for actions */}
           </tr>
         </thead>
         <tbody>
           {currentItems.map((leave) => (
             <tr key={leave._id}>
-                 <td>{leave.userId.username}</td>
-                 <td>{leave.userId.contact.emailId}</td>
+              <td>{leave.userId.username}</td>
+              <td>{leave.userId.contact.emailId}</td>
               <td>{new Date(leave.from).toLocaleDateString()}</td>
               <td>{new Date(leave.to).toLocaleDateString()}</td>
               <td>{leave.leaveType}</td>
               <td>{leave.reason}</td>
               <td>{leave.state}</td>
-             
-              
-              <td>
-                {leave.state === "Pending" && ( // Show buttons only for pending leave applications
-                  <>
-                    <button
-                      className={styles.approveButton}
-                      onClick={() => handleAction(leave._id, "approve")}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      className={styles.rejectButton}
-                      onClick={() => handleAction(leave._id, "reject")}
-                    >
-                      Reject
-                    </button>
-                  </>
-                )}
-              </td>
             </tr>
           ))}
         </tbody>

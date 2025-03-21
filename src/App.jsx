@@ -25,6 +25,7 @@ import LeaveSummary from './Components/LeaveSummary/LeaveSummary';
 import TaskManagement from './Components/TaskManagement/TaskManagement';
 import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
 import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
+import Attendance from './Components/Attendance/Attendance';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -73,6 +74,7 @@ const App = () => {
                 <Route path="/ApplyLeaveTable" element={<ApplyLeaveTable />} />
                 <Route path="/PastLeaveTable" element={<PastLeaveTable />} /> {/* Add PastLeaveTable route */}
                 <Route path="/leave-summary" element={<LeaveSummary />} />
+                <Route path ="/Attendance"  element={<Attendance />}></Route>
                 
               </>
             )}
@@ -85,7 +87,7 @@ const App = () => {
                 <Route path="/task-manager" element={<TaskManagement />} />
                 <Route path='/ApplyLeaveTable' element={<ApplyLeaveTable />}></Route>
                 <Route path='/PastLeaveTable'  element={<PastLeaveTable />}></Route>
-                
+                <Route path='/Attendance' element={<Attendance />}></Route>
               </>
             )}
 
