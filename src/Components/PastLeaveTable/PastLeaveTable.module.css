@@ -1,0 +1,58 @@
+/* src/Components/PastLeaveTable/PastLeaveTable.module.css */
+.tableContainer {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .leaveTable {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders are merged */
+    margin-top: 10px;
+  }
+  
+  .leaveTable th,
+  .leaveTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Add border to all cells */
+  }
+  
+  .leaveTable th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff; /* Add border to header cells */
+  }
+  
+  .leaveTable tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagination button.activePage {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+    color: white;
+  }

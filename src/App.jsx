@@ -19,11 +19,12 @@ import EnquiryDetails from './Components/EnquiryDetails/EnquiryDetails';
 import PurchaseManagement from './Components/PurchaseManagement/PurchaseManagement';
 import PurchaseReport from './Components/PurchaseReport/PurchaseReport';
 import SalesDetails from './Components/SalesDetails/SalesDetails';
-import LeaveManagement from './Components/LeaveManagement/LeaveManagement';
 import UserSidebar from './Components/UserSidebar/UserSidebar';
 import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
 import LeaveSummary from './Components/LeaveSummary/LeaveSummary';
 import TaskManagement from './Components/TaskManagement/TaskManagement';
+import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
+import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -69,8 +70,10 @@ const App = () => {
                 <Route path="/enquiries-details" element={<EnquiryDetails />} />
                 <Route path="/purchase-management" element={<PurchaseManagement />} />
                 <Route path="/purchase-report" element={<PurchaseReport />} />
-                <Route path="/leave-management" element={<LeaveManagement />} />
+                <Route path="/ApplyLeaveTable" element={<ApplyLeaveTable />} />
+                <Route path="/PastLeaveTable" element={<PastLeaveTable />} /> {/* Add PastLeaveTable route */}
                 <Route path="/leave-summary" element={<LeaveSummary />} />
+                
               </>
             )}
 
@@ -78,8 +81,11 @@ const App = () => {
             {typeOfUser === "User" && (
               <>
                 <Route path="/leave-summary" element={<LeaveSummary />} />
-                <Route path="/leave-management" element={<LeaveManagement />} />
+                {/* // <Route path="/leave-management" element={<LeaveManagement />} /> */}
                 <Route path="/task-manager" element={<TaskManagement />} />
+                <Route path='/ApplyLeaveTable' element={<ApplyLeaveTable />}></Route>
+                <Route path='/PastLeaveTable'  element={<PastLeaveTable />}></Route>
+                
               </>
             )}
 
