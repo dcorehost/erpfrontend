@@ -210,10 +210,10 @@ const UserSidebar = ({ children }) => {
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        {title:"Assigned Task & Project Details" ,  link:"/"},
-        {title:"Update Task Progress & Completion Status" , link:"/"},
-        {title:"Upload Documents &  Project Related Files" , link:"/"},
-        {title:"View Deadlines  Set By Admin " , link:"/"},
+        { title: "Assigned Task & Project Details", link: "/task-details" }, // Add actual routes
+        { title: "Update Task Progress & Completion Status", link: "/task-update" },
+        { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
+        { title: "View Deadlines Set By Admin", link: "/admin-deadlines" },
 
 
       ]
