@@ -24,14 +24,11 @@ import AddTask from './Components/AddTask/AddTask';
 import TaskList from './Components/TaskList/TaskList';
 import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
 import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
-<<<<<<< HEAD
 import MarkAttendance from './Components/MarkAttendance/MarkAttendance';
 import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary';
-=======
 import Attendance from './Components/Attendance/Attendance';
 import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
 import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
->>>>>>> f10da60971ba66f734cc5a17450abc3a364f2b29
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -80,15 +77,12 @@ const App = () => {
                 <Route path="/ApplyLeaveTable" element={<ApplyLeaveTable />} />
                 <Route path="/PastLeaveTable" element={<PastLeaveTable />} /> {/* Add PastLeaveTable route */}
                 <Route path="/leave-summary" element={<LeaveSummary />} />
-<<<<<<< HEAD
                 <Route path='/mark-attendance' element={<MarkAttendance />}>
                 <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
                 </Route>
-=======
                 <Route path ="/Attendance"  element={<Attendance />}></Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                 <Route path='/Leave-policy' element={<LeavePolicy />}></Route>
->>>>>>> f10da60971ba66f734cc5a17450abc3a364f2b29
                 
               </>
             )}
@@ -102,14 +96,11 @@ const App = () => {
                 <Route path="/task-list" element={<TaskList />} />
                 <Route path='/ApplyLeaveTable' element={<ApplyLeaveTable />}></Route>
                 <Route path='/PastLeaveTable'  element={<PastLeaveTable />}></Route>
-<<<<<<< HEAD
                 <Route path='/mark-attendance' element={<MarkAttendance />}></Route>
                 <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
-=======
                 <Route path='/Attendance' element={<Attendance />}></Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                  <Route path='/Leave-policy'  element={<LeavePolicy />}></Route>
->>>>>>> f10da60971ba66f734cc5a17450abc3a364f2b29
               </>
             )}
 
