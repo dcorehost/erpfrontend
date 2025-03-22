@@ -1,0 +1,131 @@
+/* Wrapper for the entire page */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: linear-gradient(135deg, #f5f5f5, #f6e8e8); 
+  padding: 20px;
+}
+
+/* Heading Outside the Container */
+.title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced box shadow */
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Mark Attendance Section */
+.markAttendanceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05); /* Button hover effect */
+}
+
+.checkInButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.checkInButton:hover {
+  background-color: #45a049;
+}
+
+.checkOutButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.checkOutButton:hover {
+  background-color: #e53935;
+}
+
+.checkedInMessage,
+.checkedOutMessage {
+  font-size: 1rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.checkedInMessage {
+  color: #4caf50;
+}
+
+.checkedOutMessage {
+  color: #f44336;
+}
+
+.timer {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Today's Details Section */
+.bottomSection {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bottomSection:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.bottomSection h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.details p {
+  font-size: 1rem;
+  color: #555;
+  margin: 8px 0;
+}
