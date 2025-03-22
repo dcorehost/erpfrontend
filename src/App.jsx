@@ -96,7 +96,6 @@ const App = () => {
                 <Route path='/PastLeaveTable'  element={<PastLeaveTable />}></Route>
                 <Route path='/mark-attendance' element={<MarkAttendance />}></Route>
                 <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
-                <Route path='/Attendance' element={<Attendance />}></Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                  <Route path='/Leave-policy'  element={<LeavePolicy />}></Route>
               </>
