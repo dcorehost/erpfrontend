@@ -177,7 +177,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaChartLine, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaChartLine, FaChevronUp, FaChevronDown , FaCalendarAlt} from "react-icons/fa";
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import styles from "./UserSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -223,18 +223,46 @@ const UserSidebar = ({ children }) => {
 
     },
     {
-      title:"Attandance",
-      icon:<FaChartLine />,
-      link:"/#",
-      submenus:[
-        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/Attendance"},
-        {title:"View Daily &  Weekly Monthly " , link:"/"},
-        {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
-        {title:"Leave Approval Status  " , link:"/"},
-
-
-      ]
-
+      title: "Attendance",
+      icon: <FaCalendarAlt />, 
+      link: "/attendance",
+      submenus: [
+        {
+          title: "Mark Attendance",
+          link: "/mark-attendance",
+          description: "Check-in and Check-out for daily attendance tracking.",
+        },
+        {
+          title: "Attendance Summary",
+          link: "/attendance-summary",
+          description: "View daily, weekly, and monthly attendance records.",
+        },
+        {
+          title: "Apply for Leave",
+          link: "/apply-leave",
+          description: "Apply for Sick, Annual, Casual, or other types of leave.",
+        },
+        {
+          title: "Leave Approval Status",
+          link: "/leave-status",
+          description: "Track the status of your leave applications.",
+        },
+        {
+          title: "Attendance Regularization",
+          link: "/attendance-regularization",
+          description: "Request corrections for missing or incorrect attendance records.",
+        },
+        {
+          title: "Shift Management",
+          link: "/shift-management",
+          description: "View and manage your work shifts.",
+        },
+        {
+          title: "Holiday Calendar",
+          link: "/holiday-calendar",
+          description: "View the company's holiday schedule.",
+        },
+      ],
     },
     {
       title:"Payroll &  PaySlips",
