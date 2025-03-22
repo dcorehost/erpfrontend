@@ -26,7 +26,6 @@ import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
 import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
 import MarkAttendance from './Components/MarkAttendance/MarkAttendance';
 import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary';
-import Attendance from './Components/Attendance/Attendance';
 import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
 import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
 
@@ -80,7 +79,6 @@ const App = () => {
                 <Route path='/mark-attendance' element={<MarkAttendance />}>
                 <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
                 </Route>
-                <Route path ="/Attendance"  element={<Attendance />}></Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                 <Route path='/Leave-policy' element={<LeavePolicy />}></Route>
                 
