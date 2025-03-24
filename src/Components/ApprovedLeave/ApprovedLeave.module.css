@@ -1,0 +1,343 @@
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.header h2 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.summary {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pendingCount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e67e22;
+  font-weight: 500;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.table tr:hover td {
+  background-color: #f8f9fa;
+}
+
+.employeeInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.email {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+}
+
+.userType {
+  font-size: 0.75rem;
+  background-color: #ecf0f1;
+  color: #7f8c8d;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.to {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.leaveType {
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.sickLeave {
+  background-color: #ffe8e8;
+  color: #e74c3c;
+}
+
+.casualLeave {
+  background-color: #e8f4ff;
+  color: #2980b9;
+}
+
+.reason {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: #f0f0f0;
+  color: #7f8c8d;
+}
+
+.status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.approveBtn, .rejectBtn {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.approveBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+.approveBtn:hover {
+  background-color: #218838;
+}
+
+.rejectBtn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.rejectBtn:hover {
+  background-color: #c82333;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #f8f9fa;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.pageNumbers button {
+  min-width: 35px;
+}
+
+.activePage {
+  background-color: #3498db !important;
+  color: white !important;
+  border-color: #3498db !important;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.leaveDetails {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+}
+
+.leaveDetails div {
+  margin-bottom: 0.5rem;
+}
+
+.leaveDetails div:last-child {
+  margin-bottom: 0;
+}
+
+.remarksContainer {
+  margin-bottom: 1.5rem;
+}
+
+.remarksContainer label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+.remarksTextarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.remarksTextarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.submitBtn, .cancelBtn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.submitBtn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.submitBtn:hover {
+  background-color: #c82333;
+}
+
+.submitBtn:disabled {
+  background-color: #e0a6ad;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancelBtn:hover {
+  background-color: #5a6268;
+}
