@@ -167,6 +167,9 @@ import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary'
 import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
 import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
 import ApprovedLeave from './Components/ApprovedLeave/ApprovedLeave';
+import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
+import Deductions from './Components/Deductions/Deductions'
+import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -235,6 +238,10 @@ const App = () => {
                 <Route path="/attendance-summary" element={<AttendanceSummary />} />
                 <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} />
                 <Route path="/Leave-policy" element={<LeavePolicy />} />
+                 <Route path='/payroll-summary' element={<PayrollSummary />}></Route>
+                 <Route path='/deductions' element={<Deductions />}></Route>
+                 <Route path='/payment-methods' element={<PaymentMethods />}></Route>
+
               </>
             )}
 

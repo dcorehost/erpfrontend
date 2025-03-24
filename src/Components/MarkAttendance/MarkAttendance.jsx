@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import styles from "./MarkAttendance.module.css";
+import Auth from "../Httpservices/Auth";
+import { toast } from 'react-toastify';
 
 const MarkAttendance = () => {
   const [attendanceStatus, setAttendanceStatus] = useState({
@@ -7,14 +10,13 @@ const MarkAttendance = () => {
     checkedOut: false,
     checkInTime: null,
     checkOutTime: null,
-    location: null, // Location object to store address
-    timer: 0, // Timer in seconds
-    isTimerRunning: false, // To control the timer
+    location: null,
+    timer: 0,
+    isTimerRunning: false,
   });
 
-  const [timeSpent, setTimeSpent] = useState("00:00:00"); // Formatted time spent
+  const [timeSpent, setTimeSpent] = useState("00:00:00");
 
-  // Function to start the timer
   useEffect(() => {
     let interval;
     if (attendanceStatus.isTimerRunning) {
@@ -25,10 +27,9 @@ const MarkAttendance = () => {
         }));
       }, 1000);
     }
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, [attendanceStatus.isTimerRunning]);
 
-  // Format the timer into HH:MM:SS
   useEffect(() => {
     const hours = Math.floor(attendanceStatus.timer / 3600);
     const minutes = Math.floor((attendanceStatus.timer % 3600) / 60);
@@ -38,70 +39,107 @@ const MarkAttendance = () => {
     );
   }, [attendanceStatus.timer]);
 
-  // Function to fetch human-readable address using reverse geocoding
   const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          try {
-            // Use a reverse geocoding API to fetch the address
-            const response = await fetch(
-              `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`
-            );
-            const data = await response.json();
-            const address = data.results[0].formatted; // Get the formatted address
-            setAttendanceStatus((prevState) => ({
-              ...prevState,
-              location: address,
-            }));
-          } catch (error) {
-            console.error("Error fetching address:", error);
-            alert("Unable to fetch your location address. Please try again.");
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            resolve({ latitude, longitude });
+          },
+          (error) => {
+            alert("Unable to fetch your location. Please enable location services.");
+            reject(error);
           }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+        reject(new Error("Geolocation not supported"));
+      }
+    });
+  };
+
+  const handleCheckIn = async () => {
+    try {
+      const token = Auth.getToken();
+      if (!token) {
+        alert('User not authenticated.');
+        return;
+      }
+
+      const { latitude, longitude } = await getLocation();
+      const requestData = {
+        latitude,
+        longitude,
+        accuracy: 10,
+        altitude: 20,
+      };
+
+      const response = await axios.post('http://209.74.89.83/erpbackend/check-in', requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-        (error) => {
-          console.error("Error fetching location:", error);
-          alert("Unable to fetch your location. Please enable location services.");
-        }
-      );
-    } else {
-      alert("Geolocation is not supported by your browser.");
+      });
+
+      const { message, location } = response.data;
+      alert(message); // Use alert for success message
+
+      setAttendanceStatus((prevState) => ({
+        ...prevState,
+        checkedIn: true,
+        checkInTime: new Date().toLocaleTimeString(),
+        isTimerRunning: true,
+        location: location.formatted,
+      }));
+    } catch (error) {
+      const errorMessage = error.response ? error.response.data.message : "Failed to check in. Please try again.";
+      alert(errorMessage); // Use alert for error messages
     }
   };
 
-  const handleCheckIn = () => {
-    getLocation(); // Fetch location before checking in
-    const currentTime = new Date().toLocaleTimeString();
-    setAttendanceStatus({
-      ...attendanceStatus,
-      checkedIn: true,
-      checkInTime: currentTime,
-      isTimerRunning: true, // Start the timer
-    });
-    alert("You have successfully checked in!");
-  };
+  const handleCheckOut = async () => {
+    try {
+      const token = Auth.getToken();
+      if (!token) {
+        alert('User not authenticated.');
+        return;
+      }
 
-  const handleCheckOut = () => {
-    getLocation(); // Fetch location before checking out
-    const currentTime = new Date().toLocaleTimeString();
-    setAttendanceStatus({
-      ...attendanceStatus,
-      checkedOut: true,
-      checkOutTime: currentTime,
-      isTimerRunning: false, // Stop the timer
-    });
-    alert("You have successfully checked out!");
+      const { latitude, longitude } = await getLocation();
+      const payload = {
+        latitude,
+        longitude,
+        accuracy: 10,
+        altitude: 20,
+      };
+
+      const response = await axios.post('http://209.74.89.83/erpbackend/check-out', payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const { message } = response.data;
+      alert(message); // Use alert for success message
+
+      setAttendanceStatus((prevState) => ({
+        ...prevState,
+        checkedOut: true,
+        checkOutTime: new Date().toLocaleTimeString(),
+        isTimerRunning: false,
+      }));
+    } catch (error) {
+      const errorMessage = error.response ? error.response.data.message : "Failed to check out. Please try again.";
+      alert(errorMessage); // Use alert for error messages
+    }
   };
 
   return (
     <div className={styles.wrapper}>
-      {/* Heading Outside the Container */}
       <h1 className={styles.title}>Mark Attendance</h1>
-
-      {/* Main Container */}
       <div className={styles.container}>
-        {/* Mark Attendance Section */}
         <div className={styles.markAttendanceSection}>
           <div className={styles.buttons}>
             {!attendanceStatus.checkedIn ? (
@@ -140,7 +178,6 @@ const MarkAttendance = () => {
           </div>
         </div>
 
-        {/* Today's Details Section */}
         <div className={styles.bottomSection}>
           <h3>Today's Details</h3>
           <div className={styles.details}>

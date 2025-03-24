@@ -4,10 +4,10 @@
 
 .sidebar {
   position: fixed;
-  top: 90px;
+  top: 65px;
   left: -100%;
   width: 250px;
-  height: calc(100% - 90px); /* Ensure it doesn’t overlap navbar */
+  height: calc(100% - 65px); /* Ensure it doesn’t overlap navbar */
   background-color: #fef9f8;
   color: #0d0d0d;
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
