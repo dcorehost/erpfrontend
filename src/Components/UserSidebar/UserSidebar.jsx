@@ -266,15 +266,24 @@ const UserSidebar = ({ children }) => {
     },
     {
       title:"Payroll &  PaySlips",
-      icon:<FaChartLine />,
+      icon:<BiSolidCoinStack />,
       link:"/#",
       submenus:[
-        {title:"Mark Attendance (Check in & Check out system)" ,  link:"/"},
-        {title:"View Daily &  Weekly Monthly " , link:"/"},
-        {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
-        {title:"Leave Approval Status  " , link:"/"},
-
-
+        { 
+          title: "Payroll Summary", 
+          link: "/payroll-summary",
+          description: "View current pay breakdown and YTD totals" 
+        },
+        { 
+          title: "Deductions Overview", 
+          link: "/deductions",
+          description: "View insurance, retirement, and other deductions" 
+        },
+        { 
+          title: "Payment Methods", 
+          link: "/payment-methods",
+          description: "Manage bank account details and payment preferences" 
+        }
       ]
 
     }

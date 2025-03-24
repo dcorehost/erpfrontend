@@ -28,6 +28,9 @@ import MarkAttendance from './Components/MarkAttendance/MarkAttendance';
 import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary';
 import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
 import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
+import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
+import Deductions from './Components/Deductions/Deductions'
+import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -77,10 +80,14 @@ const App = () => {
                 <Route path="/PastLeaveTable" element={<PastLeaveTable />} /> {/* Add PastLeaveTable route */}
                 <Route path="/leave-summary" element={<LeaveSummary />} />
                 <Route path='/mark-attendance' element={<MarkAttendance />}>
-                <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
+                <Route path='/attendance-summary' element={<AttendanceSummary />}>
+                <Route path='/payroll-summary' element={<PayrollSummary />}></Route>
+                </Route>
                 </Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                 <Route path='/Leave-policy' element={<LeavePolicy />}></Route>
+                <Route path='/deductions' element={<Deductions />}></Route>
+                <Route path='/payment-methods' element={<PaymentMethods />}></Route>
                 
               </>
             )}
@@ -98,6 +105,10 @@ const App = () => {
                 <Route path='/attendance-summary' element={<AttendanceSummary />}></Route>
                 <Route path='/TaskAndProjectDetails' element={<TaskAndProjectDetails />}></Route>
                  <Route path='/Leave-policy'  element={<LeavePolicy />}></Route>
+                 <Route path='/payroll-summary' element={<PayrollSummary />}></Route>
+                 <Route path='/deductions' element={<Deductions />}></Route>
+                 <Route path='/payment-methods' element={<PaymentMethods />}></Route>
+
               </>
             )}
 

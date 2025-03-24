@@ -9,7 +9,7 @@ import logo from "../../assets/logo.jpeg"
 
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("");
+  const [identifier, setIdentifier] = useState(""); // Combined emailId and phone into one field
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(null);
@@ -25,19 +25,27 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      const isPhoneNumber = /^\d{10}$/.test(identifier); // Adjust regex if your phone format varies
+
       const response = await httpServices.post(
         "http://209.74.89.83/erpbackend/log-in", // ✅ Updated API URL
-        { emailId, password }
-      );
+{
+        [isPhoneNumber ? "phone" : "emailId"]: identifier, // Dynamic key based on input
+        password,
+      }      );
 
       console.log("Login API Response:", response);
 
 
       if (response.status === 200) {
-        const { token, typeOfUser } = response.data || {};
+        const { token, typeOfUser, username } = response.data || {};
 
         console.log("Received Token:", token);
         console.log("User Type:", typeOfUser);
+
+        localStorage.setItem("identifier", identifier); // Save identifier (email or phone)
+        console.log("identifier",identifier)
+
 
         if (!token) {
           setError("Invalid response from server. Please try again.");
@@ -46,10 +54,13 @@ const Login = () => {
 
         localStorage.setItem("token", token);
         localStorage.setItem("typeOfUser", typeOfUser);
-        localStorage.setItem("emailId", emailId);
-       
+        console.log("typeOfuser",typeOfUser)
+        localStorage.setItem("identifier", identifier); // Save identifier (email or phone)
+        console.log("identifier", identifier);
+        
 
-        Auth.login({ token, typeOfUser, emailId });
+
+        Auth.login({ token, username, typeOfUser, identifier});
 
         setTimeout(() => {
         // ✅ Redirect to the correct sidebar based on user type
@@ -94,11 +105,11 @@ const Login = () => {
             id="identifier"
             name="identifier"
             placeholder="Enter email or phone"
-            value={emailId}
-            onChange={(e) => setEmailId(e.target.value)}
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
             className={styles.input}
             required
-          />
+          /> 
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password" className={styles.label}>
