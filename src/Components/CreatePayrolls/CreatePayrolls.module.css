@@ -86,9 +86,12 @@
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
-    overflow: hidden;git 
+    overflow: hidden;
     width: 100%;
 }
+
+
+
   
   .submitButton:hover {
     transform: translateY(-1px);
