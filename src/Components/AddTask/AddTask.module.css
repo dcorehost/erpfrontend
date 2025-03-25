@@ -1,6 +1,7 @@
 .app {
   padding: 20px;
   font-family: Arial, sans-serif; /* Modern font */
+  width: 800px;
 }
 
 .container {
