@@ -170,6 +170,7 @@ import PendingLeaves from './Components/PendingLeaves/PendingLeaves';
 import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
 import Deductions from './Components/Deductions/Deductions'
 import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
+import CreatePayrolls from './Components/CreatePayrolls/CreatePayrolls';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -223,6 +224,7 @@ const App = () => {
                 <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} />
                 <Route path="/Leave-policy" element={<LeavePolicy />} />
                 <Route  path='/Pending-Leaves' element={<PendingLeaves />}></Route>
+                <Route  path='/Create-User-Payrolls' element={<CreatePayrolls />}></Route>
 
               </>
             )}
@@ -241,6 +243,7 @@ const App = () => {
                  <Route path='/payroll-summary' element={<PayrollSummary />}></Route>
                  <Route path='/deductions' element={<Deductions />}></Route>
                  <Route path='/payment-methods' element={<PaymentMethods />}></Route>
+                 <Route  path='/Create-Payrolls' element={<CreatePayrolls />}></Route>
 
               </>
             )}
