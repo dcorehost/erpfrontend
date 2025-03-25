@@ -166,7 +166,7 @@ import MarkAttendance from './Components/MarkAttendance/MarkAttendance';
 import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary';
 import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
 import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
-import ApprovedLeave from './Components/ApprovedLeave/ApprovedLeave';
+import PendingLeaves from './Components/PendingLeaves/PendingLeaves';
 import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
 import Deductions from './Components/Deductions/Deductions'
 import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
@@ -222,7 +222,7 @@ const App = () => {
                 <Route path="/attendance-summary" element={<AttendanceSummary />} />
                 <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} />
                 <Route path="/Leave-policy" element={<LeavePolicy />} />
-                <Route  path='/Approved-Leave' element={<ApprovedLeave />}></Route>
+                <Route  path='/Pending-Leaves' element={<PendingLeaves />}></Route>
 
               </>
             )}
@@ -256,8 +256,8 @@ const App = () => {
             {/* Redirect to appropriate dashboard based on user type */}
             {typeOfUser === "admin" && (
               <>
-                 <Route path='/Approved-Leave' element={<ApprovedLeave />}></Route>
-              </>
+                <Route  path='/Pending-Leaves' element={<PendingLeaves />}></Route>
+                </>
             )}
           
           </Routes>
