@@ -1,100 +1,183 @@
-// src/Components/PastLeaveTable/PastLeaveTable.jsx
-import React, { useEffect, useState } from "react";
-import styles from "./PastLeaveTable.module.css"; // Import CSS module
-import httpServices from "../Httpservices/httpservices"; // Import httpServices
+
+
+import React, { useState, useEffect } from "react";
+import styles from "./PastLeaveTable.module.css";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import Auth from "../Services/Auth";
+import axios from "axios";
 
 const PastLeaveTable = () => {
-  const [leaveApplications, setLeaveApplications] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [leaveData, setLeaveData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Pagination state
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Number of items per page
+  const itemsPerPage = 5;
 
-  // Fetch all leave data
-  useEffect(() => {
-    const fetchLeaveData = async () => {
-      try {
-        const data = await httpServices.get("/get-upcoming-leave");
-        // Filter leave applications with "Completed" state
-        const pastLeaves = data.leaveDetails.filter(
-          (leave) => leave.state === "Completed"
-        );
-        setLeaveApplications(pastLeaves);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching leave data:", error);
-        setError(error.message);
-        setLoading(false);
+  const fetchPastLeaves = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const token = Auth.getToken();
+      if (!token) {
+        throw new Error("Please login to access this page");
       }
-    };
 
-    fetchLeaveData();
+      const response = await axios.get("http://209.74.89.83/erpbackend/get-past-leave", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!response.data.leaveDetails) {
+        throw new Error("Failed to fetch leave details");
+      }
+
+      // Filter only completed leaves if needed
+      const pastLeaves = response.data.leaveDetails.filter(
+        (leave) => leave.state === "Completed"
+      );
+      setLeaveData(pastLeaves);
+    } catch (err) {
+      setError(err.message);
+      if (err.message.includes("login") || err.message.includes("401")) {
+        Auth.logout();
+        window.location.href = "/login";
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPastLeaves();
   }, []);
 
-  // Pagination logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = leaveApplications.slice(indexOfFirstItem, indexOfLastItem);
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
 
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const totalLeaves = leaveData.length || 0;
+  const totalPages = Math.ceil(totalLeaves / itemsPerPage);
+  const currentItems = leaveData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.loading}>Loading past leave records...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.error}>
+          {error}
+          <button onClick={fetchPastLeaves} className={styles.retryButton}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className={styles.tableContainer}>
-      <h2>Past Leave Applications</h2>
-      <table className={styles.leaveTable}>
-        <thead>
-          <tr>
-          <th>Username</th>
-          <th>Email</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Leave Type</th>
-            <th>Reason</th>
-            <th>Status</th>
-           
-            
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((leave) => (
-            <tr key={leave._id}>
-                 <td>{leave.userId.username}</td>
-                 <td>{leave.userId.contact.emailId}</td>
-              <td>{new Date(leave.from).toLocaleDateString()}</td>
-              <td>{new Date(leave.to).toLocaleDateString()}</td>
-              <td>{leave.leaveType}</td>
-              <td>{leave.reason}</td>
-              <td>{leave.state}</td>
-             
-             
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Pagination */}
-      <div className={styles.pagination}>
-        {Array.from({ length: Math.ceil(leaveApplications.length / itemsPerPage) }, (_, i) => (
-          <button
-            key={i + 1}
-            onClick={() => paginate(i + 1)}
-            className={currentPage === i + 1 ? styles.activePage : ""}
-          >
-            {i + 1}
-          </button>
-        ))}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h2>Past Leave Records</h2>
+        <div className={styles.summary}>
+          <span>Total Records: {totalLeaves}</span>
+          <span className={styles.pendingCount}>
+            <FaRegCalendarAlt /> Completed: {totalLeaves}
+          </span>
+        </div>
       </div>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Leave Dates</th>
+              <th>Type</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((leave) => (
+              <tr key={leave._id}>
+                <td>
+                  <div className={styles.employeeInfo}>
+                    <div className={styles.avatar}>
+                      {leave.userId?.username?.charAt(0).toUpperCase() || 'U'}
+                    </div>
+                    <div>
+                      <div className={styles.name}>{leave.userId?.username || 'N/A'}</div>
+                      <div className={styles.email}>{leave.userId?.contact?.emailId || 'N/A'}</div>
+                      <div className={styles.userType}>{leave.userId?.typeOfUser || 'N/A'}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.dates}>
+                    <div>{formatDate(leave.from)}</div>
+                    <div className={styles.to}>to</div>
+                    <div>{formatDate(leave.to)}</div>
+                  </div>
+                </td>
+                <td>
+                  <span className={`${styles.leaveType} ${
+                    leave.leaveType === 'Sick Leave' ? styles.sickLeave : 
+                    leave.leaveType === 'Casual Leave' ? styles.casualLeave : 
+                    styles.otherLeave}`}>
+                    {leave.leaveType}
+                  </span>
+                </td>
+                <td className={styles.reason}>{leave.reason || '-'}</td>
+                <td>
+                  <span className={`${styles.status} ${
+                    leave.state === 'Completed' ? styles.completed : 
+                    leave.state === 'Approved' ? styles.approved : 
+                    styles.rejected}`}>
+                    {leave.state}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={styles.paginationButton}
+          >
+            <FiChevronLeft />
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className={styles.paginationButton}
+          >
+            <FiChevronRight />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
