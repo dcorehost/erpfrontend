@@ -217,7 +217,7 @@ const UserSidebar = ({ children }) => {
         { title: "Update Task Progress & Completion Status", link: "/task-update" },
         { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
         { title: "View Deadlines Set By Admin", link: "/admin-deadlines" },
-
+        { title: "UserTaskList", link: "/User-Task-List" },
 
       ]
 

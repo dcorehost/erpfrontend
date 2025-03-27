@@ -1,0 +1,202 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  /* Fixed Header */
+  .headerContainer {
+    padding: 20px 25px;
+    background: white;
+    border-bottom: 1px solid #eee;
+    z-index: 10;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c3e50;
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .headerIcon {
+    color: #6a11cb;
+  }
+  
+  /* Scrollable Form Area */
+  .scrollableForm {
+    flex: 1;
+    padding: 0 25px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #6a11cb #f1f1f1;
+  }
+  
+  .scrollableForm::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollableForm::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .scrollableForm::-webkit-scrollbar-thumb {
+    background-color: #6a11cb;
+    border-radius: 10px;
+  }
+  
+  /* Form Styles */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .formRow {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .formGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .inputIcon {
+    color: #6a11cb;
+    font-size: 16px;
+  }
+  
+  input, select, textarea {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: #6a11cb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .errorInput {
+    border-color: #ff4757 !important;
+  }
+  
+  .error {
+    color: #ff4757;
+    font-size: 13px;
+    margin-top: 5px;
+  }
+  
+  /* File Input */
+  .fileInput {
+    padding: 10px;
+    border: 1px dashed #ddd;
+    background: #f9f9f9;
+  }
+  
+  .filePreview {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #555;
+    padding: 5px;
+    background: #f5f5f5;
+    border-radius: 4px;
+  }
+  
+  /* Additional Notes */
+  .additionalNotes {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+  }
+  
+  /* Fixed Footer */
+  .fixedActions {
+    padding: 15px 25px;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 10;
+  }
+  
+  .submitButton {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
+  }
+  
+  /* Success Message */
+  .successMessage {
+    background-color: #4BB543;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      height: 85vh;
+      margin: 10px;
+    }
+    
+    .formRow {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .scrollableForm {
+      padding: 0 15px;
+    }
+  }

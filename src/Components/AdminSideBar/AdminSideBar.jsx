@@ -25,9 +25,10 @@ const AdminSidebar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Pending Leave", link:"/Pending-Leaves" },
-        { title: "Upcoming Leave",  link: "" },
-        { title: "Past Leave",  link: "" },
-        { title:"Leave Policy" , link:""},
+        { title: "Create User",  link: "/create-user" },
+        { title: "TaskAssignment",  link: "/Task-Assignment" },
+        { title:"AdminPayroll" , link:"/Admin-Payroll"},
+        { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
       ],
     },
     {

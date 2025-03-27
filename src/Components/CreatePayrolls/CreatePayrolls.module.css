@@ -9,7 +9,6 @@
     transition: transform 0.2s;
 }
 
-  
   .title {
     color: #2d3436;
     font-size: 1.5rem;
@@ -89,6 +88,9 @@
     overflow: hidden;
     width: 100%;
 }
+
+
+
   
   .submitButton:hover {
     transform: translateY(-1px);
