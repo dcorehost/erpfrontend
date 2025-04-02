@@ -1,236 +1,31 @@
-// import React, { useState } from 'react';
-// import styles from './CreateUser.module.css';
 
-// const CreateUser = () => {
-//   const [formData, setFormData] = useState({
-//     username: '',
-//     email: '',
-//     password: '',
-//     confirmPassword: '',
-//     role: 'employee',
-//     phone: '',
-//     department: ''
-//   });
-
-//   const [errors, setErrors] = useState({});
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const [successMessage, setSuccessMessage] = useState('');
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value
-//     });
-//   };
-
-//   const validateForm = () => {
-//     const newErrors = {};
-    
-//     if (!formData.username.trim()) {
-//       newErrors.username = 'Username is required';
-//     }
-    
-//     if (!formData.email.trim()) {
-//       newErrors.email = 'Email is required';
-//     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-//       newErrors.email = 'Email is invalid';
-//     }
-    
-//     if (!formData.password) {
-//       newErrors.password = 'Password is required';
-//     } else if (formData.password.length < 6) {
-//       newErrors.password = 'Password must be at least 6 characters';
-//     }
-    
-//     if (formData.password !== formData.confirmPassword) {
-//       newErrors.confirmPassword = 'Passwords do not match';
-//     }
-    
-//     if (!formData.phone.trim()) {
-//       newErrors.phone = 'Phone number is required';
-//     }
-    
-//     setErrors(newErrors);
-//     return Object.keys(newErrors).length === 0;
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-    
-//     if (validateForm()) {
-//       setIsSubmitting(true);
-      
-//       // Simulate API call
-//       setTimeout(() => {
-//         console.log('User created:', formData);
-//         setIsSubmitting(false);
-//         setSuccessMessage('User created successfully!');
-//         setFormData({
-//           username: '',
-//           email: '',
-//           password: '',
-//           confirmPassword: '',
-//           role: 'employee',
-//           phone: '',
-//           department: ''
-//         });
-        
-//         // Hide success message after 3 seconds
-//         setTimeout(() => setSuccessMessage(''), 3000);
-//       }, 1500);
-//     }
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.title}>Create New User</h2>
-      
-//       {successMessage && (
-//         <div className={styles.successMessage}>{successMessage}</div>
-//       )}
-      
-//       <form onSubmit={handleSubmit} className={styles.form}>
-//         <div className={styles.formGroup}>
-//           <label htmlFor="username">Username</label>
-//           <input
-//             type="text"
-//             id="username"
-//             name="username"
-//             value={formData.username}
-//             onChange={handleChange}
-//             className={errors.username ? styles.errorInput : ''}
-//           />
-//           {errors.username && <span className={styles.error}>{errors.username}</span>}
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="email">Email</label>
-//           <input
-//             type="email"
-//             id="email"
-//             name="email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className={errors.email ? styles.errorInput : ''}
-//           />
-//           {errors.email && <span className={styles.error}>{errors.email}</span>}
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="password">Password</label>
-//           <input
-//             type="password"
-//             id="password"
-//             name="password"
-//             value={formData.password}
-//             onChange={handleChange}
-//             className={errors.password ? styles.errorInput : ''}
-//           />
-//           {errors.password && <span className={styles.error}>{errors.password}</span>}
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="confirmPassword">Confirm Password</label>
-//           <input
-//             type="password"
-//             id="confirmPassword"
-//             name="confirmPassword"
-//             value={formData.confirmPassword}
-//             onChange={handleChange}
-//             className={errors.confirmPassword ? styles.errorInput : ''}
-//           />
-//           {errors.confirmPassword && (
-//             <span className={styles.error}>{errors.confirmPassword}</span>
-//           )}
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="phone">Phone Number</label>
-//           <input
-//             type="tel"
-//             id="phone"
-//             name="phone"
-//             value={formData.phone}
-//             onChange={handleChange}
-//             className={errors.phone ? styles.errorInput : ''}
-//           />
-//           {errors.phone && <span className={styles.error}>{errors.phone}</span>}
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="role">Role</label>
-//           <select
-//             id="role"
-//             name="role"
-//             value={formData.role}
-//             onChange={handleChange}
-//           >
-//             <option value="employee">Employee</option>
-//             <option value="manager">Manager</option>
-//             <option value="admin">Admin</option>
-//           </select>
-//         </div>
-        
-//         <div className={styles.formGroup}>
-//           <label htmlFor="department">Department</label>
-//           <input
-//             type="text"
-//             id="department"
-//             name="department"
-//             value={formData.department}
-//             onChange={handleChange}
-//           />
-//         </div>
-        
-//         <button
-//           type="submit"
-//           className={styles.submitButton}
-//           disabled={isSubmitting}
-//         >
-//           {isSubmitting ? 'Creating...' : 'Create User'}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default CreateUser;
 
 
 import React, { useState } from 'react';
+import axios from 'axios';
 import styles from './CreateUser.module.css';
+import Auth from '../Services/Auth';
 
 const CreateUser = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    emailId: '',
     phone: '',
-    dob: '',
+    password: '',
+    confirmPassword : '',
+    displayName: '',
     gender: 'male',
-    address: '',
-    city: '',
-    state: '',
     country: 'India',
+    state: '',
     pincode: '',
-    department: '',
-    position: '',
-    role: 'employee',
-    joiningDate: '',
-    salary: '',
-    emergencyContact: '',
-    bloodGroup: '',
-    panNumber: '',
-    aadharNumber: ''
+    language: 'English',
+    role: ''
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -243,86 +38,144 @@ const CreateUser = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    // Personal Info Validation
-    if (!formData.firstName.trim()) newErrors.firstName = 'Required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Required';
-    if (!formData.username.trim()) newErrors.username = 'Required';
+    if (!formData.username.trim()) newErrors.username = 'Username is required';
+    if (!formData.displayName.trim()) newErrors.displayName = 'Display name is required';
     
-    // Contact Info Validation
-    if (!formData.email.trim()) {
-      newErrors.email = 'Required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email';
+    if (!formData.emailId.trim()) {
+      newErrors.emailId = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailId)) {
+      newErrors.emailId = 'Invalid email format';
     }
     
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Required';
+      newErrors.phone = 'Phone number is required';
     } else if (!/^\d{10}$/.test(formData.phone)) {
-      newErrors.phone = 'Invalid phone number';
+      newErrors.phone = 'Phone must be 10 digits';
     }
     
-    // Account Security Validation
     if (!formData.password) {
-      newErrors.password = 'Required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Minimum 8 characters';
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
     }
-    
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords don\'t match';
+      newErrors.confirmPassword = 'Passwords do not match';
     }
     
-    // Employment Details Validation
-    if (!formData.department.trim()) newErrors.department = 'Required';
-    if (!formData.position.trim()) newErrors.position = 'Required';
-    if (!formData.joiningDate) newErrors.joiningDate = 'Required';
+    if (!formData.country.trim()) newErrors.country = 'Country is required';
+    if (!formData.state.trim()) newErrors.state = 'State is required';
+    if (!formData.pincode.trim()) newErrors.pincode = 'Pincode is required';
+    if (!formData.role.trim()) newErrors.role = 'Role is required';
     
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    console.log("Validation Errors:", newErrors);
+    return Object.keys(newErrors).length === 0;  
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
     
-    if (validateForm()) {
-      setIsSubmitting(true);
+    console.log('Starting form submission...');
+    
+
+    if (!Auth.isAuthenticated()) {
+      const authError = 'Authentication required. Please login.';
+      console.error(authError);
+      setErrorMessage(authError);
+      return;
+    }
+
+    if (!validateForm()) {
+      console.log('Form validation failed', errors);
+      return;
+    }
+
+    setIsSubmitting(true);
+  
+    const token = Auth.getToken();
+    const requestData = { ...formData };
+
+    console.log('Prepared body data:', requestData);
+
+    try {
+      console.log('Making API request to create-user-account...');
       
-      // Simulate API call
-      setTimeout(() => {
-        console.log('User created:', formData);
-        setIsSubmitting(false);
+      const response = await axios.post('http://209.74.89.83/erpbackend/create-user-acoount', requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      
+      console.log('API response:',response)
+
+      if (response.data && response.data.success) {
+        console.log('User creation successful');
         setSuccessMessage('User created successfully!');
         
-        // Reset form after 2 seconds
-        setTimeout(() => {
-          setSuccessMessage('');
-          setFormData({
-            firstName: '',
-            lastName: '',
-            username: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-            phone: '',
-            dob: '',
-            gender: 'male',
-            address: '',
-            city: '',
-            state: '',
-            country: 'India',
-            pincode: '',
-            department: '',
-            position: '',
-            role: 'employee',
-            joiningDate: '',
-            salary: '',
-            emergencyContact: '',
-            bloodGroup: '',
-            panNumber: '',
-            aadharNumber: ''
-          });
-        }, 2000);
-      }, 1500);
+        // Reset form
+        setFormData({
+          username: '',
+          emailId: '',
+          phone: '',
+          password: '',
+          confirmPassword:'',
+          displayName: '',
+          gender: 'male',
+          country: 'India',
+          state: '',
+          pincode: '',
+          language: 'English',
+          role:''
+        });
+      } else {
+        console.error('API returned unsuccessful response:', response.data);
+        setErrorMessage(response.data?.message || 'Unknown API error');
+      }
+    } catch (error) {
+      console.error('API call failed:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+        response: error.response
+      });
+
+      if (error.response) {
+        // Handle HTTP error responses
+        switch (error.response.status) {
+          case 400:
+            setErrorMessage('Invalid request data. Please check your inputs.');
+            break;
+          case 401:
+            Auth.logout();
+            setErrorMessage('Session expired. Please login again.');
+            break;
+          case 500:
+            setErrorMessage('Server error. Please try again later.');
+            break;
+          default:
+            setErrorMessage(
+              error.response.data?.message || 
+              `Request failed with status ${error.response.status}`
+            );
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setErrorMessage('Network error. Please check your connection.');
+      } else {
+        // Something happened in setting up the request
+        setErrorMessage('Request configuration error: ' + error.message);
+      }
+    } finally {
+      setIsSubmitting(false);
+      // Clear messages after 5 seconds
+      setTimeout(() => {
+        setSuccessMessage('');
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -332,38 +185,22 @@ const CreateUser = () => {
       
       {successMessage && (
         <div className={styles.successMessage}>
-          <span>✓</span> {successMessage}
+          <span className={styles.successIcon}>✓</span> 
+          {successMessage}
+        </div>
+      )}
+      
+      {errorMessage && (
+        <div className={styles.errorMessage}>
+          <span className={styles.errorIcon}>⚠</span> 
+          {errorMessage}
         </div>
       )}
       
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formSection}>
-          <h3>Personal Information</h3>
+          <h3>Account Information</h3>
           <div className={styles.formGrid}>
-            <div className={styles.formGroup}>
-              <label>First Name*</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className={errors.firstName ? styles.errorInput : ''}
-              />
-              {errors.firstName && <span className={styles.error}>{errors.firstName}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Last Name*</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className={errors.lastName ? styles.errorInput : ''}
-              />
-              {errors.lastName && <span className={styles.error}>{errors.lastName}</span>}
-            </div>
-            
             <div className={styles.formGroup}>
               <label>Username*</label>
               <input
@@ -372,20 +209,111 @@ const CreateUser = () => {
                 value={formData.username}
                 onChange={handleChange}
                 className={errors.username ? styles.errorInput : ''}
+                placeholder="Enter username"
               />
-              {errors.username && <span className={styles.error}>{errors.username}</span>}
+              {errors.username && (
+                <span className={styles.error}>{errors.username}</span>
+              )}
             </div>
             
             <div className={styles.formGroup}>
-              <label>Date of Birth</label>
+              <label>Display Name*</label>
               <input
-                type="date"
-                name="dob"
-                value={formData.dob}
+                type="text"
+                name="displayName"
+                value={formData.displayName}
                 onChange={handleChange}
+                className={errors.displayName ? styles.errorInput : ''}
+                placeholder="Enter display name"
               />
+              {errors.displayName && (
+                <span className={styles.error}>{errors.displayName}</span>
+              )}
             </div>
             
+            <div className={styles.formGroup}>
+              <label>Password*</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={errors.password ? styles.errorInput : ''}
+                placeholder="At least 6 characters"
+              />
+              {errors.password && (
+                <span className={styles.error}>{errors.password}</span>
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Confirm Password*</label>
+              <input
+                type="confirm password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={errors.confirmPassword ? styles.errorInput : ''}
+                placeholder="At least 6 characters"
+              />
+              {errors.confirmPassword && (
+                <span className={styles.error}>{errors.confirmPassword}</span>
+              )}
+            </div>
+
+
+            <div className={styles.formGroup}>
+          <label>Role*</label>
+          <select name="role" value={formData.role} onChange={handleChange} className={errors.role ? styles.errorInput : ''}>
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+          </select>
+          {errors.role && <span className={styles.error}>{errors.role}</span>}
+        </div>
+            
+          </div>
+        </div>
+        
+        <div className={styles.formSection}>
+          <h3>Contact Information</h3>
+          <div className={styles.formGrid}>
+            <div className={styles.formGroup}>
+              <label>Email*</label>
+              <input
+                type="email"
+                name="emailId"
+                value={formData.emailId}
+                onChange={handleChange}
+                className={errors.emailId ? styles.errorInput : ''}
+                placeholder="example@domain.com"
+              />
+              {errors.emailId && (
+                <span className={styles.error}>{errors.emailId}</span>
+              )}
+            </div>
+            
+            <div className={styles.formGroup}>
+              <label>Phone*</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={errors.phone ? styles.errorInput : ''}
+                placeholder="10 digit phone number"
+              />
+              {errors.phone && (
+                <span className={styles.error}>{errors.phone}</span>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        <div className={styles.formSection}>
+          <h3>Personal Information</h3>
+          <div className={styles.formGrid}>
             <div className={styles.formGroup}>
               <label>Gender</label>
               <select
@@ -400,99 +328,31 @@ const CreateUser = () => {
             </div>
             
             <div className={styles.formGroup}>
-              <label>Blood Group</label>
+              <label>Language</label>
               <select
-                name="bloodGroup"
-                value={formData.bloodGroup}
+                name="language"
+                value={formData.language}
                 onChange={handleChange}
               >
-                <option value="">Select</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
               </select>
             </div>
           </div>
         </div>
         
         <div className={styles.formSection}>
-          <h3>Contact Information</h3>
+          <h3>Address Information</h3>
           <div className={styles.formGrid}>
             <div className={styles.formGroup}>
-              <label>Email*</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={errors.email ? styles.errorInput : ''}
-              />
-              {errors.email && <span className={styles.error}>{errors.email}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Phone*</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className={errors.phone ? styles.errorInput : ''}
-              />
-              {errors.phone && <span className={styles.error}>{errors.phone}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Emergency Contact</label>
-              <input
-                type="tel"
-                name="emergencyContact"
-                value={formData.emergencyContact}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>City</label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>State</label>
-              <input
-                type="text"
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Country</label>
+              <label>Country*</label>
               <select
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
+                className={errors.country ? styles.errorInput : ''}
               >
                 <option value="India">India</option>
                 <option value="USA">USA</option>
@@ -500,137 +360,39 @@ const CreateUser = () => {
                 <option value="Canada">Canada</option>
                 <option value="Australia">Australia</option>
               </select>
+              {errors.country && (
+                <span className={styles.error}>{errors.country}</span>
+              )}
             </div>
             
             <div className={styles.formGroup}>
-              <label>Pincode</label>
+              <label>State*</label>
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                className={errors.state ? styles.errorInput : ''}
+                placeholder="Enter state"
+              />
+              {errors.state && (
+                <span className={styles.error}>{errors.state}</span>
+              )}
+            </div>
+            
+            <div className={styles.formGroup}>
+              <label>Pincode*</label>
               <input
                 type="text"
                 name="pincode"
                 value={formData.pincode}
                 onChange={handleChange}
+                className={errors.pincode ? styles.errorInput : ''}
+                placeholder="Enter pincode"
               />
-            </div>
-          </div>
-        </div>
-        
-        <div className={styles.formSection}>
-          <h3>Account Security</h3>
-          <div className={styles.formGrid}>
-            <div className={styles.formGroup}>
-              <label>Password*</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className={errors.password ? styles.errorInput : ''}
-              />
-              {errors.password && <span className={styles.error}>{errors.password}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Confirm Password*</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className={errors.confirmPassword ? styles.errorInput : ''}
-              />
-              {errors.confirmPassword && (
-                <span className={styles.error}>{errors.confirmPassword}</span>
+              {errors.pincode && (
+                <span className={styles.error}>{errors.pincode}</span>
               )}
-            </div>
-          </div>
-        </div>
-        
-        <div className={styles.formSection}>
-          <h3>Employment Details</h3>
-          <div className={styles.formGrid}>
-            <div className={styles.formGroup}>
-              <label>Department*</label>
-              <input
-                type="text"
-                name="department"
-                value={formData.department}
-                onChange={handleChange}
-                className={errors.department ? styles.errorInput : ''}
-              />
-              {errors.department && <span className={styles.error}>{errors.department}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Position*</label>
-              <input
-                type="text"
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
-                className={errors.position ? styles.errorInput : ''}
-              />
-              {errors.position && <span className={styles.error}>{errors.position}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Role*</label>
-              <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-              >
-                <option value="employee">Employee</option>
-                <option value="manager">Manager</option>
-                <option value="admin">Admin</option>
-                <option value="hr">HR</option>
-              </select>
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Joining Date*</label>
-              <input
-                type="date"
-                name="joiningDate"
-                value={formData.joiningDate}
-                onChange={handleChange}
-                className={errors.joiningDate ? styles.errorInput : ''}
-              />
-              {errors.joiningDate && <span className={styles.error}>{errors.joiningDate}</span>}
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Salary (₹)</label>
-              <input
-                type="number"
-                name="salary"
-                value={formData.salary}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </div>
-        
-        <div className={styles.formSection}>
-          <h3>Government IDs</h3>
-          <div className={styles.formGrid}>
-            <div className={styles.formGroup}>
-              <label>PAN Number</label>
-              <input
-                type="text"
-                name="panNumber"
-                value={formData.panNumber}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label>Aadhar Number</label>
-              <input
-                type="text"
-                name="aadharNumber"
-                value={formData.aadharNumber}
-                onChange={handleChange}
-              />
             </div>
           </div>
         </div>
@@ -643,7 +405,8 @@ const CreateUser = () => {
           >
             {isSubmitting ? (
               <>
-                <span className={styles.spinner}></span> Creating User...
+                <span className={styles.spinner}></span> 
+                Creating User...
               </>
             ) : (
               'Create User'

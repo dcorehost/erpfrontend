@@ -65,23 +65,30 @@
 .hamburgerButton {
   position: fixed;
   top: 70px;
-  left: 25px;
+  left: 10px;
   background: transparent;
   border: none; 
   color: #0d0d0d;
   font-size: 20px;
   cursor: pointer;
   z-index: 100;
+  /* border: 1px solid black; */
+  width: 0px;
+  padding: 0px 10px;
+}
+.hamburgerButton:hover {
+  background-color: transparent; /* Ensures no background appears */
 }
 
 /* Logout Button */
 .menuItem.logout {
   margin-top: auto;
   color: #ff4d4d;
+  background-color: transparent; 
 }
 
 .menuItem.logout:hover {
-  background-color: #660000;
+  background-color: transparent; 
 }
 
 /* Responsive Design */
