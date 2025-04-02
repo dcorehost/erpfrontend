@@ -1,0 +1,121 @@
+.container {
+    width: 900px; /* Fixed width */
+    max-height: 80vh; /* 80% of viewport height */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Vertical scroll */
+    box-sizing: border-box;
+  }
+  
+  /* Header styles */
+  .header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px 0;
+    z-index: 10;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  
+  /* Form container */
+  .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Form sections */
+  .formSection {
+    width: 100%;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .formSection h3 {
+    color: #3498db;
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    position: sticky;
+    top: 60px; /* Below main header */
+    background: #f9f9f9;
+    padding: 5px 0;
+    z-index: 5;
+  }
+  
+  /* Grid layout */
+  .formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 15px;
+    width: 100%;
+  }
+  
+  /* Form elements */
+  .formGroup {
+    width: 100%;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .formGroup input,
+  .formGroup select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  /* Submit button */
+  .formActions {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 15px 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submitButton {
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 950px) {
+    .container {
+      width: 95%;
+      max-width: 900px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .formGrid {
+      grid-template-columns: 1fr; /* Single column on mobile */
+    }
+    
+    .formSection h3 {
+      top: 50px; /* Adjusted sticky position */
+    }
+  }

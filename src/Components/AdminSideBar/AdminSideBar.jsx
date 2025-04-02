@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaChartLine, FaChevronUp, FaChevronDown , FaCalendarAlt} from "react-icons/fa";
-import { RiAdminFill, RiTeamFill } from "react-icons/ri";
+// import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
-import { FaBuildingUser } from "react-icons/fa6";
-import { GrTasks } from "react-icons/gr";
-import { FaUser } from "react-icons/fa";
-import { FcSalesPerformance } from "react-icons/fc";
-import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
-import { link } from "framer-motion/client";
+// import { FaBuildingUser } from "react-icons/fa6";
+// import { GrTasks } from "react-icons/gr";
+// import { FaUser } from "react-icons/fa";
+// import { FcSalesPerformance } from "react-icons/fc";
+// import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
+// import { link } from "framer-motion/client";
 
 const AdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,19 +24,20 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-        { title: "Pending Leave", link:"/Pending-Leaves" },
-        { title: "Upcoming Leave",  link: "" },
-        { title: "Past Leave",  link: "" },
-        { title:"Leave Policy" , link:""},
+        { title: "Pending Leave", link:"/Admin/Leave/Pending-Leaves" },
+        { title: "User Table", link: "/UserTable" },
+        { title: "TaskAssignment",  link: "/Admin/Leave/Task-Assignment" },
+        { title:"AdminPayroll" , link:"/Admin-Payroll"},
+        { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
       ],
     },
     {
-      title:"Task & Project Management",
+      title:"User Creation",
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        { title: "Add Task", link: "" }, // Add actual routes
-        { title: "All Tasks Status", link: "" }, // Add actual routes
+        { title: "Create User",  link: "/create-user" }, // Add actual routes
+        // Add actual routes
         { title: "Assigned Task & Project Details", link: "" }, // Add actual routes
         { title: "Update Task Progress & Completion Status", link: "" },
         { title: "Upload Documents & Project Related Files", link: "" },

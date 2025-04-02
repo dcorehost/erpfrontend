@@ -171,6 +171,14 @@ import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
 import Deductions from './Components/Deductions/Deductions'
 import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
 import CreatePayrolls from './Components/CreatePayrolls/CreatePayrolls';
+import CreateUser from './Components/CreateUser/CreateUser';
+import TaskAssignment from './Components/TaskAssignment/TaskAssignment';
+import AdminPayroll from './Components/AdminPayroll/AdminPayroll';
+import AdminTaskSummary from './Components/AdminTaskSummary/AdminTaskSummary';
+import UserTaskList from './Components/UserTaskList/UserTaskList';
+import AdminUserTable from './Components/AdminUserTable/AdminUserTable';
+
+
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -223,9 +231,15 @@ const App = () => {
                 <Route path="/attendance-summary" element={<AttendanceSummary />} />
                 <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} />
                 <Route path="/Leave-policy" element={<LeavePolicy />} />
-                <Route  path='/Pending-Leaves' element={<PendingLeaves />}></Route>
+                <Route  path='/Admin/Leave/Pending-Leaves' element={<PendingLeaves />}></Route>
                 <Route  path='/Create-User-Payrolls' element={<CreatePayrolls />}></Route>
-
+                <Route path='/create-user'  element={<CreateUser />}></Route>
+                <Route path='/Admin/Leave/Task-Assignment' element={<TaskAssignment />}></Route>
+                <Route path='/Admin-Payroll'  element={<AdminPayroll />}></Route>
+                <Route path='/Admin-Task-Summary'  element={<AdminTaskSummary />}></Route>
+                <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
+                <Route path='/UserTable'  element={<AdminUserTable />}></Route>
+                
               </>
             )}
 
@@ -244,7 +258,8 @@ const App = () => {
                  <Route path='/deductions' element={<Deductions />}></Route>
                  <Route path='/payment-methods' element={<PaymentMethods />}></Route>
                  <Route  path='/Create-Payrolls' element={<CreatePayrolls />}></Route>
-
+                 <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
+ 
               </>
             )}
 
@@ -259,7 +274,12 @@ const App = () => {
             {/* Redirect to appropriate dashboard based on user type */}
             {typeOfUser === "admin" && (
               <>
-                <Route  path='/Pending-Leaves' element={<PendingLeaves />}></Route>
+                <Route  path='/Admin/Leave/Pending-Leaves' element={<PendingLeaves />}></Route>
+                <Route path='/create-user' element={<CreateUser />}></Route>
+                <Route path='/Admin/Leave/Task-Assignment'  element={<TaskAssignment />}></Route>
+                 <Route path='/Admin-Payroll' element={<AdminPayroll />}></Route>
+                 <Route path='/Admin-Task-Summary'  element={<AdminTaskSummary />}></Route>
+                 <Route path='/UserTable'  element={<AdminUserTable />}></Route>
                 </>
             )}
           

@@ -1,0 +1,412 @@
+/* TaskAssignment.module.css */
+
+.appContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.formWrapper {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  height: 90vh;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 280px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeader {
+  margin-bottom: 40px;
+}
+
+.sidebarHeader h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.sidebarHeader p {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navItem.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+}
+
+.navIcon {
+  font-size: 18px;
+  width: 24px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.progressContainer {
+  margin-top: auto;
+}
+
+.progressBar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: white;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 13px;
+  opacity: 0.8;
+  display: block;
+}
+
+.formContainer {
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* Custom scrollbar */
+.formContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.formContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.formContainer::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.formContainer::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.statusMessage {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  animation: fadeIn 0.3s ease;
+}
+
+.statusMessage.success {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+}
+
+.statusMessage.error {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+}
+
+.statusContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.statusContent p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.statusMessage.success .statusContent p {
+  color: #10b981;
+}
+
+.statusMessage.error .statusContent p {
+  color: #ef4444;
+}
+
+.taskId {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.formSection {
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.formSection:last-child {
+  border-bottom: none;
+  margin-bottom: 30px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 25px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: #4f46e5;
+  border-radius: 6px;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.inputGroup label span {
+  color: #ef4444;
+}
+
+.inputGroup input,
+.inputGroup textarea,
+.inputGroup select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus,
+.inputGroup select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  background-color: white;
+}
+
+.inputGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.priorityOptions {
+  display: flex;
+  gap: 12px;
+}
+
+.priorityOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.priorityOption input {
+  display: none;
+}
+
+.priorityLabel {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.priorityOption input:checked + .priorityLabel {
+  transform: scale(1.05);
+}
+
+.priorityLabel.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.priorityOption input:checked + .priorityLabel.high {
+  background: #dc2626;
+  color: white;
+}
+
+.priorityLabel.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.priorityOption input:checked + .priorityLabel.medium {
+  background: #d97706;
+  color: white;
+}
+
+.priorityLabel.low {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.priorityOption input:checked + .priorityLabel.low {
+  background: #16a34a;
+  color: white;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.submitButton {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.1);
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(79, 70, 229, 0.15);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .formWrapper {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .sidebarNav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .navItem {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .formContainer {
+    padding: 25px;
+  }
+  
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .inputGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .formActions {
+    justify-content: center;
+  }
+  
+  .submitButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
