@@ -1001,7 +1001,7 @@ const TaskAssignment = () => {
                 <div className={styles.inputGroup}>
                   <label>Priority</label>
                   <div className={styles.priorityOptions}>
-                    {['High', 'Medium', 'Low','Urgent'].map(level => (
+                    {['High', 'Medium', 'Low', 'Urgent'].map(level => (
                       <label key={level} className={styles.priorityOption}>
                         <input
                           type="radio"
