@@ -213,11 +213,12 @@ const UserSidebar = ({ children }) => {
       submenus:[
         { title: "Add Task", link: "/add-task" }, // Add actual routes
         { title: "All Tasks Status", link: "/task-list" }, // Add actual routes
-        { title: "Assigned Task & Project Details", link: "/TaskAndProjectDetails" }, // Add actual routes
-        { title: "Update Task Progress & Completion Status", link: "/task-update" },
-        { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
-        { title: "View Deadlines Set By Admin", link: "/admin-deadlines" },
         { title: "UserTaskList", link: "/User-Task-List" },
+        { title: "Assigned Task & Project Details", link: "/TaskAndProjectDetails" }, // Add actual routes
+        { title: "Update Task Progress & Completion Status", link: "/UserTaskProgress" },
+        { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
+        { title: "View Deadlines Set By Admin", link: "/admin-deadlines" }
+        
 
       ]
 

@@ -24,10 +24,19 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-        { title: "Pending Leave", link:"/Admin/Leave/Pending-Leaves" },
-        { title: "User Table", link: "/UserTable" },
+        { title: "Pending Leaves", link:"/Admin/Leave/Pending-Leaves" },
+        { title:"Comleted Leaves" , link:"/CompletedLeaves"},
+        { title:"Rejected Leaves" , link:"/RejectedLeaves"}
+       
+      ],
+    },
+    {
+      title: "Assignment",
+      icon: <FaChartLine />, 
+      link: "/#",
+      submenus: [
+       
         { title: "TaskAssignment",  link: "/Admin/Leave/Task-Assignment" },
-        { title:"AdminPayroll" , link:"/Admin-Payroll"},
         { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
       ],
     },
@@ -38,6 +47,7 @@ const AdminSidebar = ({ children }) => {
       submenus:[
         { title: "Create User",  link: "/create-user" }, // Add actual routes
         // Add actual routes
+        { title: "User Table", link: "/AdminUserTable" },
         { title: "Assigned Task & Project Details", link: "" }, // Add actual routes
         { title: "Update Task Progress & Completion Status", link: "" },
         { title: "Upload Documents & Project Related Files", link: "" },
@@ -92,6 +102,7 @@ const AdminSidebar = ({ children }) => {
       link:"/#",
       submenus:[
         {title:"User Payrolls", link:"/Create-User-Payrolls"},
+        { title:"AdminPayroll" , link:"/Admin-Payroll"},
         {title:"View Daily &  Weekly Monthly " , link:"/"},
         {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
         {title:"Leave Approval Status  " , link:"/"},

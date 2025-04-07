@@ -347,7 +347,7 @@ const LeaveSummary = () => {
           toast.error('User not authenticated.');
           return;
         }
-
+  
         const response = await axios.get(
           "http://209.74.89.83/erpbackend/get-user-leaves",
           {
@@ -357,9 +357,9 @@ const LeaveSummary = () => {
             },
           }
         );
-
+  
         if (response.data && response.data.users) {
-          const { casualLeaves, sickLeaves } = response.data.users;
+          const { casualLeaves, sickLeaves } = response.data.users.leaveBalance; // यहां सुधार करें
           setLeaveData({
             casualLeaves: {
               available: casualLeaves?.available || 0,
@@ -378,7 +378,7 @@ const LeaveSummary = () => {
         setLoading(false);
       }
     };
-
+  
     fetchLeaveData();
   }, []);
 

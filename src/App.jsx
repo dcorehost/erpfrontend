@@ -177,6 +177,10 @@ import AdminPayroll from './Components/AdminPayroll/AdminPayroll';
 import AdminTaskSummary from './Components/AdminTaskSummary/AdminTaskSummary';
 import UserTaskList from './Components/UserTaskList/UserTaskList';
 import AdminUserTable from './Components/AdminUserTable/AdminUserTable';
+import UserTaskProgress from './Components/UserTaskProgress/UserTaskProgress';
+import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
+import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
+
 
 
 
@@ -238,7 +242,10 @@ const App = () => {
                 <Route path='/Admin-Payroll'  element={<AdminPayroll />}></Route>
                 <Route path='/Admin-Task-Summary'  element={<AdminTaskSummary />}></Route>
                 <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
-                <Route path='/UserTable'  element={<AdminUserTable />}></Route>
+                <Route path='/AdminUserTable'  element={<AdminUserTable />}></Route>
+                <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
+                 <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
+                 <Route path='/RejectedLeaves' element={<RejectedLeaves />}></Route>
                 
               </>
             )}
@@ -259,6 +266,8 @@ const App = () => {
                  <Route path='/payment-methods' element={<PaymentMethods />}></Route>
                  <Route  path='/Create-Payrolls' element={<CreatePayrolls />}></Route>
                  <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
+                 <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
+                
  
               </>
             )}
@@ -279,7 +288,9 @@ const App = () => {
                 <Route path='/Admin/Leave/Task-Assignment'  element={<TaskAssignment />}></Route>
                  <Route path='/Admin-Payroll' element={<AdminPayroll />}></Route>
                  <Route path='/Admin-Task-Summary'  element={<AdminTaskSummary />}></Route>
-                 <Route path='/UserTable'  element={<AdminUserTable />}></Route>
+                 <Route path='/AdminUserTable'  element={<AdminUserTable />}></Route>
+                 <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
+                 <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
                 </>
             )}
           

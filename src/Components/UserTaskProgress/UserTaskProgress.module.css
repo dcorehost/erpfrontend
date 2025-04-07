@@ -1,0 +1,52 @@
+/* UserTable.module.css */
+.tableContainer {
+    margin: 20px;
+    overflow-x: auto;
+    border: 2px solid #009879;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .usersTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 1000px;
+  }
+  
+  .usersTable th,
+  .usersTable td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    text-align: left;
+  }
+  
+  .usersTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    border-bottom: 2px solid #005f4a;
+  }
+  
+  .usersTable tbody tr {
+    transition: all 0.3s ease;
+  }
+  
+  .usersTable tbody tr:nth-of-type(even) {
+    background-color: #f8f8f8;
+  }
+  
+  .usersTable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  
+  .usersTable tbody tr:hover {
+    background-color: #e6f7f3;
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .usersTable th {
+    position: sticky;
+    top: 0;
+    background-color: #009879;
+  }
