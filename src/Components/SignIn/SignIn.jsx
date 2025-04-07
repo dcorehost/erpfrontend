@@ -37,7 +37,7 @@ const SignIn = () => {
 
     try {
       const response = await axios.post(
-        "https://amediagencyonline.com/erp/sign-in",
+        "http://localhost:8000/erpbackend/login-in-user",
         formData
       );
 
@@ -69,21 +69,7 @@ const SignIn = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Log In</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="username" className={styles.label}>
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
-        </div>
+        
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.label}>
             Email/Phone
