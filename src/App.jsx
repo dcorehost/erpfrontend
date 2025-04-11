@@ -180,6 +180,8 @@ import AdminUserTable from './Components/AdminUserTable/AdminUserTable';
 import UserTaskProgress from './Components/UserTaskProgress/UserTaskProgress';
 import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
 import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
+import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 
 
 
@@ -246,7 +248,8 @@ const App = () => {
                 <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
                  <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
                  <Route path='/RejectedLeaves' element={<RejectedLeaves />}></Route>
-                
+                 <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
+                 <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
               </>
             )}
 
@@ -291,6 +294,8 @@ const App = () => {
                  <Route path='/AdminUserTable'  element={<AdminUserTable />}></Route>
                  <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
+                 <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
+                 <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                 </>
             )}
           
