@@ -1,0 +1,322 @@
+/* UserTaskList.module.css */
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .header h2 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .refreshButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4a6baf;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .refreshButton:hover {
+    transform: rotate(180deg);
+  }
+  
+  .taskCount {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+  
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #4a6baf;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    text-align: center;
+  }
+  
+  .errorMessage {
+    margin-bottom: 20px;
+    color: #d32f2f;
+  }
+  
+  .retryButton {
+    padding: 8px 16px;
+    background-color: #4a6baf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .retryButton:hover {
+    background-color: #3a5a9f;
+  }
+  
+  .refreshIcon {
+    animation: spin 1s linear infinite;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .taskTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .taskTable th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .taskTable td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  
+  .taskTable tr:hover td {
+    background-color: #f8fafc;
+  }
+  
+  .descriptionCell {
+    max-width: 300px;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .notesCell {
+    max-width: 250px;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .priority {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  
+  .priority.high {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .priority.medium {
+    background-color: #fff8e1;
+    color: #f57f17;
+  }
+  
+  .priority.low {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+  
+  .paginationButton {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .paginationButton:hover:not(:disabled) {
+    background-color: #f1f3f5;
+  }
+  
+  .paginationButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pageNumbers {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .pageButton {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .pageButton:hover {
+    background-color: #f1f3f5;
+  }
+  
+  .activePage {
+    background-color: #4a6baf;
+    color: white;
+    border-color: #4a6baf;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+    
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .controls {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .taskTable th,
+    .taskTable td {
+      padding: 0.75rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Add these styles to your UserTaskList.module.css */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .paginationButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .paginationButton:hover:not(:disabled) {
+    background-color: #f1f3f5;
+    border-color: #4a6baf;
+    color: #4a6baf;
+  }
+  
+  .paginationButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pageNumbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .pageButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .pageButton:hover {
+    border-color: #4a6baf;
+    color: #4a6baf;
+  }
+  
+  .activePage {
+    background-color: #4a6baf;
+    color: white;
+    border-color: #4a6baf;
+  }
+  
+  .ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+  }

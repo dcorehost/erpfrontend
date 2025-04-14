@@ -5,7 +5,6 @@ const EnquiryDetails = () => {
   const [enquiries, setEnquiries] = useState([]);
 
   useEffect(() => {
-    // Fetch enquiries from localStorage
     const storedEnquiries = JSON.parse(localStorage.getItem("enquiries")) || [];
     setEnquiries(storedEnquiries);
   }, []);
@@ -18,13 +17,13 @@ const EnquiryDetails = () => {
     );
 
     setEnquiries(updatedEnquiries);
-    localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries)); // Update localStorage
+    localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries)); 
   };
 
   const handleDelete = (indexToDelete) => {
     const updatedEnquiries = enquiries.filter((_, index) => index !== indexToDelete);
     setEnquiries(updatedEnquiries);
-    localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries)); // Update localStorage
+    localStorage.setItem("enquiries", JSON.stringify(updatedEnquiries)); 
   };
 
   return (

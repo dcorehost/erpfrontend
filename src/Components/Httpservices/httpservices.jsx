@@ -1,53 +1,107 @@
 
-import axios from "axios";
-import auth from "../Httpservices/Auth";
 
-// Base API URL
-const baseApiUrl = "http://localhost:8000/erpbackend";
-// const baseApiUrl = "https://amediagencyonline.com/erp";
+import { useState } from "react";
+import auth from "../Httpservices/Auth"; 
 
-// Set up Axios instance with Authorization header
-const axiosInstance = axios.create({
-  baseURL: baseApiUrl,
-});
+const BASE_URL = "http://209.74.89.83/erpbackend";
 
-// Add authorization token to the headers if the user is authenticated
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const authData = auth.getAuthData();
-    if (authData && authData.token) {
-      config.headers.Authorization = `Bearer ${authData.token}`;
+const httpServices = {
+  // GET method
+  get: async (endpoint, signal = null) => {
+    try {
+      const token = auth.getToken(); 
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        signal,
+      });
+
+      
+      console.log("Request URL:", `${BASE_URL}${endpoint}`);
+      console.log("Response Status:", response.status);
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Server error: ${error}`); 
+      }
+
+      const responseData = await response.json();
+      console.log("Response Data:", responseData); 
+      return responseData;
+    } catch (error) {
+      console.error("HTTP request failed:", error);
+      throw new Error(`Network error: ${error.message}`); 
     }
-    return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
 
-// GET request
-function get(url) {
-  return axiosInstance.get(url);
-}
+  // POST method
+  post: async (endpoint, body, signal = null) => {
+    try {
+      const token = auth.getToken(); 
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(body),
+        signal,
+      });
 
-// POST request
-function post(url, body) {
-  return axiosInstance.post(url, body);
-}
+      // Log the request and response for debugging
+      console.log("Request URL:", `${BASE_URL}${endpoint}`);
+      console.log("Request Body:", body);
+      console.log("Response Status:", response.status);
 
-// PUT request
-function put(url, body) {
-  return axiosInstance.put(url, body);
-}
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Server error: ${error}`); 
+      }
 
-// DELETE request
-function deletReq(url) {
-  return axiosInstance.delete(url);
-}
+      const responseData = await response.json();
+      console.log("Response Data:", responseData); 
+      return responseData;
+    } catch (error) {
+      console.error("HTTP request failed:", error);
+      throw new Error(`Network error: ${error.message}`); 
+    }
+  },
 
-export default {
-  get,
-  post,
-  put,
-  deletReq,
+  // PATCH method
+  patch: async (endpoint, body, signal = null) => {
+    try {
+      const token = auth.getToken(); 
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(body),
+        signal,
+      });
+
+      // Log the request and response for debugging
+      console.log("Request URL:", `${BASE_URL}${endpoint}`);
+      console.log("Request Body:", body);
+      console.log("Response Status:", response.status);
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Server error: ${error}`); 
+      }
+
+      const responseData = await response.json();
+      console.log("Response Data:", responseData); 
+      return responseData;
+    } catch (error) {
+      console.error("HTTP request failed:", error);
+      throw new Error(`Network error: ${error.message}`); 
+    }
+  },
 };
+
+export default httpServices;

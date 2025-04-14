@@ -1,0 +1,153 @@
+/* src/Components/ApplyLeaveTable/ApplyLeaveTable.module.css */
+/* .tableContainer {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .leaveTable {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 10px;
+  }
+  
+  .leaveTable th,
+  .leaveTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .leaveTable th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff; 
+  }
+  
+  .leaveTable tr:hover {
+    background-color: #f1f1f1;
+  }
+   */
+  /* Pagination styles */
+  /* .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagination button.activePage {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+    color: white;
+  } */
+  
+  /* Approve and Reject button styles */
+  /* .approveButton {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .rejectButton {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .approveButton:hover {
+    background-color: #218838; 
+  }
+  
+  .rejectButton:hover {
+    background-color: #c82333; 
+  } */
+
+  .tableContainer {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 100%;
+    overflow-x: auto; /* Ensures table is scrollable on small screens */
+  }
+  
+  .tableWrapper {
+    overflow-x: auto; /* Adds horizontal scroll for the table */
+  }
+  
+  .leaveTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .leaveTable th,
+  .leaveTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .leaveTable th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+  }
+  
+  .leaveTable tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .paginationButton {
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .paginationButton:disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+  }
+  
+  .paginationButton:hover:not(:disabled) {
+    background-color: #007bff;
+    color: white;
+  }

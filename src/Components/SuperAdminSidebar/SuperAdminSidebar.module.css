@@ -1,258 +1,182 @@
+.sidebarWrapper {
+  margin-top: 70px;
+}
 
-.sidebarWrapper{
-    margin-top: 70px;
-  }
-  
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: -100%;
+  width: 250px;
+  height: calc(100% - 60px); /* Ensure it doesn’t overlap navbar */
+  background-color: #fef9f8;
+  color: #0d0d0d;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  padding: 8px;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.sidebar.open {
+  left: 0;
+  width: 250px;
+}
+
+.sidebar.hidden {
+  left: -100%;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  color: #0d0d0d;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #ef9273;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+/* Hamburger Menu */
+.hamburgerButton {
+  position: fixed;
+  top: 70px;
+  left: 25px;
+  background: transparent;
+  border: none; 
+  color: #0d0d0d;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* Logout Button */
+.menuItem.logout {
+  margin-top: auto;
+  color: #ff4d4d;
+}
+
+.menuItem.logout:hover {
+  background-color: #660000;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background-color:  #fef9f8 ;
-    color: #0d0d0d;
-    transition: left 0.3s;
-    padding: 8px;
+    width: 60px;
   }
-  
-  .contentMenu {
-    width: 100%;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    margin-top: 30px;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 10px 0;
-  }
-  
-  .sidebar ul li a {
-    color: #0d0d0d;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .menu {
-    font-size: 20px;
-    color: #0d0d0d;
-    cursor: pointer;
-  }
-  
-  
-  .menuItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  
-  }
-  
-  .menuItem:hover {
-    background-color: #ef9273 ;
-  }
-  
-  .icon {
-    margin-right: 10px;
-  }
-  
-  .title {
-    flex: 1;
-  }
-  
-  
-  
-  .sidebarContainer {
-    position: relative;
-  }
-  
-  
-  .submenuItemWrapper {
-    display: flex;
-    align-items: center; 
-  }
-  
-  .submenuItem .icon {
-    margin-right: 8px; 
-    font-size: 16px;   
-    color: #0d0d0d;  
-    /* margin-top: 0px;    */
-  }
-  
-  .submenuItem .submenuLink {
-    color: #0d0d0d ;     
-    text-decoration: none; 
-  }
-  
-  .submenuItem:hover .icon {
-    color: #ef9273 ; 
-  }
-  
-  .submenuItem:hover .submenuLink {
-    color: #ef9273 ; 
-  }
-  
-  .hamburgerButton {
-    position: fixed;
-    top: 10px;
-    left: 25px;
-    background: transparent;
-    border: none;
-    color: #0d0d0d;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
-  
-  
-  .menuDivider {
-    border: 0;
-    height: 1px;
-    background: #555;
-    margin: 10px 0;
-  }
-  
-  .menuItem.logout {
-    margin-top: auto; 
-    color: #ff4d4d; 
-  }
-  
-  .menuItem.logout:hover {
-    background-color: #660000; 
-  }
-  
-  
-  .sidebar_custom{
-    display: flex;
-  }
-  
+
   .sidebar.open {
-    left: 0; 
-    width: 55px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    
+    width: 200px;
   }
-  
-  .sidebar.hidden {
-    left: -100%; 
+
+  .menuItem {
+    font-size: 16px;
+    padding: 10px 5px;
   }
-  
-  
-  
-  @media (max-width: 480px) {
-    .sidebar {
-      width: 50px; 
-      position: fixed;
-      transition: left 0.3s ease-in-out;
-      overflow-x: hidden;
-      overflow-y: hidden;
-    }
-  
-    .hamburgerButton{
-      left: 10px;
-    }
-  
-    .sidebar.open {
-      left: 0; 
-    }
-  
-    .sidebar ul {
-      padding: 10px;
-    }
-  
-    .menuItem {
-      font-size: 16px; 
-      padding: 10px 5px;
-    }
-  
-    .icon {
-      font-size: 18px; 
-    }
-  
-    .title {
-      font-size: 16px; 
-    }
-  
-    .submenu {
-      margin-left: 10px;
-    }
-  
-    .submenuItem {
-      font-size: 14px; 
-    }
+
+  .icon {
+    font-size: 18px;
   }
-  
-  
-  @media (max-width: 768px) and (min-width: 481px) {
-    .sidebar {
-      width: 40px; 
-      position: fixed;
-      left: 0; 
-      transition: left 0.3s ease-in-out;
-      overflow-x: hidden;
-      overflow-y: hidden;
-    }
-  
-    .hamburgerButton{
-      left: 10px;
-    }
-    .contentMenu {
-      width: calc(100% - 55px); 
-    }
-  
-    .menuItem {
-      font-size: 18px; 
-    }
-  
-    .icon {
-      font-size: 20px; 
-    }
-  
-    .title {
-      font-size: 18px; 
-    }
-  
-    .submenu {
-      margin-left: 15px; 
-    }
-  
-    .submenuItem {
-      font-size: 16px; 
-    }
+
+  .title {
+    font-size: 14px;
   }
-  
-  
-  @media (min-width: 769px) {
-    .sidebar {
-      width: 250px;
-  
-    }
-  
-    .menuItem {
-      font-size: 20px;
-      padding: 20px 15px;
-    }
-  
-    .icon {
-      font-size: 24px;
-    }
-  
-    .title {
-      font-size: 20px;
-    }
-  
-    .submenu {
-      margin-left: 20px;
-    }
-  
-    .submenuItem {
-      font-size: 18px;
-    }
+
+  .submenu {
+    margin-left: 10px;
   }
-  
-  
+
+  .submenuItem {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+  .sidebar {
+    width: 70px;
+  }
+
+  .sidebar.open {
+    width: 220px;
+  }
+
+  .hamburgerButton {
+    left: 10px;
+  }
+
+  .contentMenu {
+    width: calc(100% - 70px);
+  }
+
+  .menuItem {
+    font-size: 18px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .submenu {
+    margin-left: 15px;
+  }
+
+  .submenuItem {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    width: 250px;
+  }
+
+  .menuItem {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .submenu {
+    margin-left: 20px;
+  }
+
+  .submenuItem {
+    font-size: 18px;
+  }
+}

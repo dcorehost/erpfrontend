@@ -29,8 +29,8 @@ const ResetPassword = () => {
            Reset Password
         </button>
       </form>
-      <a href="/signin" className={styles.backLink}>
-        Back to Login
+      <a href="/sign" className={styles.backLink}>
+        Back to sign
       </a>
     </div>
   );

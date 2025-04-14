@@ -1,89 +1,112 @@
-
+import { useEffect } from "react"
 import React, { useState } from "react";
-import axios from "axios"; 
+import { useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import httpServices from "../Services/Httpservices";
+import Auth from "../Services/Auth.js";
+import logo from "../../assets/logo.jpeg"
 
-const SignIn = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
 
-  const [showPassword, setShowPassword] = useState(false); 
-  const [loading, setLoading] = useState(false); 
-  const [errorMessage, setErrorMessage] = useState(""); 
+const Login = () => {
+  const [identifier, setIdentifier] = useState(""); 
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
-  const handleSubmit = async (e) => {
+  
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setErrorMessage(""); 
-
-    
-    if (!formData.username || !formData.email || !formData.password) {
-      setLoading(false);
-      setErrorMessage("All fields are required!");
-      return;
-    }
+    setError(null);
+    setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/erpbackend/login-in-user",
-        formData
-      );
+      const isPhoneNumber = /^\d{10}$/.test(identifier);
 
-      if (response.data.success) {
+      const response = await httpServices.post( "http://209.74.89.83/erpbackend/log-in", {
+        [isPhoneNumber ? "phone" : "emailId"]: identifier, 
+        password,
+      }      );
 
+      console.log("Login API Response:", response);
+
+
+      if (response.status === 200) {
+        const { token, typeOfUser, username } = response.data || {};
+
+        console.log("Received Token:", token);
+        console.log("User Type:", typeOfUser);
+
+        localStorage.setItem("identifier", identifier); 
+        console.log("identifier",identifier)
+
+
+        if (!token) {
+          setError("Invalid response from server. Please try again.");
+          return;
+        }
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("typeOfUser", typeOfUser);
+        console.log("typeOfuser",typeOfUser)
+        localStorage.setItem("identifier", identifier); 
+        console.log("identifier", identifier);
         
-        console.log("Login successful:", response.data);
-        alert("Sign-in successful!");
 
-        
+
+        Auth.login({ token, username, typeOfUser, identifier});
+
+        setTimeout(() => {
+        const storedType = localStorage.getItem("typeOfUser");
+        console.log("Redirecting user type:", storedType);
+
+        if (storedType === "Admin") {
+          console.log("Redirecting to Admin Sidebar...");
+          window.location.href = "/admin-sidebar"; 
+        } else if (storedType === "User") {
+          console.log("Redirecting to User Sidebar...");
+          window.location.href = "/user-sidebar";
+        } else if (storedType === "superadmin") {
+          console.log("Redirecting to SuperAdmin Sidebar...");
+          window.location.href = "/superadmin-sidebar";
+        }
+      }, 500);
+
+
       } else {
-       
-        setErrorMessage(response.data.message || "Sign-in failed!");
+        setError("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      
-      console.error("Error signing in:", error);
-      setErrorMessage("An unexpected error occurred. Please try again.");
+      console.error("Login request failed:", error);
+      setError("An error occurred during login. Please try again.");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
 
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Log In</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        
+      <form onSubmit={handleLogin} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email/Phone
+          <label htmlFor="identifier" className={styles.label}>
+            Email or Phone
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
+            type="text"
+            id="identifier"
+            name="identifier"
+            placeholder="Enter email or phone"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
             className={styles.input}
             required
-          />
+          /> 
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password" className={styles.label}>
@@ -95,14 +118,14 @@ const SignIn = () => {
               id="password"
               name="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className={styles.input}
               required
             />
             <button
               type="button"
-              onClick={togglePasswordVisibility}
+              onClick={() => setShowPassword(!showPassword)}
               className={styles.eyeButton}
               aria-label="Toggle password visibility"
             >
@@ -110,13 +133,9 @@ const SignIn = () => {
             </button>
           </div>
         </div>
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={loading}
-        >
-          {loading ? "Signing In..." : "Login"}
+        {error && <p className={styles.error}>{error}</p>}
+        <button type="submit" className={styles.button} disabled={isLoading}>
+          {isLoading ? "Signing In..." : "Sign In"}
         </button>
       </form>
       <div className={styles.linksContainer}>
@@ -124,14 +143,11 @@ const SignIn = () => {
           Forgot Password?
         </a>
         <p className={styles.text}>
-          Don’t have an account?{" "}
-          <a href="/signup" className={styles.link}>
-            Sign Up
-          </a>
+          Don’t have an account? <a href="/signup" className={styles.link}>Sign Up</a>
         </p>
       </div>
     </div>
   );
-};
+}; 
 
-export default SignIn;
+export default Login;
