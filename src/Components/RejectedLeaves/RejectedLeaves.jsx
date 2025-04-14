@@ -26,7 +26,7 @@ const RejectedLeaves = () => {
         throw new Error("Please login to access this page");
       }
 
-      const response = await axios.get("http://209.74.89.83/erpbackend/get-complete-leave-details", {
+      const response = await axios.get("http://209.74.89.83/erpbackend/get-rejected-leave-details", {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json"

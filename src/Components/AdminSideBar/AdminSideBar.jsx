@@ -35,7 +35,8 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-       
+        { title: "CreateNewProject",  link: "/CreateNewProject" },
+        { title:"ProjectDetails" , link:"/ProjectDetails"},
         { title: "TaskAssignment",  link: "/Admin/Leave/Task-Assignment" },
         { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
       ],
