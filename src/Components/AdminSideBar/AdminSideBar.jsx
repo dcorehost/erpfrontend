@@ -46,10 +46,10 @@ const AdminSidebar = ({ children }) => {
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        { title: "Create User",  link: "/create-user" }, // Add actual routes
+        { title: "Create User",  link: "/create-user" }, 
         // Add actual routes
         { title: "User Table", link: "/AdminUserTable" },
-        { title: "Assigned Task & Project Details", link: "" }, // Add actual routes
+        { title: "Assigned Task & Project Details", link: "" }, 
         { title: "Update Task Progress & Completion Status", link: "" },
         { title: "Upload Documents & Project Related Files", link: "" },
         { title: "View Deadlines Set By Admin", link: "" },

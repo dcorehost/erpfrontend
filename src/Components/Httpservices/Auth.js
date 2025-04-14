@@ -1,10 +1,9 @@
 
 
-// auth.js
 const auth = {
   isAuthenticated: () => {
     const token = localStorage.getItem("token");
-    return !!token; // Return true if token exists, false otherwise
+    return !!token; 
   },
 
   getToken: () => {
@@ -17,7 +16,6 @@ const auth = {
 
   logout: () => {
     localStorage.removeItem("token");
-    // Redirect to login page or perform other cleanup
   },
 };
 
