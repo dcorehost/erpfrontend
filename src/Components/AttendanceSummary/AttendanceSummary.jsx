@@ -105,7 +105,7 @@ const AttendanceSummary = () => {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>User Id</th>
+                <th>Employee Id</th>
                 <th>User name</th>
                 <th>Display name</th>
                 <th>Email Id</th>
@@ -122,7 +122,7 @@ const AttendanceSummary = () => {
             <tbody>
               {attendanceRecords.map((record, index) => (
                 <tr key={index}>
-                  <td>{record.userId}</td>
+                  <td>{record.employeeId}</td>
                   <td>{record.username}</td>
                   <td>{record.displayName}</td>
                   <td>{record.emailId}</td>

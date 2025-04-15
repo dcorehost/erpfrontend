@@ -1,221 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { FiChevronLeft, FiChevronRight, FiRefreshCw } from 'react-icons/fi';
-// import Auth from '../Services/Auth';
-// import styles from './UserTaskList.module.css';
-
-// const UserTaskList = () => {
-//   const [tasks, setTasks] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const itemsPerPage = 5;
-
-//   const fetchTasks = async () => {
-//     try {
-//       setLoading(true);
-//       setError(null);
-//       const token = Auth.getToken();
-      
-//       if (!token) {
-//         throw new Error('Authentication required. Please login.');
-//       }
-
-//       const response = await axios.get(
-//         'http://209.74.89.83/erpbackend/get-task-createdBy-admin',
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//             'Content-Type': 'application/json'
-//           }
-//         }
-//       );
-
-//       if (!response.data?.users) {
-//         throw new Error('Invalid response format');
-//       }
-
-//       // Transform the data to flatten adminTasks
-//       const allTasks = response.data.users.flatMap(user => 
-//         user.adminTasks?.map(task => ({
-//           ...task,
-//           employeeId: user.employeeId
-//         })) || []
-//       );
-
-//       if (allTasks.length === 0) {
-//         setError('No tasks found');
-//       } else {
-//         setTasks(allTasks);
-//       }
-//     } catch (err) {
-//       setError(err.response?.data?.message || err.message || 'Failed to fetch tasks');
-//       if (err.response?.status === 401) {
-//         Auth.logout();
-//         window.location.href = '/login';
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchTasks();
-//   }, []);
-
-//   // Pagination logic
-//   const totalPages = Math.ceil(tasks.length / itemsPerPage);
-//   const currentItems = tasks.slice(
-//     (currentPage - 1) * itemsPerPage,
-//     currentPage * itemsPerPage
-//   );
-
-//   const handlePageChange = (newPage) => {
-//     if (newPage > 0 && newPage <= totalPages) {
-//       setCurrentPage(newPage);
-//     }
-//   };
-
-//   if (loading) {
-//     return (
-//       <div className={styles.container}>
-//         <div className={styles.loadingContainer}>
-//           <div className={styles.spinner}></div>
-//           <p>Loading tasks...</p>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   if (error) {
-//     return (
-//       <div className={styles.container}>
-//         <div className={styles.errorContainer}>
-//           <div className={styles.errorMessage}>
-//             {error === 'No tasks found' ? (
-//               <>
-//                 <p>No tasks have been created yet.</p>
-//                 <p>When admin creates tasks, they will appear here.</p>
-//               </>
-//             ) : (
-//               <p>{error}</p>
-//             )}
-//           </div>
-//           <button 
-//             onClick={fetchTasks} 
-//             className={styles.retryButton}
-//           >
-//             <FiRefreshCw className={styles.refreshIcon} />
-//             Try Again
-//           </button>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.header}>
-//         <h2>Admin Tasks List</h2>
-//         <div className={styles.controls}>
-//           <span className={styles.taskCount}>
-//             Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, tasks.length)} of {tasks.length} tasks
-//           </span>
-//           <button 
-//             onClick={fetchTasks} 
-//             className={styles.refreshButton}
-//             title="Refresh tasks"
-//           >
-//             <FiRefreshCw />
-//           </button>
-//         </div>
-//       </div>
-
-//       <div className={styles.tableContainer}>
-//         <table className={styles.taskTable}>
-//           <thead>
-//             <tr>
-//               <th>Employee ID</th>
-//               <th>Project</th>
-//               <th>Task</th>
-//               <th>Sub Task</th>
-//               <th>Description</th>
-//               <th>Deadline</th>
-//               <th>Priority</th>
-//               <th>Est. Time</th>
-//               <th>Notes</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {currentItems.map((task, index) => (
-//               <tr key={`${task.employeeId}-${index}`}>
-//                 <td>{task.employeeId || 'N/A'}</td>
-//                 <td>{task.projectName || 'N/A'}</td>
-//                 <td>{task.taskName || 'N/A'}</td>
-//                 <td>{task.subTask || 'N/A'}</td>
-//                 <td className={styles.descriptionCell}>
-//                   {task.description || 'N/A'}
-//                 </td>
-//                 <td>
-//                   {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'N/A'}
-//                 </td>
-//                 <td>
-//                   <span className={`${styles.priority} ${task.priority?.toLowerCase()}`}>
-//                     {task.priority || 'Medium'}
-//                   </span>
-//                 </td>
-//                 <td>{task.estimatedTime || 'N/A'}</td>
-//                 <td className={styles.notesCell}>
-//                   {task.additionalNotes || 'N/A'}
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-
-//       {tasks.length > itemsPerPage && (
-//         <div className={styles.pagination}>
-//           <button
-//             onClick={() => handlePageChange(currentPage - 1)}
-//             disabled={currentPage === 1}
-//             className={styles.paginationButton}
-//             aria-label="Previous page"
-//           >
-//             <FiChevronLeft />
-//           </button>
-          
-//           <div className={styles.pageNumbers}>
-//             {Array.from({ length: totalPages }, (_, i) => (
-//               <button
-//                 key={i + 1}
-//                 onClick={() => handlePageChange(i + 1)}
-//                 className={`${styles.pageButton} ${
-//                   currentPage === i + 1 ? styles.activePage : ''
-//                 }`}
-//                 aria-label={`Page ${i + 1}`}
-//               >
-//                 {i + 1}
-//               </button>
-//             ))}
-//           </div>
-          
-//           <button
-//             onClick={() => handlePageChange(currentPage + 1)}
-//             disabled={currentPage === totalPages}
-//             className={styles.paginationButton}
-//             aria-label="Next page"
-//           >
-//             <FiChevronRight />
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default UserTaskList;
-
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -423,7 +205,7 @@ const UserTaskList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>Admin Tasks List</h2>
+        <h2>Assigned Tasks List</h2>
         <div className={styles.controls}>
           <span className={styles.taskCount}>
             Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, tasks.length)} of{' '}
@@ -452,6 +234,8 @@ const UserTaskList = () => {
               <th>Priority</th>
               <th>Est. Time</th>
               <th>Notes</th>
+              <th>CreatedAt</th>
+              <th>UpdatedAt</th>
             </tr>
           </thead>
           <tbody>
@@ -476,6 +260,10 @@ const UserTaskList = () => {
                 <td className={styles.notesCell}>
                   {task.additionalNotes || 'N/A'}
                 </td>
+                <td>{new Date(task.createdAt).toLocaleString()}</td>
+                <td>{new Date(task.updatedAt).toLocaleString()}</td>
+
+
               </tr>
             ))}
           </tbody>
