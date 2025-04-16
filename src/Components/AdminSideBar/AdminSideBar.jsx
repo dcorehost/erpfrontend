@@ -49,10 +49,10 @@ const AdminSidebar = ({ children }) => {
         { title: "Create User",  link: "/create-user" }, 
         // Add actual routes
         { title: "User Table", link: "/AdminUserTable" },
-        { title: "Assigned Task & Project Details", link: "" }, 
-        { title: "Update Task Progress & Completion Status", link: "" },
-        { title: "Upload Documents & Project Related Files", link: "" },
-        { title: "View Deadlines Set By Admin", link: "" },
+        // { title: "Assigned Task & Project Details", link: "" }, 
+        // { title: "Update Task Progress & Completion Status", link: "" },
+        // { title: "Upload Documents & Project Related Files", link: "" },
+        // { title: "View Deadlines Set By Admin", link: "" },
       ]
     },
     {
@@ -70,31 +70,31 @@ const AdminSidebar = ({ children }) => {
           link: "/attendance-summary",
           description: "View daily, weekly, and monthly attendance records.",
         },
-        {
-          title: "Apply for Leave",
-          link: "/apply-leave",
-          description: "Apply for Sick, Annual, Casual, or other types of leave.",
-        },
-        {
-          title: "Leave Approval Status",
-          link: "/leave-status",
-          description: "Track the status of your leave applications.",
-        },
-        {
-          title: "Attendance Regularization",
-          link: "/attendance-regularization",
-          description: "Request corrections for missing or incorrect attendance records.",
-        },
-        {
-          title: "Shift Management",
-          link: "/shift-management",
-          description: "View and manage your work shifts.",
-        },
-        {
-          title: "Holiday Calendar",
-          link: "/holiday-calendar",
-          description: "View the company's holiday schedule.",
-        },
+        // {
+        //   title: "Apply for Leave",
+        //   link: "/apply-leave",
+        //   description: "Apply for Sick, Annual, Casual, or other types of leave.",
+        // },
+        // {
+        //   title: "Leave Approval Status",
+        //   link: "/leave-status",
+        //   description: "Track the status of your leave applications.",
+        // },
+        // {
+        //   title: "Attendance Regularization",
+        //   link: "/attendance-regularization",
+        //   description: "Request corrections for missing or incorrect attendance records.",
+        // },
+        // {
+        //   title: "Shift Management",
+        //   link: "/shift-management",
+        //   description: "View and manage your work shifts.",
+        // },
+        // {
+        //   title: "Holiday Calendar",
+        //   link: "/holiday-calendar",
+        //   description: "View the company's holiday schedule.",
+        // },
       ],
     },
     {
@@ -103,10 +103,10 @@ const AdminSidebar = ({ children }) => {
       link:"/#",
       submenus:[
         {title:"User Payrolls", link:"/Create-User-Payrolls"},
-        { title:"AdminPayroll" , link:"/Admin-Payroll"},
-        {title:"View Daily &  Weekly Monthly " , link:"/"},
-        {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
-        {title:"Leave Approval Status  " , link:"/"},
+        { title:"Payroll Summary" , link:"/Admin-Payroll"},
+        // {title:"View Daily &  Weekly Monthly " , link:"/"},
+        // {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
+        // {title:"Leave Approval Status  " , link:"/"},
       ]
 
     }

@@ -38,7 +38,7 @@ const PastLeaveTable = () => {
 
       // Filter only completed leaves if needed
       const pastLeaves = response.data.leaveDetails.filter(
-        (leave) => leave.state === "Completed"
+        (leave) => leave.state === "Completed" || leave.state === "Rejected"
       );
       setLeaveData(pastLeaves);
     } catch (err) {
@@ -95,9 +95,9 @@ const PastLeaveTable = () => {
         <h2>Past Leave Records</h2>
         <div className={styles.summary}>
           <span>Total Records: {totalLeaves}</span>
-          <span className={styles.pendingCount}>
+          {/* <span className={styles.pendingCount}>
             <FaRegCalendarAlt /> Completed: {totalLeaves}
-          </span>
+          </span> */}
         </div>
       </div>
 
@@ -110,6 +110,8 @@ const PastLeaveTable = () => {
               <th>Type</th>
               <th>Reason</th>
               <th>Status</th>
+              <th>Created AT</th>
+              <th>Updated AT</th>
             </tr>
           </thead>
           <tbody>
@@ -151,6 +153,8 @@ const PastLeaveTable = () => {
                     {leave.state}
                   </span>
                 </td>
+                <td>{leave.createdAt}</td>
+                <td>{leave.updatedAt}</td>
               </tr>
             ))}
           </tbody>
