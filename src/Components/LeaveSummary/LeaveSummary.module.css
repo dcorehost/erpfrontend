@@ -10,10 +10,7 @@
   transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions for interactivity */
 }
 
-.container:hover {
-  transform: scale(1.02); /* Slightly scales up on hover for an interactive effect */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Intensifies shadow on hover */
-}
+
 
   .header {
     display: flex;
@@ -22,7 +19,9 @@
     margin-bottom: 20px;
   }
   
-
+  
+  
+  
   .calendarPopup { /* Ensure it only shows when calendar is toggled */
     position: absolute;
     top: 50px;
@@ -42,9 +41,7 @@
   
 
   
-  .applyButton:hover { /* Optional hover effect */
-    background-color: #0056b3; /* Darker shade on hover */
-  }
+  
   
   /* Ensure the calendar does not conflict with popups */
   .popupOverlay {
@@ -198,14 +195,20 @@
     cursor: pointer;
     border-radius: 5px;
   }
+  .submitButton:hover{
+    background-color: #007bff;
+  }
   
   .cancelButton {
-    background-color: #ccc;
-    color: black;
+    background-color: red;
+    color: White;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
+  }
+  .cancelButton:hover{
+    background-color: red;
   }
   .headerContainer {
 
@@ -239,11 +242,13 @@
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 16px;
     border-radius: 4px;
     cursor: pointer;
-    /* border: 1px solid black; */
-    margin: 0px 0px 0px 350px;
+    margin-left: 755px;
+  }
+  .applyButton:hover{
+    background-color: #007bff;
   }
   
   @media (max-width: 768px) {

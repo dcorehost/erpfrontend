@@ -9,7 +9,7 @@ import logo from "../../assets/logo.jpeg"
 
 
 const Login = () => {
-  const [identifier, setIdentifier] = useState(""); // Combined emailId and phone into one field
+  const [identifier, setIdentifier] = useState(""); 
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(null);
@@ -25,12 +25,10 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const isPhoneNumber = /^\d{10}$/.test(identifier); // Adjust regex if your phone format varies
+      const isPhoneNumber = /^\d{10}$/.test(identifier);
 
-      const response = await httpServices.post(
-        "http://209.74.89.83/erpbackend/log-in", // ✅ Updated API URL
-{
-        [isPhoneNumber ? "phone" : "emailId"]: identifier, // Dynamic key based on input
+      const response = await httpServices.post( "http://209.74.89.83/erpbackend/log-in", {
+        [isPhoneNumber ? "phone" : "emailId"]: identifier, 
         password,
       }      );
 
@@ -43,7 +41,7 @@ const Login = () => {
         console.log("Received Token:", token);
         console.log("User Type:", typeOfUser);
 
-        localStorage.setItem("identifier", identifier); // Save identifier (email or phone)
+        localStorage.setItem("identifier", identifier); 
         console.log("identifier",identifier)
 
 
@@ -55,7 +53,7 @@ const Login = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("typeOfUser", typeOfUser);
         console.log("typeOfuser",typeOfUser)
-        localStorage.setItem("identifier", identifier); // Save identifier (email or phone)
+        localStorage.setItem("identifier", identifier); 
         console.log("identifier", identifier);
         
 
@@ -63,13 +61,12 @@ const Login = () => {
         Auth.login({ token, username, typeOfUser, identifier});
 
         setTimeout(() => {
-        // ✅ Redirect to the correct sidebar based on user type
         const storedType = localStorage.getItem("typeOfUser");
         console.log("Redirecting user type:", storedType);
 
         if (storedType === "Admin") {
           console.log("Redirecting to Admin Sidebar...");
-          window.location.href = "/admin-sidebar"; // 🔄 Full Page Reload
+          window.location.href = "/admin-sidebar"; 
         } else if (storedType === "User") {
           console.log("Redirecting to User Sidebar...");
           window.location.href = "/user-sidebar";
@@ -151,6 +148,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default Login;
