@@ -3,27 +3,6 @@ import styles from "./AttendanceSummary.module.css";
 import axios from "axios";
 import Auth from "../Httpservices/Auth";
 
-// const getFormattedAddress = async (latitude, longitude) => {
-//   const apiKey = '169f2b7e9da14a9abbc3375ce9214f2c'; // Replace with your actual API key
-//   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
-//   console.log("ur",url)
-
-//   try {
-//     const response = await axios.get(url);
-//     console.log("Geocoding API Response:", response.data);
-
-//     if (response.data.status === 'OK') {
-//       return response.data.results[0].formatted_address;
-//     } else {
-//       console.error("Geocoding error:", response.data.status);
-//       return `${latitude}, ${longitude}`;
-//     }
-//   } catch (error) {
-//     console.error("Error fetching address:", error);  
-//     return `${latitude}, ${longitude}`;
-//   }
-// };
-
 const AttendanceSummary = () => {
   const [attendanceRecords, setAttendanceRecords] = useState([]);
   const [formattedLocations, setFormattedLocations] = useState({});
@@ -114,9 +93,7 @@ const AttendanceSummary = () => {
                 <th>Check-in Time</th>
                 <th>Check-out Time</th>
                 <th>Time Spent</th>
-                {/* <th>Created At</th>
-                <th>Updated At</th> */}
-                {/* <th>Location</th> */}
+              
               </tr>
             </thead>
             <tbody>
@@ -130,11 +107,7 @@ const AttendanceSummary = () => {
                   <td>{record.status}</td>
                   <td>{new Date(record.checkInStatus).toLocaleTimeString()}</td>
                   <td>{record.checkOutStatus ? new Date(record.checkOutStatus).toLocaleTimeString() : "N/A"}</td>
-                  <td>{record.timeSpent}</td>
-                  {/* <td>{record.createdAt}</td>
-                  <td>{record.updatedAt}</td> */}
-
-                  {/* <td>{formattedLocations[record.userId] || "Loading..."}</td> */}
+                  <td>{record.timeSpent}</td>  
                 </tr>
               ))}
             </tbody>
