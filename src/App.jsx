@@ -111,7 +111,8 @@ const App = () => {
                 <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
                  <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
                  <Route path='/RejectedLeaves' element={<RejectedLeaves />}></Route>
-                
+                 <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
+                 <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
               </>
             )}
 
@@ -157,6 +158,8 @@ const App = () => {
                  <Route path='/AdminUserTable'  element={<AdminUserTable />}></Route>
                  <Route path='/CompletedLeaves'  element={<CompletedLeaves />}></Route>
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
+                 <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
+                 <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                 </>
             )}
           
