@@ -44,6 +44,9 @@ import UserTaskProgress from './Components/UserTaskProgress/UserTaskProgress';
 import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
 import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
 import UserTask from './Components/UserTask/UserTask';
+import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
+import TaskStatus from './Components/TaskStatus/TaskStatus';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 
 
@@ -113,6 +116,8 @@ const App = () => {
                  <Route path='/RejectedLeaves' element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
+                 <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
+
               </>
             )}
 

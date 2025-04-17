@@ -133,6 +133,7 @@ const LeaveSummary = () => {
               />
             </div>
           )}
+          
           <button
             className={styles.applyButton}
             onClick={() => openPopup("Casual Leave")}
