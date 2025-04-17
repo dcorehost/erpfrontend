@@ -97,8 +97,8 @@ body {
   
   .eyeButton {
     position: absolute;
-    right: 12px;
-    top: 50%;
+    right: 0px;
+    top: 46%;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -106,11 +106,16 @@ body {
     padding: 0;
     font-size: 18px;
     color: #0d0d0d;
+     /* border: 1px solid black; */
+     width: 30px;
     
   }
   
   .eyeButton:focus {
     outline: none;
+  }
+  .eyeButton:hover{
+    background: none;
   }
   
   .linksContainer {

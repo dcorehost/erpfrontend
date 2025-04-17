@@ -65,7 +65,7 @@ h1 {
 
 button {
   padding: 10px 15px;
-  background: #28a745;
+  background-color: #ef9273;
   color: white;
   border: none;
   border-radius: 4px;
@@ -75,7 +75,7 @@ button {
 }
 
 button:hover {
-  background: #218838;
+  background-color: #ef9273;
 }
 
 .timer {
@@ -85,11 +85,11 @@ button:hover {
 
 .viewTasks {
   margin-top: 20px; /* Space above button */
-  background: #007bff;
+  background-color: #ef9273;
 }
 
 .viewTasks:hover {
-  background: #0056b3;
+  background-color: #ef9273;
 }
 
 .timerControls {
@@ -101,7 +101,7 @@ button:hover {
 .timerButton {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #ef9273;
   color: white;
   border: none;
   border-radius: 5px;

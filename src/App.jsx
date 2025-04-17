@@ -44,6 +44,8 @@ import UserTaskProgress from './Components/UserTaskProgress/UserTaskProgress';
 import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
 import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
 import UserTask from './Components/UserTask/UserTask';
+import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 
 
