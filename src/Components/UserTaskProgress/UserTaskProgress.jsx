@@ -1,8 +1,11 @@
 import styles from './UserTaskProgress.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 
 const UserTaskProgress = () => {
-  // यूजर डेटा अब कंपोनेंट के अंदर
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(1); // Adjust this number to change items per page
+
+  // User data
   const users = [
     {
       username: "john_doe",
@@ -30,6 +33,12 @@ const UserTaskProgress = () => {
     }
   ];
 
+  // Calculate pagination indexes
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.usersTable}>
@@ -48,7 +57,7 @@ const UserTaskProgress = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {currentItems.map((user, index) => (
             <tr key={index}>
               <td>{user.username}</td>
               <td>{user.emailId}</td>
@@ -64,6 +73,29 @@ const UserTaskProgress = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div className={styles.paginationContainer}>
+        <button 
+          onClick={() => setCurrentPage(currentPage - 1)} 
+          disabled={currentPage === 1}
+          className={styles.paginationButton}
+        >
+          Previous
+        </button>
+        
+        <span className={styles.pageInfo}>
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button 
+          onClick={() => setCurrentPage(currentPage + 1)} 
+          disabled={currentPage === totalPages}
+          className={styles.paginationButton}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

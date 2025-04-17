@@ -12,7 +12,7 @@
 }
 
 .createTaskButton {
-  background-color: #4CAF50;
+  background-color: #ef9273;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -29,7 +29,7 @@
 }
 
 .createTaskButton:hover {
-  background-color: #45a049;
+  background-color: #ef9273;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
@@ -57,7 +57,7 @@
 .column h3 {
   margin: 0 0 1rem 0;
   padding: 0.75rem;
-  background: #4CAF50;
+  background-color: #ef9273;
   color: white;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -80,7 +80,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   cursor: grab;
-  border-left: 0.25rem solid #4CAF50;
+  border-left: 0.25rem solid #ef9273;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 

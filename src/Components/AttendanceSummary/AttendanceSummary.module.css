@@ -70,7 +70,7 @@
 }
 
 .filterButton.active {
-    background-color: #4caf50;
+    background-color: #ef9273;
     color: white;
     box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
@@ -105,7 +105,7 @@
 }
 
 .table th {
-    background-color: #4caf50;
+    background-color: #ef9273;
     color: white;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -167,3 +167,41 @@
 .table tr:nth-child(2) { animation-delay: 0.2s; }
 .table tr:nth-child(3) { animation-delay: 0.3s; }
 /* Add more delays as needed */
+
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 8px;
+    padding: 10px 0;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+  }
+  
+  .pagination button.activePage {
+    background-color: #ef9273;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    background-color: #f8f9fa;
+  }
