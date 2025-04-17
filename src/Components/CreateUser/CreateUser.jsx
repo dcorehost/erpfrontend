@@ -266,9 +266,19 @@ const CreateUser = () => {
           <label>Role*</label>
           <select name="role" value={formData.role} onChange={handleChange} className={errors.role ? styles.errorInput : ''}>
             <option value="">Select Role</option>
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-            <option value="Manager">Manager</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+            <option value="PHP Developer">PHP Developer</option>
+            <option value="MERN Stack Developer">MERN Stack Developer</option>
+            <option value="SEO Executive">SEO Executive</option>
+            <option value="HR Manager">HR Manager</option>
+            <option value="Graphic Designer">Graphic Designer</option>
+            <option value="Digital Marketing">Digital Marketing</option>
+            <option value="Personal Assistant">Personal Assistant</option>
+            <option value="Wordpress Developer">Wordpress Developer</option>
+
+
           </select>
           {errors.role && <span className={styles.error}>{errors.role}</span>}
         </div>
