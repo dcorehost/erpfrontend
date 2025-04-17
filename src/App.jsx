@@ -47,9 +47,8 @@ import UserTask from './Components/UserTask/UserTask';
 import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
-
-
-
+import UserDashboard from './Pages/UserDashboard/UserDashboard';
+import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -136,6 +135,9 @@ const App = () => {
                  <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
                  <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
                  <Route path='/UserTask'  element={<UserTask />}></Route>
+                 <Route path="/user-dashboard" element={<UserDashboard />} />
+                <Route path="/user-profile" element={<OwnUserProfile />} />
+
                 
  
               </>
@@ -164,6 +166,7 @@ const App = () => {
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                 </>
             )}
+
           
           </Routes>
         </>
