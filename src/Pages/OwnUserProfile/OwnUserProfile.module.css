@@ -1,0 +1,59 @@
+.user-profile {
+    padding: 24px;
+    background-color: #fef9f8;
+  }
+  
+  .user-profile-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #0d0d0d;
+  }
+  
+  .profile-card {
+    background-color: white;
+    padding: 24px;
+    max-width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #f1f1f1;
+    color: #0d0d0d;
+  }
+  
+  .btn-container {
+    text-align: right;
+  }
+  
+  .btn-container button {
+    background-color: #ef9273;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  .btn-container button:hover {
+    background-color: #e0775b;
+  }
+  

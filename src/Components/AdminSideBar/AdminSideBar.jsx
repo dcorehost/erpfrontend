@@ -25,7 +25,7 @@ const AdminSidebar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Pending Leaves", link:"/Admin/Leave/Pending-Leaves" },
-        { title:"Comleted Leaves" , link:"/CompletedLeaves"},
+        { title:"Completed Leaves" , link:"/CompletedLeaves"},
         { title:"Rejected Leaves" , link:"/RejectedLeaves"}
        
       ],
@@ -47,9 +47,9 @@ const AdminSidebar = ({ children }) => {
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        { title: "Create User",  link: "/create-user" }, 
+        { title: "New User",  link: "/create-user" }, 
         // Add actual routes
-        { title: "User Table", link: "/AdminUserTable" },
+        { title: "User Details", link: "/AdminUserTable" },
         // { title: "Assigned Task & Project Details", link: "" }, 
         // { title: "Upload Documents & Project Related Files", link: "" },
         // { title: "View Deadlines Set By Admin", link: "" },
