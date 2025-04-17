@@ -18,7 +18,7 @@ const UserTask = () => {
 
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://209.74.89.83/erpbackend/get-tasks', {
+        const response = await axios.get('http://209.74.89.83/erpbackend/get-all-Tasks-forUser', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,37 +46,37 @@ const UserTask = () => {
         <table className={styles.taskTable}>
           <thead>
             <tr>
-              <th>Project</th>
-              <th>Task</th>
+              <th>Project Name</th>
+              <th>Task Name</th>
               <th>Description</th>
               <th>Username</th>
               <th>Email</th>
-              <th>Created At</th>
               <th>State</th>
               <th>Time Spent</th>
               <th>Start Time</th>
               <th>Is Running</th>
+              <th>Created At</th>
               <th>Updated At</th>
             </tr>
           </thead>
           <tbody>
-            {tasks.map(task => (
-              <tr key={task._id}>
-                <td>{task.projectName}</td>
-                <td>{task.taskName}</td>
-                <td>{task.description}</td>
-                <td>{task.userId?.username || 'N/A'}</td>
-                <td>{task.userId?.contact?.emailId || 'N/A'}</td>
-                <td>{new Date(task.createdAt).toLocaleString()}</td>
-                <td>{task.state || 'N/A'}</td>
-                <td>{task.timeSpent || '0s'}</td>
+            {tasks.map(taskDetails => (
+              <tr key={taskDetails._id}>
+                <td>{taskDetails.projectName}</td>
+                <td>{taskDetails.taskName}</td>
+                <td>{taskDetails.description}</td>
+                <td>{taskDetails.userId?.username || 'N/A'}</td>
+                <td>{taskDetails.userId?.contact?.emailId || 'N/A'}</td>
+                <td>{taskDetails.state || 'N/A'}</td>
+                <td>{taskDetails.timeSpent || '0s'}</td>
                 <td>
-                  {task.startTime
-                    ? new Date(task.startTime).toLocaleString()
+                  {taskDetails.startTime
+                    ? new Date(taskDetails.startTime).toLocaleString()
                     : 'Null'}
                 </td>
-                <td>{task.isRunning ? 'True' : 'False'}</td>
-                <td>{new Date(task.updatedAt).toLocaleString()}</td>
+                <td>{taskDetails.isRunning ? 'True' : 'False'}</td>
+                <td>{new Date(taskDetails.createdAt).toLocaleString()}</td>
+                <td>{new Date(taskDetails.updatedAt).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

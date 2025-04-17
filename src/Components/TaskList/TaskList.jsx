@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -95,7 +96,13 @@ const TaskList = () => {
               description: task.description,
               project: task.projectName,
               user: task.userId?.username || 'Unassigned',
-              state: task.state || 'todo'
+              email: task.userId?.contact?.emailId || 'No email',
+              state: task.state || 'todo',
+              timeSpent: task.timeSpent,
+              isRunning: task.isRunning,
+              createdAt: task.createdAt,
+              updatedAt: task.updatedAt,
+              startTime: task.startTime
             };
 
             const column = task.state ? 
@@ -118,10 +125,13 @@ const TaskList = () => {
               description: task.description,
               project: task.projectName,
               user: task.userId?.username || 'Unassigned',
+              email: task.userId?.contact?.emailId || 'No email',
               state: 'submitted',
               timeSpent: task.timeSpent,
+              isRunning: task.isRunning,
               createdAt: task.createdAt,
-              updatedAt: task.updatedAt
+              updatedAt: task.updatedAt,
+              startTime: task.startTime
             };
 
             serverTasks.submitted.push(taskObj);
@@ -137,8 +147,10 @@ const TaskList = () => {
               description: task.description,
               project: task.projectName,
               user: task.userId?.username || 'Unassigned',
+              email: task.userId?.contact?.emailId || 'No email',
               state: 'completed',
               timeSpent: task.timeSpent,
+              isRunning: task.isRunning,
               createdAt: task.createdAt,
               updatedAt: task.updatedAt,
               startTime: task.startTime
@@ -256,6 +268,11 @@ const TaskList = () => {
     navigate('/add-task');
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Not available';
+    return new Date(dateString).toLocaleString();
+  };
+
   return (
     <div className={styles.board}>
       <button className={styles.createTaskButton} onClick={handleCreateTask}>
@@ -282,14 +299,16 @@ const TaskList = () => {
                 >
                   <h4>{task.name}</h4>
                   <p>{task.description}</p>
-                  <p><strong>Project:</strong> {task.project}</p>
-                  <p><strong>Assigned to:</strong> {task.user}</p>
-                  {task.timeSpent && <p><strong>Time Spent:</strong> {task.timeSpent}</p>}
-                  {task.createdAt && <p><strong>Created:</strong> {task.createdAt}</p>}
-                  {task.updatedAt && <p><strong>Updated:</strong> {task.updatedAt}</p>}
-                  {task.startTime && <p><strong>Started:</strong> {new Date(task.startTime).toLocaleString()}</p>}
-                  <div className={styles.taskStatus}>
-                    Status: {columnDisplayNames[column]}
+                  <div className={styles.taskDetails}>
+                    <p><strong>Project:</strong> {task.project}</p>
+                    <p><strong>Assigned to:</strong> {task.user}</p>
+                    <p><strong>Email:</strong> {task.email}</p>
+                    <p><strong>Time Spent:</strong> {task.timeSpent || '0h 0m 0s'}</p>
+                    <p><strong>Status:</strong> {columnDisplayNames[column]}</p>
+                    <p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
+                    <p><strong>Updated:</strong> {formatDate(task.updatedAt)}</p>
+                    {task.startTime && <p><strong>Started:</strong> {formatDate(task.startTime)}</p>}
+                    <p><strong>Timer:</strong> {task.isRunning ? 'Running' : 'Stopped'}</p>
                   </div>
                 </div>
               ))}

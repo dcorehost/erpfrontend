@@ -35,10 +35,11 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-        { title: "New Project",  link: "/CreateNewProject" },
-        { title:"Project Details" , link:"/ProjectDetails"},
-        { title: "Task Assignment",  link: "/Admin/Leave/Task-Assignment" },
-        { title:"Task Summary" , link:"/Admin-Task-Summary"}
+        { title: "CreateNewProject",  link: "/CreateNewProject" },
+        { title:"ProjectDetails" , link:"/ProjectDetails"},
+        { title: "TaskAssignment",  link: "/Admin/Leave/Task-Assignment" },
+        { title: "Update Task Progress & Completion Status", link: "/Admin/Assignment/task-status" },
+        { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
       ],
     },
     {
@@ -50,7 +51,6 @@ const AdminSidebar = ({ children }) => {
         // Add actual routes
         { title: "User Details", link: "/AdminUserTable" },
         // { title: "Assigned Task & Project Details", link: "" }, 
-        // { title: "Update Task Progress & Completion Status", link: "" },
         // { title: "Upload Documents & Project Related Files", link: "" },
         // { title: "View Deadlines Set By Admin", link: "" },
       ]
