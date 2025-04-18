@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./UserDashboard.module.css";
+import styles from "./DashboardUser.module.css";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "react-toastify";
