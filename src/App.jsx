@@ -48,7 +48,7 @@ import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 import TaskStatus from './Components/TaskStatus/TaskStatus';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
-import UserDashboard from './Pages/UserDashboard/UserDashboard';
+import UserDashboard from './Pages/UserDashboard/DashboardUser';
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
 
 const App = () => {
