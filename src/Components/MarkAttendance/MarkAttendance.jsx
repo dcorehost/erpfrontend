@@ -17,6 +17,71 @@ const MarkAttendance = () => {
 
   const [timeSpent, setTimeSpent] = useState("00:00:00");
 
+  const reverseGeocode = async (latitude, longitude) => {
+    try {
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
+      const address = response.data.address;
+      return `${address.city || address.town || address.village || ''}, ${address.state || ''}`;
+    } catch (err) {
+      console.error("Reverse geocoding error:", err);
+      return `Lat: ${latitude}, Long: ${longitude}`;
+    }
+  };
+
+  useEffect(() => {
+    const fetchTodayAttendance = async () => {
+      try {
+        const token = Auth.getToken();
+        if (!token) {
+          alert("User not authenticated.");
+          return;
+        }
+
+        const response = await axios.get("http://209.74.89.83/erpbackend/get-daily-report", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const report = response.data.report?.[0];
+
+        if (report) {
+          const { checkInStatus, checkOutStatus, location } = report;
+
+          let elapsedSeconds = 0;
+          if (checkInStatus && !checkOutStatus) {
+            const start = new Date(checkInStatus);
+            const now = new Date();
+            elapsedSeconds = Math.floor((now - start) / 1000);
+          }
+
+          let formattedLocation = null;
+          if (location?.latitude && location?.longitude) {
+            formattedLocation = await reverseGeocode(location.latitude, location.longitude); // 🆕
+          }
+
+          setAttendanceStatus({
+            checkedIn: !!checkInStatus,
+            checkedOut: !!checkOutStatus,
+            checkInTime: checkInStatus ? new Date(checkInStatus).toLocaleTimeString() : null,
+            checkOutTime: checkOutStatus ? new Date(checkOutStatus).toLocaleTimeString() : null,
+            location: location
+              ? `Lat: ${location.latitude}, Long: ${location.longitude}`
+              : null,
+            timer: elapsedSeconds,
+            isTimerRunning: !!checkInStatus && !checkOutStatus,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch today's attendance:", error);
+      }
+    };
+
+    fetchTodayAttendance();
+  }, []); // 🆕 this runs only once on mount
+
   useEffect(() => {
     let interval;
     if (attendanceStatus.isTimerRunning) {
@@ -84,13 +149,14 @@ const MarkAttendance = () => {
 
       const { message, location } = response.data;
       alert(message); // Use alert for success message
+      const formattedLocation = await reverseGeocode(latitude, longitude);
 
       setAttendanceStatus((prevState) => ({
         ...prevState,
         checkedIn: true,
         checkInTime: new Date().toLocaleTimeString(),
         isTimerRunning: true,
-        location: location.formatted,
+        location:  formattedLocation,
       }));
     } catch (error) {
       const errorMessage = error.response ? error.response.data.message : "Failed to check in. Please try again.";
