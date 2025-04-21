@@ -104,10 +104,10 @@ const AdminSidebar = ({ children }) => {
       submenus:[
         {title:"User Payrolls", link:"/Create-User-Payrolls"},
         { title:"Payroll Summary" , link:"/Admin-Payroll"},
-        // {title:"View Daily &  Weekly Monthly " , link:"/"},
+        {title:"View DailyTimeWaste &  WeeklyTimeWaste MonthlyTimeWaste " , link:"/Admine/payrolls&slips/timechange"},
         // {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
         // {title:"Leave Approval Status  " , link:"/"},
-      ]
+      ] 
 
     }
   ];
@@ -130,15 +130,12 @@ const AdminSidebar = ({ children }) => {
   return (
     <div className={`${styles.sidebarWrapper}`}>
       <div className={`${styles.sidebarContainer}`}>
-        {/* <button className={styles.hamburgerButton} onClick={toggleSidebar}>
-          ☰
-        </button> */}
+        
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-          {/* ☰ (Open) / ✖ (Close) Button */}
+         
           <button className={styles.hamburgerButton} onClick={toggleSidebar}>
             {isOpen ? "✖" : "☰"}
           </button>
-        {/* <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}> */}
           <ul className={styles.menu}>
             {menus.map((menu, index) => (
               <React.Fragment key={index}>
