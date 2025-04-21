@@ -50,7 +50,6 @@ import TaskStatus from './Components/TaskStatus/TaskStatus';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
-import TimeWaste from './Components/TimeWaste/TimeWaste';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -168,7 +167,6 @@ const App = () => {
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
-                 <Route path='/Admine/payrolls&slips/timechange'  element={<TimeWaste />}></Route>
                 </>
             )}
 
