@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./UserProfile.module.css";
+import styles from "./ownUserProfile.module.css";
 
 // Utility function to convert seconds to HH:MM:SS format
 const convertToHHMMSS = (seconds) => {

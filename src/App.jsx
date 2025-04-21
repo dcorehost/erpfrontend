@@ -8,7 +8,7 @@ import Signup from './Components/Signup/Signup';
 import SignIn from './Components/SignIn/SignIn';
 import Logout from './Components/Logout/Logout';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import UserProfile from './Components/UseProfile/UserProfile';
+import UserProfile from './Components/ownUserProfile/ownUserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
