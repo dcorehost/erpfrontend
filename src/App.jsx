@@ -10,7 +10,7 @@ import Logout from './Components/Logout/Logout';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 import UserProfile from './Components/ownUserProfile/ownUserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
-import UserManagement from './Components/UserManagement/UserManagement';
+// import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
 import EnquiryManagement from './Components/EnquiryManagement/EnquiryManagement';
 import TaskManager from './Components/TaskManager/TaskManager';
@@ -49,7 +49,7 @@ import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
-import TimeWaste from './Components/TimeWaste/TimeWaste';
+import SystemSetting from './Components/SystemSetting/SystemSetting';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -87,7 +87,6 @@ const App = () => {
             {typeOfUser === "Admin" && (
               <>
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/user-management" element={<UserManagement />} />
                 <Route path="/task-manager" element={<TaskManager />} />
                 <Route path="/sales-management" element={<SalesManagement />} />
                 <Route path="/sales-report" element={<SalesDetails />} />
@@ -115,7 +114,9 @@ const App = () => {
                  <Route path='/RejectedLeaves' element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
-                 <Route path='/Own-User-Profile'  element={<OwnUserProfile />}></Route>
+                 <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
+                 <Route path='/Admin-system-setting'  element={<SystemSetting />}></Route>
+
               </>
             )}
 
@@ -145,8 +146,12 @@ const App = () => {
             {/* Superadmin-specific routes */}
             {typeOfUser === "superadmin" && (
               <>
-                <Route path="/user-management" element={<UserManagement />} />
+                {/* <Route path="/user-management" element={<UserManagement />} /> */}
                 <Route path="/task-manager" element={<TaskManager />} />
+                <Route path="/create-holidays" element={<CreateHolidays />} />
+                <Route path="/holiday-list" element={<HolidayList />} />
+
+
               </>
             )}
 
@@ -163,7 +168,6 @@ const App = () => {
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
-                 <Route path='/Admine/payrolls&slips/timechange'  element={<TimeWaste />}></Route>
                 </>
             )}
           
