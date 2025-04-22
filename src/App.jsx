@@ -8,7 +8,7 @@ import Signup from './Components/Signup/Signup';
 import SignIn from './Components/SignIn/SignIn';
 import Logout from './Components/Logout/Logout';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import UserProfile from './Components/UseProfile/UserProfile';
+import UserProfile from './Components/ownUserProfile/ownUserProfile';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import UserManagement from './Components/UserManagement/UserManagement';
 import SalesManagement from './Components/SalesManagement/Salesmanagement';
@@ -47,9 +47,9 @@ import UserTask from './Components/UserTask/UserTask';
 import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
-import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile';
-
-
+import UserDashboard from './Pages/UserDashboard/DashboardUser';
+import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
+import TimeWaste from './Components/TimeWaste/TimeWaste';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -137,7 +137,7 @@ const App = () => {
                  <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
                  <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
                  <Route path='/UserTask'  element={<UserTask />}></Route>
-                
+                 <Route path='/Own-User-Profile'  element={<OwnUserProfile />}></Route>
  
               </>
             )}
@@ -163,6 +163,7 @@ const App = () => {
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
+                 <Route path='/Admine/payrolls&slips/timechange'  element={<TimeWaste />}></Route>
                 </>
             )}
           
@@ -173,4 +174,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 
