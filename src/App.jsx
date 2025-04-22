@@ -49,7 +49,9 @@ import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 import TaskStatus from './Components/TaskStatus/TaskStatus';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
-import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
+import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile';
+import CreateHolidays from './Components/CreateHolidays/CreateHolidays'
+import HolidayList from './Components/HolidaysList/HolidaysList'
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -151,6 +153,10 @@ const App = () => {
               <>
                 <Route path="/user-management" element={<UserManagement />} />
                 <Route path="/task-manager" element={<TaskManager />} />
+                <Route path="/create-holidays" element={<CreateHolidays />} />
+                <Route path="/holiday-list" element={<HolidayList />} />
+
+
               </>
             )}
 
