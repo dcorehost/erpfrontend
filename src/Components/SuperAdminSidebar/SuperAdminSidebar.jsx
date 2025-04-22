@@ -201,6 +201,16 @@ const SuperAdminSidebar = ({ children }) => {
       submenus: [
         { title: "User Management", icon: <FaBuildingUser />, link: "/user-management" },
         { title: "Task Manager", icon: <GrTasks />, link: "/task-manager" },
+        
+      ],
+    },
+    {
+      title: "Holiday Management", // ✅ New Section
+      icon: <FaBuildingUser />,    // You can change this icon if needed
+      link: "/#",
+      submenus: [
+        { title: "Create Holidays", icon: <FaBuildingUser />, link: "/create-holidays" },
+        { title: "Holiday List", icon: <GrTasks />, link: "/holiday-list" }, // optional extra submenu
       ],
     },
   ];

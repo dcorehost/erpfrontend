@@ -152,6 +152,10 @@ const App = () => {
               <>
                 {/* <Route path="/user-management" element={<UserManagement />} /> */}
                 <Route path="/task-manager" element={<TaskManager />} />
+                <Route path="/create-holidays" element={<CreateHolidays />} />
+                <Route path="/holiday-list" element={<HolidayList />} />
+
+
               </>
             )}
 

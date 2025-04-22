@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -133,7 +132,7 @@ const LeaveSummary = () => {
               />
             </div>
           )}
-          
+
           <button
             className={styles.applyButton}
             onClick={() => openPopup("Casual Leave")}
@@ -177,7 +176,7 @@ const LeaveSummary = () => {
         />
       )}
 
-      <ToastContainer /> {/* Toast container here */}
+      <ToastContainer />
 
       <div className={styles.holidayContainer}>
         <HolidayCalendar />
@@ -188,12 +187,52 @@ const LeaveSummary = () => {
 
 const HolidayCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [holidays, setHolidays] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const holidays = [
-    { date: new Date(2025, 0, 1), name: "New Year's Day" },
-    { date: new Date(2025, 6, 4), name: "Independence Day" },
-    { date: new Date(2025, 11, 25), name: "Christmas Day" },
-  ];
+  useEffect(() => {
+    const fetchHolidays = async () => {
+      try {
+        const token = Auth.getToken();
+        if (!token) {
+          toast.error("User not authenticated.");
+          return;
+        }
+
+        const response = await axios.get(
+          "http://209.74.89.83/erpbackend/get-holidays",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.data?.holidays) {
+          const expanded = [];
+
+          response.data.holidays.forEach(({ startDate, endDate, description }) => {
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+
+            for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+              expanded.push({ date: new Date(d), description });
+            }
+          });
+
+          setHolidays(expanded);
+        }
+      } catch (error) {
+        console.error("Error fetching holidays:", error);
+        toast.error("Failed to fetch holiday data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHolidays();
+  }, []);
 
   const isHoliday = (date) => {
     return holidays.some(
@@ -215,18 +254,22 @@ const HolidayCalendar = () => {
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             inline
-            dayClassName={(date) => (isHoliday(date) ? styles.holiday : null)}
+            dayClassName={(date) =>
+              isHoliday(date) ? styles.holiday : null
+            }
           />
         </div>
         <div className={styles.holidayDetailsSection}>
           <h3>Holiday Details</h3>
-          {isHoliday(selectedDate) ? (
+          {loading ? (
+            <p>Loading holidays...</p>
+          ) : isHoliday(selectedDate) ? (
             <div>
               <p>
                 <strong>Date:</strong> {selectedDate.toDateString()}
               </p>
               <p>
-                <strong>Holiday:</strong> {getHolidayDetails(selectedDate).name}
+                <strong>Holiday:</strong> {getHolidayDetails(selectedDate)?.description}
               </p>
             </div>
           ) : (
