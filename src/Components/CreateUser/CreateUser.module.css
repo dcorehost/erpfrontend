@@ -119,3 +119,15 @@
       top: 50px; /* Adjusted sticky position */
     }
   }
+  /* Toast overrides */
+.toastSuccess {
+  background-color: #28a745 !important; /* Green background */
+  color: #fff !important; /* White text */
+  border-left: 5px solid #218838;
+}
+
+.toastError {
+  background-color: #dc3545 !important; /* Red background */
+  color: #fff !important;
+  border-left: 5px solid #c82333;
+}
