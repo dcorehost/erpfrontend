@@ -46,7 +46,7 @@ const OwnUserProfile = () => {
   const [showLanguagePopup, setShowLanguagePopup] = useState(false);
   const [newLanguage, setNewLanguage] = useState('');
   const [showDeductionPopup, setShowDeductionPopup] = useState(false);
-  const [newDeduction, setNewDeduction] = useState([]); // Initialize as an empty array
+  const [newDeduction, setNewDeduction] = useState([]); 
 
 
   const fileInputRef = useRef(null);

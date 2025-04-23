@@ -1,10 +1,16 @@
 .app {
+  
   padding: 20px;
   font-family: Arial, sans-serif; /* Modern font */
   width: 800px;
+  overflow: auto; /* Enable scroll for the entire app if content overflows */
+  margin-top: 20px; /* Add margin at the top */
+  margin-bottom: 20px; /* Add margin at the bottom */
+  height: 650px;
 }
 
 .container {
+  
   padding: 20px;
   border: 1px solid #ddd; /* Light border */
   border-radius: 8px; /* Rounded corners */
@@ -22,10 +28,14 @@ h1 {
   flex-direction: column; /* Column layout for form */
   gap: 15px; /* Space between elements */
 }
+
 .createdTasksContainer {
   display: flex;
   flex-direction: column; /* Stack tasks vertically */
   margin-top: 20px;
+  overflow-y: auto; /* Enable vertical scroll for created tasks */
+  max-height: 300px; /* Adjust as needed to control the visible area before scrolling */
+  padding-right: 10px; /* Add some padding to prevent scrollbar from overlapping content */
 }
 
 .createdTask {
@@ -36,7 +46,14 @@ h1 {
   background-color: #f9f9f9; /* Light background for clarity */
 }
 
+.createdTask h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
 
+.createdTask p {
+  margin-bottom: 5px;
+}
 
 .taskRow {
   display: flex;
@@ -75,7 +92,7 @@ button {
 }
 
 button:hover {
-  background-color: #ef9273;
+  background-color: #d17a5e; /* Darker shade on hover */
 }
 
 .timer {
@@ -89,7 +106,7 @@ button:hover {
 }
 
 .viewTasks:hover {
-  background-color: #ef9273;
+  background-color: #d17a5e;
 }
 
 .timerControls {
@@ -101,15 +118,16 @@ button:hover {
 .timerButton {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #ef9273;
+  background-color: #5cb85c; /* Green for action buttons */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .timerButton:hover {
-  color: black; /* Darker green on hover */
+  background-color: #4cae4c; /* Darker green on hover */
 }
 
 /* Responsive adjustments */

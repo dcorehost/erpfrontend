@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TaskList.module.css';
@@ -19,9 +19,10 @@ const TaskList = () => {
       completed: [],
     };
   });
-  
+
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
+  const columnsContainerRef = useRef(null); // Ref for the columns container
 
   const columnDisplayNames = {
     todo: 'To Do',
@@ -105,9 +106,9 @@ const TaskList = () => {
               startTime: task.startTime
             };
 
-            const column = task.state ? 
+            const column = task.state ?
               task.state.toLowerCase().replace(/\s+/g, '') : 'todo';
-            
+
             if (serverTasks[column]) {
               serverTasks[column].push(taskObj);
             } else {
@@ -163,14 +164,14 @@ const TaskList = () => {
         // Merge with locally stored tasks (preserving any local changes)
         setTasks(prev => {
           const mergedTasks = {...serverTasks};
-          
+
           // Preserve the order and status of tasks that exist in both
           Object.keys(prev).forEach(column => {
             prev[column].forEach(localTask => {
               const existsInServer = Object.values(serverTasks)
                 .flat()
                 .some(serverTask => serverTask.id === localTask.id);
-              
+
               if (!existsInServer) {
                 mergedTasks[localTask.state] = [
                   ...(mergedTasks[localTask.state] || []),
@@ -179,7 +180,7 @@ const TaskList = () => {
               }
             });
           });
-          
+
           return mergedTasks;
         });
       } catch (error) {
@@ -279,7 +280,7 @@ const TaskList = () => {
         + Create Task
       </button>
 
-      <div className={styles.columnsContainer}>
+      <div ref={columnsContainerRef} className={styles.columnsContainer}>
         {Object.keys(tasks).map((column) => (
           <div
             key={column}

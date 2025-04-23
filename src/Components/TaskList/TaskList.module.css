@@ -4,20 +4,28 @@
 
 .board {
   padding: 1rem;
-  max-width: 100%;
+  max-width: 80%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
-  height: 500px;
- 
+  height: 500px; /* Set a fixed height for the board to enable vertical scroll */
+  overflow-y: auto; /* Enable vertical scroll for the board */
+  margin: 0px auto;
+  border-top: 5px solid #8fbc8f; /* Dark Sea Green (muted green) */
+  border-right: 5px solid #8fbc8f; /* Light Coral (muted red) */
+  border-left: 5px solid #8fbc8f; /* Sky Blue (soft blue) */
+  border-bottom: 5px solid #8fbc8f; /* Gold (warm, but not too bright) */
+
+  border-radius: 10px;
 }
 
 .createTaskButton {
+ 
   background-color: #ef9273;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  cursor: pointer; 
+  cursor: pointer;
   margin-bottom: 1.5rem;
   font-size: 1rem;
   font-weight: 600;
@@ -35,6 +43,7 @@
 }
 
 .columnsContainer {
+
   display: flex;
   gap: 1rem;
   overflow-x: auto;
@@ -45,6 +54,8 @@
 }
 
 .column {
+  
+ 
   flex: 1 0 18rem;
   background: #f8f9fa;
   border-radius: 0.75rem;
@@ -52,9 +63,13 @@
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   min-height: 20rem;
+  display: flex; /* Enable flex layout for vertical scroll within column */
+  flex-direction: column; /* Stack items vertically */
 }
 
 .column h3 {
+  position: fixed;
+
   margin: 0 0 1rem 0;
   padding: 0.75rem;
   background-color: #ef9273;
@@ -72,6 +87,7 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 10rem;
+  overflow-y: auto; /* Enable vertical scroll within the task list of each column */
 }
 
 .taskCard {
@@ -122,24 +138,24 @@
   background: #f1f1f1;
 }
 
-/* Scrollbar Styling */
-/* .columnsContainer::-webkit-scrollbar {
-  height: 0.5rem;
+/* Scrollbar Styling (for columns if needed) */
+.taskList::-webkit-scrollbar {
+  width: 0.5rem;
 }
 
-.columnsContainer::-webkit-scrollbar-track {
+.taskList::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 0.25rem;
 }
 
-.columnsContainer::-webkit-scrollbar-thumb {
+.taskList::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 0.25rem;
 }
 
-.columnsContainer::-webkit-scrollbar-thumb:hover {
+.taskList::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
-} */
+}
 
 /* Responsive Breakpoints */
 @media (max-width: 1200px) {
@@ -147,7 +163,7 @@
     flex-wrap: wrap;
     overflow-x: visible;
   }
-  
+
   .column {
     flex: 1 0 calc(50% - 1rem);
     min-width: 0;
@@ -158,17 +174,18 @@
   .board {
     padding: 0.75rem;
   }
-  
+
   .columnsContainer {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .column {
     flex: 1 0 auto;
     width: 100%;
+    min-height: auto; /* Adjust min-height for smaller screens */
   }
-  
+
   .createTaskButton {
     width: 100%;
     justify-content: center;
@@ -180,15 +197,15 @@
   .taskCard {
     padding: 1rem;
   }
-  
+
   .taskCard h4 {
     font-size: 0.9375rem;
   }
-  
+
   .taskCard p {
     font-size: 0.8125rem;
   }
-  
+
   .column h3 {
     font-size: 0.9375rem;
     padding: 0.5rem;
@@ -210,7 +227,7 @@
   .taskCard {
     cursor: pointer;
   }
-  
+
   .columnsContainer {
     -webkit-overflow-scrolling: touch;
   }
@@ -221,18 +238,18 @@
   .createTaskButton {
     display: none;
   }
-  
+
   .columnsContainer {
     display: block;
     overflow: visible;
   }
-  
+
   .column {
     break-inside: avoid;
     page-break-inside: avoid;
     margin-bottom: 1rem;
   }
-  
+
   .taskCard {
     box-shadow: none;
     border: 1px solid #ddd;
