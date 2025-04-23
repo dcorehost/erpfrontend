@@ -52,12 +52,10 @@ import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
 import HolidayList from './Components/HolidaysList/HolidaysList'; 
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
 import SystemSetting from './Components/SystemSetting/SystemSetting';
+import UserAttendance from './Components/UserAttendance/UserAttendance';
 import TaskStatus from './Components/TaskStatus/TaskStatus';
-import AdminNotifications from './Components/AdminNotifications/AdminNotifications'; // Admin Notifications
-import SuperAdminNotifications from './Components/SuperAdminNotifications/SuperAdminNotifications'; // Superadmin Notifications
-import UserNotifications from './Components/UserNotifications/UserNotifications'; // User Notifications
-import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory';
-import AdminHistory from './Components/AdminNotificationsHistory/AdminNotificationsHistory';
+import AdminNotificationsHistory from './Components/AdminNotificationsHistory/AdminNotificationsHistory';
+import AdminNotification from './Components/AdminNotifications/AdminNotifications'
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -124,8 +122,9 @@ const App = () => {
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                  <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
                  <Route path='/Admin-system-setting'  element={<SystemSetting />}></Route>
-                 <Route path="/admin-notifications" element={<AdminNotifications />} /> {/* Admin Notifications Route */}
-                 <Route path="/admin-notifications-history" element={<AdminHistory />} /> {/* Superadmin Notifications Route */}
+                 <Route path='/Admin-user-attendance'  element={<UserAttendance />}></Route>
+                 <Route path="/admin-notifications" element={<AdminNotification />} /> {/* Admin Notifications Route */}
+                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} /> {/* Superadmin Notifications Route */}
 
               </>
             )}

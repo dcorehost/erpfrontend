@@ -1,191 +1,10 @@
 
-
-// import React, { useState, useEffect } from "react";
-// import styles from "./AttendanceSummary.module.css";
-// import axios from "axios";
-// import Auth from "../Httpservices/Auth";
-
-// const AttendanceSummary = () => {
-//   const [attendanceRecords, setAttendanceRecords] = useState([]);
-//   const [filter, setFilter] = useState("daily");
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [itemsPerPage] = useState(10);
-//   const [startDate, setStartDate] = useState("");
-//   const [endDate, setEndDate] = useState("");
-
-//   useEffect(() => {
-//     setCurrentPage(1);
-//   }, [filter]);
-
-//   useEffect(() => {
-//     fetchAttendanceRecords();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [filter]);
-
-//   const fetchAttendanceRecords = async (customSearch = false) => {
-//     const token = Auth.getToken();
-//     if (!token) {
-//       alert("User not authenticated.");
-//       return;
-//     }
-
-//     let url = "";
-
-//     if (customSearch && startDate && endDate) {
-//       const start = new Date(startDate);
-//       const month = start.getMonth() + 1;
-//       const year = start.getFullYear();
-
-//       url = `http://209.74.89.83/erpbackend/get-attendance-report-forUser?startDate=${startDate}&endDate=${endDate}&month=${month}&year=${year}`;
-//     } else {
-//       switch (filter) {
-//         case "daily":
-//           url = "http://209.74.89.83/erpbackend/get-daily-report";
-//           break;
-//         case "weekly":
-//           url = "http://209.74.89.83/erpbackend/get-weekly-report";
-//           break;
-//         case "monthly":
-//           url = "http://209.74.89.83/erpbackend/get-monthly-report";
-//           break;
-//         default:
-//           url = "http://209.74.89.83/erpbackend/get-daily-report";
-//       }
-//     }
-
-//     try {
-//       const response = await axios.get(url, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//       });
-
-//       if (response.status === 200) {
-//         setAttendanceRecords(response.data.report);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching attendance records:", error);
-//     }
-//   };
-
-//   const handleSearch = () => {
-//     if (!startDate || !endDate) {
-//       alert("Please select both start and end dates.");
-//       return;
-//     }
-//     fetchAttendanceRecords(true); // true = custom date range
-//   };
-
-//   // Pagination
-//   const indexOfLastItem = currentPage * itemsPerPage;
-//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-//   const currentItems = attendanceRecords.slice(indexOfFirstItem, indexOfLastItem);
-//   const totalPages = Math.ceil(attendanceRecords.length / itemsPerPage);
-
-//   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-//   return (
-//     <div className={styles.wrapper}>
-//       <h1 className={styles.title}>Attendance Summary</h1>
-
-//       {/* Filter Buttons */}
-//       <div className={styles.container}>
-//         <div className={styles.filterButtons}>
-//           <button className={`${styles.filterButton} ${filter === "daily" ? styles.active : ""}`} onClick={() => setFilter("daily")}>Daily</button>
-//           <button className={`${styles.filterButton} ${filter === "weekly" ? styles.active : ""}`} onClick={() => setFilter("weekly")}>Weekly</button>
-//           <button className={`${styles.filterButton} ${filter === "monthly" ? styles.active : ""}`} onClick={() => setFilter("monthly")}>Monthly</button>
-//         </div>
-
-//         {/* Date Range Search */}
-//         <div className={styles.dateSearch}>
-//           <input
-//             type="date"
-//             value={startDate}
-//             onChange={(e) => setStartDate(e.target.value)}
-//             className={styles.dateInput}
-//           />
-//           <span>to</span>
-//           <input
-//             type="date"
-//             value={endDate}
-//             onChange={(e) => setEndDate(e.target.value)}
-//             className={styles.dateInput}
-//           />
-//           <button onClick={handleSearch} className={styles.searchButton}>
-//             Search
-//           </button>
-//         </div>
-
-//         {/* Attendance Table */}
-//         <div className={styles.tableContainer}>
-//           <table className={styles.table}>
-//             <thead>
-//               <tr>
-//                 <th>Employee Id</th>
-//                 <th>User name</th>
-//                 <th>Display name</th>
-//                 <th>Email Id</th>
-//                 <th>Phone</th>
-//                 <th>Status</th>
-//                 <th>Check-in Time</th>
-//                 <th>Check-out Time</th>
-//                 <th>Time Spent</th>
-//                 <th>Created At</th>
-//                 <th>Updated At</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {currentItems.map((record, index) => (
-//                 <tr key={index}>
-//                   <td>{record.employeeId}</td>
-//                   <td>{record.username}</td>
-//                   <td>{record.displayName}</td>
-//                   <td>{record.emailId}</td>
-//                   <td>{record.phone}</td>
-//                   <td>{record.status}</td>
-//                   <td>{new Date(record.checkInStatus).toLocaleTimeString()}</td>
-//                   <td>{record.checkOutStatus ? new Date(record.checkOutStatus).toLocaleTimeString() : "N/A"}</td>
-//                   <td>{record.timeSpent || "N/A"}</td>
-
-//                   <td>{new Date(record.createdAt).toLocaleString()}</td>
-//                   <td>{new Date(record.updatedAt).toLocaleString()}</td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </div>
-
-//         {/* Pagination */}
-//         <div className={styles.pagination}>
-//           <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-//           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-//             <button key={page} onClick={() => paginate(page)} className={currentPage === page ? styles.activePage : ""}>
-//               {page}
-//             </button>
-//           ))}
-//           <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AttendanceSummary;
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Auth from "../Httpservices/Auth";
-import styles from "./AttendanceSummary.module.css";
+import styles from "./UserAttendance.module.css";
 
-const AttendanceSummary = () => {
+const UserAttendance = () => {
   const [attendanceRecords, setAttendanceRecords] = useState([]);
   const [filter, setFilter] = useState("daily");
   const [currentPage, setCurrentPage] = useState(1);
@@ -219,20 +38,20 @@ const AttendanceSummary = () => {
       const month = start.getMonth() + 1;
       const year = start.getFullYear();
 
-      url = `http://209.74.89.83/erpbackend/get-attendance-report-forUser?startDate=${startDate}&endDate=${endDate}&month=${month}&year=${year}`;
+      url = `http://209.74.89.83/erpbackend/get-attendance-Report-forAdmin?startDate=${startDate}&endDate=${endDate}&month=${month}&year=${year}`;
     } else {
       switch (filter) {
         case "daily":
-          url = "http://209.74.89.83/erpbackend/get-daily-report";
+          url = "http://209.74.89.83/erpbackend/get-dailyReport-forAdmin";
           break;
         case "weekly":
-          url = "http://209.74.89.83/erpbackend/get-weekly-report";
+          url = "http://209.74.89.83/erpbackend/get-weeklyReport-forAdmin";
           break;
         case "monthly":
-          url = "http://209.74.89.83/erpbackend/get-monthly-report";
+          url = "http://209.74.89.83/erpbackend/get-monthlyReport-forAdmin";
           break;
         default:
-          url = "http://209.74.89.83/erpbackend/get-daily-report";
+          url = "http://209.74.89.83/erpbackend/get-dailyReport-forAdmin";
       }
     }
 
@@ -479,4 +298,4 @@ const AttendanceSummary = () => {
   );
 };
 
-export default AttendanceSummary;
+export default UserAttendance;

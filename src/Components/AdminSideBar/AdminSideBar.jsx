@@ -55,8 +55,41 @@ const AdminSidebar = ({ children }) => {
       icon: <FaCalendarAlt />,
       link: "/attendance",
       submenus: [
-        { title: "Mark Attendance", link: "/mark-attendance" },
-        { title: "Attendance Summary", link: "/attendance-summary" },
+        {
+          title: "Mark Attendance",
+          link: "/mark-attendance",
+          description: "Check-in and Check-out for daily attendance tracking.",
+        },
+        {
+          title: "Attendance Summary",
+          link: "/attendance-summary",
+          description: "View daily, weekly, and monthly attendance records.",
+        },
+        {
+          title: "User Attendance",
+          link: "/Admin-user-attendance",
+          description: "View daily, weekly, and monthly attendance records of User.",
+        },
+        // {
+        //   title: "Leave Approval Status",
+        //   link: "/leave-status",
+        //   description: "Track the status of your leave applications.",
+        // },
+        // {
+        //   title: "Attendance Regularization",
+        //   link: "/attendance-regularization",
+        //   description: "Request corrections for missing or incorrect attendance records.",
+        // },
+        // {
+        //   title: "Shift Management",
+        //   link: "/shift-management",
+        //   description: "View and manage your work shifts.",
+        // },
+        // {
+        //   title: "Holiday Calendar",
+        //   link: "/holiday-calendar",
+        //   description: "View the company's holiday schedule.",
+        // },
       ],
     },
     {
