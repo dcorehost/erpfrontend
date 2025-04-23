@@ -51,6 +51,7 @@ import TaskStatus from './Components/TaskStatus/TaskStatus';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
 import SystemSetting from './Components/SystemSetting/SystemSetting';
+import UserAttendance from './Components/UserAttendance/UserAttendance';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -117,6 +118,7 @@ const App = () => {
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                  <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
                  <Route path='/Admin-system-setting'  element={<SystemSetting />}></Route>
+                 <Route path='/Admin-user-attendance'  element={<UserAttendance />}></Route>
 
               </>
             )}

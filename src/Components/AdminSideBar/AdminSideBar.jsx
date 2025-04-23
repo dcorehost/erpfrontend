@@ -70,11 +70,11 @@ const AdminSidebar = ({ children }) => {
           link: "/attendance-summary",
           description: "View daily, weekly, and monthly attendance records.",
         },
-        // {
-        //   title: "Apply for Leave",
-        //   link: "/apply-leave",
-        //   description: "Apply for Sick, Annual, Casual, or other types of leave.",
-        // },
+        {
+          title: "User Attendance",
+          link: "/Admin-user-attendance",
+          description: "View daily, weekly, and monthly attendance records of User.",
+        },
         // {
         //   title: "Leave Approval Status",
         //   link: "/leave-status",
