@@ -57,6 +57,7 @@ import AdminNotifications from './Components/AdminNotifications/AdminNotificatio
 import SuperAdminNotifications from './Components/SuperAdminNotifications/SuperAdminNotifications'; // Superadmin Notifications
 import UserNotifications from './Components/UserNotifications/UserNotifications'; // User Notifications
 import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory';
+import AdminHistory from './Components/AdminNotificationsHistory/AdminNotificationsHistory';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -124,6 +125,7 @@ const App = () => {
                  <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
                  <Route path='/Admin-system-setting'  element={<SystemSetting />}></Route>
                  <Route path="/admin-notifications" element={<AdminNotifications />} /> {/* Admin Notifications Route */}
+                 <Route path="/admin-notifications-history" element={<AdminHistory />} /> {/* Superadmin Notifications Route */}
 
               </>
             )}

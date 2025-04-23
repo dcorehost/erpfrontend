@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from './SuperAdminHistory.module.css'; // You can rename this if used for Admin too
-import Auth from '../Services/Auth';
+import styles from './AdminNotificationsHistory.module.css';
+import Auth from '../Services/Auth'; // Assuming you have an Auth service for token management
 
-const SuperAdminNotificationsHistory = () => {
+const AdminNotificationsHistory = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,7 +47,7 @@ const SuperAdminNotificationsHistory = () => {
       ) : error ? (
         <div className={styles['error-message']}>{error}</div>
       ) : (
-        <table className={styles.table}>
+        <table>
           <thead>
             <tr>
               <th>Title</th>
@@ -65,14 +65,14 @@ const SuperAdminNotificationsHistory = () => {
                   <td>{notification.title}</td>
                   <td>{notification.message}</td>
                   <td>{notification.notificationType}</td>
-                  <td>{notification.targetRoles?.join(', ')}</td>
+                  <td>{notification.targetRoles.join(', ')}</td>
                   <td>{new Date(notification.createdAt).toLocaleString()}</td>
                   <td>{new Date(notification.updatedAt).toLocaleString()}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6" style={{ textAlign: 'center' }}>
+                <td colSpan="7" style={{ textAlign: 'center' }}>
                   No notifications found.
                 </td>
               </tr>
@@ -84,4 +84,4 @@ const SuperAdminNotificationsHistory = () => {
   );
 };
 
-export default SuperAdminNotificationsHistory;
+export default AdminNotificationsHistory;

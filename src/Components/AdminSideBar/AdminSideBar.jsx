@@ -1,16 +1,16 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaChartLine, FaChevronUp, FaChevronDown , FaCalendarAlt} from "react-icons/fa";
-// import { RiAdminFill, RiTeamFill } from "react-icons/ri";
+import {
+  FaChartLine,
+  FaChevronUp,
+  FaChevronDown,
+  FaCalendarAlt,
+  FaBullhorn,
+  FaClipboardList,
+} from "react-icons/fa";
+import { GrTasks } from "react-icons/gr"; // ✅ Import fixed
 import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
-// import { FaBuildingUser } from "react-icons/fa6";
-// import { GrTasks } from "react-icons/gr";
-// import { FaUser } from "react-icons/fa";
-// import { FcSalesPerformance } from "react-icons/fc";
-// import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
-// import { link } from "framer-motion/client";
 
 const AdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,95 +21,71 @@ const AdminSidebar = ({ children }) => {
   const menus = [
     {
       title: "Leave",
-      icon: <FaChartLine />, 
+      icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Pending Leaves", link:"/Admin/Leave/Pending-Leaves" },
-        { title:"Completed Leaves" , link:"/CompletedLeaves"},
-        { title:"Rejected Leaves" , link:"/RejectedLeaves"}
-       
+        { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
+        { title: "Completed Leaves", link: "/CompletedLeaves" },
+        { title: "Rejected Leaves", link: "/RejectedLeaves" },
       ],
     },
     {
       title: "Assignment",
-      icon: <FaChartLine />, 
+      icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "CreateNewProject",  link: "/CreateNewProject" },
-        { title:"ProjectDetails" , link:"/ProjectDetails"},
-        { title: "TaskAssignment",  link: "/Admin/Leave/Task-Assignment" },
+        { title: "Create New Project", link: "/CreateNewProject" },
+        { title: "Project Details", link: "/ProjectDetails" },
+        { title: "Task Assignment", link: "/Admin/Leave/Task-Assignment" },
         { title: "Update Task Progress & Completion Status", link: "/Admin/Assignment/task-status" },
-        { title:"AdminTaskSummary" , link:"/Admin-Task-Summary"}
+        { title: "Admin Task Summary", link: "/Admin-Task-Summary" },
       ],
     },
     {
-      title:"User Creation",
-      icon:<FaChartLine />,
-      link:"/#",
-      submenus:[
-        { title: "New User",  link: "/create-user" }, 
-        // Add actual routes
+      title: "User Creation",
+      icon: <FaChartLine />,
+      link: "/#",
+      submenus: [
+        { title: "New User", link: "/create-user" },
         { title: "User Details", link: "/AdminUserTable" },
-        // { title: "Assigned Task & Project Details", link: "" }, 
-        // { title: "Upload Documents & Project Related Files", link: "" },
-        // { title: "View Deadlines Set By Admin", link: "" },
-      ]
+      ],
     },
     {
       title: "Attendance",
-      icon: <FaCalendarAlt />, 
+      icon: <FaCalendarAlt />,
       link: "/attendance",
       submenus: [
-        {
-          title: "Mark Attendance",
-          link: "/mark-attendance",
-          description: "Check-in and Check-out for daily attendance tracking.",
-        },
-        {
-          title: "Attendance Summary",
-          link: "/attendance-summary",
-          description: "View daily, weekly, and monthly attendance records.",
-        },
-        // {
-        //   title: "Apply for Leave",
-        //   link: "/apply-leave",
-        //   description: "Apply for Sick, Annual, Casual, or other types of leave.",
-        // },
-        // {
-        //   title: "Leave Approval Status",
-        //   link: "/leave-status",
-        //   description: "Track the status of your leave applications.",
-        // },
-        // {
-        //   title: "Attendance Regularization",
-        //   link: "/attendance-regularization",
-        //   description: "Request corrections for missing or incorrect attendance records.",
-        // },
-        // {
-        //   title: "Shift Management",
-        //   link: "/shift-management",
-        //   description: "View and manage your work shifts.",
-        // },
-        // {
-        //   title: "Holiday Calendar",
-        //   link: "/holiday-calendar",
-        //   description: "View the company's holiday schedule.",
-        // },
+        { title: "Mark Attendance", link: "/mark-attendance" },
+        { title: "Attendance Summary", link: "/attendance-summary" },
       ],
     },
     {
-      title:"Payroll &  PaySlips",
-      icon:<FaChartLine />,
-      link:"/#",
-      submenus:[
-        {title:"User Payrolls", link:"/Create-User-Payrolls"},
-        { title:"Payroll Summary" , link:"/Admin-Payroll"},
-        {title:"View DailyTimeWaste &  WeeklyTimeWaste MonthlyTimeWaste " , link:"/Admine/payrolls&slips/timechange"},
-        // {title:"Apply Leave (Sick ,Annual, Casual )" , link:"/"},
-        // {title:"Leave Approval Status  " , link:"/"},
-      ] 
-
-    }
+      title: "Payroll & PaySlips",
+      icon: <FaChartLine />,
+      link: "/#",
+      submenus: [
+        { title: "User Payrolls", link: "/Create-User-Payrolls" },
+        { title: "Payroll Summary", link: "/Admin-Payroll" },
+        { title: "View TimeWaste Stats", link: "/Admine/payrolls&slips/timechange" },
+      ],
+    },
+    {
+      title: "Announcements",
+      icon: <FaBullhorn />,
+      link: "/#",
+      submenus: [
+        {
+          title: "New Announcements",
+          icon: <FaClipboardList />,
+          link: "/admin-notifications",
+        },
+        {
+          title: "Announcements History",
+          icon: <GrTasks />,
+          link: "/admin-notifications-history",
+        },
+      ],
+    },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -120,19 +96,13 @@ const AdminSidebar = ({ children }) => {
     localStorage.clear();
     sessionStorage.clear();
     setIsLoggedOut(true);
-    window.location.href = "/";
+    navigate("/"); // Immediate redirect after clear
   };
 
-  if (isLoggedOut) {
-    navigate("/");
-  }
-
   return (
-    <div className={`${styles.sidebarWrapper}`}>
-      <div className={`${styles.sidebarContainer}`}>
-        
-      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-         
+    <div className={styles.sidebarWrapper}>
+      <div className={styles.sidebarContainer}>
+        <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
           <button className={styles.hamburgerButton} onClick={toggleSidebar}>
             {isOpen ? "✖" : "☰"}
           </button>
@@ -155,12 +125,10 @@ const AdminSidebar = ({ children }) => {
                     <ul className={styles.submenu}>
                       {menu.submenus.map((submenu, subIndex) => (
                         <li key={subIndex} className={styles.submenuItem}>
-                          <div className={styles.submenuItemWrapper}>
-                            <span className={styles.icon}>{submenu.icon}</span>
-                            <Link to={submenu.link} className={styles.submenuLink}>
-                              {submenu.title}
-                            </Link>
-                          </div>
+                          <Link to={submenu.link} className={styles.submenuLink}>
+                            {submenu.icon && <span className={styles.icon}>{submenu.icon}</span>}
+                            {submenu.title}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -187,7 +155,3 @@ const AdminSidebar = ({ children }) => {
 };
 
 export default AdminSidebar;
-
-
-
-
