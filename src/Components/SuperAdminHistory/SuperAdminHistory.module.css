@@ -1,64 +1,25 @@
-.history-container {
-    width: 100%;
-    margin: 40px auto;
-    padding: 30px;
-    background: linear-gradient(135deg, #f7f8f8, #afb5b5);
-    border-radius: 15px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-    color: #333;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    color: #5c5b5b;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-  }
-  
-  table {
+.table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   }
   
-  table th, table td {
-    padding: 15px;
+  .table th, .table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
     text-align: left;
-    border: 1px solid #ddd;
   }
   
-  table th {
-    background-color: #3a8d99;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  table tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  table td {
-    font-size: 14px;
+  .table th {
+    background-color: #f6f8fa;
+    font-weight: 600;
     color: #333;
   }
   
-  .loading {
-    text-align: center;
-    font-size: 18px;
-    color: #555;
-    margin-top: 20px;
-    font-style: italic;
-  }
-  
-  .error-message {
-    color: #d9534f;
-    text-align: center;
-    font-size: 18px;
-    margin-top: 20px;
+  .table tr:hover {
+    background-color: #f0f8ff;
   }
   
