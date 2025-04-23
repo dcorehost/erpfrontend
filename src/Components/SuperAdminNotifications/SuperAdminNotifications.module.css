@@ -1,0 +1,117 @@
+/* ===== Base Styling (reusing variables) ===== */
+:root {
+    --primary-color: #3a0ca3;
+    --primary-hover: #480ca8;
+    --success-color: #4cc9f0;
+    --error-color: #f72585;
+    --warning-color: #f8961e;
+    --text-dark: #2b2d42;
+    --text-medium: #4a4e69;
+    --text-light: #8e9aaf;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --transition-speed: 0.3s;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* ===== Container for SuperAdmin ===== */
+  .superadmin-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  /* ===== Notification Form ===== */
+  .superadmin-form {
+    background-color: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .superadmin-form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .superadmin-form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-medium);
+  }
+  
+  .superadmin-form-group input,
+  .superadmin-form-group textarea,
+  .superadmin-form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    transition: all var(--transition-speed) ease;
+  }
+  
+  .superadmin-form-group input:focus,
+  .superadmin-form-group textarea:focus,
+  .superadmin-form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 12, 163, 0.1);
+    outline: none;
+  }
+  
+  .superadmin-form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .superadmin-submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: 100%;
+    transition: all var(--transition-speed) ease;
+  }
+  
+  .superadmin-submit-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* ===== Toast Styling ===== */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--success-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .superadmin-container {
+      width: 95%;
+      padding: 1rem;
+    }
+  }
+  
