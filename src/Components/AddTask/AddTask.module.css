@@ -1,21 +1,21 @@
 .app {
   
   padding: 20px;
-  font-family: Arial, sans-serif; /* Modern font */
+  font-family: Arial, sans-serif;
   width: 800px;
-  overflow: auto; /* Enable scroll for the entire app if content overflows */
-  margin-top: 20px; /* Add margin at the top */
-  margin-bottom: 20px; /* Add margin at the bottom */
+  overflow: auto; 
+  margin-top: 20px; 
+  margin-bottom: 20px; 
   height: 650px;
 }
 
 .container {
   
   padding: 20px;
-  border: 1px solid #ddd; /* Light border */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  background-color: #ffffff; /* Background color */
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background-color: #ffffff; 
 }
 
 h1 {
@@ -25,25 +25,25 @@ h1 {
 
 .taskForm {
   display: flex;
-  flex-direction: column; /* Column layout for form */
-  gap: 15px; /* Space between elements */
+  flex-direction: column; 
+  gap: 15px; 
 }
 
 .createdTasksContainer {
   display: flex;
-  flex-direction: column; /* Stack tasks vertically */
+  flex-direction: column; 
   margin-top: 20px;
-  overflow-y: auto; /* Enable vertical scroll for created tasks */
-  max-height: 300px; /* Adjust as needed to control the visible area before scrolling */
-  padding-right: 10px; /* Add some padding to prevent scrollbar from overlapping content */
+  overflow-y: auto; 
+  max-height: 300px; 
+  padding-right: 10px;
 }
 
 .createdTask {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin: 5px 0; /* Space between tasks */
-  background-color: #f9f9f9; /* Light background for clarity */
+  margin: 5px 0; 
+  background-color: #f9f9f9; 
 }
 
 .createdTask h2 {
@@ -57,8 +57,8 @@ h1 {
 
 .taskRow {
   display: flex;
-  gap: 15px; /* Space between project select and task input */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 15px; 
+  flex-wrap: wrap; 
 }
 
 .projectSelect,
@@ -67,16 +67,16 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s;
-  flex: 1; /* Allow inputs to grow and fill space */
-  min-width: 150px; /* Minimum width for better layout */
+  flex: 1; 
+  min-width: 150px; 
 }
 
 .taskTextarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  resize: vertical; /* Allow vertical resizing */
-  height: 150px; /* Fixed height */
+  resize: vertical; 
+  height: 150px;
   width: 100%;
 }
 
@@ -92,7 +92,7 @@ button {
 }
 
 button:hover {
-  background-color: #d17a5e; /* Darker shade on hover */
+  background-color: #d17a5e;
 }
 
 .timer {
@@ -101,7 +101,7 @@ button:hover {
 }
 
 .viewTasks {
-  margin-top: 20px; /* Space above button */
+  margin-top: 20px;
   background-color: #ef9273;
 }
 
@@ -112,13 +112,13 @@ button:hover {
 .timerControls {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between button and timer text */
+  gap: 10px; 
 }
 
 .timerButton {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #5cb85c; /* Green for action buttons */
+  background-color: #5cb85c; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -127,27 +127,27 @@ button:hover {
 }
 
 .timerButton:hover {
-  background-color: #4cae4c; /* Darker green on hover */
+  background-color: #4cae4c; 
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .taskRow {
-    flex-direction: column; /* Stack items on small screens */
+    flex-direction: column; 
   }
 
   .projectSelect,
   .taskInput {
-    width: 100%; /* Full width on small screens */
+    width: 100%; 
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 20px; /* Smaller heading on very small screens */
+    font-size: 20px; 
   }
 
   button {
-    width: 100%; /* Full-width buttons on small screens */
+    width: 100%; 
   }
 }

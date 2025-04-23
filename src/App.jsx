@@ -45,6 +45,9 @@ import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
 import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
 import UserTask from './Components/UserTask/UserTask';
 import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
+import HolidayList from './Components/HolidaysList/HolidaysList'
+import TaskStatus from  './Components/TaskStatus/TaskStatus'
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./PurchaseManagement.module.css";
 
 const PurchaseManagement = () => {
-  const [purchases, setPurchases] = useState([]); // Stores the purchase data
+  const [purchases, setPurchases] = useState([]); 
   const [form, setForm] = useState({
     productName: "",
     quantity: "",
@@ -12,8 +12,8 @@ const PurchaseManagement = () => {
     supplierName: "",
     supplierId: "",
   });
-  const [notification, setNotification] = useState(""); // State for notification
-  const [editingIndex, setEditingIndex] = useState(null); // To track editing purchase
+  const [notification, setNotification] = useState(""); 
+  const [editingIndex, setEditingIndex] = useState(null); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,7 +58,7 @@ const PurchaseManagement = () => {
     });
 
     // Show notification for 3 seconds
-    setTimeout(() => setNotification(""), 3000); // Hide notification after 3 seconds
+    setTimeout(() => setNotification(""), 3000); 
   };
 
   const handleEdit = (index) => {

@@ -27,32 +27,32 @@ h1 {
   background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  overflow: auto; /* Enable scroll if table content overflows */
+  overflow: auto; 
 }
 
 .taskTable th,
 .taskTable td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid #cfd8dc; /* Light gray border */
+  border-bottom: 1px solid #cfd8dc; 
 }
 
 .taskTable th {
-  background-color: #ef9273; /* Teal header */
+  background-color: #ef9273; 
   color: white;
   font-weight: bold;
-  position: sticky; /* Make header stick to the top during vertical scroll */
+  position: sticky; 
   top: 0;
-  z-index: 1; /* Ensure header is above the content */
+  z-index: 1; 
 }
 
 .taskTable tbody {
-  overflow-y: auto; /* Enable vertical scroll for the table body if needed */
-  max-height: 500px; /* Adjust as needed to control the scrollable area of the body */
+  overflow-y: auto; 
+  max-height: 500px; 
 }
 
 .taskTable tr:hover {
-  background-color: #e0f2f1; /* Light teal hover */
+  background-color: #e0f2f1; 
 }
 
 /* Pagination Styles */
@@ -64,11 +64,11 @@ h1 {
 }
 
 .paginationArrow {
-  border: 1px solid #80cbc4; /* Light teal border */
+  border: 1px solid #80cbc4; 
   padding: 0.5rem 0.8rem;
   cursor: pointer;
   background-color: white;
-  color: #263238; /* Dark gray text */
+  color: #263238; 
   transition: background-color 0.3s ease;
   border-radius: 4px;
   margin: 0 0.5rem;
@@ -84,5 +84,5 @@ h1 {
 .paginationInfo {
   margin: 0 1rem;
   font-size: 0.9rem;
-  color: #607d8b; /* Medium gray text */
+  color: #607d8b; 
 }

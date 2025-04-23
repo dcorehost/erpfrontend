@@ -7,14 +7,10 @@
   max-width: 80%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
-  height: 500px; /* Set a fixed height for the board to enable vertical scroll */
-  overflow-y: auto; /* Enable vertical scroll for the board */
+  height: 500px;
+  overflow-y: auto; 
   margin: 0px auto;
-  border-top: 5px solid #8fbc8f; /* Dark Sea Green (muted green) */
-  border-right: 5px solid #8fbc8f; /* Light Coral (muted red) */
-  border-left: 5px solid #8fbc8f; /* Sky Blue (soft blue) */
-  border-bottom: 5px solid #8fbc8f; /* Gold (warm, but not too bright) */
-
+  border: 5px dotted #8fbc8f; 
   border-radius: 10px;
 }
 
@@ -63,7 +59,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   min-height: 20rem;
-  display: flex; /* Enable flex layout for vertical scroll within column */
+  display: flex; 
   flex-direction: column; /* Stack items vertically */
 }
 
@@ -87,7 +83,7 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 10rem;
-  overflow-y: auto; /* Enable vertical scroll within the task list of each column */
+  overflow-y: auto; 
 }
 
 .taskCard {
@@ -183,7 +179,7 @@
   .column {
     flex: 1 0 auto;
     width: 100%;
-    min-height: auto; /* Adjust min-height for smaller screens */
+    min-height: auto; 
   }
 
   .createTaskButton {

@@ -10,7 +10,7 @@ const ApprovedLeave = () => {
   const [isRejectPopupOpen, setIsRejectPopupOpen] = useState(false);
   const [selectedLeave, setSelectedLeave] = useState(null);
   const [remarks, setRemarks] = useState("");
-  const [leaveData, setLeaveData] = useState([]); // Changed to an array to hold multiple users' leaves
+  const [leaveData, setLeaveData] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
