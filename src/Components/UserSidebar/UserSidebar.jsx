@@ -27,7 +27,9 @@ const UserSidebar = ({ children }) => {
         { title: "Apply Leave", link: "/leave-summary" },
         { title: "Upcoming Leave",  link: "/ApplyLeaveTable" },
         { title: "Past Leave",  link: "/PastLeaveTable" },
-        { title:"Leave Policy" , link:"/Leave-policy"}
+        { title:"Leave Policy" , link:"/Leave-policy"},
+        { title:"User Profile" , link:"/Own-User-Profile"},
+       
       ],
     },
     {

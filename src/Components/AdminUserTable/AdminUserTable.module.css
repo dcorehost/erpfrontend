@@ -1,67 +1,4 @@
-/* 
-.container {
-    width: 90%;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table th, .table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .table th {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .table tr:hover {
-    background-color: #ddd;
-  }
-  
-  .pagination {
-    margin-top: 20px;
-  }
-  
-  .pagination button {
-    padding: 8px 12px;
-    margin: 0 5px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .pagination span {
-    font-size: 16px;
-    margin: 0 10px;
-  }
-   */
-
-   /* UserTable.module.css */
+/* UserTable.module.css */
 .tableContainer {
   margin: 20px;
   overflow-x: auto;
@@ -85,9 +22,9 @@
 }
 
 .usersTable thead tr {
-  background-color: #009879;
+  background-color:  #ef9273;
   color: #ffffff;
-  border-bottom: 2px solid #005f4a;
+  border-bottom: 2px solid  #ef9273;
 }
 
 .usersTable tbody tr {
@@ -99,7 +36,7 @@
 }
 
 .usersTable tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid  #ef9273;
 }
 
 .usersTable tbody tr:hover {
@@ -111,7 +48,7 @@
 .usersTable th {
   position: sticky;
   top: 0;
-  background-color: #009879;
+  background-color:  #ef9273;
 }
 /* UserTable.module.css */
 .pagination {
@@ -138,7 +75,7 @@
 }
 
 .paginationButton:hover:not(:disabled) {
-  background-color: #009879;
+  background-color:  #ef9273;
   color: white;
 }
 
@@ -150,7 +87,7 @@
 }
 
 .pageNumber.active {
-  background-color: #009879;
+  background-color:  #ef9273;
   color: white;
   border-color: #009879;
 }

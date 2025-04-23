@@ -46,12 +46,16 @@ import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
 import UserTask from './Components/UserTask/UserTask';
 import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
-import TaskStatus from './Components/TaskStatus/TaskStatus';
 // import AssignedTask from './Components/AssignedTask/AssignedTask';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
+import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
+import HolidayList from './Components/HolidaysList/HolidaysList'; 
 import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile'
 import SystemSetting from './Components/SystemSetting/SystemSetting';
 import UserAttendance from './Components/UserAttendance/UserAttendance';
+import TaskStatus from './Components/TaskStatus/TaskStatus';
+import AdminNotificationsHistory from './Components/AdminNotificationsHistory/AdminNotificationsHistory';
+import AdminNotification from './Components/AdminNotifications/AdminNotifications'
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -119,6 +123,8 @@ const App = () => {
                  <Route path='/Admin/Assignment/task-status'  element={<TaskStatus />}></Route>
                  <Route path='/Admin-system-setting'  element={<SystemSetting />}></Route>
                  <Route path='/Admin-user-attendance'  element={<UserAttendance />}></Route>
+                 <Route path="/admin-notifications" element={<AdminNotification />} /> {/* Admin Notifications Route */}
+                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} /> {/* Superadmin Notifications Route */}
 
               </>
             )}
@@ -141,11 +147,9 @@ const App = () => {
                  <Route path='/User-Task-List'  element={<UserTaskList />}></Route>
                  <Route path='/UserTaskProgress'  element={<UserTaskProgress />}></Route>
                  <Route path='/UserTask'  element={<UserTask />}></Route>
-                 <Route path="/user-dashboard" element={<UserDashboard />} />
-                <Route path="/user-profile" element={<OwnUserProfile />} />
+                 <Route path='/Own-User-Profile'  element={<OwnUserProfile />}></Route>
+                 <Route path="/user-notifications" element={<UserNotifications />} /> {/* User Notifications Route */}
 
-                
- 
               </>
             )}
 
@@ -156,6 +160,9 @@ const App = () => {
                 <Route path="/task-manager" element={<TaskManager />} />
                 <Route path="/create-holidays" element={<CreateHolidays />} />
                 <Route path="/holiday-list" element={<HolidayList />} />
+                <Route path="/superadmin-notifications" element={<SuperAdminNotifications />} /> {/* Superadmin Notifications Route */}
+                <Route path="/superadmin-notifications-history" element={<SuperAdminHistory />} /> {/* Superadmin Notifications Route */}
+
 
 
               </>
@@ -176,7 +183,6 @@ const App = () => {
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
                 </>
             )}
-
           
           </Routes>
         </>
