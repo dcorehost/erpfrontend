@@ -1,0 +1,171 @@
+/* Notifications.css */
+
+/* General Styling */
+.notifications-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h2 {
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: #5bc0de;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.notifications-list {
+  margin-top: 20px;
+}
+
+.notification-item {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.notification-item p {
+  font-size: 16px;
+  color: #555;
+}
+
+.notification-item span {
+  font-size: 14px;
+  color: #888;
+  display: block;
+  margin-top: 10px;
+}
+
+.notification-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Specific styling for Superadmin, Admin, and User panels */
+.superadmin-panel {
+  background-color: #d1ecf1;
+}
+
+.admin-panel {
+  background-color: #fff3cd;
+}
+
+.user-panel {
+  background-color: #f8d7da;
+}
+
+.superadmin-panel h1 {
+  color: #0c5460;
+}
+
+.admin-panel h1 {
+  color: #856404;
+}
+
+.user-panel h1 {
+  color: #721c24;
+}
+
+/* Panel-specific forms and notifications styling */
+.superadmin-panel .notification-form {
+  background-color: #d1ecf1;
+}
+
+.admin-panel .notification-form {
+  background-color: #fff3cd;
+}
+
+.user-panel .notification-form {
+  background-color: #f8d7da;
+}
+
+/* Different notifications list appearance */
+.superadmin-panel .notification-item {
+  background-color: #cce5ff;
+}
+
+.admin-panel .notification-item {
+  background-color: #ffeeba;
+}
+
+.user-panel .notification-item {
+  background-color: #f8d7da;
+}
+
+.superadmin-panel .notification-item h3,
+.admin-panel .notification-item h3,
+.user-panel .notification-item h3 {
+  font-weight: bold;
+}
+
