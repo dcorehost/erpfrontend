@@ -29,6 +29,8 @@ const SuperAdminSidebar = ({ children }) => {
       submenus: [
         { title: "User Management", icon: <FaBuildingUser />, link: "/user-management" },
         { title: "Task Manager", icon: <GrTasks />, link: "/task-manager" },
+        { title: "SuperAdmin Profile", icon: <GrTasks />, link: "/Pages/OwnSuperAdminProfile" },
+        
         
       ],
     },

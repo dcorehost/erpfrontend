@@ -27,6 +27,7 @@ const AdminSidebar = ({ children }) => {
         { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
         { title: "Completed Leaves", link: "/CompletedLeaves" },
         { title: "Rejected Leaves", link: "/RejectedLeaves" },
+        { title: "Admin Profile", link: "/Pages/OwnAdminProfile/OwnAdminProfile" },
       ],
     },
     {

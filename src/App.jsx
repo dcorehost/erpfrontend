@@ -61,6 +61,9 @@ import AdminNotificationsHistory from './Components/AdminNotificationsHistory/Ad
 import AdminNotification from './Components/AdminNotifications/AdminNotifications';
 import SuperAdminNotifications from './Components/SuperAdminNotifications/SuperAdminNotifications';
 import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory';
+import UserNotifications from './Components/UserNotifications/UserNotifications';
+import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
+import OwnSuperAdminProfile from './Pages/OwnSuperAdminProfile/OwnSuperAdminProfile';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -130,7 +133,8 @@ const App = () => {
                  <Route path='/Admin-user-attendance'  element={<UserAttendance />}></Route>
                  <Route path="/admin-notifications" element={<AdminNotification />} /> {/* Admin Notifications Route */}
                  <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} /> {/* Superadmin Notifications Route */}
-
+                 <Route path='/Pages/OwnAdminProfile/OwnAdminProfile' element={<OwnAdminProfile />}></Route>
+                 <Route path='/Pages/OwnSuperAdminProfile'  element={<OwnSuperAdminProfile />}></Route>
               </>
             )}
 
@@ -167,7 +171,7 @@ const App = () => {
                 <Route path="/holiday-list" element={<HolidayList />} />
                 <Route path="/superadmin-notifications" element={<SuperAdminNotifications />} /> {/* Superadmin Notifications Route */}
                 <Route path="/superadmin-notifications-history" element={<SuperAdminHistory />} /> {/* Superadmin Notifications Route */}
-
+                <Route path='/Pages/OwnSuperAdminProfile'  element={<OwnSuperAdminProfile />}></Route>
 
 
               </>
@@ -186,6 +190,7 @@ const App = () => {
                  <Route path='/RejectedLeaves'  element={<RejectedLeaves />}></Route>
                  <Route path='/CreateNewProject'  element={<CreateNewProject />}></Route>
                  <Route path='/ProjectDetails'  element={<ProjectDetails />}></Route>
+                 <Route path='/Pages/OwnAdminProfile/OwnAdminProfile' element={<OwnAdminProfile />}></Route>
                 </>
             )}
           

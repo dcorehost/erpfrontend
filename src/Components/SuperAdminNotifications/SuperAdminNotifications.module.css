@@ -14,10 +14,12 @@
     --border-radius: 12px;
     --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+   
   }
   
   /* ===== Container for SuperAdmin ===== */
   .superadmin-container {
+  
     width: 95%;
     max-width: 1200px;
     margin: 2rem auto;
@@ -29,14 +31,17 @@
   
   /* ===== Notification Form ===== */
   .superadmin-form {
+  
     background-color: var(--bg-white);
     padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    
   }
   
   .superadmin-form-group {
     margin-bottom: 1.25rem;
+   
   }
   
   .superadmin-form-group label {
@@ -50,6 +55,7 @@
   .superadmin-form-group input,
   .superadmin-form-group textarea,
   .superadmin-form-group select {
+   
     width: 100%;
     padding: 0.6rem;
     border: 1px solid #e9ecef;
@@ -105,6 +111,7 @@
     z-index: 9999;
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
+    
   }
   
   /* ===== Responsive ===== */
