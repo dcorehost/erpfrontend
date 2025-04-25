@@ -8,7 +8,7 @@ import {
   FaBullhorn,
   FaClipboardList,
 } from "react-icons/fa";
-import { GrTasks } from "react-icons/gr"; // ✅ Import fixed
+import { GrTasks } from "react-icons/gr"; 
 import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -20,7 +20,7 @@ const AdminSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: "Leave",
+      title: " User Leave",
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
@@ -47,7 +47,7 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "New User", link: "/create-user" },
+        { title: "Create New User", link: "/create-user" },
         { title: "User Details", link: "/AdminUserTable" },
       ],
     },
@@ -62,7 +62,7 @@ const AdminSidebar = ({ children }) => {
           description: "Check-in and Check-out for daily attendance tracking.",
         },
         {
-          title: "Attendance Summary",
+          title: "My Attendance Summary",
           link: "/attendance-summary",
           description: "View daily, weekly, and monthly attendance records.",
         },

@@ -8,6 +8,16 @@ import Navbar from "../Navbar/Navbar";
 import { FaBuildingUser } from "react-icons/fa6";
 import { GrTasks } from "react-icons/gr";
 import { FaUser } from "react-icons/fa";
+import { FaTag } from "react-icons/fa";
+import { FaRegCalendarCheck } from "react-icons/fa";
+import { FaHistory } from "react-icons/fa";
+import { FaRegFileAlt } from "react-icons/fa"; // Note the 'Reg' for regular style
+import { FaPlus } from "react-icons/fa";
+import { FaListUl } from "react-icons/fa";
+import { FaUserCheck } from "react-icons/fa";
+import { RiUserShared2Fill } from "react-icons/ri";
+import { FaTasks } from "react-icons/fa";
+
 import { FcSalesPerformance } from "react-icons/fc";
 import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
 import { link } from "framer-motion/client";
@@ -24,10 +34,10 @@ const UserSidebar = ({ children }) => {
       icon: <FaChartLine />, 
       link: "/#",
       submenus: [
-        { title: "Apply Leave", link: "/leave-summary" },
-        { title: "Upcoming Leave",  link: "/ApplyLeaveTable" },
-        { title: "Past Leave",  link: "/PastLeaveTable" },
-        { title:"Leave Policy" , link:"/Leave-policy"},
+        { title: "Apply Leave",  icon: <FaTag  />, link: "/leave-summary" },
+        { title: "Upcoming Leave", link: "/ApplyLeaveTable", icon: <FaRegCalendarCheck /> },
+        { title: "Past Leave", link: "/PastLeaveTable", icon: <FaHistory /> },
+        { title: "Leave Policy", link: "/Leave-policy", icon: <FaRegFileAlt /> },
         { title:"User Profile" , link:"/Own-User-Profile"},
        
       ],
@@ -37,12 +47,12 @@ const UserSidebar = ({ children }) => {
       icon:<FaChartLine />,
       link:"/#",
       submenus:[
-        { title: "Add Task", link: "/add-task" }, 
-        { title: "All Tasks Status", link: "/task-list" }, 
-        { title: "AssignedTaskList", link: "/User-Task-List" },
+        { title: "Add Task", link: "/add-task", icon: <FaPlus /> }, 
+        { title: "All Tasks Status", link: "/task-list", icon: <FaListUl /> },
+        { title: "AssignedTaskList", link: "/User-Task-List", icon: <RiUserShared2Fill /> },
         // { title: "Assigned Task & Project Details", link: "/AssignedTask" }, 
-        { title: "UserTask", link: "/UserTask" }, 
-        { title: "Update Task Progress & Completion Status", link: "/UserTaskProgress" },
+        { title: "UserTask", link: "/UserTask", icon: <FaUserCheck /> },
+        { title: "Update Task Progress & Completion Status", link: "/UserTaskProgress", icon: <FaTasks /> },
         // { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
         // { title: "View Deadlines Set By Admin", link: "/admin-deadlines" }
         
@@ -58,7 +68,7 @@ const UserSidebar = ({ children }) => {
         {
           title: "Mark Attendance",
           link: "/mark-attendance",
-          description: "Check-in and Check-out for daily attendance tracking.",
+         
         },
         {
           title: "Attendance Summary",

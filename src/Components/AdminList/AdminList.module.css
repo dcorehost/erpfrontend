@@ -1,0 +1,94 @@
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .title {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .tableContainer {
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .adminTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 1300px;
+  }
+  
+  .adminTable thead tr {
+    background-color: #4285F4;
+    color: white;
+    text-align: left;
+  }
+  
+  .adminTable th,
+  .adminTable td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .adminTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .adminTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  .adminTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4285F4;
+  }
+  
+  .adminTable tbody tr:hover {
+    background-color: #e9f7fe;
+    cursor: pointer;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #4285F4;
+  }
+  
+  .error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #F44336;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .adminTable {
+      font-size: 0.8em;
+    }
+    
+    .adminTable th,
+    .adminTable td {
+      padding: 8px 10px;
+    }
+  }
+  
+  /* Status colors */
+  .status-active {
+    color: #34A853;
+    font-weight: bold;
+  }
+  
+  .status-inactive {
+    color: #EA4335;
+    font-weight: bold;
+  }

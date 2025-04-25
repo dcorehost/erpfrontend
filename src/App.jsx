@@ -259,7 +259,8 @@ import SuperAdminDashboard from './Pages/SuperAdminDashboard/SuperAminDashboard'
 import SuperAdminNotifications from './Components/SuperAdminNotifications/SuperAdminNotifications';
 import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory';
 import UserNotifications from './Components/UserNotifications/UserNotifications'; // ADD THIS
-import CreateAdmin from './Components/CreateAdmin/CreateAdmin';
+import UserList from './Components/UserList/UserList';
+import AdminList from './Components/AdminList/AdminList';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -375,7 +376,8 @@ const App = () => {
                 <Route path="/holiday-list" element={<HolidayList />} />
                 <Route path="/superadmin-notifications" element={<SuperAdminNotifications />} />
                 <Route path="/superadmin-notifications-history" element={<SuperAdminHistory />} />
-                <Route path='/adminCreate'  element={<CreateAdmin />}></Route>
+                <Route path="/superadmin-userlist" element={<UserList />} />
+                <Route path="/superadmin-adminlist" element={<AdminList />} />
               </>
             )}
 

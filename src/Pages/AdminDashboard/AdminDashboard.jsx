@@ -93,7 +93,7 @@ const AdminDashboard = () => {
 
     const fetchTaskStatusData = async () => {
       try {
-        // Fetch all task status data in parallel
+        // Fetch all task status data in parallel using the new API endpoint
         const [
           todoRes,
           inProgressRes,
@@ -101,30 +101,30 @@ const AdminDashboard = () => {
           submittedRes,
           completedRes
         ] = await Promise.all([
-          axios.get(`${BASE_URL}/get-todo-task-count`, {
+          axios.get(`${BASE_URL}/get-task-count?state=ToDo`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${BASE_URL}/get-InProgress-task-count`, {
+          axios.get(`${BASE_URL}/get-task-count?state=In Progress`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${BASE_URL}/get-done-task-count`, {
+          axios.get(`${BASE_URL}/get-task-count?state=Done`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${BASE_URL}/get-submit-task-count`, {
+          axios.get(`${BASE_URL}/get-task-count?state=Submitted For Review`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${BASE_URL}/get-complete-task-count`, {
+          axios.get(`${BASE_URL}/get-task-count?state=Completed`, {
             headers: { Authorization: `Bearer ${token}` },
           })
         ]);
 
         // Format the data for the chart
         const formattedData = [
-          { name: 'To Do', value: todoRes.data.toDoCount, fill: '#FFB74D' },
-          { name: 'In Progress', value: inProgressRes.data.toDoCount, fill: '#64B5F6' },
-          { name: 'Done', value: doneRes.data.toDoCount, fill: '#81C784' },
-          { name: 'Submitted for Review', value: submittedRes.data.toDoCount, fill: '#BA68C8' },
-          { name: 'Completed', value: completedRes.data.toDoCount, fill: '#4CAF50' }
+          { name: 'To Do', value: todoRes.data.taskCount, fill: '#FFB74D' },
+          { name: 'In Progress', value: inProgressRes.data.taskCount, fill: '#64B5F6' },
+          { name: 'Done', value: doneRes.data.taskCount, fill: '#81C784' },
+          { name: 'Submitted for Review', value: submittedRes.data.taskCount, fill: '#BA68C8' },
+          { name: 'Completed', value: completedRes.data.taskCount, fill: '#4CAF50' }
         ];
 
         setTaskStatus({
@@ -455,4 +455,3 @@ const DashboardLink = ({ to, title }) => (
 );
 
 export default AdminDashboard;
-

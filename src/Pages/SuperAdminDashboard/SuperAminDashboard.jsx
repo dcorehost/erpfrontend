@@ -1,35 +1,109 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./SuperAdminDashboard.module.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import axios from 'axios';
+import Auth from '../../Components/Services/Auth';
 
 const SuperAdminDashboard = () => {
-  // Static data for the dashboard
+  // State for API data
+  const [adminCount, setAdminCount] = useState(35); 
+  const [userCount, setUserCount] = useState(1200);
+  const [adminAttendance, setAdminAttendance] = useState({
+    dailyAttendanceCount: 28, 
+    absentCount: 7, 
+    lateAttendanceCount: 0 
+  });
+  const [userAttendance, setUserAttendance] = useState({
+    presentCount: 0,
+    lateCount: 0,
+    onLeaveCount: 0
+  });
+  const token = Auth.getToken();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Get current date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
+        
+        // Fetch all data in parallel
+        const [
+          adminResponse, 
+          userResponse,
+          adminAttendanceResponse,
+          presentResponse,
+          lateResponse,
+          onLeaveResponse
+        ] = await Promise.all([
+          axios.get('http://209.74.89.83/erpbackend/get-all-admins-count', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-all-users-count', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get(`http://209.74.89.83/erpbackend/get-admin-attendance-status?date=${today}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-All-attendance-count?type=present', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-All-attendance-count?type=late', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-All-attendance-count?type=onLeave', {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+        ]);
+
+        setAdminCount(adminResponse.data.admins);
+        setUserCount(userResponse.data.users);
+        setAdminAttendance({
+          dailyAttendanceCount: adminAttendanceResponse.data.dailyAttendanceCount,
+          absentCount: adminAttendanceResponse.data.absentCount,
+          lateAttendanceCount: adminAttendanceResponse.data.lateAttendanceCount
+        });
+
+        // Set user attendance data from separate API calls
+        setUserAttendance({
+          presentCount: presentResponse.data.count || 0,
+          lateCount: lateResponse.data.count || 0,
+          onLeaveCount: onLeaveResponse.data.count || 0
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Keep the default values if API fails
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
   const userStats = {
     totalOrganizations: 12,
-    totalAdmins: 35,
-    totalUsers: 1200,
+    totalAdmins: adminCount, 
+    totalActiveAdmins: adminAttendance.dailyAttendanceCount,
+    totalAdminsOnLeave: adminAttendance.absentCount,
+    totalLateAdmins: adminAttendance.lateAttendanceCount,
+    totalUsers: userCount, 
+    totalActiveUsers: userAttendance.presentCount,
+    totalUsersOnLeave: userAttendance.onLeaveCount,
+    totalLateUsers: userAttendance.lateCount
   };
 
-  const taskStats = [
-    { name: 'To Do', value: 120, fill: '#FFB74D' },
-    { name: 'In Progress', value: 90, fill: '#64B5F6' },
-    { name: 'Done', value: 150, fill: '#81C784' },
-    { name: 'Submitted', value: 60, fill: '#BA68C8' },
-    { name: 'Completed', value: 180, fill: '#4CAF50' }
+  // Admin statistics
+  const adminStats = [
+    { name: 'Late Arrivals', value: userStats.totalLateAdmins, fill: '#FF7043' },
+    { name: 'Active Admins', value: userStats.totalActiveAdmins, fill: '#34A853' },
+    { name: 'Admins on Leave', value: userStats.totalAdminsOnLeave, fill: '#FBBC05' }
   ];
 
-  const leaveStats = [
-    { name: 'Pending', value: 25, fill: '#FFC107' },
-    { name: 'Rejected', value: 10, fill: '#F44336' },
-    { name: 'Completed', value: 70, fill: '#4CAF50' }
-  ];
-
-  const attendanceStats = [
-    { name: 'Present', value: 950, fill: '#4CAF50' },
-    { name: 'Late', value: 120, fill: '#FFC107' },
-    { name: 'Absent', value: 130, fill: '#F44336' }
+  // User statistics
+  const userStatsChart = [
+    { name: 'Late Arrivals', value: userStats.totalLateUsers, fill: '#FF7043' },
+    { name: 'Active Users', value: userStats.totalActiveUsers, fill: '#34A853' },
+    { name: 'Users on Leave', value: userStats.totalUsersOnLeave, fill: '#FBBC05' }
   ];
 
   return (
@@ -40,56 +114,69 @@ const SuperAdminDashboard = () => {
 
       <section className={styles.statsSection}>
         <div className={styles.statCard}>
-          <h3>Total Organizations</h3>
-          <p>{userStats.totalOrganizations}</p>
-        </div>
-        <div className={styles.statCard}>
           <h3>Total Admins</h3>
           <p>{userStats.totalAdmins}</p>
+          <div className={styles.subStats}>
+            <span className={styles.activeStat}>Active: {userStats.totalActiveAdmins}</span>
+            <span className={styles.leaveStat}>On Leave: {userStats.totalAdminsOnLeave}</span>
+            <span className={styles.lateStat}>Late: {userStats.totalLateAdmins}</span>
+          </div>
         </div>
         <div className={styles.statCard}>
           <h3>Total Users</h3>
           <p>{userStats.totalUsers}</p>
+          <div className={styles.subStats}>
+            <span className={styles.activeStat}>Active: {userStats.totalActiveUsers}</span>
+            <span className={styles.leaveStat}>On Leave: {userStats.totalUsersOnLeave}</span>
+            <span className={styles.lateStat}>Late: {userStats.totalLateUsers}</span>
+          </div>
         </div>
       </section>
 
       <section className={styles.chartSection}>
         <div className={styles.chartCard}>
-          <h2>Task Overview</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={taskStats}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="value">
-                {taskStats.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className={styles.chartCard}>
-          <h2>Attendance Overview</h2>
+          <h2>Admin Statistics</h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
-                data={attendanceStats}
+                data={adminStats}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
                 outerRadius={100}
                 innerRadius={60}
                 dataKey="value"
-                label={({ name, value }) => `${name}: ${value}`}
+                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
               >
-                {attendanceStats.map((entry, index) => (
+                {adminStats.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.fill} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip formatter={(value) => [value, 'Count']} />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.chartCard}>
+          <h2>User Statistics</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={userStatsChart}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={100}
+                innerRadius={60}
+                dataKey="value"
+                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+              >
+                {userStatsChart.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => [value, 'Count']} />
               <Legend />
             </PieChart>
           </ResponsiveContainer>
@@ -116,4 +203,3 @@ const DashboardLink = ({ to, title }) => (
 );
 
 export default SuperAdminDashboard;
-
