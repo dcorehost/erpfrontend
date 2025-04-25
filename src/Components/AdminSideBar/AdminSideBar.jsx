@@ -20,13 +20,14 @@ const AdminSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: " User Leave",
+      title: "Leave",
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
-        { title: "Completed Leaves", link: "/CompletedLeaves" },
-        { title: "Rejected Leaves", link: "/RejectedLeaves" },
+        { title: "User Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
+        { title: "User Completed Leaves", link: "/CompletedLeaves" },
+        { title: "User Rejected Leaves", link: "/RejectedLeaves" },
+        { title: "Apply Leave", link:"/Admin/Leave/ApplyLeave" },
       ],
     },
     {
@@ -70,26 +71,7 @@ const AdminSidebar = ({ children }) => {
           link: "/Admin-user-attendance",
           description: "View daily, weekly, and monthly attendance records of User.",
         },
-        // {
-        //   title: "Leave Approval Status",
-        //   link: "/leave-status",
-        //   description: "Track the status of your leave applications.",
-        // },
-        // {
-        //   title: "Attendance Regularization",
-        //   link: "/attendance-regularization",
-        //   description: "Request corrections for missing or incorrect attendance records.",
-        // },
-        // {
-        //   title: "Shift Management",
-        //   link: "/shift-management",
-        //   description: "View and manage your work shifts.",
-        // },
-        // {
-        //   title: "Holiday Calendar",
-        //   link: "/holiday-calendar",
-        //   description: "View the company's holiday schedule.",
-        // },
+       
       ],
     },
     {

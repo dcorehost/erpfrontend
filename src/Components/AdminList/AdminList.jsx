@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Auth from '../../Components/Services/Auth';
@@ -18,7 +19,14 @@ const AdminList = () => {
             headers: { Authorization: `Bearer ${token}` }
           }
         );
-        setAdmins(response.data);
+        
+        // Check if response.data is an array or needs to be accessed differently
+        const adminData = Array.isArray(response.data) ? response.data : 
+                         response.data.users ? response.data.users : 
+                         response.data.admins ? response.data.admins : 
+                         [];
+        
+        setAdmins(adminData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -36,6 +44,10 @@ const AdminList = () => {
 
   if (error) {
     return <div className={styles.error}>Error: {error}</div>;
+  }
+
+  if (admins.length === 0) {
+    return <div className={styles.error}>No admin data available</div>;
   }
 
   return (
@@ -67,15 +79,15 @@ const AdminList = () => {
                 <td>{admin.username}</td>
                 <td>{admin.displayName}</td>
                 <td>{admin.gender}</td>
-                <td>{admin.contact.phone}</td>
-                <td>{admin.contact.emailId}</td>
-                <td>{admin.address.country}</td>
-                <td>{admin.address.state}</td>
-                <td>{admin.address.pincode}</td>
-                <td>{admin.language.join(', ')}</td>
-                <td>{admin.role}</td>
-                <td>{new Date(admin.createdAt).toLocaleString()}</td>
-                <td>{new Date(admin.updatedAt).toLocaleString()}</td>
+                <td>{admin.contact?.phone || 'N/A'}</td>
+                <td>{admin.contact?.emailId || 'N/A'}</td>
+                <td>{admin.address?.country || 'N/A'}</td>
+                <td>{admin.address?.state || 'N/A'}</td>
+                <td>{admin.address?.pincode || 'N/A'}</td>
+                <td>{admin.language?.join(', ') || 'N/A'}</td>
+                <td>{admin.role || 'N/A'}</td>
+                <td>{admin.createdAt ? new Date(admin.createdAt).toLocaleString() : 'N/A'}</td>
+                <td>{admin.updatedAt ? new Date(admin.updatedAt).toLocaleString() : 'N/A'}</td>
               </tr>
             ))}
           </tbody>
