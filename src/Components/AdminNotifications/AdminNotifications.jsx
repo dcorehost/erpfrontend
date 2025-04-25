@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Auth from "../Services/Auth";
 import styles from './AdminNotifications.module.css';
-import { ToastContainer, toast } from 'react-toastify'; // Import Toast
-import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 // Notification Form Component
 const NotificationForm = ({ 
@@ -131,8 +131,8 @@ const AdminPanel = () => {
       error: '',
       success: ''
     });
-    const [toastMessage, setToastMessage] = useState('');  // **New state for Toast message**
-    const [isToastVisible, setIsToastVisible] = useState(false);  // **New state for Toast visibility**
+    const [toastMessage, setToastMessage] = useState(''); 
+    const [isToastVisible, setIsToastVisible] = useState(false);  
   
     useEffect(() => {
       const fetchUserData = async () => {
