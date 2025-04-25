@@ -82,3 +82,22 @@
     background: #eef2f5;
   }
   
+
+
+
+
+  .subStats {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .activeStat {
+    color: #34A853;
+  }
+  
+  .leaveStat {
+    color: #FBBC05;
+  }

@@ -1,0 +1,79 @@
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .title {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .tableContainer {
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .userTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 1200px;
+  }
+  
+  .userTable thead tr {
+    background-color: #4285F4;
+    color: white;
+    text-align: left;
+  }
+  
+  .userTable th,
+  .userTable td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .userTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .userTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  .userTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4285F4;
+  }
+  
+  .userTable tbody tr:hover {
+    background-color: #e9f7fe;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #4285F4;
+  }
+  
+  .error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #F44336;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .userTable {
+      font-size: 0.8em;
+    }
+    
+    .userTable th,
+    .userTable td {
+      padding: 8px 10px;
+    }
+  }
