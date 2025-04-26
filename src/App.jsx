@@ -242,6 +242,9 @@ import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
 import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
 import UserTask from './Components/UserTask/UserTask';
 import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+// import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
+// import HolidayList from './Components/HolidaysList/HolidaysList'
+// import TaskStatus from  './Components/TaskStatus/TaskStatus'
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 import UserDashboard from './Pages/UserDashboard/DashboardUser';
 import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
@@ -337,7 +340,6 @@ const App = () => {
                 <Route path='/Admin-user-attendance' element={<UserAttendance />} />
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
-                <Route path="/Admin/Leave/ApplyLeave" element={<ApplyLeaveAdmin />} />
               </>
             )}
 

@@ -81,6 +81,7 @@ const SuperAdminSidebar = ({ children }) => {
         { title: "System Logs", icon: <BiSolidCoinStack />, link: "/system-logs" },
         { title: "Admin Messages", icon: <BiSolidMessageSquareDots />, link: "/admin-messages" },
         { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
+        { title: "Create Admin", icon: <FaClipboardList />, link: "/adminCreate" },
       ],
     },
   ];

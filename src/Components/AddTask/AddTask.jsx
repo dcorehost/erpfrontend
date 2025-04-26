@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,6 +23,7 @@ const AddTaskPage = () => {
   const navigate = useNavigate();
 
   const intervalsRef = useRef([]);
+  const createdTasksContainerRef = useRef(null);
 
   // Save tasks to localStorage whenever they change
   useEffect(() => {
@@ -80,10 +82,10 @@ const AddTaskPage = () => {
     }
 
     const startTime = Date.now() - (initialTime * 1000);
-    
+
     intervalsRef.current[index] = setInterval(() => {
       const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-      
+
       setCreatedTasks(prevTasks =>
         prevTasks.map((task, idx) =>
           idx === index ? { ...task, timer: elapsedSeconds } : task
@@ -252,7 +254,7 @@ const AddTaskPage = () => {
           </button>
         </div>
 
-        <div className={styles.createdTasksContainer}>
+        <div ref={createdTasksContainerRef} className={styles.createdTasksContainer}>
           {createdTasks.map((task, index) => (
             <div key={index} className={styles.createdTask}>
               <h2>Task: {task.taskName}</h2>

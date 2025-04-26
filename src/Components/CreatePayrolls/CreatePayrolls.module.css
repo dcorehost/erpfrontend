@@ -117,11 +117,11 @@
   }
 
   .success {
-    background-color: #28a745; /* Green for success */
+    background-color: #28a745; 
 }
 
 .error {
-    background-color: #dc3545; /* Red for error */
+    background-color: #dc3545; 
 }
   
   @keyframes bounceIn {
@@ -132,8 +132,8 @@
   
   @media (max-width: 768px) {
     .container {
-        margin: 1rem; /* Keep margin consistent on smaller screens */
-        padding: 1.5rem; /* Adjust padding */
+        margin: 1rem; 
+        padding: 1.5rem; 
         width: 95%;
     }
     

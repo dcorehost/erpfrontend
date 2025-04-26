@@ -1,9 +1,9 @@
 
 
 import { useState, useRef } from 'react';
-import styles from './OwnUserProfile.module.css';
+import styles from './OwnAdminProfile.module.css';
 
-const OwnUserProfile = () => {
+const OwnAdminProfile = () => {
   const [formData, setFormData] = useState({
     employeeid: 'emp123',
     username: 'surjeet',
@@ -863,4 +863,4 @@ const OwnUserProfile = () => {
   );
 };
 
-export default OwnUserProfile;
+export default OwnAdminProfile;

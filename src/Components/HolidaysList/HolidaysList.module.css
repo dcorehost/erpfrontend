@@ -1,7 +1,7 @@
 /* Container with padding and shadow for a clean card-like look */
 .container {
     padding: 2rem;
-    max-width: 1200px;  /* Increased width for better content flow */
+    max-width: 1200px;  
     margin: auto;
     background-color: #ffffff;
     border-radius: 12px;
@@ -14,16 +14,16 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: #2c3e50;
-    margin-right: auto;  /* Keeps the heading left-aligned */
+    margin-right: auto;  
   }
   
   /* Container for Heading and Search Box */
   .headerWrapper {
     display: flex;
-    justify-content: space-between;  /* Aligns heading to the left and search box to the right */
+    justify-content: space-between;  
     align-items: center;
     margin-bottom: 1.5rem;
-    padding: 0 1rem;  /* Adds padding around the header area */
+    padding: 0 1rem;  
   }
   
   /* Search box for filtering holidays by description */
@@ -34,17 +34,17 @@
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background-color: #f9f9f9;
-    max-width: 300px;  /* Ensures search box does not exceed a certain width */
-    width: 100%;  /* Makes search box responsive */
+    max-width: 300px;  
+    width: 100%;  
     height: 40px;
-    transition: width 0.3s ease; /* Smooth transition for expanding width */
+    transition: width 0.3s ease; 
   }
   
   /* Search icon inside the search box */
   .searchIcon {
     margin-right: 0.5rem;
     color: #666;
-    font-size: 1.2rem;  /* Adjusted icon size for better visibility */
+    font-size: 1.2rem; 
   }
   
   /* Input field inside the search box */
@@ -54,7 +54,7 @@
     outline: none;
     background: transparent;
     font-size: 1rem;
-    padding: 0.3rem;  /* Added padding for better input appearance */
+    padding: 0.3rem;  
   }
   
   /* Search Button */   
@@ -66,7 +66,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    margin-left: 0.5rem; /* Space between input and button */
+    margin-left: 0.5rem; 
     transition: background-color 0.3s ease;
   }
   

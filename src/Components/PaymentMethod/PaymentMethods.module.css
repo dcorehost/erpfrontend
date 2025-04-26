@@ -42,7 +42,7 @@
 }
 
 .tableRow:hover {
-    background-color: #f0f8ff; /* Light blue on hover */
+    background-color: #f0f8ff; 
 }
 
 .table th, .table td {
@@ -58,11 +58,11 @@
 }
 
 .table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Light gray for even rows */
+    background-color: #f9f9f9; 
 }
 
 .table tr:nth-child(odd) {
-    background-color: #ffffff; /* White for odd rows */
+    background-color: #ffffff; 
 }
 
 .editButton, .deleteButton, .addButton {
@@ -75,21 +75,21 @@
 }
 
 .editButton {
-    background-color: #4caf50; /* Green for edit */
+    background-color: #4caf50; 
     color: white;
 }
 
 .editButton:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049; 
 }
 
 .deleteButton {
-    background-color: #ff4d4d; /* Red for delete */
+    background-color: #ff4d4d; 
     color: white;
 }
 
 .deleteButton:hover {
-    background-color: #ff1a1a; /* Darker red on hover */
+    background-color: #ff1a1a; 
 }
 
 .addMethod {
@@ -125,12 +125,12 @@
 }
 
 .confirmButton {
-    background-color: #4caf50; /* Green */
+    background-color: #4caf50; 
     color: white;
 }
 
 .cancelButton {
-    background-color: #ff4d4d; /* Red */
+    background-color: #ff4d4d; 
     color: white;
 }
 
