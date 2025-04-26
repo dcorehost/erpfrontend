@@ -34,14 +34,14 @@ const AdminSidebar = ({ children }) => {
 
   const menus = [
     {
-      title: " User Leave",
-      icon: <FaCalendarCheck />, // More relevant icon for leave
+      title: "Leave",
+      icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves", icon: <FaUserClock /> },
-        { title: "Completed Leaves", link: "/CompletedLeaves", icon: <FaCheckSquare /> },
-        { title: "Rejected Leaves", link: "/RejectedLeaves", icon: <FaTimesCircle /> },
-        { title: "Admin Profile", link: "/Pages/OwnAdminProfile/OwnAdminProfile", icon: <FaUserCog /> },
+        { title: "User Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
+        { title: "User Completed Leaves", link: "/CompletedLeaves" },
+        { title: "User Rejected Leaves", link: "/RejectedLeaves" },
+        { title: "Apply Leave", link:"/Admin/Leave/ApplyLeave" },
       ],
     },
     {
@@ -88,30 +88,7 @@ const AdminSidebar = ({ children }) => {
           description: "View daily, weekly, and monthly attendance records of User.",
           icon: <FaUsers />,
         },
-        // {
-        //   title: "Leave Approval Status",
-        //   link: "/leave-status",
-        //   description: "Track the status of your leave applications.",
-        //   icon: <FaCheckSquare />, // Example icon
-        // },
-        // {
-        //   title: "Attendance Regularization",
-        //   link: "/attendance-regularization",
-        //   description: "Request corrections for missing or incorrect attendance records.",
-        //   icon: <FaPencilAlt />, // Need to import FaPencilAlt
-        // },
-        // {
-        //   title: "Shift Management",
-        //   link: "/shift-management",
-        //   description: "View and manage your work shifts.",
-        //   icon: <FaClock />, // Need to import FaClock
-        // },
-        // {
-        //   title: "Holiday Calendar",
-        //   link: "/holiday-calendar",
-        //   description: "View the company's holiday schedule.",
-        //   icon: <FaCalendar />, // Need to import FaCalendar
-        // },
+       
       ],
     },
     {
