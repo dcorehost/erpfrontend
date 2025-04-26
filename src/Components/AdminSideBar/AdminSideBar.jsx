@@ -7,8 +7,22 @@ import {
   FaCalendarAlt,
   FaBullhorn,
   FaClipboardList,
+  FaUser,
+  FaCheckSquare,
+  FaTimesCircle,
+  FaUserCog,
+  FaTasks,
+  FaPlus,
+  FaListUl,
+  FaFileInvoiceDollar,
+  FaUsers,
+  FaCalendarCheck,
+  FaUserClock, // For pending leaves
+  FaUserPlus, // For create new user
+  FaClipboard, // For admin task summary
+  FaChartBar, // For time waste stats
 } from "react-icons/fa";
-import { GrTasks } from "react-icons/gr"; 
+import { GrTasks } from "react-icons/gr";
 import styles from "./AdminSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -21,34 +35,34 @@ const AdminSidebar = ({ children }) => {
   const menus = [
     {
       title: " User Leave",
-      icon: <FaChartLine />,
+      icon: <FaCalendarCheck />, // More relevant icon for leave
       link: "/#",
       submenus: [
-        { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
-        { title: "Completed Leaves", link: "/CompletedLeaves" },
-        { title: "Rejected Leaves", link: "/RejectedLeaves" },
-        { title: "Admin Profile", link: "/Pages/OwnAdminProfile/OwnAdminProfile" },
+        { title: "Pending Leaves", link: "/Admin/Leave/Pending-Leaves", icon: <FaUserClock /> },
+        { title: "Completed Leaves", link: "/CompletedLeaves", icon: <FaCheckSquare /> },
+        { title: "Rejected Leaves", link: "/RejectedLeaves", icon: <FaTimesCircle /> },
+        { title: "Admin Profile", link: "/Pages/OwnAdminProfile/OwnAdminProfile", icon: <FaUserCog /> },
       ],
     },
     {
       title: "Assignment",
-      icon: <FaChartLine />,
+      icon: <GrTasks />, // More relevant icon for assignments
       link: "/#",
       submenus: [
-        { title: "Create New Project", link: "/CreateNewProject" },
-        { title: "Project Details", link: "/ProjectDetails" },
-        { title: "Task Assignment", link: "/Admin/Leave/Task-Assignment" },
-        { title: "Update Task Progress & Completion Status", link: "/Admin/Assignment/task-status" },
-        { title: "Admin Task Summary", link: "/Admin-Task-Summary" },
+        { title: "Create New Project", link: "/CreateNewProject", icon: <FaPlus /> },
+        { title: "Project Details", link: "/ProjectDetails", icon: <FaListUl /> },
+        { title: "Task Assignment", link: "/Admin/Leave/Task-Assignment", icon: <FaTasks /> },
+        { title: "Update Task Progress", link: "/Admin/Assignment/task-status", icon: <FaCheckSquare /> }, // Shortened title
+        { title: "Admin Task Summary", link: "/Admin-Task-Summary", icon: <FaClipboard /> },
       ],
     },
     {
       title: "User Creation",
-      icon: <FaChartLine />,
+      icon: <FaUsers />, // Icon for multiple users
       link: "/#",
       submenus: [
-        { title: "Create New User", link: "/create-user" },
-        { title: "User Details", link: "/AdminUserTable" },
+        { title: "Create New User", link: "/create-user", icon: <FaUserPlus /> },
+        { title: "User Details", link: "/AdminUserTable", icon: <FaListUl /> },
       ],
     },
     {
@@ -60,47 +74,54 @@ const AdminSidebar = ({ children }) => {
           title: "Mark Attendance",
           link: "/mark-attendance",
           description: "Check-in and Check-out for daily attendance tracking.",
+          icon: <FaCalendarCheck />, // Clearer icon for marking attendance
         },
         {
           title: "My Attendance Summary",
           link: "/attendance-summary",
           description: "View daily, weekly, and monthly attendance records.",
+          icon: <FaChartLine />,
         },
         {
           title: "User Attendance",
           link: "/Admin-user-attendance",
           description: "View daily, weekly, and monthly attendance records of User.",
+          icon: <FaUsers />,
         },
         // {
-        //   title: "Leave Approval Status",
-        //   link: "/leave-status",
-        //   description: "Track the status of your leave applications.",
+        //   title: "Leave Approval Status",
+        //   link: "/leave-status",
+        //   description: "Track the status of your leave applications.",
+        //   icon: <FaCheckSquare />, // Example icon
         // },
         // {
-        //   title: "Attendance Regularization",
-        //   link: "/attendance-regularization",
-        //   description: "Request corrections for missing or incorrect attendance records.",
+        //   title: "Attendance Regularization",
+        //   link: "/attendance-regularization",
+        //   description: "Request corrections for missing or incorrect attendance records.",
+        //   icon: <FaPencilAlt />, // Need to import FaPencilAlt
         // },
         // {
-        //   title: "Shift Management",
-        //   link: "/shift-management",
-        //   description: "View and manage your work shifts.",
+        //   title: "Shift Management",
+        //   link: "/shift-management",
+        //   description: "View and manage your work shifts.",
+        //   icon: <FaClock />, // Need to import FaClock
         // },
         // {
-        //   title: "Holiday Calendar",
-        //   link: "/holiday-calendar",
-        //   description: "View the company's holiday schedule.",
+        //   title: "Holiday Calendar",
+        //   link: "/holiday-calendar",
+        //   description: "View the company's holiday schedule.",
+        //   icon: <FaCalendar />, // Need to import FaCalendar
         // },
       ],
     },
     {
       title: "Payroll & PaySlips",
-      icon: <FaChartLine />,
+      icon: <FaFileInvoiceDollar />, // More relevant icon for payroll
       link: "/#",
       submenus: [
-        { title: "User Payrolls", link: "/Create-User-Payrolls" },
-        { title: "Payroll Summary", link: "/Admin-Payroll" },
-        { title: "View TimeWaste Stats", link: "/Admine/payrolls&slips/timechange" },
+        { title: "User Payrolls", link: "/Create-User-Payrolls", icon: <FaUsers /> }, // Icon for managing user payrolls
+        { title: "Payroll Summary", link: "/Admin-Payroll", icon: <FaChartLine /> },
+        { title: "Time Waste Stats", link: "/Admine/payrolls&slips/timechange", icon: <FaChartBar /> }, // Using chart bar for stats
       ],
     },
     {
@@ -149,13 +170,13 @@ const AdminSidebar = ({ children }) => {
                     <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
                       {menu.title}
                     </span>
-                    {menu.submenus.length > 0 && (
+                    {menu.submenus && menu.submenus.length > 0 && (
                       <span className={styles.dropdownIcon}>
                         {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
                       </span>
                     )}
                   </div>
-                  {activeMenu === index && (
+                  {activeMenu === index && menu.submenus && (
                     <ul className={styles.submenu}>
                       {menu.submenus.map((submenu, subIndex) => (
                         <li key={subIndex} className={styles.submenuItem}>
@@ -173,7 +194,7 @@ const AdminSidebar = ({ children }) => {
             ))}
             <li>
               <button onClick={handleLogout} className={`${styles.menuItem} ${styles.logout}`}>
-                <FaChartLine />
+                <FaChartLine /> {/* You might want a different icon for logout */}
                 <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>Logout</span>
               </button>
             </li>

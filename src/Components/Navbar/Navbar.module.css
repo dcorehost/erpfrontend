@@ -210,3 +210,67 @@
 .profileDropdown li button:hover {
   background-color: #f0f0f0;
 }
+
+.profileDropdown {
+  /* ... other styles ... */
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.userIcon {
+  font-size: 1.5em;
+  margin-right: 10px;
+  color: #555; /* Example color */
+}
+
+.userType {
+  margin: 0;
+  font-weight: bold;
+  color: #333; /* Example color */
+}
+/* Navbar.module.css */
+/* ... other styles ... */
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.userIcon {
+  font-size: 2em;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.userName {
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 5px; /* Add some space below the username */
+}
+
+.userEmail {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  text-align: center;
+  margin-bottom: 5px; /* Add some space below the email */
+}
+
+.userType {
+  margin: 0;
+  font-size: 0.8em;
+  color: #777;
+  text-align: center;
+}
+
+/* ... other styles ... */

@@ -261,6 +261,8 @@ import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory'
 import UserNotifications from './Components/UserNotifications/UserNotifications'; // ADD THIS
 import UserList from './Components/UserList/UserList';
 import AdminList from './Components/AdminList/AdminList';
+import CreateAdmin from './Components/CreateAdmin/CreateAdmin';
+
 
 const App = () => {
   const token = localStorage.getItem("token");
