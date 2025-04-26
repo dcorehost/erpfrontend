@@ -1,4 +1,8 @@
 
+
+
+
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaChartLine, FaChevronUp, FaChevronDown } from "react-icons/fa";
@@ -12,6 +16,7 @@ import { FcSalesPerformance } from "react-icons/fc";
 import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
 import { FaBullhorn } from 'react-icons/fa';
 import { FaClipboardList } from 'react-icons/fa';
+import { FaCalendarAlt, FaFileAlt, FaUserClock } from 'react-icons/fa';
 
 const SuperAdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,11 +36,22 @@ const SuperAdminSidebar = ({ children }) => {
     },
     {
       title: "Holiday Management",
-      icon: <FaBuildingUser />,
+      icon: <FaCalendarAlt />,
       link: "/#",
       submenus: [
-        { title: "Create Holidays", icon: <FaBuildingUser />, link: "/create-holidays" },
-        { title: "Holiday List", icon: <GrTasks />, link: "/holiday-list" },
+        { title: "Create Holidays", icon: <FaCalendarAlt />, link: "/create-holidays" },
+        { title: "Holiday List", icon: <FaClipboardList />, link: "/holiday-list" },
+      ],
+    },
+    {
+      title: "Leave Management",
+      icon: <FaUserClock />,
+      link: "/#",
+      submenus: [
+        { title: "Pending Admin Leave", icon: <FaFileAlt />, link: "/leave-applications" },
+        { title: "Admin Leave Summary", icon: <FaClipboardList />, link: "/leave-balance" },
+        { title: "User Leave Summary", icon: <FaClipboardList />, link: "/leave-policy" },
+        // { title: "", icon: <FaFileAlt />, link: "/leave-reports" },
       ],
     },
     {

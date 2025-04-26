@@ -258,6 +258,7 @@ import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory'
 import UserNotifications from './Components/UserNotifications/UserNotifications'; // ADD THIS
 import UserList from './Components/UserList/UserList';
 import AdminList from './Components/AdminList/AdminList';
+import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -336,6 +337,7 @@ const App = () => {
                 <Route path='/Admin-user-attendance' element={<UserAttendance />} />
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
+                <Route path="/Admin/Leave/ApplyLeave" element={<ApplyLeaveAdmin />} />
               </>
             )}
 
