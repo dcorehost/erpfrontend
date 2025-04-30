@@ -21,10 +21,10 @@ const ApplyLeaveAdmin = () => {
   const leaveTypes = [
     'Casual Leave',
     'Sick Leave',
-    'Earned Leave',
-    'Maternity Leave',
-    'Paternity Leave',
-    'Compensatory Leave'
+    // 'Earned Leave',
+    // 'Maternity Leave',
+    // 'Paternity Leave',
+    // 'Compensatory Leave'
   ];
 
   const handleChange = (e) => {
