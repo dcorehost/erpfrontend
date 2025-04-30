@@ -98,7 +98,7 @@ const AdminSidebar = ({ children }) => {
       submenus: [
         { title: "User Payrolls", link: "/Create-User-Payrolls", icon: <FaUsers /> }, // Icon for managing user payrolls
         { title: "Payroll Summary", link: "/Admin-Payroll", icon: <FaChartLine /> },
-        { title: "Time Waste Stats", link: "/Admine/payrolls&slips/timechange", icon: <FaChartBar /> }, // Using chart bar for stats
+        // { title: "Time Waste Stats", link: "/Admine/payrolls&slips/timechange", icon: <FaChartBar /> }, // Using chart bar for stats
       ],
     },
     {

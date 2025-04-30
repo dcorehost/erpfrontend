@@ -10,14 +10,18 @@ import axios from 'axios';
 import Auth from '../../Components/Services/Auth';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { io } from "socket.io-client";
 
-const recentActivities = [
-  { id: 1, action: 'User Ram updated profile', time: '2 mins ago', icon: '👤' },
-  { id: 2, action: 'New task assigned to Team A', time: '15 mins ago', icon: '📌' },
-  { id: 3, action: 'Leave request from Priya', time: '1 hour ago', icon: '🏖️' },
-  { id: 4, action: 'Attendance marked for 120 users', time: '3 hours ago', icon: '📅' },
-  { id: 5, action: 'System maintenance scheduled', time: '5 hours ago', icon: '⚙️' },
-];
+
+// const recentActivities = [
+//   { id: 1, action: 'User Ram updated profile', time: '2 mins ago', icon: '👤' },
+//   { id: 2, action: 'New task assigned to Team A', time: '15 mins ago', icon: '📌' },
+//   { id: 3, action: 'Leave request from Priya', time: '1 hour ago', icon: '🏖️' },
+//   { id: 4, action: 'Attendance marked for 120 users', time: '3 hours ago', icon: '📅' },
+//   { id: 5, action: 'System maintenance scheduled', time: '5 hours ago', icon: '⚙️' },
+// ];
+
+
 
 const BASE_URL = "http://209.74.89.83/erpbackend";
 
@@ -48,6 +52,11 @@ const AdminDashboard = () => {
     data: []
   });
 
+  const [activities, setActivities] = useState({
+    loading: true,
+    data: [],
+    error: null
+  });
   const token = Auth.getToken();
   if (!token) {
     toast.error('User not authenticated.');
@@ -229,10 +238,61 @@ const AdminDashboard = () => {
       }
     };
 
+    const fetchActivities = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/recent-activities`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+    
+        setActivities({
+          loading: false,
+          data: res.data.data || [],  // ✅ use `res.data.data` as per your backend response
+          error: null,
+        });
+      } catch (error) {
+        console.error('Failed to fetch recent activities:', error);
+        toast.error('Failed to load recent activities');
+        setActivities({
+          loading: false,
+          data: [],
+          error: 'Failed to load recent activities',
+        });
+      }
+    };
+    
+
+    const socket = io(BASE_URL, {
+      auth: {
+        token: token,  // if backend uses auth
+      },
+      transports: ['websocket'],
+    });
+    
+    socket.on("connect", () => {
+      console.log("Connected to socket server");
+    });
+    
+    socket.on("newNotification", (data) => {
+      // Update activities state or show a toast
+      setActivities(prev => ({
+        ...prev,
+        data: [data, ...prev.data]
+      }));
+      toast.info(`New Activity: ${data.title}`);
+    });
+    
+    // Clean up on unmount
+    return () => {
+      socket.disconnect();
+    };
+    
+    
+
     fetchDashboardData();
     fetchTaskStatusData();
     fetchLeaveStatusData();
     fetchAttendanceStatusData();
+    fetchActivities()
   }, [token]);
 
   if (stats.loading || taskStatus.loading || leaveStatus.loading || attendanceStatus.loading) {
@@ -415,16 +475,27 @@ const AdminDashboard = () => {
             <Link to="/activities" className={styles.viewAll}>View All →</Link>
           </div>
           <ul className={styles.activityList}>
-            {recentActivities.map(activity => (
-              <li key={activity.id} className={styles.activityItem}>
-                <span className={styles.activityIcon}>{activity.icon}</span>
-                <div className={styles.activityContent}>
-                  <p>{activity.action}</p>
-                  <span className={styles.activityTime}>{activity.time}</span>
-                </div>
-                <span className={styles.activityBadge}>New</span>
-              </li>
-            ))}
+          {activities.loading ? (
+  <div>Loading activities...</div>
+) : activities.error ? (
+  <div>{activities.error}</div>
+) : activities.data.length === 0 ? (
+  <div>No recent activities.</div>
+) : (
+  activities.data.map((activity) => (
+    <li key={activity._id} className={styles.activityItem}>
+      <span className={styles.activityIcon}>📌</span>
+      <div className={styles.activityContent}>
+        <p>{activity.title}: {activity.message}</p>
+        <span className={styles.activityTime}>
+          {new Date(activity.createdAt).toLocaleString()}
+        </span>
+      </div>
+      <span className={styles.activityBadge}>New</span>
+    </li>
+  ))
+)}
+
           </ul>
         </div>
       </div>
