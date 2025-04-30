@@ -1,5 +1,5 @@
 .holidayContainer {
-    width: 50vw;        /* Forces full viewport width */
+    width: 50vw;        
     max-width: none; 
     margin: 40px auto;
     padding: 30px 20px;
@@ -87,8 +87,8 @@
   }
   
   .spinner {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #007bff; /* Blue */
+    border: 4px solid #f3f3f3; 
+    border-top: 4px solid #007bff; 
     border-radius: 50%;
     width: 20px;
     height: 20px;

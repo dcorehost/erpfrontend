@@ -7,11 +7,11 @@
     border-radius: 8px;
     background-color: #f9f9f9;
     width: 100%;
-    overflow-x: auto; /* Ensures table is scrollable on small screens */
+    overflow-x: auto;
   }
   
   .tableWrapper {
-    overflow-x: auto; /* Adds horizontal scroll for the table */
+    overflow-x: auto; 
   }
   
   .leaveTable {

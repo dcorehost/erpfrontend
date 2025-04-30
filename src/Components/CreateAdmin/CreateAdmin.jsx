@@ -4,12 +4,12 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import styles from './CreateUser.module.css';
+import styles from './CreateAdmin.module.css';
 import Auth from '../Services/Auth';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const CreateUser = () => {
+const CreateAdmin = () => {
   const [formData, setFormData] = useState({
     username: '',
     emailId: '',
@@ -93,7 +93,7 @@ const CreateUser = () => {
 
     try {
       const response = await axios.post(
-        'http://209.74.89.83/erpbackend/create-user-acoount',
+        'http://209.74.89.83/erpbackend/create-admin-acoount',
         requestData,
         {
           headers: {
@@ -104,7 +104,7 @@ const CreateUser = () => {
       );
 
       if (response.data && response.data.success) {
-        toast.success('User created successfully!', {
+        toast.success('Admin created successfully!', {
           className: styles.toastSuccess
         });
 
@@ -402,10 +402,10 @@ const CreateUser = () => {
             {isSubmitting ? (
               <>
                 <span className={styles.spinner}></span> 
-                Creating User...
+                Creating Admin...
               </>
             ) : (
-              'Create User'
+              'Create Admin'
             )}
           </button>
         </div>
@@ -414,4 +414,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default CreateAdmin;

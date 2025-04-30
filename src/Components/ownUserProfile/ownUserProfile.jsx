@@ -16,18 +16,17 @@ const UserProfile = () => {
   const [attendance, setAttendance] = useState([]);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-  const [overTime, setOverTime] = useState(0); // Track overtime in seconds
-  const [overTimeRunning, setOverTimeRunning] = useState(false); // Track if overtime is running
-  const [currentOverTime, setCurrentOverTime] = useState(0); // Current overtime in seconds
-  const [overtimeIntervalId, setOvertimeIntervalId] = useState(null); // To hold interval ID for stopping the overtime
-
-  const [lunchBreaks, setLunchBreaks] = useState([]); // Track lunch breaks in seconds
-  const [remainingLunchTime, setRemainingLunchTime] = useState(1800); // 30 minutes = 1800 seconds
-  const [lunchTimerRunning, setLunchTimerRunning] = useState(false); // Track if lunch timer is running
-  const [currentLunchTime, setCurrentLunchTime] = useState(0); // Current lunch break time in seconds
-  const [intervalId, setIntervalId] = useState(null); // To hold interval ID for stopping the timer
-  const [lastAttendanceDate, setLastAttendanceDate] = useState(null); // Track the last marked attendance date
-  const [salary, setSalary] = useState(0); // To track total salary
+  const [overTime, setOverTime] = useState(0); 
+  const [overTimeRunning, setOverTimeRunning] = useState(false); 
+  const [currentOverTime, setCurrentOverTime] = useState(0); 
+  const [overtimeIntervalId, setOvertimeIntervalId] = useState(null); 
+  const [lunchBreaks, setLunchBreaks] = useState([]); 
+  const [remainingLunchTime, setRemainingLunchTime] = useState(1800); 
+  const [lunchTimerRunning, setLunchTimerRunning] = useState(false); 
+  const [currentLunchTime, setCurrentLunchTime] = useState(0); 
+  const [intervalId, setIntervalId] = useState(null); 
+  const [lastAttendanceDate, setLastAttendanceDate] = useState(null);
+  const [salary, setSalary] = useState(0); 
 
   const officeEndTime = 18; // 6 PM in 24-hour format
   const dailySalary = 1000; // For example, assume the daily salary is 1000

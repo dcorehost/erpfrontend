@@ -123,15 +123,34 @@ const UserTask = () => {
           setUsers(response.data.users);
         } else {
           toast.info('No tasks found.');
+          setTotalPages(1);
         }
       } catch (error) {
         console.error('Error fetching tasks:', error);
         toast.error('Failed to fetch tasks.');
+        setTotalPages(1);
       }
     };
 
     fetchTasks();
-  }, [token]);
+  }, [token, tasksPerPage]); // Re-fetch if tasksPerPage changes (though unlikely here)
+
+  // Get current tasks
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   const toggleUser = (userId) => {
     if (expandedUser === userId) {
@@ -249,6 +268,17 @@ const UserTask = () => {
           </div>
         ))}
       </div>
+      <nav className={styles.pagination}>
+        <button onClick={goToPreviousPage} disabled={currentPage === 1} className={styles.paginationArrow}>
+          &lt;
+        </button>
+        <span className={styles.paginationInfo}>
+          {currentPage} of {totalPages}
+        </span>
+        <button onClick={goToNextPage} disabled={currentPage === totalPages} className={styles.paginationArrow}>
+          &gt;
+        </button>
+      </nav>
     </div>
   );
 };

@@ -217,38 +217,38 @@
   .pagination {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the buttons */
+    justify-content: center; 
     gap: 1rem;
     margin-top: 1rem; 
   }
   
   .pagination button {
-    background-color: #007bff; /* Primary button color */
-    color: white; /* Text color */
-    border: none; /* Remove default border */
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
     border-radius: 5px;
-    padding: 0.3rem 0.5rem; /* Reduced padding for smaller buttons */
+    padding: 0.3rem 0.5rem; 
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    min-width: 40px; /* Set a smaller minimum width */
-    font-size: 1rem; /* Adjust font size as needed */
+    min-width: 40px; 
+    font-size: 1rem; 
     width: 5%;
   }
   
   .pagination button:hover:not(:disabled) {
-    background-color: #0056b3; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #0056b3; 
+    transform: scale(1.05); 
   }
   
   .pagination button:disabled {
-    background-color: #6c757d; /* Gray color for disabled state */
-    cursor: not-allowed; /* Indicate non-clickable */
-    opacity: 0.65; /* Slightly transparent for disabled state */
+    background-color: #6c757d; 
+    cursor: not-allowed; 
+    opacity: 0.65; 
   }
   
   .pagination span {
-    font-weight: bold; /* Make page info bold for emphasis */
-    color: #2c3e50; /* Use a contrasting color for better visibility */
+    font-weight: bold; 
+    color: #2c3e50; 
   }
   
   

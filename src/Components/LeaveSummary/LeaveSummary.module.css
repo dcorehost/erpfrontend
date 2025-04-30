@@ -7,14 +7,14 @@
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px auto;
-  max-width: 1500px;  /* Increased max-width for wider container */
-  width: 95%; /* Ensures container fills up a large portion of the screen */  
+  max-width: 1500px;  
+  width: 95%;  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
-  transform: scale(1.02); /* Slight zoom effect */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  transform: scale(1.02); 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
 }
 
 /* Header Styling */
