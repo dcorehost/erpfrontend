@@ -34,6 +34,10 @@ const Auth = {
       };
     },
   
+    getUserDetails: () => {
+      return Auth.getAuthData();
+    },
+    
     getToken: () => {
       return localStorage.getItem("authToken");
     },
