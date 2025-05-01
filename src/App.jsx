@@ -197,6 +197,9 @@
 
 // export default App; 
 
+
+
+
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -265,6 +268,7 @@ import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
 import UserLeavesPage from './Components/UserLeavesPage/UserLeavesPage';
 import PendingLeavesPage from './Components/PendingLeavesPage/PendingLeavesPage';
 import CompletedLeavesPage from './Components/CompletedLeavesPage/CompletedLeavesPage';
+import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -343,6 +347,7 @@ const App = () => {
                 <Route path='/Admin-user-attendance' element={<UserAttendance />} />
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
+                <Route path='/Own-Admin-Profile'  element={<OwnAdminProfile />}></Route>
               </>
             )}
 

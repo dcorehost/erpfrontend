@@ -42,46 +42,46 @@ const UserList = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>User Details</h2>
       <div className={styles.tableContainer}>
-        <table className={styles.userTable}>
-          <thead>
-            <tr>
-              <th>Employee ID</th>
-              <th>Name</th>
-              <th>Display Name</th>
-              <th>Gender</th>
-              <th>Role</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Country</th>
-              <th>State</th>
-              <th>Pincode</th>
-              <th>Languages</th>
-              <th>Created At</th>
-              <th>Updated At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <td>{user.employeeId}</td>
-                <td>{user.username}</td>
-                <td>{user.displayName}</td>
-                <td>{user.gender}</td>
-                <td>{user.role ? user.role : "NA"}</td>
-                {/* <td>{user.role} </td> */}
-                <td>{user.contact.phone}</td>
-                <td>{user.contact.emailId}</td>
-                <td>{user.address.country}</td>
-                <td>{user.address.state}</td>
-                <td>{user.address.pincode}</td>
-                <td>{user.language.join(', ')}</td>
-                <td>{new Date(user.createdAt).toLocaleString()}</td>
-                <td>{new Date(user.updatedAt).toLocaleString()}</td>
-
+        <div className={styles.scrollableTable}> {/* Added this div for scrolling */}
+          <table className={styles.userTable}>
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Gender</th>
+                <th>Role</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Pincode</th>
+                <th>Languages</th>
+                <th>Created At</th>
+                <th>Updated At</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={index}>
+                  <td>{user.employeeId}</td>
+                  <td>{user.username}</td>
+                  <td>{user.displayName}</td>
+                  <td>{user.gender}</td>
+                  <td>{user.role ? user.role : "NA"}</td>
+                  <td>{user.contact.phone}</td>
+                  <td>{user.contact.emailId}</td>
+                  <td>{user.address.country}</td>
+                  <td>{user.address.state}</td>
+                  <td>{user.address.pincode}</td>
+                  <td>{user.language.join(', ')}</td>
+                  <td>{new Date(user.createdAt).toLocaleString()}</td>
+                  <td>{new Date(user.updatedAt).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
