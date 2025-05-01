@@ -197,6 +197,9 @@
 
 // export default App; 
 
+
+
+
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -262,6 +265,7 @@ import UserNotifications from './Components/UserNotifications/UserNotifications'
 import UserList from './Components/UserList/UserList';
 import AdminList from './Components/AdminList/AdminList';
 import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
+import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -340,6 +344,7 @@ const App = () => {
                 <Route path='/Admin-user-attendance' element={<UserAttendance />} />
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
+                <Route path='/Own-Admin-Profile'  element={<OwnAdminProfile />}></Route>
               </>
             )}
 
