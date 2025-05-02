@@ -265,6 +265,7 @@ import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
 import UserLeavesPage from './Components/UserLeavesPage/UserLeavesPage';
 import PendingLeavesPage from './Components/PendingLeavesPage/PendingLeavesPage';
 import CompletedLeavesPage from './Components/CompletedLeavesPage/CompletedLeavesPage';
+import MyProfile from './Pages/MyProfile/MyProfile';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -307,6 +308,7 @@ const App = () => {
             <Route path="/logout" element={<Logout />} />
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/add-task" element={<AddTask />} />
+            <Route path="/my-profile" element={<MyProfile />} />
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
