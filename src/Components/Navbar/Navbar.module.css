@@ -274,3 +274,108 @@
 }
 
 /* ... other styles ... */
+
+/* Add these styles to your existing Navbar.module.css */
+.welcomeMessage {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #333;
+  padding: 0 20px;
+}
+
+.username {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.profileName {
+  font-weight: 500;
+}
+
+.profileDropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.profileHeader {
+  display: flex;
+  padding: 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.profileLargeIcon {
+  font-size: 2.5rem;
+  margin-right: 12px;
+  color: #555;
+}
+
+.userRole {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 4px 0;
+}
+
+.userEmail {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+.profileMenu {
+  padding: 8px 0;
+}
+
+.profileMenuItem {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.profileMenuItem:hover {
+  background: #f0f0f0;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logoutButton:hover {
+  background: #f0f0f0;
+}
+
+.notificationItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.notificationItem small {
+  display: block;
+  color: #888;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
