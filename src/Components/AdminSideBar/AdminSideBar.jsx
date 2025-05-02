@@ -43,6 +43,7 @@ const AdminSidebar = ({ children }) => {
         { title: "User Completed Leaves", link: "/CompletedLeaves" },
         { title: "User Rejected Leaves", link: "/RejectedLeaves" },
         { title: "Apply Leave", link:"/Admin/Leave/ApplyLeave" },
+        { title: "Admin User", link:"Own-Admin-Profile" },
       ],
     },
     {

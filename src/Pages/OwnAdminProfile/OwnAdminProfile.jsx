@@ -146,7 +146,7 @@ const OwnAdminProfile = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>User Profile </h1>
+      <h1 className={styles.header}>Admin Profile </h1>
 
       <form onSubmit={handleSubmit}>
         {/* Profile Header Section */}
