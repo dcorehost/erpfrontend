@@ -148,7 +148,7 @@ const Navbar = ({ isOpen }) => {
                   <Link to="/my-profile" className={styles.profileMenuItem}>
                     My Profile
                   </Link>
-                  <Link to="/settings" className={styles.profileMenuItem}>
+                  <Link to="/Own-User-Profile" className={styles.profileMenuItem}>
                     Settings
                   </Link>
                  

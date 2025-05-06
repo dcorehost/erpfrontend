@@ -4,7 +4,8 @@
     color: #333;
     padding: 20px;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-    min-height: 100vh;
+    min-height: auto;
+    /* border: 1px solid black; */
   }
   
   .header {
