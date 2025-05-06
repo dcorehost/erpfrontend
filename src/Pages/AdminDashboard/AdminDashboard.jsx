@@ -263,12 +263,12 @@ const AdminDashboard = () => {
         <div className={styles.headerContent}>
           <h1>
             <span className={styles.logoIcon}>📊</span>
-            <span className={styles.logoText}>ERP</span> Dashboard
+            <span className={styles.logoText}>Admin</span> Dashboard
           </h1>
-          <div className={styles.userProfile}>
+          {/* <div className={styles.userProfile}>
             <span className={styles.userInitial}>A</span>
             <span className={styles.userName}>Admin</span>
-          </div>
+          </div> */}
         </div>
       </header>
 

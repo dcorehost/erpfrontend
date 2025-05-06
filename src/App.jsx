@@ -197,6 +197,9 @@
 
 // export default App; 
 
+
+
+
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -270,6 +273,8 @@ import ClientDashboard from './Pages/ClientDashboard/ClientDashboard';
 import ClientProjects from './Components/ClientProjects/ClientProjects';
 import ClientProjectDetails from './Components/ClientProjectDetails/ClientProjectDetails';
 import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProjectsRequests'; // Import the new component
+import MyProfile from './Pages/MyProfile/MyProfile';
+import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -315,6 +320,7 @@ const App = () => {
             <Route path="/logout" element={<Logout />} />
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/add-task" element={<AddTask />} />
+            <Route path="/my-profile" element={<MyProfile />} />
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
@@ -351,6 +357,7 @@ const App = () => {
                 <Route path='/Admin-user-attendance' element={<UserAttendance />} />
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
+                <Route path='/Own-Admin-Profile'  element={<OwnAdminProfile />}></Route>
               </>
             )}
 
