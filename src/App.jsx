@@ -275,6 +275,8 @@ import ClientProjectDetails from './Components/ClientProjectDetails/ClientProjec
 import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProjectsRequests'; // Import the new component
 import MyProfile from './Pages/MyProfile/MyProfile';
 import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
+import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
+
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -409,6 +411,7 @@ const App = () => {
                 <Route path="/projects" element={<ClientProjects />} />
                 <Route path="/client-project-details" element={<ClientProjectDetails />} />
                 <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
+                <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
                 </>
             )}
 
