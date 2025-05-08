@@ -350,6 +350,7 @@ const App = () => {
                 <Route path="/admin-notifications" element={<AdminNotification />} />
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
                 <Route path='/Own-Admin-Profile'  element={<OwnAdminProfile />}></Route>
+                <Route path='/ApplyLeaveAdmin'  element={<ApplyLeaveAdmin />}></Route>
               </>
             )}
 
