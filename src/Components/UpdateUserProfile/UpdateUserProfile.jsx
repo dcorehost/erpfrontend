@@ -1,4 +1,48 @@
 
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import styles from './UpdateUserProfile.module.css';
+// import Auth from '../../Components/Services/Auth';
+
+// const UpdateUserProfile = () => {
+//   const [requests, setRequests] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [selectedRequest, setSelectedRequest] = useState(null);
+//   const [remarks, setRemarks] = useState('');
+//   const [action, setAction] = useState('');
+//   const [successMessage, setSuccessMessage] = useState('');
+//   const [expandedRequest, setExpandedRequest] = useState(null);
+
+//   const API_BASE_URL = 'http://209.74.89.83/erpbackend/';
+
+//   const getAxiosInstance = () => {
+//     return axios.create({
+//       baseURL: API_BASE_URL,
+//       headers: {
+//         'Authorization': `Bearer ${Auth.getToken()}`,
+//         'Content-Type': 'application/json'
+//       }
+//     });
+//   };
+
+//   useEffect(() => {
+//     fetchProfileUpdateRequests();
+//   }, []);
+
+//   const fetchProfileUpdateRequests = async () => {
+//     try {
+//       setLoading(true);
+//       const axiosInstance = getAxiosInstance();
+//       const response = await axiosInstance.get('get-user-profile-update-request');
+//       setRequests(response.data.requests);
+//       setLoading(false);
+//     } catch (err) {
+//       console.error('Error fetching profile update requests:', err);
+//       setError('Failed to load profile update requests');
+//       setLoading(false);
+//     }
+//   };
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './UpdateUserProfile.module.css';
@@ -35,7 +79,7 @@ const UpdateUserProfile = () => {
       setLoading(true);
       const axiosInstance = getAxiosInstance();
       const response = await axiosInstance.get('get-user-profile-update-request');
-      setRequests(response.data.requests);
+      setRequests(response.data.requests || []);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching profile update requests:', err);
@@ -112,22 +156,40 @@ const UpdateUserProfile = () => {
     }
   };
 
-  const renderRequestDetails = (request) => {
+//   const renderRequestDetails = (request) => {
+//     return (
+//       <div className={styles.detailsContainer}>
+//         <div className={styles.detailSection}>
+//           <h4>User Information</h4>
+//           <div className={styles.detailRow}>
+//             <span className={styles.detailLabel}>User ID:</span>
+//             <span>{request.userId._id}</span>
+//           </div>
+//           <div className={styles.detailRow}>
+//             <span className={styles.detailLabel}>Username:</span>
+//             <span>{request.userId.username}</span>
+//           </div>
+//           <div className={styles.detailRow}>
+//             <span className={styles.detailLabel}>Display Name:</span>
+//             <span>{request.userId.displayName}</span>
+//           </div>
+//         </div>
+const renderRequestDetails = (request) => {
     return (
       <div className={styles.detailsContainer}>
         <div className={styles.detailSection}>
           <h4>User Information</h4>
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>User ID:</span>
-            <span>{request.userId._id}</span>
+            <span>{request.userId?._id || 'N/A'}</span>
           </div>
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>Username:</span>
-            <span>{request.userId.username}</span>
+            <span>{request.userId?.username || 'N/A'}</span>
           </div>
           <div className={styles.detailRow}>
             <span className={styles.detailLabel}>Display Name:</span>
-            <span>{request.userId.displayName}</span>
+            <span>{request.userId?.displayName || 'N/A'}</span>
           </div>
         </div>
 
@@ -220,7 +282,7 @@ const UpdateUserProfile = () => {
         </div>
       )}
 
-      <div className={styles.content}>
+      {/* <div className={styles.content}>
         {requests.length === 0 ? (
           <div className={styles.emptyState}>
             <i className="fas fa-inbox"></i>
@@ -254,7 +316,45 @@ const UpdateUserProfile = () => {
                       </span>
                       <span className={styles.date}>{formatDate(request.requestedAt)}</span>
                     </div>
+                  </div> */}
+                  <div className={styles.content}>
+        {requests.length === 0 ? (
+          <div className={styles.emptyState}>
+            <i className="fas fa-inbox"></i>
+            <h3>No profile update requests</h3>
+            <p>There are currently no pending profile update requests.</p>
+          </div>
+        ) : (
+          <div className={styles.requestsGrid}>
+            <div className={styles.requestsList}>
+              {requests.map((request) => (
+                <div
+                  key={request._id}
+                  className={`${styles.requestCard} ${
+                    selectedRequest?._id === request._id ? styles.selected : ''
+                  }`}
+                  onClick={() => setSelectedRequest(request)}
+                >
+                  <div className={styles.cardHeader}>
+                    <div className={styles.userInfo}>
+                      <div className={styles.avatar}>
+                        {request.userId?.displayName?.charAt(0) || 
+                         request.userId?.username?.charAt(0) || 
+                         'U'}
+                      </div>
+                      <div>
+                        <h4>{request.userId?.displayName || 'Unknown User'}</h4>
+                        <p>@{request.userId?.username || 'unknown'}</p>
+                      </div>
+                    </div>
+                    <div className={styles.cardStatus}>
+                      <span className={`${styles.statusBadge} ${getStatusBadgeClass(request.status)}`}>
+                        {request.status}
+                      </span>
+                      <span className={styles.date}>{formatDate(request.requestedAt)}</span>
+                    </div>
                   </div>
+
 
                   <div className={styles.cardBody}>
                     <div className={styles.changesPreview}>
@@ -301,6 +401,11 @@ const UpdateUserProfile = () => {
               ))}
             </div>
 
+
+
+
+
+{/* 
             <div className={styles.actionPanel}>
               {selectedRequest ? (
                 <>
@@ -336,7 +441,46 @@ const UpdateUserProfile = () => {
                         </span>
                       </div>
                     </div>
+                  </div> */}
+ <div className={styles.actionPanel}>
+              {selectedRequest ? (
+                <>
+                  <div className={styles.panelHeader}>
+                    <h3>Process Request</h3>
+                    <button
+                      className={styles.closePanel}
+                      onClick={() => setSelectedRequest(null)}
+                    >
+                      <i className="fas fa-times"></i>
+                    </button>
                   </div>
+
+                  <div className={styles.requestSummary}>
+                    <div className={styles.summaryUser}>
+                      <div className={styles.avatarLarge}>
+                        {selectedRequest.userId?.displayName?.charAt(0) || 
+                         selectedRequest.userId?.username?.charAt(0) || 
+                         'U'}
+                      </div>
+                      <div>
+                        <h4>{selectedRequest.userId?.displayName || 'Unknown User'}</h4>
+                        <p>@{selectedRequest.userId?.username || 'unknown'}</p>
+                      </div>
+                    </div>
+                    <div className={styles.summaryMeta}>
+                      <div>
+                        <span className={styles.metaLabel}>Requested:</span>
+                        <span>{formatDate(selectedRequest.requestedAt)}</span>
+                      </div>
+                      <div>
+                        <span className={styles.metaLabel}>Status:</span>
+                        <span className={`${styles.statusBadge} ${getStatusBadgeClass(selectedRequest.status)}`}>
+                          {selectedRequest.status}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
 
                   <div className={styles.changesList}>
                     <h4>Requested Changes</h4>

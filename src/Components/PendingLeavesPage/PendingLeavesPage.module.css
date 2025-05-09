@@ -1,250 +1,415 @@
-/* Container */
+/* PendingLeavesPage.module.css */
+
+/* Base Styles */
 .container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  margin-top: 150px;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.header h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
+}
+
+.userInfo {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #7f8c8d;
+  align-items: center;
+}
+
+.userInfo span:first-child {
+  font-weight: 600;
+  color: #3498db;
+}
+
+/* Loading and Error States */
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.errorContainer h3 {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.loginButton {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.loginButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.noData {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  color: #7f8c8d;
+}
+
+/* Leaves Container */
+.leavesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.userSection {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.userSection:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.userHeader {
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .userHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
-  
-  /* Header */
+}
+
+.userHeader h2 {
+  margin: 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userType {
+  background: #3498db;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.userContact {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.userContact span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Leave Card Styles */
+.leavesList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.leaveCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+  .leaveCard {
+    flex-direction: row;
+  }
+}
+
+.leaveCard:hover {
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+.leaveInfo {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leaveType {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  padding: 5px 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.leaveDates {
+  font-size: 14px;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.leaveDates span {
+  color: #3498db;
+  font-weight: 600;
+}
+
+.leaveReason {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.leaveActions {
+  padding: 15px;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .leaveActions {
+    border-top: none;
+    border-left: 1px solid #dee2e6;
+    min-width: 250px;
+  }
+}
+
+.takeActionButton {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.takeActionButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.remarksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.remarksInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.remarksInput:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.approveButton {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.approveButton:hover:not(:disabled) {
+  background: #27ae60;
+  transform: translateY(-2px);
+}
+
+.approveButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.rejectButton {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.rejectButton:hover:not(:disabled) {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.rejectButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    padding: 15px;
   }
   
   .header h1 {
-    font-size: 2rem;
-    color: #333;
+    font-size: 24px;
   }
   
   .userInfo {
-    font-size: 0.95rem;
-    color: #555;
-  }
-  
-  /* Loading & Error States */
-  .loadingContainer,
-  .errorContainer {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-    text-align: center;
+    align-items: flex-start;
+    gap: 5px;
   }
   
-  .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .loginButton {
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .loginButton:hover {
-    background-color: #2980b9;
-  }
-  
-  /* No Data */
-  .noData {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #777;
-    margin-top: 2rem;
-  }
-  
-  /* Leaves Container */
-  .leavesContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  
-  /* User Section */
-  .userSection {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background-color: #fafafa;
-  }
-  
-  .userHeader {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .userHeader h2 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-  }
-  
-  .userType {
-    font-size: 0.9rem;
-    color: #888;
-    margin-left: 0.5rem;
-  }
-  
-  .userContact {
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  /* Leaves List */
-  .leavesList {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  /* Leave Card */
   .leaveCard {
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    padding: 1rem;
-    background-color: #fff;
-    display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
   
-  /* Leave Info */
-  .leaveInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .leaveType {
-    font-weight: bold;
-    color: #34495e;
-  }
-  
-  .leaveDates {
-    font-size: 0.95rem;
-    color: #555;
-  }
-  
-  .leaveReason {
-    font-size: 0.95rem;
-    color: #555;
-  }
-  
-  /* Leave Actions */
   .leaveActions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    border-top: 1px solid #dee2e6;
+    border-left: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
   }
   
-  .takeActionButton,
-  .approveButton,
-  .rejectButton,
-  .cancelButton {
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.95rem;
-  }
-  
-  .takeActionButton {
-    background-color: #2980b9;
-    color: #fff;
-  }
-  
-  .takeActionButton:hover {
-    background-color: #1f6391;
-  }
-  
-  .approveButton {
-    background-color: #27ae60;
-    color: #fff;
-  }
-  
-  .approveButton:hover {
-    background-color: #1e8449;
-  }
-  
-  .rejectButton {
-    background-color: #e74c3c;
-    color: #fff;
-  }
-  
-  .rejectButton:hover {
-    background-color: #c0392b;
-  }
-  
-  .cancelButton {
-    background-color: #bdc3c7;
-    color: #2c3e50;
-  }
-  
-  .cancelButton:hover {
-    background-color: #95a5a6;
-  }
-  
-  /* Remarks Section */
-  .remarksSection {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .remarksInput {
-    width: 100%;
-    min-height: 80px;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    font-size: 0.95rem;
-  }
-  
-  /* Action Buttons */
   .actionButtons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-direction: column;
   }
   
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-  
-    .header h1 {
-      font-size: 1.5rem;
-    }
-  
-    .userHeader h2 {
-      font-size: 1.2rem;
-    }
-  
-    .leaveCard {
-      padding: 1rem;
-    }
+  .approveButton,
+  .rejectButton {
+    width: 100%;
   }
-  
+}
+
+/* Animation for status changes */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.leaveCard {
+  animation: pulse 0.5s ease-in-out;
+}
