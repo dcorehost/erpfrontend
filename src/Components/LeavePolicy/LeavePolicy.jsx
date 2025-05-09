@@ -1,4 +1,3 @@
-// src/components/LeavePolicy/LeavePolicy.jsx
 import React from 'react';
 import styles from './LeavePolicy.module.css';
 import { FaRegCalendarCheck, FaUserMd, FaExclamationTriangle, FaClipboardList } from 'react-icons/fa';

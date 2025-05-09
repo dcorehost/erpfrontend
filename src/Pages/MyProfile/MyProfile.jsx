@@ -100,65 +100,131 @@ const MyProfile = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'personal':
-        return (
-          <div className={styles.tabContent}>
-            <div className={styles.profileCard}>
-              <div className={styles.profileHeader}>
-                <h2>Personal Details</h2>
-                <div className={styles.profileAvatar}>
-                  {userData.profilePhoto ? (
-                    <img src={userData.profilePhoto} alt="Profile" className={styles.profileImage} />
-                  ) : (
-                    <div className={styles.profileInitial}>
-                      {userData.username?.charAt(0).toUpperCase()}
-                    </div>
-                  )}
-                </div>
+      // case 'personal':
+      //   return (
+      //     <div className={styles.tabContent}>
+      //       <div className={styles.profileCard}>
+      //         <div className={styles.profileHeader}>
+      //           <h2>Personal Details</h2>
+      //           <div className={styles.profileAvatar}>
+      //             {userData.profilePhoto ? (
+      //               <img src={userData.profilePhoto} alt="Profile" className={styles.profileImage} />
+      //             ) : (
+      //               <div className={styles.profileInitial}>
+      //                 {userData.username?.charAt(0).toUpperCase()}
+      //               </div>
+      //             )}
+      //           </div>
+      //         </div>
+      //         <div className={styles.detailGrid}>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Full Name</span>
+      //             <span className={styles.detailValue}>{userData.displayName || userData.username}</span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Gender</span>
+      //             <span className={styles.detailValue}>{userData.gender || 'N/A'}</span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Email</span>
+      //             <span className={styles.detailValue}>{userData.contact?.emailId || 'N/A'}</span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Phone</span>
+      //             <span className={styles.detailValue}>{userData.contact?.phone || 'N/A'}</span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Employee ID</span>
+      //             <span className={styles.detailValue}>{userData.employeeId || 'N/A'}</span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Address</span>
+      //             <span className={styles.detailValue}>
+      //               {userData.address?.country || 'N/A'}, {userData.address?.state || ''} {userData.address?.pincode || ''}
+      //             </span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Language</span>
+      //             <span className={styles.detailValue}>
+      //               {userData.language?.join(', ') || 'N/A'}
+      //             </span>
+      //           </div>
+      //           <div className={styles.detailItem}>
+      //             <span className={styles.detailLabel}>Member Since</span>
+      //             <span className={styles.detailValue}>
+      //               {new Date(userData.createdAt).toLocaleDateString()}
+      //             </span>
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   );
+      // Update the personal details section in the renderTabContent function
+case 'personal':
+  return (
+    <div className={styles.tabContent}>
+      <div className={styles.profileCard}>
+        <div className={styles.profileHeader}>
+          <h2>Personal Details</h2>
+          <div className={styles.profileAvatar}>
+            {userData.profilePhoto ? (
+              <img src={userData.profilePhoto} alt="Profile" className={styles.profileImage} />
+            ) : (
+              <div className={styles.profileInitial}>
+                {userData.username?.charAt(0).toUpperCase()}
               </div>
-              <div className={styles.detailGrid}>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Full Name</span>
-                  <span className={styles.detailValue}>{userData.displayName || userData.username}</span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Gender</span>
-                  <span className={styles.detailValue}>{userData.gender || 'N/A'}</span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Email</span>
-                  <span className={styles.detailValue}>{userData.contact?.emailId || 'N/A'}</span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Phone</span>
-                  <span className={styles.detailValue}>{userData.contact?.phone || 'N/A'}</span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Employee ID</span>
-                  <span className={styles.detailValue}>{userData.employeeId || 'N/A'}</span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Address</span>
-                  <span className={styles.detailValue}>
-                    {userData.address?.country || 'N/A'}, {userData.address?.state || ''} {userData.address?.pincode || ''}
-                  </span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Language</span>
-                  <span className={styles.detailValue}>
-                    {userData.language?.join(', ') || 'N/A'}
-                  </span>
-                </div>
-                <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Member Since</span>
-                  <span className={styles.detailValue}>
-                    {new Date(userData.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
-        );
+        </div>
+        <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Full Name</span>
+            <span className={styles.detailValue}>{userData.displayName || userData.username}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Role</span>
+            <span className={styles.detailValue}>
+              {userData.role || 'N/A'}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Gender</span>
+            <span className={styles.detailValue}>{userData.gender || 'N/A'}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Email</span>
+            <span className={styles.detailValue}>{userData.contact?.emailId || 'N/A'}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Phone</span>
+            <span className={styles.detailValue}>{userData.contact?.phone || 'N/A'}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Employee ID</span>
+            <span className={styles.detailValue}>{userData.employeeId || 'N/A'}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Address</span>
+            <span className={styles.detailValue}>
+              {userData.address?.country || 'N/A'}, {userData.address?.state || ''} {userData.address?.pincode || ''}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Language</span>
+            <span className={styles.detailValue}>
+              {userData.language?.join(', ') || 'N/A'}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Member Since</span>
+            <span className={styles.detailValue}>
+              {new Date(userData.createdAt).toLocaleDateString()}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
       case 'leave':
         return (
           <div className={styles.tabContent}>
