@@ -7,7 +7,6 @@ import httpServices from "../Services/Httpservices";
 import Auth from "../Services/Auth.js";
 import logo from "../../assets/logo.jpeg"
 
-
 const Login = () => {
   const [identifier, setIdentifier] = useState(""); 
   const [password, setPassword] = useState("");
@@ -73,6 +72,9 @@ const Login = () => {
         } else if (storedType === "superadmin") {
           console.log("Redirecting to SuperAdmin Sidebar...");
           window.location.href = "/superadmin-sidebar";
+        } else if (storedType === "Client") {
+          console.log("Redirecting to Client Sidebar...");
+          window.location.href = "/client-sidebar"; 
         }
       }, 500);
 

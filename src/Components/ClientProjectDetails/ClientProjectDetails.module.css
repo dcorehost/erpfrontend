@@ -1,0 +1,188 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .modalContent {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 85%;
+    max-width: 650px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 5px;
+  }
+  
+  /* .closeButton:hover {
+    color: #ff4757;
+    transform: rotate(90deg);
+  } */
+  
+  .modalContent h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+  }
+  
+  .detailsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .detailItem {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .detailItem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detailIcon {
+    font-size: 1.4rem;
+    margin-right: 15px;
+    margin-top: 3px;
+  }
+  
+  .detailContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .detailLabel {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+  }
+  
+  .detailValue {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .progressContainer {
+    width: 100%;
+    height: 25px;
+    background-color: #ecf0f1;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progressBar {
+    height: 100%;
+    border-radius: 20px;
+  }
+  
+  .progressText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .description {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .description h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+  }
+  
+  .description p {
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+  }
+  
+  .primaryButton, .secondaryButton {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+  
+  .primaryButton {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .primaryButton:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .secondaryButton {
+    background-color: white;
+    color: #3498db;
+    border: 1px solid #3498db;
+  }
+  
+  .secondaryButton:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .modalContent {
+      width: 95%;
+      padding: 20px;
+    }
+    
+    .detailsGrid {
+      grid-template-columns: 1fr;
+    }
+  }

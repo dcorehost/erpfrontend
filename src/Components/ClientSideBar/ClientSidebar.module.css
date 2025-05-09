@@ -1,0 +1,189 @@
+.sidebarWrapper {
+  margin-top: 70px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: -100%;
+  width: 250px;
+  height: calc(100% - 60px); 
+  background-color: #fef9f8;
+  color: #0d0d0d;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  padding: 8px;
+  overflow-x: hidden;
+  z-index: 100;
+}
+
+.sidebar.open {
+  left: 0;
+  width: 250px;
+}
+
+.sidebar.hidden {
+  left: -100%;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  color: #0d0d0d;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #ef9273;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.title {
+  flex: 1;
+}
+
+/* Hamburger Menu */
+.hamburgerButton {
+  position: fixed;
+  top: 70px;
+  left: 10px;
+  background: transparent;
+  border: none; 
+  color: #0d0d0d;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  /* border: 1px solid black; */
+  width: 0px;
+  padding: 0px 10px;
+}
+.hamburgerButton:hover {
+  background-color: transparent; 
+}
+
+/* Logout Button */
+.menuItem.logout {
+  margin-top: auto;
+  color: #ff4d4d;
+  background-color: transparent; 
+}
+
+.menuItem.logout:hover {
+  background-color: transparent; 
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar.open {
+    width: 200px;
+  }
+
+  .menuItem {
+    font-size: 16px;
+    padding: 10px 5px;
+  }
+
+  .icon {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .submenu {
+    margin-left: 10px;
+  }
+
+  .submenuItem {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+  .sidebar {
+    width: 70px;
+  }
+
+  .sidebar.open {
+    width: 220px;
+  }
+
+  .hamburgerButton {
+    left: 10px;
+  }
+
+  .contentMenu {
+    width: calc(100% - 70px);
+  }
+
+  .menuItem {
+    font-size: 18px;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .submenu {
+    margin-left: 15px;
+  }
+
+  .submenuItem {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    width: 250px;
+  }
+
+  .menuItem {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .submenu {
+    margin-left: 20px;
+  }
+
+  .submenuItem {
+    font-size: 18px;
+  }
+}
