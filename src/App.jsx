@@ -268,9 +268,16 @@ import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
 import UserLeavesPage from './Components/UserLeavesPage/UserLeavesPage';
 import PendingLeavesPage from './Components/PendingLeavesPage/PendingLeavesPage';
 import CompletedLeavesPage from './Components/CompletedLeavesPage/CompletedLeavesPage';
+import ClientSideBar from './Components/ClientSideBar/ClientSideBar';
+import ClientDashboard from './Pages/ClientDashboard/ClientDashboard';
+import ClientProjects from './Components/ClientProjects/ClientProjects';
+import ClientProjectDetails from './Components/ClientProjectDetails/ClientProjectDetails';
+import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProjectsRequests'; // Import the new component
 import MyProfile from './Pages/MyProfile/MyProfile';
 import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
 import UpdateUserProfile from './Components/UpdateUserProfile/UpdateUserProfile';
+import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
+
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -293,6 +300,7 @@ const App = () => {
           {typeOfUser === "Admin" && <SideBar />}
           {typeOfUser === "User" && <UserSidebar />}
           {typeOfUser === "superadmin" && <SuperAdminSidebar />}
+          {typeOfUser === "Client" && <ClientSideBar />}
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
@@ -304,6 +312,8 @@ const App = () => {
                     ? "/admin-dashboard"
                     : typeOfUser === "superadmin"
                       ? "/superadmin-dashboard"
+                      : typeOfUser === "Client"
+                      ? "/client-dashboard"
                       : "/user-dashboard"
                 } />
               }
@@ -395,6 +405,18 @@ const App = () => {
                 <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
               </>
             )}
+
+
+              {typeOfUser === "Client" && (
+              <>
+                <Route path="/client-dashboard" element={<ClientDashboard />} />
+                <Route path="/projects" element={<ClientProjects />} />
+                <Route path="/client-project-details" element={<ClientProjectDetails />} />
+                <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
+                <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
+                </>
+            )}
+
 
             {/* Default catch-all */}
             <Route path="*" element={<Navigate to="/" />} />

@@ -1,0 +1,205 @@
+.projectsContainer {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .header h1 {
+    font-size: 20px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .searchBar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    height: 32px;
+    margin-left: 10px;
+  }
+  
+  .searchIcon {
+    margin-right: 6px;
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  .searchBar input {
+    border: none;
+    outline: none;
+    font-size: 0.85rem;
+    width: 150px;
+    padding: 2px 4px;
+    margin-top: 18px;
+  }
+  
+  .addProjectButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .addProjectButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .projectList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .projectItem {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .projectItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .projectLink {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: #333;
+    position: relative;
+  }
+  
+  .projectName {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .projectDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  
+  .status {
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+  
+  .status[data-status="in progress"] {
+    background-color: #e7f3ff;
+    color: #007bff;
+  }
+  
+  .status[data-status="planning"] {
+    background-color: #fff8e1;
+    color: #ffc107;
+  }
+  
+  .status[data-status="completed"] {
+    background-color: #e6ffe9;
+    color: #28a745;
+  }
+  
+  .status[data-status="on hold"] {
+    background-color: #fdecea;
+    color: #dc3545;
+  }
+  
+  .progressBarContainer {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    height: 8px;
+    flex-basis: 100px;
+    overflow: hidden;
+  }
+  
+  .progressBar {
+    background-color: #007bff;
+    height: 100%;
+    font-size: 0.65rem;
+    text-align: right;
+    color: white;
+    padding-right: 4px;
+    line-height: 8px;
+    transition: width 0.3s;
+  }
+  
+  .lastUpdated {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: #888;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  
+  .projectItem:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlayText {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .noProjects {
+    color: #777;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 16px;
+    text-align: center;
+  }
+  

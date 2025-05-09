@@ -10,4 +10,4 @@ const SuperAdminLayout = ({ children }) => (
   </>
 );
 
-export default SuperAdminLayout;
+export default SuperAdminLayout;  
