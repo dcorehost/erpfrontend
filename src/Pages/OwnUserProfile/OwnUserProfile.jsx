@@ -624,28 +624,24 @@ const EditableField = ({
           onChange={handleInputChange}
         />
       )
-    ) : (
-      <div className={styles.staticValue}>
-        {Array.isArray(formData[fieldName]) 
-          ? formData[fieldName].join(', ') || 'Not specified'
-          : formData[fieldName] || 'Not specified'}
-      </div>
-    )}
+  //   ) : (
+  //     <div className={styles.staticValue}>
+  //       {Array.isArray(formData[fieldName]) 
+  //         ? formData[fieldName].join(', ') || 'Not specified'
+  //         : formData[fieldName] || 'Not specified'}
+  //     </div>
+  //   )}
+  // </div>
+) : (
+  <div className={styles.staticValue}>
+    {!Array.isArray(formData[fieldName])
+      ? formData[fieldName] || 'N/A'
+      : formData[fieldName].join(', ') || 'N/A'}
   </div>
+)}
+</div>
 );
 
+
+
 export default OwnUserProfile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

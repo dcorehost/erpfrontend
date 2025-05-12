@@ -76,6 +76,16 @@ const SuperAdminSidebar = ({ children }) => {
         // { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
       ],
     },
+    {
+      title: "Client Section",
+      icon: <FaCalendarAlt />,
+      link: "/#",
+      submenus: [
+        { title: "Create Project", icon: <FaCalendarAlt />, link: "/superadmin-clientsection-createproject" },
+        { title: "New Request", icon: <FaClipboardList />, link: "/" },
+        { title: "Thinking", icon: <FaClipboardList />, link: "/" },
+      ],
+    }
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
