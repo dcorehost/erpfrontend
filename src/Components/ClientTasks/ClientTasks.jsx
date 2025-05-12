@@ -71,52 +71,52 @@ const ClientTasks = () => {
 
   // API CALL: Create new task
   // API CALL: Create new task
-const handleAddTask = async () => {
-  if (taskFormData.title.trim()) {
-    setLoading(true);
-    try {
-      const payload = {
-        title: taskFormData.title,
-        description: taskFormData.description,
-        dueDate: taskFormData.dueDate || undefined,
-        priority: taskFormData.priority,
-        completed: false,
-        assignedBy: "Admin", // ← Must match your backend expected field
-        attachments: ["https://example.com/design.jpg"], // ← Optional default
-      };
+  const handleAddTask = async () => {
+    if (taskFormData.title.trim()) {
+      setLoading(true);
+      try {
+        const payload = {
+          title: taskFormData.title,
+          description: taskFormData.description,
+          dueDate: taskFormData.dueDate || undefined,
+          priority: taskFormData.priority,
+          completed: false,
+          assignedBy: "Admin", // ← Must match your backend expected field
+          attachments: ["https://example.com/design.jpg"], // ← Optional default
+        };
 
-      const response = await fetch(
-        "http://209.74.89.83/erpbackend/create-task",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Auth.getToken()}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+        const response = await fetch(
+          "http://209.74.89.83/erpbackend/create-task",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Auth.getToken()}`,
+            },
+            body: JSON.stringify(payload),
+          }
+        );
 
-      if (!response.ok) throw new Error("Failed to create task");
+        if (!response.ok) throw new Error("Failed to create task");
 
-      const result = await response.json();
-      setTasks([...tasks, result.data]);
+        const result = await response.json();
+        setTasks([...tasks, result.data]);
 
-      setTaskFormData({
-        title: "",
-        description: "",
-        dueDate: "",
-        priority: "medium",
-      });
-      setShowTaskForm(false);
-      setError(null);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        setTaskFormData({
+          title: "",
+          description: "",
+          dueDate: "",
+          priority: "medium",
+        });
+        setShowTaskForm(false);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
-};
+  };
 
   // API CALL: Toggle task completion status
   const handleToggleComplete = async (id) => {
@@ -186,76 +186,81 @@ const handleAddTask = async () => {
   };
 
   // API CALL: Add comment to task - UPDATED VERSION
-// API CALL: Add comment to task - UPDATED VERSION
-const handleAddComment = async (e) => {
-  e?.preventDefault(); // ✅ Good practice to prevent default form submission
+  // API CALL: Add comment to task - UPDATED VERSION
+  const handleAddComment = async (e) => {
+    e?.preventDefault(); // ✅ Good practice to prevent default form submission
+    console.log(
+      "handleAddComment called. selectedTask at start:",
+      selectedTask
+    ); // 🔍 DEBUG
 
-  if (!newComment.trim()) {
-    setError("Please enter comment text");
-    return;
-  }
-
-  // if (!selectedTask?._id) { // ✅ Robust check to ensure a task is selected
-  //   setError("No task selected");
-  //   return;
-  // }
-
-  setLoading(true);
-  setError(null);
-
-  try {
-    const token = Auth.getToken();
-    if (!token) {
-      throw new Error("Please login to add comments");
+    if (!newComment.trim()) {
+      setError("Please enter comment text");
+      return;
     }
 
-    const response = await fetch(
-      `http://209.74.89.83/erpbackend/create-comment?id=${selectedTask._id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ text: newComment }),
-        // ✅ Double-check if your backend expects 'text'. It might be 'content' or something else.
+    // ✅ ENSURE selectedTask HAS AN ID BEFORE MAKING THE API CALL**
+    if (!selectedTask?._id) {
+      setError("No task selected");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const token = Auth.getToken();
+      if (!token) {
+        throw new Error("Please login to add comments");
       }
-    );
 
-    if (!response.ok) {
-      // ✅ Important: Log the error response from the server for debugging
-      const errorData = await response.json().catch(() => ({}));
-      console.error("Add comment API error:", response.status, errorData);
-      throw new Error(errorData.message || "Failed to add comment");
+      const response = await fetch(
+        `http://209.74.89.83/erpbackend/create-comment?id=${selectedTask._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ text: newComment }),
+          // ✅ Double-check if your backend expects 'text'. It might be 'content' or something else.
+        }
+      );
+
+      if (!response.ok) {
+        // ✅ Important: Log the error response from the server for debugging
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Add comment API error:", response.status, errorData);
+        throw new Error(errorData.message || "Failed to add comment");
+      }
+
+      const { data: newCommentData } = await response.json();
+
+      setSelectedTask((prev) => ({
+        ...prev,
+        comments: [...(prev.comments || []), newCommentData],
+      }));
+  
+      // Update global task list
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === selectedTask._id
+            ? {
+                ...task,
+                comments: [...(task.comments || []), newCommentData],
+              }
+            : task
+        )
+      );
+  
+      setNewComment("");
+    } catch (err) {
+      console.error("Comment error:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-
-    const { data: newCommentData } = await response.json();
-    
-    const updatedTasks = tasks.map(task =>
-      task._id === selectedTask._id
-        ? {
-            ...task,
-            comments: [...(task.comments || []), newCommentData]
-            
-          }
-        : task
-    );
-
-    setTasks(updatedTasks);
-    setSelectedTask(prev => ({
-      ...prev,
-      comments: [...(prev.comments || []), newCommentData]
-      // ✅ Same considerations as above for 'prev.comments'.
-    }));
-
-    setNewComment(""); 
-  } catch (err) {
-    console.error("Comment error:", err);
-    setError(err.message);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   // API CALL: Update task
   const handleUpdateTask = async () => {
@@ -470,7 +475,14 @@ const handleAddComment = async (e) => {
                   className={`${styles.taskItem} ${
                     selectedTask?._id === task._id ? styles.selected : ""
                   }`}
-                  onClick={() => setSelectedTask(task)}
+                  onClick={() => {
+                    console.log("Task item clicked:", task); // 🔍 DEBUG
+                    setSelectedTask(task);
+
+                    setTimeout(() => {
+                      console.log("selectedTask after set:", task); // 🟢 This shows expected new value
+                    }, 0);
+                  }}
                 >
                   <div className={styles.taskHeader}>
                     <div className={styles.taskStatus}>
@@ -616,9 +628,7 @@ const handleAddComment = async (e) => {
                 )}
 
               <div className={styles.taskComments}>
-                <h3>
-                    Comments ({selectedTask.comments?.length || 0})
-                    </h3>
+                <h3>Comments ({selectedTask.comments?.length || 0})</h3>
                 {selectedTask.comments && selectedTask.comments.length > 0 ? (
                   <ul className={styles.commentList}>
                     {selectedTask.comments.map((comment) => (
@@ -644,21 +654,23 @@ const handleAddComment = async (e) => {
                 )}
 
                 <div className={styles.addComment}>
-                <form onSubmit={handleAddComment}> {/* Added form wrapper */}
-                  <textarea
-                    placeholder="Add a comment..."
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    rows={3}
-                  />
-                  <button
-                    className={styles.addCommentButton}
-                    onClick={handleAddComment}
-                    disabled={!newComment.trim()}
-                  >
-        {loading ? "Adding..." : "Add Comment"} {/* Added loading state */}
-        </button>
-        </form>
+                  <form onSubmit={handleAddComment}>
+                    {" "}
+                    {/* Added form wrapper */}
+                    <textarea
+                      placeholder="Add a comment..."
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                      rows={3}
+                    />
+                    <button
+                      type="submit" // ✅ let the form handle it
+                      className={styles.addCommentButton}
+                      disabled={!newComment.trim()}
+                    >
+                      {loading ? "Adding..." : "Add Comment"}
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
