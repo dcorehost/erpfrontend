@@ -68,6 +68,9 @@ import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProj
 import MyProfile from './Pages/MyProfile/MyProfile';
 import UpdateUserProfile from './Components/UpdateUserProfile/UpdateUserProfile';
 import ClientTasks from './Components/ClientTasks/ClientTasks'; 
+import CLientSidebar from './Components/ClientSideBar/ClientSideBar';
+import RedirectBasedOnUser from './RedirectBasedOnUser';
+import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
 
 
 const App = () => {
@@ -91,7 +94,7 @@ const App = () => {
           {typeOfUser === "Admin" && <SideBar />}
           {typeOfUser === "User" && <UserSidebar />}
           {typeOfUser === "superadmin" && <SuperAdminSidebar />}
-          {typeOfUser === "Client" && <ClientSideBar />}
+          {typeOfUser === "Client" && <CLientSidebar />}
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
@@ -109,6 +112,9 @@ const App = () => {
                 } />
               }
             />
+
+
+            {/* //common routes */}
 
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/logout" element={<Logout />} />
@@ -204,6 +210,8 @@ const App = () => {
                 <Route path="/superadmin-adminleave" element={<PendingLeavesPage />} />
                 <Route path="/superadmin-userupdate" element={<UpdateUserProfile />} />
                 <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
+                <Route path="/superadmin-clientsection-createproject" element={<ClientCreateProject />} /> 
+
               </>
             )}
 

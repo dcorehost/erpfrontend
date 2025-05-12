@@ -271,7 +271,7 @@ case 'personal':
                 userData.userLeaves.map((leave, index) => (
                   <div key={index} className={styles.leaveCard}>
                     <div className={styles.leaveHeader}>
-                      <span className={`${styles.leaveStatus} ${styles[leave.state.toLowerCase()]}`}>
+                      <span className={`${styles.leaveStatus} ${styles[leave.state.toLowerCase()]}`} >
                         {leave.state}
                       </span>
                       <span className={styles.leaveType}>{leave.leaveType}</span>
@@ -308,6 +308,7 @@ case 'personal':
             {userProjectCount > 0 ? (
               Object.entries(userTasksByProject).map(([projectName, tasks]) => (
                 <div key={`user-${projectName}`} className={styles.projectCard}>
+                  
                   <div 
                     className={styles.projectHeader}
                     onClick={() => toggleProject(`user-${projectName}`)}
