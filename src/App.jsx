@@ -224,6 +224,7 @@ const App = () => {
                 <Route path="/client-project-details" element={<ClientProjectDetails />} />
                 <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
                 <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
+      
                 </>
             )}
 
