@@ -68,7 +68,7 @@ import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProj
 import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
 import MyProfile from './Pages/MyProfile/MyProfile';
 import UpdateUserProfile from './Components/UpdateUserProfile/UpdateUserProfile';
-import ClientTasks from './Components/ClientTasks/ClientTasks'; 
+// import ClientTasks from './Components/ClientTasks/ClientTasks'; 
 import CLientSidebar from './Components/ClientSideBar/ClientSideBar';
 import RedirectBasedOnUser from './RedirectBasedOnUser';
 import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
