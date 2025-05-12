@@ -71,6 +71,7 @@ import ClientTasks from './Components/ClientTasks/ClientTasks';
 import CLientSidebar from './Components/ClientSideBar/ClientSideBar';
 import RedirectBasedOnUser from './RedirectBasedOnUser';
 import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
+import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
 
 
 const App = () => {
@@ -211,6 +212,7 @@ const App = () => {
                 <Route path="/superadmin-userupdate" element={<UpdateUserProfile />} />
                 <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
                 <Route path="/superadmin-clientsection-createproject" element={<ClientCreateProject />} /> 
+                <Route path="/superadmin-clientsection-clientrequest" element={<ClientNewRequest />} /> 
 
               </>
             )}
