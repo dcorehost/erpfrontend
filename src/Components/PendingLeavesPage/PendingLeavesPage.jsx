@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +12,7 @@ const PendingLeavesPage = () => {
   const [error, setError] = useState(null);
   const [remarks, setRemarks] = useState('');
   const [selectedLeaveId, setSelectedLeaveId] = useState(null);
-  const [actionInProgress, setActionInProgress] = useState(false);
+  const [actionInProgress, setActionInProgress] = useState({});
 
   useEffect(() => {
     const fetchPendingLeaves = async () => {
@@ -47,7 +48,7 @@ const PendingLeavesPage = () => {
       return;
     }
 
-    setActionInProgress(true);
+    setActionInProgress(prev => ({ ...prev, [leaveId]: action }));
     setError(null);
 
     try {
@@ -76,7 +77,7 @@ const PendingLeavesPage = () => {
       setError(err.response?.data?.message || err.message || 'Failed to process leave');
       toast.error('Error processing leave');
     } finally {
-      setActionInProgress(false);
+      setActionInProgress(prev => ({ ...prev, [leaveId]: null }));
     }
   };
 
@@ -126,10 +127,7 @@ const PendingLeavesPage = () => {
       <ToastContainer />
       <div className={styles.header}>
         <h1>Pending Leave Approvals</h1>
-        <div className={styles.userInfo}>
-          <span>Logged in as: {Auth.getAuthData().username}</span>
-          <span>({Auth.getAuthData().typeOfUser})</span>
-        </div>
+        
       </div>
 
       {pendingLeaves.length === 0 ? (
@@ -174,17 +172,17 @@ const PendingLeavesPage = () => {
                           <div className={styles.actionButtons}>
                             <button
                               onClick={() => handleApproveReject(leave._id, 'approve')}
-                              disabled={actionInProgress}
+                              disabled={actionInProgress[leave._id] === 'approve'}
                               className={styles.approveButton}
                             >
-                              {actionInProgress ? 'Processing...' : 'Approve'}
+                              {actionInProgress[leave._id] === 'approve' ? 'Processing...' : 'Approve'}
                             </button>
                             <button
                               onClick={() => handleApproveReject(leave._id, 'reject')}
-                              disabled={actionInProgress || !remarks.trim()}
+                              disabled={actionInProgress[leave._id] === 'reject' || !remarks.trim()}
                               className={styles.rejectButton}
                             >
-                              {actionInProgress ? 'Processing...' : 'Reject'}
+                              {actionInProgress[leave._id] === 'reject' ? 'Processing...' : 'Reject'}
                             </button>
                           </div>
                         </div>

@@ -1,938 +1,139 @@
 
-
-// import { useState, useRef } from 'react';
-// import styles from './OwnUserProfile.module.css';
-
-// const OwnUserProfile = () => {
-//   const [formData, setFormData] = useState({
-//     employeeid: 'emp123',
-//     username: 'surjeet',
-//     email: 'surjeet@gmail.com',
-//     displayname: 'Surjeet Kumar',
-//     adGender: '',
-//     phone: '',
-//     dateOfBirth: '',
-//     pincode: '',
-//     password: '',
-//     confirmPassword: '',
-//     language: '',
-//     deduction: [],
-//     designation: 'MERN Stack Developer',
-//     profilePhoto: null,
-//     adCountry: '',
-
-//     dohState: ''
-//   });
-
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-//   const [previewUrl, setPreviewUrl] = useState(null);
-
-//   const [showDisplayNamePopup, setShowDisplayNamePopup] = useState(false);
-//   const [newDisplayName, setNewDisplayName] = useState('');
-//   const [showPincodePopup, setShowPincodePopup] = useState(false);
-//   const [newPincode, setNewPincode] = useState('');
-//   const [showEmailPopup, setShowEmailPopup] = useState(false);
-//   const [newEmail, setNewEmail] = useState('');
-//   const [showCountryPopup, setShowCountryPopup] = useState(false);
-//   const [newCountry, setNewCountry] = useState('');
-//   const [showStatePopup, setShowStatePopup] = useState(false);
-//   const [newState, setNewState] = useState('');
-//   const [showPasswordPopup, setShowPasswordPopup] = useState(false);
-//   const [newPassword, setNewPassword] = useState('');
-//   const [newConfirmPassword, setNewConfirmPassword] = useState('');
-//   const [showPhonePopup, setShowPhonePopup] = useState(false);
-//   const [newPhone, setNewPhone] = useState('');
-//   const [showLanguagePopup, setShowLanguagePopup] = useState(false);
-//   const [newLanguage, setNewLanguage] = useState('');
-//   const [showDeductionPopup, setShowDeductionPopup] = useState(false);
-//   const [newDeduction, setNewDeduction] = useState([]); 
-
-
-//   const fileInputRef = useRef(null);
-
-//   const handleInputChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handlePhotoUpload = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       setFormData(prev => ({ ...prev, profilePhoto: file }));
-//       const reader = new FileReader();
-//       reader.onloadend = () => setPreviewUrl(reader.result);
-//       reader.readAsDataURL(file);
-//     }
-//   };
-
-//   const handleRemovePhoto = () => {
-//     setFormData(prev => ({ ...prev, profilePhoto: null }));
-//     setPreviewUrl(null);
-//     if (fileInputRef.current) {
-//       fileInputRef.current.value = '';
-//     }
-//   };
-
-
-
-//   const handleUpdateDisplayName = () => {
-//     setFormData(prev => ({ ...prev, displayname: newDisplayName }));
-//     setShowDisplayNamePopup(false);
-//     setNewDisplayName('');
-//   };
-
-//   const handleUpdatePincode = () => {
-//     setFormData(prev => ({ ...prev, pincode: newPincode }));
-//     setShowPincodePopup(false);
-//     setNewPincode('');
-//   };
-
-//   const handleUpdateEmail = () => {
-//     setFormData(prev => ({ ...prev, email: newEmail }));
-//     setShowEmailPopup(false);
-//     setNewEmail('');
-//   };
-
-//   const handleUpdateCountry = () => {
-//     setFormData(prev => ({ ...prev, adCountry: newCountry }));
-//     setShowCountryPopup(false);
-//     setNewCountry('');
-//   };
-
-//   const handleUpdateState = () => {
-//     setFormData(prev => ({ ...prev, dohState: newState }));
-//     setShowStatePopup(false);
-//     setNewState('');
-//   };
-
-//   const handleUpdateDeduction = () => {
-//     setFormData(prev => ({ ...prev, deduction: newDeduction }));
-//     setShowDeductionPopup(false);
-//     setNewDeduction('');
-//   };
-
-//   const handleUpdatePassword = () => {
-//     if (newPassword === newConfirmPassword) {
-//       setFormData(prev => ({ ...prev, password: newPassword, confirmPassword: newConfirmPassword }));
-//       setShowPasswordPopup(false);
-//       setNewPassword('');
-//       setNewConfirmPassword('');
-//     } else {
-//       alert("Passwords do not match!"); // Basic error handling
-//     }
-//   };
-
-//   const handleUpdatePhone = () => {
-//     setFormData(prev => ({ ...prev, phone: newPhone }));
-//     setShowPhonePopup(false);
-//     setNewPhone('');
-//   };
-
-//   const handleUpdateLanguage = () => {
-//     setFormData(prev => ({ ...prev, language: newLanguage }));
-//     setShowLanguagePopup(false);
-//     setNewLanguage('');
-//   };
-
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log('Form Data Submitted:', formData);
-//     alert('Profile Updated!');
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h1 className={styles.header}>User Profile </h1>
-
-//       <form onSubmit={handleSubmit}>
-//         {/* Profile Header Section */}
-//         <div className={styles.section}>
-//           <div className={styles.profileHeader}>
-//             <div className={styles.photoSection}>
-//               <h2 className={styles.sectionTitle}>Profile Photo</h2>
-//               <div className={styles.photoContainer}>
-//                 <div
-//                   className={styles.photoPreview}
-//                   onClick={() => fileInputRef.current && fileInputRef.current.click()}
-//                 >
-//                   {previewUrl ? (
-//                     <>
-//                       <img
-//                         src={previewUrl}
-//                         alt="Profile preview"
-//                         className={styles.profileImage}
-//                       />
-//                       <button
-//                         type="button"
-//                         className={styles.removePhotoButton}
-//                         onClick={handleRemovePhoto}
-//                       >
-//                         ×
-//                       </button>
-//                     </>
-//                   ) : (
-//                     <div className={styles.uploadPrompt}>
-//                       <span className={styles.uploadIcon}>📷</span>
-//                       <p>Click to upload photo</p>
-//                     </div>
-//                   )}
-//                 </div>
-//                 <input
-//                   type="file"
-//                   ref={fileInputRef}
-//                   accept="image/*"
-//                   onChange={handlePhotoUpload}
-//                   className={styles.fileInput}
-//                 />
-//               </div>
-//             </div>
-
-//             <div className={styles.userInfoSection}>
-//               <div className={styles.formGroup}>
-//                 <div className={styles.staticText}>
-//                   <strong>Employee ID:</strong> {formData.employeeid}
-//                 </div>
-//               </div>
-//               <div className={styles.formGroup}>
-//                 <div className={styles.staticText}>
-//                   <strong>Username:</strong> {formData.username}
-//                 </div>
-//               </div>
-//               <div className={styles.formGroup}>
-//                 <div className={styles.staticText}>
-//                   <strong>Email ID:</strong> {formData.email}
-//                 </div>
-//               </div>
-//               <div className={styles.formGroup}>
-//                 <div className={styles.staticText}>
-//                   <strong>Designation:</strong> {formData.designation}
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Personal Information Section */}
-//         <div className={styles.section}>
-//           <h2 className={styles.sectionTitle}>Personal Details</h2>
-//           <div className={styles.formRow}>
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>username</label>
-//               <input
-//                 type="text"
-//                 name="username"
-//                 className={styles.input}
-//                 placeholder="Enter username"
-//                 value={formData.username}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-
-
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>Designation</label>
-//               <input
-//                 type="text"
-//                 name="designation"
-//                 className={styles.input}
-//                 placeholder="Enter designation"
-//                 value={formData.designation}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>Employee ID</label>
-//               <input
-//                 type="text"
-//                 name="employeeid"
-//                 className={styles.input}
-//                 placeholder="Enter employee ID"
-//                 value={formData.employeeid}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>Email</label>
-//                 <a
-//                   href="#update-email"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowEmailPopup(true);
-//                   }}
-//                 >
-//                   Update
-//                 </a>
-//               </div>
-//               <input
-//                 type="email"
-//                 name="email"
-//                 className={styles.input}
-//                 placeholder="Enter email"
-//                 value={formData.email}
-//                 readOnly
-//               />
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>Display Name</label>
-//                 <a
-//                   href="#update-displayname"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowDisplayNamePopup(true);
-//                   }}
-//                 >
-//                   Update displayname
-//                 </a>
-//               </div>
-//               <input
-//                 type="text"
-//                 name="displayname"
-//                 className={styles.input}
-//                 placeholder="Enter displayname"
-//                 value={formData.displayname}
-//                 readOnly
-//               />
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>Gender</label>
-//               <select
-//                 name="adGender"
-//                 className={styles.select}
-//                 value={formData.adGender}
-//                 onChange={handleInputChange}
-//               >
-//                 <option value="">Select Gender</option>
-//                 <option value="male">Male</option>
-//                 <option value="female">Female</option>
-//                 <option value="other">Other</option>
-//               </select>
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>Phone</label>
-//                 <a
-//                   href="#update-phone"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowPhonePopup(true);
-//                   }}
-//                 >
-//                   Update
-//                 </a>
-//               </div>
-//               <input
-//                 type="text"
-//                 name="phone"
-//                 className={styles.input}
-//                 placeholder="Enter phone number"
-//                 value={formData.phone}
-//                 readOnly
-//               />
-//             </div>
-
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>Date of Birth</label>
-//               <input
-//                 type="date"
-//                 name="dateOfBirth"
-//                 className={styles.input}
-//                 value={formData.dateOfBirth}
-//                 onChange={handleInputChange}
-//               />
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Location Information */}
-//         <div className={styles.section}>
-//           <h2 className={styles.sectionTitle}>Location Details</h2>
-//           <div className={styles.formRow}>
-//           <div className={styles.formGroup}>
-//             <div className={styles.labelContainer}>
-//               <label className={styles.label}>Country</label>
-//               <button
-//                 type="button"
-//                 className={styles.updateButton}
-//                 onClick={() => setShowCountryPopup(true)}
-//               >
-//                 Update
-//               </button>
-//             </div>
-//             <select
-//               name="adCountry"
-//               className={styles.select}
-//               value={formData.adCountry}
-//               readOnly
-//             >
-//               <option value="">Select Country</option>
-//               <option value="">Select Country</option>
-//                 <option value="USA">United States of America</option>
-//                 <option value="GBR">United Kingdom of Great Britain and Northern Ireland</option>
-//                 <option value="IND">India</option>
-//                 {/* Add more country codes and full names as needed */}
-//                 <option value="CAN">Canada</option>
-//                 <option value="AUS">Australia</option>
-//                 <option value="DEU">Germany</option>
-//                 <option value="FRA">France</option>
-//                 <option value="JPN">Japan</option>
-//                 <option value="CHN">China</option>
-//                 <option value="BRA">Brazil</option>
-//               {/* Add more country codes and full names as needed */}
-//             </select>
-//           </div>
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>State</label>
-//                 <a
-//                   href="#update-state"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowStatePopup(true);
-//                   }}
-//                 >
-//                   Update
-//                 </a>
-//               </div>
-//               <input
-//                 type="text"
-//                 name="dohState"
-//                 className={styles.input}
-//                 placeholder="Enter state"
-//                 value={formData.dohState}
-//                 readOnly
-//               />
-//             </div>
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>PIN Code</label>
-//                 <a
-//                   href="#update-pincode"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowPincodePopup(true);
-//                   }}
-//                 >
-//                   Update
-//                 </a>
-//               </div>
-//               <input
-//                 type="text"
-//                 name="pincode"
-//                 className={styles.input}
-//                 placeholder="Enter pincode"
-//                 value={formData.pincode}
-//                 readOnly
-//               />
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Security Section */}
-//         <div className={styles.section}>
-//           <h2 className={styles.sectionTitle}>Security Settings</h2>
-//           <div className={styles.formRow}>
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>Password</label>
-//                 <a
-//                   href="#update-password"
-//                   className={styles.updateLink}
-//                   onClick={(e) => {
-//                     e.preventDefault();
-//                     setShowPasswordPopup(true);
-//                   }}
-//                 >
-//                   Update
-//                 </a>
-//               </div>
-//               <div className={styles.passwordContainer}>
-//                 <input
-//                   type={showPassword ? 'text' : 'password'}
-//                   name="password"
-//                   className={styles.input}
-//                   placeholder="Enter password"
-//                   value={formData.password}
-//                   readOnly
-//                 //onChange={handleInputChange}
-//                 />
-//                 <button
-//                   type="button"
-//                   className={styles.toggleButton}
-//                   onClick={() => setShowPassword(!showPassword)}
-//                 >
-//                   {showPassword ? 'Hide' : 'Show'}
-//                 </button>
-//               </div>
-//             </div>
-//             <div className={styles.formGroup}>
-//               <label className={styles.label}>Confirm Password</label>
-//               <div className={styles.passwordContainer}>
-//                 <input
-//                   type={showConfirmPassword ? 'text' : 'password'}
-//                   name="confirmPassword"
-//                   className={styles.input}
-//                   placeholder="Confirm password"
-//                   value={formData.confirmPassword}
-//                   readOnly
-//                 //onChange={handleInputChange}
-//                 />
-//                 <button
-//                   type="button"
-//                   className={styles.toggleButton}
-//                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-//                 >
-//                   {showConfirmPassword ? 'Hide' : 'Show'}
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Preferences Section */}
-//         <div className={styles.section}>
-//           <h2 className={styles.sectionTitle}>Preferences</h2>
-//           <div className={styles.formRow}>
-//           <div className={styles.formGroup}>
-//           <div className={styles.labelContainer}>
-//             <label className={styles.label}>Language</label>
-//             <button
-//               type="button"
-//               className={styles.updateLink}
-//               onClick={() => setShowLanguagePopup(true)}
-//             >
-//               Update
-//             </button>
-//           </div>
-//           <select
-//             name="language"
-//             className={styles.select}
-//             value={formData.language}
-//             readOnly
-//           >
-//             <option value="">Select Language</option>
-//             <option value="en">English</option>
-//             <option value="es">Spanish</option>
-//             <option value="de">German</option>
-//           </select>
-//         </div>
-      
-
-//             <div className={styles.formGroup}>
-//               <div className={styles.labelContainer}>
-//                 <label className={styles.label}>Deduction</label>
-//                 <button
-//                   type="button"
-//                   className={styles.updateLink}
-//                   onClick={() => setShowDeductionPopup(true)}
-//                 >
-//                   Update
-//                 </button>
-//               </div>
-//               <select
-//                 name="deduction"
-//                 className={styles.select}
-//                 value={formData.deduction}
-//                 readOnly
-//               >
-//                 <option value="">Select Deduction</option>
-//                 <option value="healthInsurance">Health Insurance</option>
-//                 <option value="providentFund">Provident Fund</option>
-//               </select>
-//             </div>
-//           </div>
-//         </div>
-
-
-//         {/* Display Name Update Popup */}
-//         {showDisplayNamePopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Display Name</h3>
-//               <input
-//                 type="text"
-//                 className={styles.input}
-//                 placeholder="New display name"
-//                 value={newDisplayName}
-//                 onChange={(e) => setNewDisplayName(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowDisplayNamePopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdateDisplayName}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* PIN Code Update Popup */}
-//         {showPincodePopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update PIN Code</h3>
-//               <input
-//                 type="text"
-//                 className={styles.input}
-//                 placeholder="New PIN Code"
-//                 value={newPincode}
-//                 onChange={(e) => setNewPincode(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowPincodePopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdatePincode}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Email Update Popup */}
-//         {showEmailPopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Email ID</h3>
-//               <input
-//                 type="email"
-//                 className={styles.input}
-//                 placeholder="New email ID"
-//                 value={newEmail}
-//                 onChange={(e) => setNewEmail(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowEmailPopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdateEmail}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Country Update Popup */}
-//         {showCountryPopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Country</h3>
-//               <select
-//                 className={styles.select}
-//                 value={newCountry}
-//                 onChange={(e) => setNewCountry(e.target.value)}
-//               >
-//                 <option value="">Select Country</option>
-//                 <option value="USA">United States of America</option>
-//                 <option value="GBR">United Kingdom of Great Britain and Northern Ireland</option>
-//                 <option value="IND">India</option>
-//                 {/* Add more country codes and full names as needed */}
-//                 <option value="CAN">Canada</option>
-//                 <option value="AUS">Australia</option>
-//                 <option value="DEU">Germany</option>
-//                 <option value="FRA">France</option>
-//                 <option value="JPN">Japan</option>
-//                 <option value="CHN">China</option>
-//                 <option value="BRA">Brazil</option>
-//                 {/* ... and so on ... */}
-//               </select>
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   type="button"
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowCountryPopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   type="button"
-//                   className={styles.saveButton}
-//                   onClick={handleUpdateCountry}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* State Update Popup */}
-//         {showStatePopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update State</h3>
-//               <input
-//                 type="text"
-//                 className={styles.input}
-//                 placeholder="New State"
-//                 value={newState}
-//                 onChange={(e) => setNewState(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowStatePopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdateState}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Password Update Popup */}
-//         {showPasswordPopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Password</h3>
-//               <input
-//                 type="password"
-//                 className={styles.input}
-//                 placeholder="New Password"
-//                 value={newPassword}
-//                 onChange={(e) => setNewPassword(e.target.value)}
-//               />
-//               <input
-//                 type="password"
-//                 className={styles.input}
-//                 placeholder="Confirm New Password"
-//                 value={newConfirmPassword}
-//                 onChange={(e) => setNewConfirmPassword(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowPasswordPopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdatePassword}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Phone Update Popup */}
-//         {showPhonePopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Phone Number</h3>
-//               <input
-//                 type="text"
-//                 className={styles.input}
-//                 placeholder="New Phone Number"
-//                 value={newPhone}
-//                 onChange={(e) => setNewPhone(e.target.value)}
-//               />
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowPhonePopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdatePhone}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* Language Update Popup */}
-//         {showLanguagePopup && (
-//         <div className={styles.popupOverlay}>
-//           <div className={styles.popupContent}>
-//             <h3>Update Language</h3>
-//             <select
-//               className={styles.select}
-//               value={newLanguage}
-//               onChange={(e) => setNewLanguage(e.target.value)}
-//             >
-//               <option value="">Select Language</option>
-//               <option value="en">English</option>
-//               <option value="es">Spanish</option>
-//               <option value="de">German</option>
-//             </select>
-//             <div className={styles.popupButtons}>
-//               <button
-//                 className={styles.cancelButton}
-//                 onClick={() => setShowLanguagePopup(false)}
-//               >
-//                 Cancel
-//               </button>
-//               <button
-//                 className={styles.saveButton}
-//                 onClick={handleUpdateLanguage}
-//               >
-//                 Save
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-
-//         {showDeductionPopup && (
-//           <div className={styles.popupOverlay}>
-//             <div className={styles.popupContent}>
-//               <h3>Update Deduction</h3>
-//               <select
-//                 className={styles.select}
-//                 value={newDeduction}
-//                 onChange={(e) => setNewDeduction(e.target.value)}
-//               >
-//                 <option value="">Select Deduction</option>
-//                 <option value="healthInsurance">Health Insurance</option>
-//                 <option value="providentFund">Provident Fund</option>
-//               </select>
-//               <div className={styles.popupButtons}>
-//                 <button
-//                   className={styles.cancelButton}
-//                   onClick={() => setShowDeductionPopup(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button
-//                   className={styles.saveButton}
-//                   onClick={handleUpdateDeduction}
-//                 >
-//                   Save
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         <button type="submit" className={styles.submitButton}>
-//           Save Profile
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default OwnUserProfile;
-
-
-
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import styles from './OwnUserProfile.module.css';
+import Auth from '../../Components/Services/Auth';
 
 const OwnUserProfile = () => {
-  const [formData, setFormData] = useState({
-    employeeid: 'emp123',
-    username: 'surjeet',
-    email: 'surjeet@gmail.com',
-    displayname: 'Surjeet Kumar',
-    adGender: '',
-    phone: '',
-    dateOfBirth: '',
-    pincode: '',
-    password: '',
-    confirmPassword: '',
-    language: '',
-    deduction: [],
-    designation: 'MERN Stack Developer',
-    profilePhoto: null,
-    adCountry: '',
-    dohState: ''
+  // State for each field's edit mode
+  const [editStates, setEditStates] = useState({
+    username: false,
+    displayName: false,
+    gender: false,
+    dateOfBirth: false,
+    language: false,
+    deductionType: false,
+    role: false,
+    country: false,
+    state: false,
+    pincode: false,
+    phone: false,
+    emailId: false,
+    profilePhoto: false
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    employeeId: '',
+    username: '',
+    displayName: '',
+    gender: '',
+    dateOfBirth: '',
+    language: [],
+    deductionType: [],
+    role: '',
+    country: '',
+    state: '',
+    pincode: '',
+    phone: '',
+    emailId: '',
+    profilePhoto: null
+  });
+
+  const [originalData, setOriginalData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
-
-  const [showDisplayNamePopup, setShowDisplayNamePopup] = useState(false);
-  const [newDisplayName, setNewDisplayName] = useState('');
-  const [showPincodePopup, setShowPincodePopup] = useState(false);
-  const [newPincode, setNewPincode] = useState('');
-  const [showEmailPopup, setShowEmailPopup] = useState(false);
-  const [newEmail, setNewEmail] = useState('');
-  const [showCountryPopup, setShowCountryPopup] = useState(false);
-  const [newCountry, setNewCountry] = useState('');
-  const [showStatePopup, setShowStatePopup] = useState(false);
-  const [newState, setNewState] = useState('');
-  const [showPasswordPopup, setShowPasswordPopup] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [newConfirmPassword, setNewConfirmPassword] = useState('');
-  const [showPhonePopup, setShowPhonePopup] = useState(false);
-  const [newPhone, setNewPhone] = useState('');
-  const [showLanguagePopup, setShowLanguagePopup] = useState(false);
-  const [newLanguage, setNewLanguage] = useState('');
-  const [showDeductionPopup, setShowDeductionPopup] = useState(false);
-  const [newDeduction, setNewDeduction] = useState('');
-  const [updatingField, setUpdatingField] = useState(''); // To store the field being updated
-
-  // New state to store pending updates
-  const [pendingUpdates, setPendingUpdates] = useState({});
-
+  const [requestSent, setRequestSent] = useState(false);
   const fileInputRef = useRef(null);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+  const API_BASE_URL = 'http://209.74.89.83/erpbackend/';
+
+  // Create axios instance with authorization token
+  const getAxiosInstance = () => {
+    return axios.create({
+      baseURL: API_BASE_URL,
+      headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`,
+        'Content-Type': 'application/json'
+      }
     });
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setLoading(true);
+        const axiosInstance = getAxiosInstance();
+        const response = await axiosInstance.get('get-user-detail');
+        const userData = response.data.users;
+        
+        const userType = Auth.getUserType();
+        setIsSuperAdmin(userType === 'Super Admin');
+
+        const mappedData = {
+          employeeId: userData.employeeId || '',
+          username: userData.username || '',
+          displayName: userData.displayName || '',
+          gender: userData.gender || '',
+          dateOfBirth: userData.dateOfBirth || '',
+          language: userData.language || [],
+          deductionType: userData.deductionType || [],
+          role: userData.role || '',
+          country: userData.address?.country || '',
+          state: userData.address?.state || '',
+          pincode: userData.address?.pincode || '',
+          phone: userData.contact?.phone || '',
+          emailId: userData.contact?.emailId || '',
+          profilePhoto: userData.profilePhoto || null
+        };
+
+        setFormData(mappedData);
+        setOriginalData(mappedData);
+
+        if (userData.profilePhoto) {
+          setPreviewUrl(userData.profilePhoto);
+        }
+
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        setError('Failed to load user data');
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleMultiSelectChange = (e) => {
+    const { name, options } = e.target;
+    const selectedValues = Array.from(options)
+      .filter(option => option.selected)
+      .map(option => option.value);
+    
+    setFormData(prev => ({
+      ...prev,
+      [name]: selectedValues
+    }));
   };
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData(prev => ({ ...prev, profilePhoto: file }));
       const reader = new FileReader();
-      reader.onloadend = () => setPreviewUrl(reader.result);
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+        setFormData(prev => ({ ...prev, profilePhoto: file }));
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -945,778 +146,502 @@ const OwnUserProfile = () => {
     }
   };
 
-  // Modified handleUpdateDisplayName function to request update
-  const handleRequestDisplayNameUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, displayname: newDisplayName }));
-    console.log('Requesting Display Name Update:', newDisplayName, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newDisplayName}`);
-    setShowDisplayNamePopup(false);
-    setNewDisplayName('');
+  const toggleFieldEdit = (fieldName) => {
+    setEditStates(prev => ({
+      ...prev,
+      [fieldName]: !prev[fieldName]
+    }));
   };
 
-  // Modified handleUpdatePincode function to request update
-  const handleRequestPincodeUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, pincode: newPincode }));
-    console.log('Requesting PIN Code Update:', newPincode, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newPincode}`);
-    setShowPincodePopup(false);
-    setNewPincode('');
-  };
+  const handleFieldSave = async (fieldName) => {
+    if (JSON.stringify(formData[fieldName]) === JSON.stringify(originalData[fieldName])) {
+      alert('No changes detected');
+      toggleFieldEdit(fieldName);
+      return;
+    }
 
-  // Modified handleUpdateEmail function to request update
-  const handleRequestEmailUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, email: newEmail }));
-    console.log('Requesting Email Update:', newEmail, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newEmail}`);
-    setShowEmailPopup(false);
-    setNewEmail('');
-  };
-
-  // Modified handleUpdateCountry function to request update
-  const handleRequestCountryUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, adCountry: newCountry }));
-    console.log('Requesting Country Update:', newCountry, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newCountry}`);
-    setShowCountryPopup(false);
-    setNewCountry('');
-  };
-
-  // Modified handleUpdateState function to request update
-  const handleRequestStateUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, dohState: newState }));
-    console.log('Requesting State Update:', newState, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newState}`);
-    setShowStatePopup(false);
-    setNewState('');
-  };
-
-  // Modified handleUpdateDeduction function to request update
-  const handleRequestDeductionUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, deduction: newDeduction }));
-    console.log('Requesting Deduction Update:', newDeduction, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newDeduction}`);
-    setShowDeductionPopup(false);
-    setNewDeduction('');
-  };
-
-  // Modified handleUpdatePassword function to request update
-  const handleRequestPasswordUpdate = () => {
-    if (newPassword === newConfirmPassword) {
-      setPendingUpdates(prev => ({ ...prev, password: newPassword }));
-      console.log('Requesting Password Update', "Field:", updatingField);
-      alert(`Request sent to admin for updating ${updatingField} to: ${newPassword}`);
-      setShowPasswordPopup(false);
-      setNewPassword('');
-      setNewConfirmPassword('');
-    } else {
-      alert("Passwords do not match!"); // Basic error handling
+    try {
+      const axiosInstance = getAxiosInstance();
+      
+      if (isSuperAdmin) {
+        const formDataToSend = new FormData();
+        if (fieldName === 'profilePhoto') {
+          formDataToSend.append('profilePhoto', formData.profilePhoto);
+          await axiosInstance.put('update-user-profile', formDataToSend, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+        } else {
+          await axiosInstance.put('update-user-profile', { [fieldName]: formData[fieldName] });
+        }
+        alert('Field updated successfully');
+      } else {
+        // Create update payload with only the changed field
+        const updatePayload = { [fieldName]: formData[fieldName] };
+        
+        // Only include username if it's the field being updated
+        if (fieldName === 'username') {
+          updatePayload.username = formData.username;
+        }
+        
+        await axiosInstance.put('request-profile-update', updatePayload);
+        setRequestSent(true);
+        alert('Profile update request sent successfully');
+      }
+      
+      setOriginalData(prev => ({ ...prev, [fieldName]: formData[fieldName] }));
+      toggleFieldEdit(fieldName);
+    } catch (err) {
+      console.error('Error updating field:', err);
+      alert('Failed to update field');
     }
   };
 
-  // Modified handleUpdatePhone function to request update
-  const handleRequestPhoneUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, phone: newPhone }));
-    console.log('Requesting Phone Update:', newPhone, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newPhone}`);
-    setShowPhonePopup(false);
-    setNewPhone('');
+  const handleFieldCancel = (fieldName) => {
+    setFormData(prev => ({
+      ...prev,
+      [fieldName]: originalData[fieldName]
+    }));
+    toggleFieldEdit(fieldName);
+    
+    if (fieldName === 'profilePhoto' && originalData.profilePhoto) {
+      setPreviewUrl(originalData.profilePhoto);
+    } else if (fieldName === 'profilePhoto') {
+      setPreviewUrl(null);
+    }
   };
 
-  // Modified handleUpdateLanguage function to request update
-  const handleRequestLanguageUpdate = () => {
-    setPendingUpdates(prev => ({ ...prev, language: newLanguage }));
-    console.log('Requesting Language Update:', newLanguage, "Field:", updatingField);
-    alert(`Request sent to admin for updating ${updatingField} to: ${newLanguage}`);
-    setShowLanguagePopup(false);
-    setNewLanguage('');
-  };
+  if (loading) {
+    return <div className={styles.container}>Loading...</div>;
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data (Initial):', formData);
-    console.log('Pending Updates:', pendingUpdates);
-    alert('Profile Update Request Sent (including pending changes)!');
-    // In a real application, you would likely send both formData (for directly editable fields)
-    // and pendingUpdates to the server.
-  };
+  if (error) {
+    return <div className={styles.container}>{error}</div>;
+  }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.header}>User Profile </h1>
+    <div className={styles.profileContainer}>
+      <div className={styles.profileCard}>
+        <div className={styles.profileHeader}>
+          <h1 className={styles.profileTitle}>
+            <i className={`${styles.profileIcon} fas fa-user-circle`}></i>
+            User Profile
+          </h1>
+          {requestSent && (
+            <div className={styles.notification}>
+              <i className="fas fa-check-circle"></i>
+              Your profile update request has been sent successfully.
+            </div>
+          )}
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        {/* Profile Header Section */}
-        <div className={styles.section}>
-          <div className={styles.profileHeader}>
-            <div className={styles.photoSection}>
-              <h2 className={styles.sectionTitle}>Profile Photo</h2>
-              <div className={styles.photoContainer}>
-                <div
-                  className={styles.photoPreview}
-                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
+        <div className={styles.profileSections}>
+          {/* Profile Photo Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-camera`}></i>
+                Profile Photo
+              </h2>
+              {!editStates.profilePhoto ? (
+                <button 
+                  onClick={() => toggleFieldEdit('profilePhoto')}
+                  className={styles.editButton}
                 >
-                  {previewUrl ? (
-                    <>
-                      <img
-                        src={previewUrl}
-                        alt="Profile preview"
-                        className={styles.profileImage}
-                      />
-                      <button
-                        type="button"
+                  <i className="fas fa-pencil-alt"></i> Edit
+                </button>
+              ) : (
+                <div className={styles.fieldActions}>
+                  <button
+                    onClick={() => handleFieldSave('profilePhoto')}
+                    className={styles.saveButton}
+                  >
+                    <i className="fas fa-check"></i> {isSuperAdmin ? 'Save' : 'Send'}
+                  </button>
+                  <button
+                    onClick={() => handleFieldCancel('profilePhoto')}
+                    className={styles.cancelButton}
+                  >
+                    <i className="fas fa-times"></i> Cancel
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <div className={styles.photoContainer}>
+              <div className={styles.photoWrapper}>
+                {previewUrl ? (
+                  <>
+                    <img src={previewUrl} alt="Profile" className={styles.profileImage} />
+                    {editStates.profilePhoto && (
+                      <button 
+                        onClick={handleRemovePhoto} 
                         className={styles.removePhotoButton}
-                        onClick={handleRemovePhoto}
                       >
-                        ×
+                        <i className="fas fa-trash"></i>
                       </button>
-                    </>
-                  ) : (
-                    <div className={styles.uploadPrompt}>
-                      <span className={styles.uploadIcon}>📷</span>
-                      <p>Click to upload photo</p>
-                    </div>
-                  )}
-                </div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  accept="image/*"
-                  onChange={handlePhotoUpload}
-                  className={styles.fileInput}
-                />
+                    )}
+                  </>
+                ) : (
+                  <div className={styles.photoPlaceholder}>
+                    <i className="fas fa-user"></i>
+                  </div>
+                )}
               </div>
-            </div>
-
-            <div className={styles.userInfoSection}>
-              <div className={styles.formGroup}>
-                <div className={styles.staticText}>
-                  <strong>Employee ID:</strong> {formData.employeeid}
+              {editStates.profilePhoto && (
+                <div className={styles.uploadContainer}>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handlePhotoUpload}
+                    accept="image/*"
+                    className={styles.fileInput}
+                    id="profilePhotoUpload"
+                  />
+                  <label htmlFor="profilePhotoUpload" className={styles.uploadButton}>
+                    <i className="fas fa-cloud-upload-alt"></i> Choose Photo
+                  </label>
                 </div>
-              </div>
-              <div className={styles.formGroup}>
-                <div className={styles.staticText}>
-                  <strong>Username:</strong> {formData.username}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <div className={styles.staticText}>
-                  <strong>Email ID:</strong> {formData.email}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <div className={styles.staticText}>
-                  <strong>Designation:</strong> {formData.designation}
-                </div>
-              </div>
+              )}
             </div>
           </div>
-        </div>
 
-        {/* Personal Information Section */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Personal Details</h2>
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>username</label>
-              <input
-                type="text"
-                name="username"
-                className={styles.input}
-                placeholder="Enter username"
-                value={formData.username}
-                onChange={handleInputChange}
-              />
+          {/* Basic Information Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-id-card`}></i>
+                Basic Information
+              </h2>
             </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Designation</label>
-              <input
-                type="text"
-                name="designation"
-                className={styles.input}
-                placeholder="Enter designation"
-                value={formData.designation}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Employee ID</label>
-              <input
-                type="text"
-                name="employeeid"
-                className={styles.input}
-                placeholder="Enter employee ID"
-                value={formData.employeeid}
-                onChange={handleInputChange}
-                readOnly
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Email</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowEmailPopup(true);
-                    setUpdatingField('email'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
+            
+            <div className={styles.formGrid}>
+              <div className={styles.formGroup}>
+                <label className={styles.inputLabel}>Employee ID</label>
+                <div className={styles.staticValue}>{formData.employeeId}</div>
               </div>
-              <input
+              
+              <EditableField 
+                fieldName="username"
+                label="Username"
+                type="text"
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+              
+              <EditableField 
+                fieldName="emailId"
+                label="Email"
                 type="email"
-                name="email"
-                className={styles.input}
-                placeholder="Enter email"
-                value={formData.email}
-                readOnly
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
             </div>
+          </div>
 
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Display Name</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowDisplayNamePopup(true);
-                    setUpdatingField('display name'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <input
+          {/* Personal Details Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-user-tie`}></i>
+                Personal Details
+              </h2>
+            </div>
+            
+            <div className={styles.formGrid}>
+              <EditableField 
+                fieldName="displayName"
+                label="Display Name"
                 type="text"
-                name="displayname"
-                className={styles.input}
-                placeholder="Enter displayname"
-                value={formData.displayname}
-                readOnly
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Gender</label>
-              <select
-                name="adGender"
-                className={styles.select}
-                value={formData.adGender}
-                onChange={handleInputChange}
-              >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Phone</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowPhonePopup(true);
-                    setUpdatingField('phone number'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <input
-                type="text"
-                name="phone"
-                className={styles.input}
-                placeholder="Enter phone number"
-                value={formData.phone}
-                readOnly
+              
+              <EditableField 
+                fieldName="gender"
+                label="Gender"
+                type="select"
+                options={[
+                  { value: '', label: 'Select Gender' },
+                  { value: 'Male', label: 'Male' },
+                  { value: 'Female', label: 'Female' },
+                  { value: 'Other', label: 'Other' }
+                ]}
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Date of Birth</label>
-              <input
+              
+              <EditableField 
+                fieldName="dateOfBirth"
+                label="Date of Birth"
                 type="date"
-                name="dateOfBirth"
-                className={styles.input}
-                value={formData.dateOfBirth}
-                onChange={handleInputChange}
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
             </div>
           </div>
-        </div>
 
-        {/* Location Information */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Location Details</h2>
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Country</label>
-                <button
-                  type="button"
-                  className={styles.updateButton}
-                  onClick={() => {
-                    setShowCountryPopup(true);
-                    setUpdatingField('country'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <select
-                name="adCountry"
-                className={styles.select}
-                value={formData.adCountry}
-                readOnly
-              >
-                <option value="">Select Country</option>
-                <option value="USA">United States of America</option>
-                <option value="GBR">United Kingdom</option>
-                <option value="IND">India</option>
-                <option value="CAN">Canada</option>
-                <option value="AUS">Australia</option>
-                <option value="DEU">Germany</option>
-                <option value="FRA">France</option>
-                <option value="JPN">Japan</option>
-                <option value="CHN">China</option>
-                <option value="BRA">Brazil</option>
-              </select>
+          {/* Contact Information Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-address-book`}></i>
+                Contact Information
+              </h2>
             </div>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>State</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowStatePopup(true);
-                    setUpdatingField('state'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <input
+            
+            <div className={styles.formGrid}>
+              <EditableField 
+                fieldName="phone"
+                label="Phone"
+                type="tel"
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+            </div>
+          </div>
+
+          {/* Location Information Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-map-marker-alt`}></i>
+                Location Information
+              </h2>
+            </div>
+            
+            <div className={styles.formGrid}>
+              <EditableField 
+                fieldName="country"
+                label="Country"
+                type="select"
+                options={[
+                  { value: '', label: 'Select Country' },
+                  { value: 'USA', label: 'United States' },
+                  { value: 'GBR', label: 'United Kingdom' },
+                  { value: 'IND', label: 'India' },
+                  { value: 'CAN', label: 'Canada' },
+                  { value: 'AUS', label: 'Australia' }
+                ]}
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+              
+              <EditableField 
+                fieldName="state"
+                label="State/Province"
                 type="text"
-                name="dohState"
-                className={styles.input}
-                placeholder="Enter state"
-                value={formData.dohState}
-                readOnly
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
-            </div>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>PIN Code</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowPincodePopup(true);
-                    setUpdatingField('pincode'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <input
+              
+              <EditableField 
+                fieldName="pincode"
+                label="ZIP/Postal Code"
                 type="text"
-                name="pincode"
-                className={styles.input}
-                placeholder="Enter pincode"
-                value={formData.pincode}
-                readOnly
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+            </div>
+          </div>
+
+          {/* Preferences Section */}
+          <div className={styles.profileSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                <i className={`${styles.sectionIcon} fas fa-cog`}></i>
+                Preferences
+              </h2>
+            </div>
+            
+            <div className={styles.formGrid}>
+              <EditableField 
+                fieldName="language"
+                label="Language"
+                type="select"
+                options={[
+                  { value: '', label: 'Select Language' },
+                  { value: 'English', label: 'English' },
+                  { value: 'Hindi', label: 'Hindi' },
+                  { value: 'Spanish', label: 'Spanish' }
+                ]}
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+              
+              <EditableField 
+                fieldName="deductionType"
+                label="Deduction Type"
+                type="select"
+                options={[
+                  { value: '', label: 'Select Deduction' },
+                  { value: 'Health Insurance', label: 'Health Insurance' },
+                  { value: 'Tax', label: 'Tax' },
+                  { value: 'Retirement', label: 'Retirement' }
+                ]}
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
+              />
+              
+              <EditableField 
+                fieldName="role"
+                label="Role"
+                type="text"
+                formData={formData}
+                editStates={editStates}
+                toggleFieldEdit={toggleFieldEdit}
+                handleInputChange={handleInputChange}
+                handleFieldSave={handleFieldSave}
+                handleFieldCancel={handleFieldCancel}
+                isSuperAdmin={isSuperAdmin}
               />
             </div>
           </div>
         </div>
-
-        {/* Security Section */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Security Settings</h2>
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Password</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowPasswordPopup(true);
-                    setUpdatingField('password'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <div className={styles.passwordContainer}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  className={styles.input}
-                  placeholder="Enter password"
-                  value={formData.password}
-                  readOnly
-                />
-                <button
-                  type="button"
-                  className={styles.toggleButton}
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? 'Hide' : 'Show'}
-                </button>
-              </div>
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Confirm Password</label>
-              <div className={styles.passwordContainer}>
-                <input
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  name="confirmPassword"
-                  className={styles.input}
-                  placeholder="Confirm password"
-                  value={formData.confirmPassword}
-                  readOnly
-                />
-                <button
-                  type="button"
-                  className={styles.toggleButton}
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? 'Hide' : 'Show'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Preferences Section */}
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Preferences</h2>
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Language</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowLanguagePopup(true);
-                    setUpdatingField('language'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <select
-                name="language"
-                className={styles.select}
-                value={formData.language}
-                readOnly
-              >
-                <option value="">Select Language</option>
-                <option value="english">English</option>
-                <option value="spanish">Spanish</option>
-                <option value="french">French</option>
-                <option value="german">German</option>
-                <option value="hindi">Hindi</option>
-              </select>
-            </div>
-            <div className={styles.formGroup}>
-              <div className={styles.labelContainer}>
-                <label className={styles.label}>Deduction</label>
-                <button
-                  type="button"
-                  className={styles.updateLink}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowDeductionPopup(true);
-                    setUpdatingField('deduction'); // Set the field name
-                  }}
-                >
-                  Request Update
-                </button>
-              </div>
-              <select
-                name="deduction"
-                className={styles.select}
-                value={formData.deduction}
-                readOnly
-              >
-                <option value="">Select Deduction</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Submit Button */}
-        <div className={styles.buttonContainer}>
-          <button type="submit" className={styles.submitButton}>
-            Update Profile
-          </button>
-        </div>
-      </form>
-
-      {/* Display Name Popup */}
-      {showDisplayNamePopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Display Name</h3>
-            <input
-              type="text"
-              value={newDisplayName}
-              onChange={(e) => setNewDisplayName(e.target.value)}
-              placeholder="Enter new display name"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestDisplayNameUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowDisplayNamePopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* PIN Code Popup */}
-      {showPincodePopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update PIN Code</h3>
-            <input
-              type="text"
-              value={newPincode}
-              onChange={(e) => setNewPincode(e.target.value)}
-              placeholder="Enter new PIN code"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestPincodeUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowPincodePopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Email Popup */}
-      {showEmailPopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Email</h3>
-            <input
-              type="email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              placeholder="Enter new email"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestEmailUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowEmailPopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Country Popup */}
-      {showCountryPopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Country</h3>
-            <select
-              value={newCountry}
-              onChange={(e) => setNewCountry(e.target.value)}
-              className={styles.select}
-            >
-              <option value="">Select Country</option>
-              <option value="USA">United States of America</option>
-              <option value="GBR">United Kingdom</option>
-              <option value="IND">India</option>
-              <option value="CAN">Canada</option>
-              <option value="AUS">Australia</option>
-              <option value="DEU">Germany</option>
-              <option value="FRA">France</option>
-              <option value="JPN">Japan</option>
-              <option value="CHN">China</option>
-              <option value="BRA">Brazil</option>
-            </select>
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestCountryUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowCountryPopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* State Popup */}
-      {showStatePopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update State</h3>
-            <input
-              type="text"
-              value={newState}
-              onChange={(e) => setNewState(e.target.value)}
-              placeholder="Enter new state"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestStateUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowStatePopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Password Popup */}
-      {showPasswordPopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Password</h3>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Enter new password"
-              className={styles.input}
-            />
-            <input
-              type="password"
-              value={newConfirmPassword}
-              onChange={(e) => setNewConfirmPassword(e.target.value)}
-              placeholder="Confirm new password"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestPasswordUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowPasswordPopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Phone Popup */}
-      {showPhonePopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Phone Number</h3>
-            <input
-              type="text"
-              value={newPhone}
-              onChange={(e) => setNewPhone(e.target.value)}
-              placeholder="Enter new phone number"
-              className={styles.input}
-            />
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestPhoneUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowPhonePopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Language Popup */}
-      {showLanguagePopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Language</h3>
-            <select
-              value={newLanguage}
-              onChange={(e) => setNewLanguage(e.target.value)}
-              className={styles.select}
-            >
-              <option value="">Select Language</option>
-              <option value="english">English</option>
-              <option value="spanish">Spanish</option>
-              <option value="french">French</option>
-              <option value="german">German</option>
-              <option value="hindi">Hindi</option>
-            </select>
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestLanguageUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowLanguagePopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Deduction Popup */}
-      {showDeductionPopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <h3>Update Deduction</h3>
-            <select
-              value={newDeduction}
-              onChange={(e) => setNewDeduction(e.target.value)}
-              className={styles.select}
-            >
-                <option value="">Select Deduction</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
-            <div className={styles.popupButtons}>
-              <button onClick={handleRequestDeductionUpdate} className={styles.popupButton}>
-                Confirm
-              </button>
-              <button onClick={() => setShowDeductionPopup(false)} className={styles.popupButton}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
+
+// Reusable EditableField component
+const EditableField = ({
+  fieldName,
+  label,
+  type = 'text',
+  options = [],
+  formData,
+  editStates,
+  toggleFieldEdit,
+  handleInputChange,
+  handleFieldSave,
+  handleFieldCancel,
+  isSuperAdmin
+}) => (
+  <div className={styles.formGroup}>
+    <div className={styles.fieldHeader}>
+      <label className={styles.inputLabel}>{label}</label>
+      {!editStates[fieldName] ? (
+        <button 
+          onClick={() => toggleFieldEdit(fieldName)}
+          className={styles.editButton}
+        >
+          <i className="fas fa-pencil-alt"></i> Edit
+        </button>
+      ) : (
+        <div className={styles.fieldActions}>
+          <button
+            onClick={() => handleFieldSave(fieldName)}
+            className={styles.saveButton}
+          >
+            <i className="fas fa-check"></i> {isSuperAdmin ? 'Save' : 'Send'}
+          </button>
+          <button
+            onClick={() => handleFieldCancel(fieldName)}
+            className={styles.cancelButton}
+          >
+            <i className="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      )}
+    </div>
+    
+    {editStates[fieldName] ? (
+      type === 'select' ? (
+        <select
+          name={fieldName}
+          className={styles.formInput}
+          value={formData[fieldName]}
+          onChange={handleInputChange}
+        >
+          {options.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          type={type}
+          name={fieldName}
+          className={styles.formInput}
+          value={formData[fieldName]}
+          onChange={handleInputChange}
+        />
+      )
+  //   ) : (
+  //     <div className={styles.staticValue}>
+  //       {Array.isArray(formData[fieldName]) 
+  //         ? formData[fieldName].join(', ') || 'Not specified'
+  //         : formData[fieldName] || 'Not specified'}
+  //     </div>
+  //   )}
+  // </div>
+) : (
+  <div className={styles.staticValue}>
+    {!Array.isArray(formData[fieldName])
+      ? formData[fieldName] || 'N/A'
+      : formData[fieldName].join(', ') || 'N/A'}
+  </div>
+)}
+</div>
+);
+
+
 
 export default OwnUserProfile;
