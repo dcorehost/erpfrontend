@@ -82,7 +82,7 @@ const SuperAdminSidebar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Create Project", icon: <FaCalendarAlt />, link: "/superadmin-clientsection-createproject" },
-        { title: "New Request", icon: <FaClipboardList />, link: "/" },
+        { title: "New Request", icon: <FaClipboardList />, link: "/superadmin-clientsection-clientrequest" },
         { title: "Thinking", icon: <FaClipboardList />, link: "/" },
       ],
     }
