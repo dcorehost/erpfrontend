@@ -273,9 +273,9 @@ import ClientDashboard from './Pages/ClientDashboard/ClientDashboard';
 import ClientProjects from './Components/ClientProjects/ClientProjects';
 import ClientProjectDetails from './Components/ClientProjectDetails/ClientProjectDetails';
 import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProjectsRequests'; // Import the new component
+import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
 import MyProfile from './Pages/MyProfile/MyProfile';
 import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
-import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
 
 
 const App = () => {
@@ -408,7 +408,7 @@ const App = () => {
               {typeOfUser === "Client" && (
               <>
                 <Route path="/client-dashboard" element={<ClientDashboard />} />
-                <Route path="/projects" element={<ClientProjects />} />
+                <Route path="/client-projects" element={<ClientProjects />} />
                 <Route path="/client-project-details" element={<ClientProjectDetails />} />
                 <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
                 <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}

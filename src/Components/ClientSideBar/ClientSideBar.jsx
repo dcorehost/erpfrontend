@@ -32,6 +32,7 @@ import {
   FaFileInvoice,
   FaMoneyBillWave
 } from "react-icons/fa"; // ✅ Fixed
+
 import { GrTasks } from "react-icons/gr";
 import styles from "./ClientSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -49,7 +50,7 @@ const CLientSidebar = ({ children }) => {
     },
     {
       title: "Projects",
-      link: "/projects",
+      link: "/client-projects",
       icon: <FaProjectDiagram />, 
     },
     {
@@ -141,30 +142,26 @@ const CLientSidebar = ({ children }) => {
             {menus.map((menu, index) => (
               <React.Fragment key={index}>
                 <li>
-                  <div className={styles.menuItem} onClick={() => toggleSubmenu(index)}>
-                    <div className={styles.icon}>{menu.icon}</div>
-                    <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
-                      {menu.title}
-                    </span>
-                    {menu.submenus && menu.submenus.length > 0 && (
-                      <span className={styles.dropdownIcon}>
-                        {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
-                      </span>
-                    )}
-                  </div>
-                  {activeMenu === index && menu.submenus && (
-                    <ul className={styles.submenu}>
-                      {menu.submenus.map((submenu, subIndex) => (
-                        <li key={subIndex} className={styles.submenuItem}>
-                          <Link to={submenu.link} className={styles.submenuLink}>
-                            {submenu.icon && <span className={styles.icon}>{submenu.icon}</span>}
-                            {submenu.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
+  {menu.submenus ? (
+    <div className={styles.menuItem} onClick={() => toggleSubmenu(index)}>
+      <div className={styles.icon}>{menu.icon}</div>
+      <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
+        {menu.title}
+      </span>
+      <span className={styles.dropdownIcon}>
+        {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
+      </span>
+    </div>
+  ) : (
+    <Link to={menu.link} className={styles.menuItem}>
+      <div className={styles.icon}>{menu.icon}</div>
+      <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
+        {menu.title}
+      </span>
+    </Link>
+  )}
+</li>
+
                 <hr className={styles.menuDivider} />
               </React.Fragment>
             ))}
