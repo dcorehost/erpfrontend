@@ -1,0 +1,417 @@
+.communicationContainer {
+    padding: 2rem;
+    background-color: #f8fafc;
+    min-height: 100vh;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header p {
+    color: #7f8c8d;
+    font-size: 1rem;
+  }
+  
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+  }
+  
+  .tab {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .tab:hover {
+    color: #3498db;
+  }
+  
+  .tab.active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+    font-weight: 600;
+  }
+  
+  .content {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+  }
+  
+  .loading, .emptyState {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+  }
+  
+  /* Messages Section */
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search {
+    display: flex;
+    align-items: center;
+    background-color: #f5f7fa;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  .search input {
+    border: none;
+    background: none;
+    margin-left: 0.5rem;
+    width: 100%;
+    outline: none;
+  }
+  
+  .newButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .newButton:hover {
+    background-color: #2980b9;
+  }
+  
+  .messageForm {
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .formGroup input,
+  .formGroup textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .formGroup textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .submitButton {
+    background-color: #2ecc71;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .submitButton:hover {
+    background-color: #27ae60;
+  }
+  
+  .messagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .message {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+  }
+  
+  .message:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message.unread {
+    border-left: 4px solid #3498db;
+    background-color: #f8fafc;
+  }
+  
+  .messageHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .messageHeader h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+  }
+  
+  .date {
+    color: #7f8c8d;
+    font-size: 0.8rem;
+  }
+  
+  .messageBody {
+    font-size: 0.9rem;
+  }
+  
+  .sender {
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .preview {
+    color: #34495e;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .messageActions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+  }
+  
+  .editButton, .deleteButton {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  
+  .editButton {
+    background-color: #f1c40f;
+    color: #2c3e50;
+  }
+  
+  .deleteButton {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .editForm {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+  }
+  
+  .editActions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+  
+  .saveButton, .cancelButton {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .saveButton {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .cancelButton {
+    background-color: #95a5a6;
+    color: white;
+  }
+  
+  /* Announcements Section */
+  .announcementsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .announcement {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+  }
+  
+  .announcementHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .announcementHeader h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+  }
+  
+  .announcementBody {
+    font-size: 0.9rem;
+    color: #34495e;
+  }
+  
+  .importantTag {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+  
+  /* Meetings Section */
+  .meetingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .meeting {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  
+  .meetingHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .meetingHeader h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+  }
+  
+  .meetingTime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+  }
+  
+  .meetingBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .participants {
+    font-size: 0.9rem;
+  }
+  
+  .participants p {
+    color: #7f8c8d;
+    margin-bottom: 0.25rem;
+  }
+  
+  .participants ul {
+    list-style-type: none;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .participants li {
+    background-color: #f5f7fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  
+  .meetingActions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .meetingActions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+  
+  .acceptButton {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .acceptButton:hover {
+    background-color: #27ae60;
+  }
+  
+  .declineButton {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .declineButton:hover {
+    background-color: #c0392b;
+  }
+  
+  .detailsButton {
+    background-color: #f5f7fa;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .detailsButton:hover {
+    background-color: #e0e0e0;
+  }
