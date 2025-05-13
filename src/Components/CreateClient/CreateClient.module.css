@@ -1,0 +1,99 @@
+/* Reset & Base styles */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  /* Form Grid Layout */
+  .formGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 600px) {
+    .formGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .formGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Form Fields */
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+  
+  .input,
+  .select {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus,
+  .select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .errorInput {
+    border-color: #dc3545;
+  }
+  
+  .errorText,
+  .error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Button */
+  button[type='submit'] {
+    margin-top: 2rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button[type='submit']:hover {
+    background-color: #0056b3;
+  }
+  
+  button[type='submit']:disabled {
+    background-color: #a2a2a2;
+    cursor: not-allowed;
+  }
+  

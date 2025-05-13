@@ -73,6 +73,7 @@ import CLientSidebar from './Components/ClientSideBar/ClientSideBar';
 import RedirectBasedOnUser from './RedirectBasedOnUser';
 import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
 import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
+import CreateClient from './Components/CreateClient/CreateClient';
 import ClientCommunication from './Components/ClientCommunication/ClientCommunication';
 
 
@@ -215,6 +216,7 @@ const App = () => {
                 <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
                 <Route path="/superadmin-clientsection-createproject" element={<ClientCreateProject />} /> 
                 <Route path="/superadmin-clientsection-clientrequest" element={<ClientNewRequest />} /> 
+                <Route path="/superadmin-clientsection-Createclient" element={<CreateClient />} /> 
 
               </>
             )}
