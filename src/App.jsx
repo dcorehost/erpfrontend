@@ -101,7 +101,7 @@ const App = () => {
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
-            <Route
+            {/* <Route
               path="/"
               element={
                 <Navigate to={
@@ -114,7 +114,26 @@ const App = () => {
                       : "/user-dashboard"
                 } />
               }
-            />
+            /> */}
+            <Route
+  path="/"
+  element={
+    !typeOfUser ? (
+      <div>Loading...</div> // Show loader while checking user type
+    ) : (
+      <Navigate 
+        to={
+          typeOfUser === "Admin" ? "/admin-dashboard" :
+          typeOfUser === "superadmin" ? "/superadmin-dashboard" :
+          typeOfUser === "Client" ? "/client-dashboard" :
+          "/user-dashboard"
+        } 
+        replace // Important: prevents history stack buildup
+      />
+    )
+  }
+/>
+
 
 
             {/* //common routes */}
@@ -227,7 +246,7 @@ const App = () => {
                 <Route path="/client-projects" element={<ClientProjects />} />
                 <Route path="/client-project-details" element={<ClientProjectDetails />} />
                 <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
-                <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
+                <Route path="/client-tasks" element={<ClientTasks />} /> 
       
                 </>
             )}
