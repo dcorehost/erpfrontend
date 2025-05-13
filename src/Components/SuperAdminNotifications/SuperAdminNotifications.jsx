@@ -11,6 +11,7 @@ const SuperAdminCreateNotification = () => {
     title: '',
     message: '',
     notificationType: 'announcement',
+    targetRoles: [], // Array to store selected roles
   });
   const [notifications, setNotifications] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,6 +19,9 @@ const SuperAdminCreateNotification = () => {
   const itemsPerPage = 5;
 
   const navigate = useNavigate();
+
+  // Define the roles here
+  const roles = ['user', 'admin', 'superadmin', 'client']; // Add roles here
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -44,14 +48,22 @@ const SuperAdminCreateNotification = () => {
     fetchNotifications();
   }, [currentPage]);
 
+  // Handle input change for the form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    if (name === 'targetRoles') {
+      const selectedRoles = Array.from(e.target.selectedOptions, option => option.value); // Handle multiple selections
+      setFormData(prev => ({ ...prev, [name]: selectedRoles }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, message } = formData;
+    const { title, message, notificationType, targetRoles } = formData;
 
     if (!title || !message) {
       toast.error('Title and message are required!');
@@ -64,16 +76,17 @@ const SuperAdminCreateNotification = () => {
 
       await axios.post(
         'http://209.74.89.83/erpbackend/create-notifications',
-        formData,
+        formData, // Send the whole form data with targetRoles
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         }
       );
 
-      setFormData({ title: '', message: '', notificationType: 'announcement' });
+      // Reset form data after successful submission
+      setFormData({ title: '', message: '', notificationType: 'announcement', targetRoles: [] });
       toast.success('Notification created successfully!');
       
       // Refresh notifications list
@@ -125,7 +138,25 @@ const SuperAdminCreateNotification = () => {
           >
             <option value="announcement">Announcement</option>
             <option value="activity">Activity</option>
-            <option value="alert">Alert</option>
+            {/* You can add more types here */}
+          </select>
+        </div>
+
+        <div className={styles['form-group']}>
+          <label htmlFor="targetRoles">Target Roles</label>
+          <select
+            id="targetRoles"
+            name="targetRoles"
+            value={formData.targetRoles}  // Ensure this is an array
+            onChange={handleChange}
+            multiple // Allow multiple selections
+            required
+          >
+            {roles.map(role => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -143,6 +174,7 @@ const SuperAdminCreateNotification = () => {
               <th>Message</th>
               <th>Type</th>
               <th>Date</th>
+              <th>Target Roles</th>
             </tr>
           </thead>
           <tbody>
@@ -152,6 +184,7 @@ const SuperAdminCreateNotification = () => {
                 <td>{notification.message}</td>
                 <td>{notification.notificationType}</td>
                 <td>{new Date(notification.createdAt).toLocaleDateString()}</td>
+                <td>{notification.targetRoles.join(', ')}</td> {/* Display target roles */}
               </tr>
             ))}
           </tbody>

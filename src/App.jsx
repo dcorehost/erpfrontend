@@ -74,6 +74,7 @@ import RedirectBasedOnUser from './RedirectBasedOnUser';
 import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
 import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
 import CreateClient from './Components/CreateClient/CreateClient';
+import ClientCommunication from './Components/ClientCommunication/ClientCommunication';
 
 
 const App = () => {
@@ -228,7 +229,8 @@ const App = () => {
                 <Route path="/client-project-details" element={<ClientProjectDetails />} />
                 <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
                 <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
-      
+                <Route path="/client-communication" element={<ClientCommunication />} /> {/* ✅ Correctly linked */}
+
                 </>
             )}
 
