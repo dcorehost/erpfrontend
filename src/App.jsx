@@ -75,7 +75,7 @@ import ClientCreateProject from './Components/ClientCreateProject/ClientCreatePr
 import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
 import CreateClient from './Components/CreateClient/CreateClient';
 import ClientCommunication from './Components/ClientCommunication/ClientCommunication';
-
+import ClientMessages from './Components/ClientMessageDetails/ClientMessageDetails';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -196,19 +196,9 @@ const App = () => {
                 <Route path='/UserTaskProgress' element={<UserTaskProgress />} />  
 
 
-
-
-
                 <Route path="/attendance-summary" element={<AttendanceSummary />} />
 
-
-
                 <Route path="/user-notifications" element={<UserNotifications />} />
-
-
-
-
-
 
                 <Route path='/payroll-summary' element={<PayrollSummary />} />
                 {/* <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} /> */}
@@ -236,10 +226,10 @@ const App = () => {
                 <Route path="/superadmin-clientsection-createproject" element={<ClientCreateProject />} /> 
                 <Route path="/superadmin-clientsection-clientrequest" element={<ClientNewRequest />} /> 
                 <Route path="/superadmin-clientsection-Createclient" element={<CreateClient />} /> 
+                <Route path="/superadmin-client-messages" element={<ClientMessages />} /> {/* ✅ Correctly linked */}
 
               </>
             )}
-
 
               {typeOfUser === "Client" && (
               <>
@@ -252,7 +242,6 @@ const App = () => {
 
                 </>
             )}
-
 
             {/* Default catch-all */}
             <Route path="*" element={<Navigate to="/" />} />

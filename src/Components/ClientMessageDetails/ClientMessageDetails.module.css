@@ -1,0 +1,309 @@
+/* Existing CSS (unchanged unless noted) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loadingContainer,
+  .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 18px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .backButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .backButton:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .messageActions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  /* Fix: Add archiveButton style */
+  .archiveButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background-color: #607d8b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .archiveButton:hover {
+    background-color: #546e7a;
+  }
+  
+  .resolveButton,
+  .deleteButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .resolveButton {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .resolveButton:hover {
+    background-color: #3e8e41;
+  }
+  
+  .deleteButton {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .deleteButton:hover {
+    background-color: #d32f2f;
+  }
+  
+  .messageContainer {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    padding: 20px;
+  }
+  
+  .messageHeader {
+    margin-bottom: 20px;
+  }
+  
+  .messageHeader h3 {
+    margin: 0;
+    color: #333;
+    font-size: 22px;
+  }
+  
+  .messageMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .sender {
+    font-weight: 600;
+  }
+  
+  /* Status tags */
+  .status {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  /* Existing statuses */
+  .status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status.resolved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status.in-progress {
+    background-color: #cce5ff;
+    color: #004085;
+  }
+  
+  /* ✅ Add this for archived */
+  .status.archived {
+    background-color: #d6d8db;
+    color: #383d41;
+  }
+  
+  .messageContent {
+    padding: 15px;
+    background-color: white;
+    border-radius: 4px;
+    border-left: 4px solid #3f51b5;
+    line-height: 1.6;
+  }
+  
+  .replySection {
+    margin-top: 30px;
+  }
+  
+  .replyButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .replyButton:hover {
+    background-color: #303f9f;
+  }
+  
+  .replyForm {
+    margin-top: 20px;
+  }
+  
+  .replyForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  
+  .replyActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .sendButton {
+    padding: 8px 20px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .sendButton:hover {
+    background-color: #303f9f;
+  }
+  
+  .cancelButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .repliesSection {
+    margin-top: 40px;
+  }
+  
+  .repliesSection h4 {
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .repliesList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .reply {
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid;
+  }
+  
+  .adminReply {
+    background-color: #e3f2fd;
+    border-left-color: #1976d2;
+    align-self: flex-end;
+    max-width: 80%;
+  }
+  
+  .clientReply {
+    background-color: #f5f5f5;
+    border-left-color: #757575;
+    align-self: flex-start;
+    max-width: 80%;
+  }
+  
+  .replyHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .replySender {
+    font-weight: 600;
+  }
+  
+  .replyDate {
+    color: #666;
+  }
+  
+  .replyContent {
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    .messageMeta {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .adminReply,
+    .clientReply {
+      max-width: 100%;
+    }
+  }
+  
