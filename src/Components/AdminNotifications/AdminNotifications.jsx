@@ -15,6 +15,9 @@ const NotificationForm = ({
   setMessage, 
   notificationType, 
   setNotificationType,
+  targetRoles,
+  setTargetRoles,
+  allowedRoles,
   error,
   success
 }) => {
@@ -43,6 +46,27 @@ const NotificationForm = ({
             required
           />
         </div>
+
+        <div className={styles['form-group']}>
+  <label htmlFor="targetRoles">Target Roles</label>
+  <select
+    id="targetRoles"
+    name="targetRoles"
+    multiple
+    value={targetRoles}
+    onChange={(e) => {
+      const selectedOptions = Array.from(e.target.selectedOptions).map(opt => opt.value);
+      setTargetRoles(selectedOptions);
+    }}
+    required
+  >
+    {allowedRoles.map(role => (
+      <option key={role} value={role}>{role}</option>
+    ))}
+  </select>
+  <small>Select one or more roles</small>
+</div>
+
         <div className={styles['form-group']}>
           <label htmlFor="notificationType">Notification Type</label>
           <select
@@ -52,7 +76,7 @@ const NotificationForm = ({
           >
             <option value="announcement">Announcement</option>
             <option value="activity">Activity</option>
-            <option value="alert">Alert</option>
+            {/* <option value="alert">Alert</option> */}
           </select>
         </div>
         <button type="submit" className={styles['submit-button']}>
@@ -125,7 +149,9 @@ const AdminPanel = () => {
     const [formData, setFormData] = useState({
       title: '',
       message: '',
-      notificationType: 'announcement'
+      notificationType: 'announcement',
+      targetRoles: [] // added
+
     });
     const [formStatus, setFormStatus] = useState({
       error: '',
@@ -171,14 +197,14 @@ const AdminPanel = () => {
     };
     const handleCreateNotification = async (e) => {
         e.preventDefault();
-        const { title, message } = formData;
+        const { title, message, targetRoles } = formData;
     
-        if (!title || !message) {
-          setFormStatus({ error: 'Title and message are required.', success: '' });
-          toast.error("Title and message are required!");  // Error Toast
+        if (!title || !message || !targetRoles.length) {
+          setFormStatus({ error: 'Title, message, and at least one role are required.', success: '' });
+          toast.error("All fields including target roles are required!");
           return;
         }
-    
+
         try {
           const token = Auth.getToken();
           if (!token) throw new Error("Please login to access this page");
@@ -206,10 +232,28 @@ const AdminPanel = () => {
         }
       };
     
+    // const handleFormChange = (e) => {
+    //   const { name, value } = e.target;
+    //   setFormData(prev => ({ ...prev, [name]: value }));
+    // };
+
     const handleFormChange = (e) => {
       const { name, value } = e.target;
-      setFormData(prev => ({ ...prev, [name]: value }));
+    
+      if (name === 'targetRoles') {
+        const selectedOptions = Array.from(e.target.selectedOptions).map(opt => opt.value);
+        setFormData(prev => ({ ...prev, targetRoles: selectedOptions }));
+      } else {
+        setFormData(prev => ({ ...prev, [name]: value }));
+      }
     };
+
+    const getSelectableRoles = () => {
+      if (userType === 'superadmin') return ['Admin', 'User', 'Client'];
+      if (userType === 'Admin') return ['User', 'Client'];
+      return [];
+    };
+    
   
     return (
         <div className={`${styles['notifications-container']} ${styles[`${userType}-panel`]}`}>
@@ -233,16 +277,19 @@ const AdminPanel = () => {
     
           {currentPage === 'create' ? (
             <NotificationForm
-              userType={userType}
-              onSubmit={handleCreateNotification}
-              title={formData.title}
-              setTitle={(value) => handleFormChange({ target: { name: 'title', value } })}
-              message={formData.message}
-              setMessage={(value) => handleFormChange({ target: { name: 'message', value } })}
-              notificationType={formData.notificationType}
-              setNotificationType={(value) => handleFormChange({ target: { name: 'notificationType', value } })}
-              error={formStatus.error}
-              success={formStatus.success}
+            userType={userType}
+            onSubmit={handleCreateNotification}
+            title={formData.title}
+            setTitle={(value) => handleFormChange({ target: { name: 'title', value } })}
+            message={formData.message}
+            setMessage={(value) => handleFormChange({ target: { name: 'message', value } })}
+            notificationType={formData.notificationType}
+            setNotificationType={(value) => handleFormChange({ target: { name: 'notificationType', value } })}
+            targetRoles={formData.targetRoles}
+            setTargetRoles={(roles) => setFormData(prev => ({ ...prev, targetRoles: roles }))}
+            allowedRoles={getSelectableRoles()}
+            error={formStatus.error}
+            success={formStatus.success}
             />
           ) : (
             <div className={styles['view-container']}>
