@@ -276,6 +276,8 @@ import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProj
 import MyProfile from './Pages/MyProfile/MyProfile';
 import OwnAdminProfile from './Pages/OwnAdminProfile/OwnAdminProfile';
 import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
+import ClientProjectRequestsDetails from './Components/ClientProjectRequestsDetails/ClientProjectRequestsDetails';
+import CreateClientProject from './Components/CreateClientProject/CreateClientProject';
 
 
 const App = () => {
@@ -361,6 +363,8 @@ const App = () => {
                 <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
                 <Route path='/Own-Admin-Profile'  element={<OwnAdminProfile />}></Route>
                 <Route path='/ApplyLeaveAdmin'  element={<ApplyLeaveAdmin />}></Route>
+                <Route path='/ClientProjectRequestsDetails' element={<ClientProjectRequestsDetails />}></Route>
+                <Route path='/CreateClientProject'  element={<CreateClientProject />}></Route>
               </>
             )}
 
@@ -402,6 +406,8 @@ const App = () => {
                 <Route path="/superadmin-userleave" element={<UserLeavesPage />} />
                 <Route path="/superadmin-adminleave" element={<PendingLeavesPage />} />
                 <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
+                <Route path="/ClientProjectRequestsDetails" element={<ClientProjectRequestsDetails/>} ></Route>
+                <Route path='/CreateClientProject' element={<CreateClientProject />}></Route>
               </>
             )}
 

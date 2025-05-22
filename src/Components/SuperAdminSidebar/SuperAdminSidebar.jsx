@@ -76,6 +76,21 @@ const SuperAdminSidebar = ({ children }) => {
         // { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
       ],
     },
+    {
+      title: "Client Section",
+      icon: <RiAdminFill />,
+      link: "/#",
+      submenus: [
+
+        { title: "Client Projects", icon: <FaUser />, link: "/CreateClientProject" },
+        { title: "Client Request", icon: <FaFileAlt />, link: "/ClientProjectRequestsDetails" },
+        // { title: "Admin Leave Summary", icon: <FaClipboardList />, link: "/##" },
+        // { title: "Manage Roles", icon: <FcSalesPerformance />, link: "/manage-roles" },
+        // { title: "System Logs", icon: <BiSolidCoinStack />, link: "/system-logs" },
+        // { title: "Admin Messages", icon: <BiSolidMessageSquareDots />, link: "/admin-messages" },
+        // { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
+      ],
+    },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
