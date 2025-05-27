@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminNotificationsHistory.module.css';
-import Auth from '../Services/Auth'; // Assuming you have an Auth service for token management
+import Auth from '../Services/Auth'; 
 
 const AdminNotificationsHistory = () => {
   const [notifications, setNotifications] = useState([]);

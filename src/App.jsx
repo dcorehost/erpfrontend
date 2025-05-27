@@ -102,7 +102,7 @@ const App = () => {
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
-            <Route
+            {/* <Route
               path="/"
               element={
                 <Navigate to={
@@ -115,7 +115,26 @@ const App = () => {
                       : "/user-dashboard"
                 } />
               }
-            />
+            /> */}
+            <Route
+  path="/"
+  element={
+    !typeOfUser ? (
+      <div>Loading...</div> // Show loader while checking user type
+    ) : (
+      <Navigate 
+        to={
+          typeOfUser === "Admin" ? "/admin-dashboard" :
+          typeOfUser === "superadmin" ? "/superadmin-dashboard" :
+          typeOfUser === "Client" ? "/client-dashboard" :
+          "/user-dashboard"
+        } 
+        replace // Important: prevents history stack buildup
+      />
+    )
+  }
+/>
+
 
 
             {/* //common routes */}
