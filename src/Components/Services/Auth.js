@@ -16,6 +16,7 @@ const Auth = {
     localStorage.removeItem("authToken");
     localStorage.removeItem("email");
     localStorage.removeItem("userData");
+    localStorage.clear();
   },
 
   isAuthenticated: () => {

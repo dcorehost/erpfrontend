@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect, useRef } from "react";
 // import { Link } from "react-router-dom";
 // import { FaBell, FaUserCircle } from "react-icons/fa";
@@ -151,7 +150,7 @@
 //                   <Link to="/Own-User-Profile" className={styles.profileMenuItem}>
 //                     Settings
 //                   </Link>
-                 
+
 //                 </div>
 //               </div>
 //             )}
@@ -163,8 +162,6 @@
 // };
 
 // export default Navbar;
-
-
 
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -241,10 +238,18 @@ const Navbar = ({ isOpen }) => {
     }
   };
 
-  // Handle logout
+  // const handleLogout = () => {
+  //   localStorage.clear();
+  //   sessionStorage.clear();
+  //   navigate("/"); // Navigate back to the login or home page
+  // };
+
   const handleLogout = () => {
-    Auth.logout();
-    navigate("/"); // Use navigate instead of window.location.href
+    console.log("Logout clicked! Clearing localStorage...");
+    localStorage.clear();
+    sessionStorage.clear();
+    setIsLoggedOut(true);
+    window.location.href = "/";
   };
 
   return (
@@ -256,7 +261,8 @@ const Navbar = ({ isOpen }) => {
 
         {userData && (
           <div className={styles.welcomeMessage}>
-            Welcome back, <span className={styles.username}>{userData.username}</span>!
+            Welcome back,{" "}
+            <span className={styles.username}>{userData.username}</span>!
           </div>
         )}
 
@@ -277,7 +283,10 @@ const Navbar = ({ isOpen }) => {
                 ) : (
                   <ul>
                     {notifications.map((notification) => (
-                      <li key={notification._id} className={styles.notificationItem}>
+                      <li
+                        key={notification._id}
+                        className={styles.notificationItem}
+                      >
                         <strong>{notification.title}</strong>
                         <p>{notification.message}</p>
                         <small>
@@ -320,10 +329,16 @@ const Navbar = ({ isOpen }) => {
                   <Link to="/my-profile" className={styles.profileMenuItem}>
                     My Profile
                   </Link>
-                  <Link to="/Own-User-Profile" className={styles.profileMenuItem}>
+                  <Link
+                    to="/Own-User-Profile"
+                    className={styles.profileMenuItem}
+                  >
                     Settings
                   </Link>
-                  <button className={styles.profileMenuItem} onClick={handleLogout}>
+                  <button
+                    className={styles.profileMenuItem}
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
                 </div>
