@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Auth from '../../Components/Services/Auth';
 import styles from './AdminList.module.css';
+import Loader from '../Loader/Loader';
 
 const AdminList = () => {
+    const [loader, setLoader] = useState(false);
+  
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,6 +15,8 @@ const AdminList = () => {
 
   useEffect(() => {
     const fetchAdmins = async () => {
+            setLoader(true)
+
       try {
         const response = await axios.get(
           'http://209.74.89.83/erpbackend/get-admin-detail-for-superadmin',
@@ -22,15 +27,19 @@ const AdminList = () => {
         
         // Check if response.data is an array or needs to be accessed differently
         const adminData = Array.isArray(response.data) ? response.data : 
-                         response.data.users ? response.data.users : 
-                         response.data.admins ? response.data.admins : 
-                         [];
+         response.data.users ? response.data.users : 
+         response.data.admins ? response.data.admins : 
+          [];
         
         setAdmins(adminData);
         setLoading(false);
+         setLoader(false)
+
       } catch (err) {
         setError(err.message);
         setLoading(false);
+              setLoader(false)
+
         console.error('Error fetching admins:', err);
       }
     };
@@ -38,8 +47,8 @@ const AdminList = () => {
     fetchAdmins();
   }, [token]);
 
-  if (loading) {
-    return <div className={styles.loading}>Loading admin data...</div>;
+  if (loader) {
+    return <Loader />;
   }
 
   if (error) {
