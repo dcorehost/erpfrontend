@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaChartLine, FaChevronUp, FaChevronDown , FaCalendarAlt} from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  FaChartLine,
+  FaChevronUp,
+  FaChevronDown,
+  FaCalendarAlt,
+} from "react-icons/fa";
 import { RiAdminFill, RiTeamFill } from "react-icons/ri";
 import styles from "./UserSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -10,159 +15,249 @@ import { FaUser } from "react-icons/fa";
 import { FaTag } from "react-icons/fa";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { FaHistory } from "react-icons/fa";
-import { FaRegFileAlt } from "react-icons/fa"; 
+import { FaRegFileAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaListUl } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
 import { RiUserShared2Fill } from "react-icons/ri";
-import { FaTasks ,FaChartPie, } from "react-icons/fa";
-import { FaMoneyBillWave, FaFileInvoiceDollar, FaCoins, FaReceipt, FaChartBar } from "react-icons/fa"; 
+import { FaTasks, FaChartPie } from "react-icons/fa";
+import {
+  FaMoneyBillWave,
+  FaFileInvoiceDollar,
+  FaCoins,
+  FaReceipt,
+  FaChartBar,
+  FaChevronRight,
+} from "react-icons/fa";
 
 import { FcSalesPerformance } from "react-icons/fc";
 import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
 import { link } from "framer-motion/client";
 
 const UserSidebar = ({ children }) => {
- const [isOpen, setIsOpen] = useState(false);
- const [activeMenu, setActiveMenu] = useState(null);
- const [isLoggedOut, setIsLoggedOut] = useState(false);
- const navigate = useNavigate();
+  const pathname = useLocation().pathname;
+  const [isOpen, setIsOpen] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [expandedItem, setExpandedItem] = useState(null);
+  const scrollContainerRef = useRef(null);
+  const navigate = useNavigate();
 
- const menus = [
- {
- title: "Leave",
- icon: <FaChartLine />,
- link: "/#",
- submenus: [
- { title: "Apply Leave",  icon: <FaTag  />, link: "/leave-summary" },
- { title: "Upcoming Leave", link: "/ApplyLeaveTable", icon: <FaRegCalendarCheck /> },
- { title: "Past Leave", link: "/PastLeaveTable", icon: <FaHistory /> },
- { title: "Leave Policy", link: "/Leave-policy", icon: <FaRegFileAlt /> },
-//  { title:"User Profile" , link:"/Own-User-Profile", icon: <FaUser /> }, // Added icon here
- ],
- },
- {
- title:"Task & Project Management",
- icon:<GrTasks />, // Changed to a more relevant icon
- link:"/#",
- submenus:[
- { title: "Add Task", link: "/add-task", icon: <FaPlus /> },
- { title: "All Tasks Status", link: "/task-list", icon: <FaListUl /> },
- { title: "AssignedTaskList", link: "/User-Task-List", icon: <RiUserShared2Fill /> },
- // { title: "Assigned Task & Project Details", link: "/AssignedTask" },
-//  { title: "UserTask", link: "/UserTask", icon: <FaUserCheck /> },
- { title: "Update Task Progress & Completion Status", link: "/UserTaskProgress", icon: <FaTasks /> },
- // { title: "Upload Documents & Project Related Files", link: "/upload-docs" },
- // { title: "View Deadlines Set By Admin", link: "/admin-deadlines" }
- ]
- },
- {
- title: "Attendance",
- icon: <FaCalendarAlt />,
- link: "/attendance",
- submenus: [
- {
- title: "Mark Attendance",
- link: "/mark-attendance",
- icon: <FaUserCheck /> // Using a checkmark with user icon
- },
- {
- title: "Attendance Summary",
- link: "/attendance-summary",
- icon: <FaChartPie />
- },
+  const menus = [
+    {
+      title: "Leave",
+      icon: <FaChartLine />,
+      link: "/#",
+      submenus: [
+        { title: "Apply Leave", icon: <FaTag />, link: "/leave-summary" },
+        {
+          title: "Upcoming Leave",
+          link: "/ApplyLeaveTable",
+          icon: <FaRegCalendarCheck />,
+        },
+        { title: "Past Leave", link: "/PastLeaveTable", icon: <FaHistory /> },
+        {
+          title: "Leave Policy",
+          link: "/Leave-policy",
+          icon: <FaRegFileAlt />,
+        },
+      ],
+    },
+    {
+      title: "Task & Project Management",
+      icon: <GrTasks />,
+      link: "/#",
+      submenus: [
+        { title: "Add Task", link: "/add-task", icon: <FaPlus /> },
+        { title: "All Tasks Status", link: "/task-list", icon: <FaListUl /> },
+        {
+          title: "AssignedTaskList",
+          link: "/User-Task-List",
+          icon: <RiUserShared2Fill />,
+        },
+        {
+          title: "Update Task Progress & Completion Status",
+          link: "/UserTaskProgress",
+          icon: <FaTasks />,
+        },
+      ],
+    },
+    {
+      title: "Attendance",
+      icon: <FaCalendarAlt />,
+      link: "/attendance",
+      submenus: [
+        {
+          title: "Mark Attendance",
+          link: "/mark-attendance",
+          icon: <FaUserCheck />,
+        },
+        {
+          title: "Attendance Summary",
+          link: "/attendance-summary",
+          icon: <FaChartPie />,
+        },
+      ],
+    },
+    {
+      title: "Payroll &  PaySlips",
+      icon: <BiSolidCoinStack />,
+      link: "/#",
+      submenus: [
+        {
+          title: "Payroll Summary",
+          link: "/payroll-summary",
+          icon: <FaFileInvoiceDollar />,
+        },
+        {
+          title: "Deductions Overview",
+          link: "/deductions",
+          description: "View insurance, retirement, and other deductions",
+          icon: <FaChartBar />,
+        },
+      ],
+    },
+  ];
 
- ],
- },
- {
- title:"Payroll &  PaySlips",
- icon:<BiSolidCoinStack />,
- link:"/#",
- submenus:[
- {
- title: "Payroll Summary",
- link: "/payroll-summary",
- icon: <FaFileInvoiceDollar /> // Using invoice with dollar for summary
- },
- {
- title: "Deductions Overview",
- link: "/deductions",
- description: "View insurance, retirement, and other deductions",
- icon: <FaChartBar /> // Using a bar chart to represent overview
- },
- ]
- }
- ];
- const toggleSidebar = () => setIsOpen(!isOpen);
- const toggleSubmenu = (index) => setActiveMenu(activeMenu === index ? null : index);
- const handleLogout = () => {
- console.log("Logout clicked! Clearing localStorage...");
- localStorage.clear();
- sessionStorage.clear();
- setIsLoggedOut(true);
- window.location.href = "/";
- };
+  useEffect(() => {
+    const match = menus.find(
+      (item) =>
+        pathname === item.link ||
+        item.submenus?.some((child) => pathname === child.link)
+    );
+    if (match) setExpandedItem(match.title);
+  }, [pathname]);
 
- if (isLoggedOut) {
- navigate("/");
- }
+  useEffect(() => {
+    if (expandedItem && scrollContainerRef.current) {
+      const expandedItemEl = scrollContainerRef.current.querySelector(
+        `[data-title="${expandedItem}"]`
+      );
+      if (expandedItemEl) {
+        expandedItemEl.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [expandedItem]);
 
- return (
- <div className={`${styles.sidebarWrapper}`}>
- <div className={`${styles.sidebarContainer}`}>
+  const toggleSidebar = () => setIsOpen(!isOpen);
+  const toggleSubmenu = (index) =>
+    setActiveMenu(activeMenu === index ? null : index);
+  const toggleExpand = (title) => {
+    setExpandedItem((prev) => (prev === title ? null : title));
+  };
+  const isActive = (path) => pathname === path;
 
- <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
- <button className={styles.hamburgerButton} onClick={toggleSidebar}>
- {isOpen ? "✖" : "☰"}
- </button>
- <ul className={styles.menu}>
- {menus.map((menu, index) => (
- <React.Fragment key={index}>
- <li>
- <div className={styles.menuItem} onClick={() => toggleSubmenu(index)}>
- <div className={styles.icon}>{menu.icon}</div>
- <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
- {menu.title}
- </span>
- {menu.submenus && menu.submenus.length > 0 && ( 
- <span className={styles.dropdownIcon}>
- {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
- </span>
- )}
- </div>
- {activeMenu === index && menu.submenus && ( 
- <ul className={styles.submenu}>
- {menu.submenus.map((submenu, subIndex) => (
- <li key={subIndex} className={styles.submenuItem}>
- <div className={styles.submenuItemWrapper}>
- <span className={styles.icon}>{submenu.icon}</span>
- <Link to={submenu.link} className={styles.submenuLink}>
- {submenu.title}
- </Link>
- </div>
- </li>
- ))}
- </ul>
- )}
- </li>
- <hr className={styles.menuDivider} />
- </React.Fragment>
- ))}
- <li>
- <button onClick={handleLogout} className={`${styles.menuItem} ${styles.logout}`}>
- <FaChartLine /> 
- <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>Logout</span>
- </button>
- </li>
- </ul>
- </div>
- </div>
- <div className={styles.contentMenu}>
- <Navbar isOpen={isOpen} />
- {children}
- </div>
- </div>
- );
+  return (
+    <div className={`${styles.sidebarWrapper}`}>
+      <div className={`${styles.sidebarContainer}`}>
+        <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+          <button
+            className={styles.hamburgerButton}
+            style={isOpen ? { left: "190px" } : { left: "10px" }}
+            onClick={toggleSidebar}
+          >
+            {"☰"}
+          </button>
+          <div className={styles.scrollContainer} ref={scrollContainerRef}>
+            <nav className={styles.menu}>
+              {menus.map((item, index) => (
+                <div
+                  key={item.title}
+                  data-title={item.title}
+                  className={styles.menuItem}
+                >
+                  {item.submenus ? (
+                    <div>
+                      <button
+                        onClick={() => toggleExpand(item.title)}
+                        className={`${styles.menuButton} ${
+                          isActive(item.link) ? styles.active : ""
+                        }`}
+                      >
+                        <div className={styles.sidebarItem}>
+                          <span
+                            className={styles.sidebarIcon}
+                            style={{ marginRight: "8px" }}
+                          >
+                            {item.icon}
+                          </span>
+                          <span
+                            className={`${styles.sidebarTitle} ${
+                              isOpen ? styles.open : ""
+                            }`}
+                            style={{
+                              flexGrow: 1,
+                            }} /* Ensure text takes available space */
+                          >
+                            {item.title}
+                          </span>
+                          <FaChevronRight
+                            size={12}
+                            className={`${styles.chevronIcon} ${
+                              isOpen ? styles.open : ""
+                            } ${
+                              expandedItem === item.title ? styles.expanded : ""
+                            }`}
+                            style={{
+                              marginLeft: "auto",
+                            }} /* Push chevron to the right */
+                          />
+                        </div>
+                      </button>
+
+                      {expandedItem === item.title && isOpen && (
+                        <div className={styles.sidebarChildrenWrapper}>
+                          {item.submenus.map((child) => (
+                            <Link
+                              key={child.link}
+                              to={child.link}
+                              className={`${styles.sidebarChildLink} ${
+                                isActive(child.link) ? styles.active : ""
+                              }`}
+                            >
+                              <span className={styles.childIcon}>
+                                {child.icon}
+                              </span>
+                              <span className={styles.childTitle}>
+                                {child.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.link}
+                      className={`${styles.navLink} ${
+                        isActive(item.link) ? styles.active : ""
+                      }`}
+                    >
+                      <span className={styles.navIcon}>{item.icon}</span>
+                      <span
+                        className={`${styles.navTitle} ${
+                          isOpen ? styles.open : ""
+                        }`}
+                      >
+                        {item.title}
+                      </span>
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div className={styles.contentMenu}>
+        <Navbar isOpen={isOpen} />
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default UserSidebar;

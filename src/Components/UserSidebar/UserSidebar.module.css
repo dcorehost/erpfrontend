@@ -1,17 +1,21 @@
+:root {
+  --spacing: 8px;
+}
+
 .sidebarWrapper {
   margin-top: 70px;
 }
 
 .sidebar {
   position: fixed;
-  top: 60px;
+  top: 60.4px;
   left: -100%;
   width: 250px;
   height: calc(100% - 60px); 
   background-color: #fef9f8;
   color: #0d0d0d;
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-  padding: 8px;
+  padding: 8px 0px;
   overflow-x: hidden;
   z-index: 100;
 }
@@ -25,7 +29,45 @@
   left: -100%;
 }
 
-.sidebar ul {
+/* Hamburger Menu */
+.hamburgerButton {
+  position: fixed;
+  top: 70px;
+  left: 10px;
+  background: transparent;
+  border: none; 
+  color: #0d0d0d;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 200;
+  /* border: 1px solid black; */
+  width: 0px;
+  padding: 0px 10px;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+.hamburgerButton:hover {
+  background-color: transparent; 
+}
+
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  height: calc(100vh - 4rem - 5rem);
+}
+
+/* Optional: hide scrollbar for WebKit and other browsers */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+
+/* .sidebar ul {
   list-style: none;
   margin-top: 30px;
   padding: 0;
@@ -39,18 +81,20 @@
   color: #0d0d0d;
   text-decoration: none;
   transition: color 0.3s;
+} */
+
+.sidebar .menu{
+  padding-inline: calc(var(--spacing) * 2) /* 0.5rem = 8px */;
+  padding-block: calc(var(--spacing) * 4) /* 1rem = 16px */;
 }
 
-.menuItem {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+/* .sidebar .menu .menuItem {
+  margin-bottom: calc(var(--spacing) * 1);
+  
+} */
 
 .menuItem:hover {
-  background-color: #ef9273;
+  /* background-color: #ef9273; */
 }
 
 .icon {
@@ -61,24 +105,168 @@
   flex: 1;
 }
 
-/* Hamburger Menu */
-.hamburgerButton {
-  position: fixed;
-  top: 70px;
-  left: 10px;
-  background: transparent;
-  border: none; 
-  color: #0d0d0d;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 100;
-  /* border: 1px solid black; */
-  width: 0px;
-  padding: 0px 10px;
+/* styles.css */
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.5rem; /* py-2 px-4 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  border-radius: 0.375rem; /* rounded-md */
+  color: black;
+  background-color: transparent;
+  transition: background 0.2s, color 0.2s;
 }
-.hamburgerButton:hover {
-  background-color: transparent; 
+
+.menuButton:hover {
+  background-color: #ef9273;
+  color: white;
 }
+
+.menuButton.active {
+  background-color: #ef9273;
+  color: black;
+}
+
+/* sidebar.css */
+
+.sidebarItem {
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  padding: 0.5rem 1rem; /* Adjust padding for better spacing */
+  width: 100%; /* Ensures the sidebar item takes full width */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+  overflow: hidden; /* Prevents content overflow */
+  gap: 0.75rem; /* Adds consistent spacing between elements */
+}
+
+.sidebarIcon {
+  flex-shrink: 0; /* Prevents the icon from shrinking */
+  font-size: 1.5rem; /* Adjust icon size as needed */
+}
+
+.sidebarTitle {
+  flex-grow: 1; /* Takes up remaining space between icon and chevron */
+  white-space: nowrap; /* Prevents wrapping of text */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
+  text-align: left; /* Ensures title starts from the left */
+}
+
+.sidebarTitle.open {
+  opacity: 1;
+}
+
+.chevronIcon {
+  flex-shrink: 0; /* Prevents the chevron from shrinking */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0; /* Optional: Adds fade-in effect for chevron */
+  margin-left: auto; /* Pushes chevron to the far right */
+}
+
+.chevronIcon.open {
+  opacity: 1; /* Makes the chevron visible when sidebar is open */
+}
+
+.chevronIcon.expanded {
+  transform: rotate(90deg);
+}
+
+
+/* sidebar.css */
+
+.sidebarChildrenWrapper {
+  margin-left: 1.5rem; /* Indent child links */
+  margin-top: 0.5rem; /* Add some spacing above child menu */
+}
+
+.sidebarChildLink {
+  display: flex;
+  align-items: center; /* Align icon and title vertically */
+  padding: 0.5rem 1rem; /* Add padding for better spacing */
+  gap: 0.75rem;
+  margin-bottom: 0.75rem; /* Add spacing between items */
+  font-size: 0.875rem; /* Slightly smaller font for submenus */
+  border-radius: 0.375rem; /* Rounded corners */
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* .sidebarChildLink:last-child {
+  margin-bottom: 0; 
+} */
+
+
+.sidebarChildLink:hover {
+  background-color: #ef9273; /* Attractive hover effect */
+  color: white;
+}
+
+.sidebarChildLink.active {
+  background-color: #ef9273; /* Highlight active link */
+  color: white;
+}
+
+.sidebarChildLink .childIcon {
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  font-size: 1rem; /* Set consistent icon size */
+}
+
+.sidebarChildLink .childTitle {
+  flex-grow: 1; /* Take up remaining space */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+  text-align: left; /* Ensure text aligns to the left */
+}
+
+
+/* sidebar.css */
+
+.navLink {
+  display: flex;
+  justify-content: flex-start; /* Align icons and text in a row */
+  align-items: center;
+  padding: 0.75rem 1.25rem; /* More padding for better spacing */
+  margin: 0.5rem 0; /* Add vertical space between nav items */
+  font-size: 1rem; /* Slightly larger font for better readability */
+  font-weight: 500;
+  border-radius: 0.5rem; /* Slightly rounder corners */
+  color: black;
+  text-decoration: none;
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%; /* Ensure full width for consistency */
+}
+
+.navLink:hover {
+  background-color: #ef9273; /* Attractive hover background */
+  color: white;
+}
+
+.navLink.active {
+  background-color: #ef9273; /* Highlight the active link */
+  color: white;
+}
+
+.navIcon {
+  flex-shrink: 0;
+}
+
+.navTitle {
+  margin-left: 0.75rem; /* ml-3 */
+  white-space: nowrap;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.navTitle.open {
+  opacity: 1;
+}
+
 
 /* Logout Button */
 .menuItem.logout {
@@ -159,6 +347,14 @@
   .submenuItem {
     font-size: 16px;
   }
+  
+}
+
+@media (max-width: 500px) {
+    .hamburgerButton{
+    left: 150px !important;
+  }
+  
 }
 
 @media (min-width: 769px) {
@@ -168,7 +364,7 @@
 
   .menuItem {
     font-size: 20px;
-    padding: 20px 15px;
+    /* padding: 8px 10px; */
   }
 
   .icon {
