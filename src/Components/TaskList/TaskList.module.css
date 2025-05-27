@@ -1,10 +1,8 @@
-/* TaskList.module.css */
-
-/* Base Styles */
+/* 
 
 .board {
   padding: 1rem;
-  max-width: 80%;
+  max-width: 60%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   height: 500px;
@@ -46,7 +44,7 @@
   padding-bottom: 1rem;
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 #f1f1f1;
-  /* -webkit-overflow-scrolling: touch; */
+  -webkit-overflow-scrolling: touch;
 }
 
 .column {
@@ -60,7 +58,7 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   min-height: 20rem;
   display: flex; 
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column; 
 }
 
 .column h3 {
@@ -123,7 +121,6 @@
   font-size: 0.8125rem;
 }
 
-/* Drag and Drop States */
 .column.drop-target {
   background-color: #e8f5e9;
   border: 2px dashed #4CAF50;
@@ -134,7 +131,6 @@
   background: #f1f1f1;
 }
 
-/* Scrollbar Styling (for columns if needed) */
 .taskList::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -153,7 +149,6 @@
   background: #a8a8a8;
 }
 
-/* Responsive Breakpoints */
 @media (max-width: 1200px) {
   .columnsContainer {
     flex-wrap: wrap;
@@ -208,7 +203,6 @@
   }
 }
 
-/* Animation for better UX */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -218,7 +212,6 @@
   animation: fadeIn 0.3s ease forwards;
 }
 
-/* Touch device optimizations */
 @media (hover: none) {
   .taskCard {
     cursor: pointer;
@@ -229,7 +222,6 @@
   }
 }
 
-/* Print styles */
 @media print {
   .createTaskButton {
     display: none;
@@ -250,4 +242,151 @@
     box-shadow: none;
     border: 1px solid #ddd;
   }
+}
+
+ */
+
+.board {
+  margin-top: 30px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-top: 450px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.createTaskButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.refreshButton {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loadingSpinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.columnsContainer {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.column {
+  min-width: 220px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.taskCount {
+  background-color: #ddd;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.taskList {
+  min-height: 100px;
+}
+
+.taskCard {
+  background-color: white;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 70px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.taskCard.moving {
+  opacity: 0.7;
+  background-color: #f9f9f9;
+}
+
+.taskDescription {
+  color: #666;
+  margin: 10px 0;
+}
+
+.taskDetails {
+  font-size: 14px;
+  color: #555;
+}
+
+.taskDetails p {
+  margin: 5px 0;
+}
+
+.moveButton {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.moveButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.emptyColumn {
+  text-align: center;
+  color: #777;
+  padding: 20px 0;
+  background-color: #f9f9f9;
+  border-radius: 4px;
 }

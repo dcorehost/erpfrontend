@@ -8,8 +8,11 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 import Auth from '../Services/Auth';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../Loader/Loader';
 
 const AddTaskPage = () => {
+    const [loader, setLoader] = useState(false);  
+  
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [taskProject, setTaskProject] = useState('');
@@ -55,7 +58,11 @@ const AddTaskPage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
+      setLoader(true)
+      
       try {
+
+        
         const response = await axios.get('http://209.74.89.83/erpbackend/get-projects-name?employeeId=dcore5447', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,7 +77,9 @@ const AddTaskPage = () => {
         toast.error('Error fetching projects');
       } finally {
         setLoading(false);
+        setLoader(false)
       }
+      
     };
 
     fetchProjects();
@@ -166,6 +175,8 @@ const AddTaskPage = () => {
   };
 
   const updateTaskStatus = async (taskId, action) => {
+    setLoader(true)
+      
     try {
       const response = await axios.put(
         `http://209.74.89.83/erpbackend/update-task-action?_id=${taskId}`,
@@ -183,9 +194,13 @@ const AddTaskPage = () => {
           task._id === taskId ? { ...task, timeSpent: response.data.task.timeSpent } : task
         )
       );
+      setLoader(false)
+      
     } catch (error) {
       console.error('Error updating task status:', error);
       toast.error('Error updating task status.');
+      setLoader(false)
+      
     }
   };
 
@@ -196,7 +211,9 @@ const AddTaskPage = () => {
       String(seconds % 60).padStart(2, '0')
     ].join(':');
   };
-
+if (loader) {
+    return <Loader />;
+  }
   return (
     <div className={styles.app}>
       <ToastContainer
