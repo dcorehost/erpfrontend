@@ -5,13 +5,15 @@ import Auth from '../../Components/Services/Auth';
 import styles from './UserList.module.css';
 import Modal from 'react-modal';
 
-// Set the root element for accessibility
+
+
 Modal.setAppElement('#root');
 
 const UserList = () => {
+
   // State management
-      const [loader, setLoader] = useState(false);
   
+  const [loader, setLoader] = useState(false);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
