@@ -75,7 +75,7 @@ const UserSidebar = ({ children }) => {
  ],
  },
  {
- title:"Payroll &  PaySlips",
+ title:"Payroll & PaySlips",
  icon:<BiSolidCoinStack />,
  link:"/#",
  submenus:[

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ClientTasks.module.css";
+import styles from "./ClientTasks.module.css"
 import {
   FaCheck,
   FaTimes,
@@ -10,7 +10,7 @@ import {
   FaFilter,
   FaCalendarAlt,
   FaExclamationTriangle,
-  FaCheckCircle,
+  FaCheckCircle,  
 } from "react-icons/fa";
 import { format, parseISO, isBefore } from "date-fns";
 import Auth from "../Services/Auth";
@@ -55,12 +55,11 @@ const ClientTasks = () => {
         }
       );
 
-      // ✅ Expecting data to be { data: [...] }
       if (Array.isArray(response.data.data)) {
         setTasks(response.data.data);
       } else {
         console.warn("Unexpected response structure:", response.data);
-        setTasks([]); // fallback to prevent crashing
+        setTasks([]); 
       }
     } catch (err) {
       setError(err.message);
@@ -69,8 +68,7 @@ const ClientTasks = () => {
     }
   };
 
-  // API CALL: Create new task
-  // API CALL: Create new task
+
   const handleAddTask = async () => {
     if (taskFormData.title.trim()) {
       setLoading(true);
@@ -81,8 +79,8 @@ const ClientTasks = () => {
           dueDate: taskFormData.dueDate || undefined,
           priority: taskFormData.priority,
           completed: false,
-          assignedBy: "Admin", // ← Must match your backend expected field
-          attachments: ["https://example.com/design.jpg"], // ← Optional default
+          assignedBy: "Admin", 
+          attachments: ["https://example.com/design.jpg"], 
         };
 
         const response = await fetch(
@@ -120,11 +118,13 @@ const ClientTasks = () => {
 
   // API CALL: Toggle task completion status
   const handleToggleComplete = async (id) => {
+    console.log("task_id", id);
     setLoading(true);
     try {
       const taskToUpdate = tasks.find((task) => task._id === id);
+      console.log("TaskToUpdate", taskToUpdate);
       if (!taskToUpdate) throw new Error("Task not found");
-
+      console.log("hi rahul");
       const response = await fetch(
         `http://209.74.89.83/erpbackend/update-task-by-taskId?id=${id}`,
         {
@@ -143,9 +143,10 @@ const ClientTasks = () => {
       if (!response.ok) throw new Error("Failed to update task");
 
       const updatedTask = await response.json();
+      console.log("UpdatedTask", updatedTask);
       setTasks(tasks.map((task) => (task._id === id ? updatedTask : task)));
       if (selectedTask && selectedTask._id === id) {
-        setSelectedTask(updatedTask);
+        setSelectedTask(updatedTask?.data);
       }
       setError(null);
     } catch (err) {
@@ -215,7 +216,7 @@ const ClientTasks = () => {
       }
 
       const response = await fetch(
-        `http://209.74.89.83/erpbackend/create-comment?id=${selectedTask._id}`,
+        `http://209.74.89.83/erpbackend/create-comment?id=${selectedTask?._id}`,
         {
           method: "POST",
           headers: {
@@ -235,12 +236,13 @@ const ClientTasks = () => {
       }
 
       const { data: newCommentData } = await response.json();
+      console.log("newCommentData", newCommentData);
 
       setSelectedTask((prev) => ({
         ...prev,
         comments: [...(prev.comments || []), newCommentData],
       }));
-  
+
       // Update global task list
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
@@ -252,7 +254,7 @@ const ClientTasks = () => {
             : task
         )
       );
-  
+
       setNewComment("");
     } catch (err) {
       console.error("Comment error:", err);
@@ -391,6 +393,8 @@ const ClientTasks = () => {
     }
   };
 
+  console.log("SelectedTask", selectedTask);
+
   return (
     <div className={styles.tasksDashboard}>
       <header className={styles.header}>
@@ -473,15 +477,11 @@ const ClientTasks = () => {
                 <li
                   key={task._id}
                   className={`${styles.taskItem} ${
-                    selectedTask?._id === task._id ? styles.selected : ""
+                    selectedTask?._id === task?._id ? styles.selected : ""
                   }`}
                   onClick={() => {
-                    console.log("Task item clicked:", task); // 🔍 DEBUG
+                    console.log("Task", task);
                     setSelectedTask(task);
-
-                    setTimeout(() => {
-                      console.log("selectedTask after set:", task); // 🟢 This shows expected new value
-                    }, 0);
                   }}
                 >
                   <div className={styles.taskHeader}>
@@ -519,8 +519,8 @@ const ClientTasks = () => {
                     </div>
                   </div>
                   <div className={styles.taskDescription}>
-                    {task.description.substring(0, 100)}
-                    {task.description.length > 100 ? "..." : ""}
+                    {task?.description?.substring(0, 100)}
+                    {task?.description?.length > 100 ? "..." : ""}
                   </div>
                   <div className={styles.taskFooter}>
                     <span className={styles.assignedBy}>
