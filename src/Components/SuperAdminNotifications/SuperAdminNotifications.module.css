@@ -1,120 +1,134 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.formContainer {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  width: 500px;
-}
-
-.formTitle {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.formGroup {
-  margin-bottom: 20px;
-}
-
-.label {
-  font-weight: bold;
-  margin-bottom: 10px;
-  display: block;
-}
-
-.input, .textarea, .select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.input:focus, .textarea:focus, .select:focus {
-  outline: none;
-  border-color: #aaa;
-}
-
-.textarea {
-  resize: vertical;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdownButton {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.dropdownContent {
-  position: absolute;
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
-.checkboxContainer {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.checkbox {
-  margin-right: 10px;
-  width: 18px;
-  height: 18px;
-}
-
-.checkboxLabel {
-  font-size: 16px;
-}
-
-.submitButton {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.submitButton:hover {
-  background-color: #3e8e41;
-}
-
-.notificationsListContainer {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.notificationsListTitle {
-  text-align: center;
-  margin-bottom: 20px;
+/* ===== Base Styling (reusing variables) ===== */
+:root {
+    --primary-color: #3a0ca3;
+    --primary-hover: #480ca8;
+    --success-color: #4cc9f0;
+    --error-color: #f72585;
+    --warning-color: #f8961e;
+    --text-dark: #2b2d42;
+    --text-medium: #4a4e69;
+    --text-light: #8e9aaf;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --transition-speed: 0.3s;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+   
+  }
+  
+  /* ===== Container for SuperAdmin ===== */
+  .notifications-container {
+   
+    
+    width: 95%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  /* ===== Notification Form ===== */
+  .superadmin-form {
+  
+    background-color: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    
+  }
+  
+  .superadmin-form-group {
+    margin-bottom: 1.25rem;
+   
+  }
+  
+  .superadmin-form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-medium);
+  }
+  
+  .superadmin-form-group input,
+  .superadmin-form-group textarea,
+  .superadmin-form-group select {
+   
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    transition: all var(--transition-speed) ease;
+  }
+  
+  .superadmin-form-group input:focus,
+  .superadmin-form-group textarea:focus,
+  .superadmin-form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 12, 163, 0.1);
+    outline: none;
+  }
+  
+  .superadmin-form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .superadmin-submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: 100%;
+    transition: all var(--transition-speed) ease;
+  }
+  
+  .superadmin-submit-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* ===== Toast Styling ===== */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--success-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+    
+  }
+  
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .superadmin-container {
+      width: 95%;
+      padding: 1rem;
+    }
+  }
+  /* Add these styles to existing CSS file */
+.notificationsList {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .notificationsTable {
@@ -154,25 +168,33 @@
 .paginationButton:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  background-color: #f8f9fa;
 }
 
-@media (max-width: 768px) {
-  .formContainer {
-    width: 100%;
-  }
-  .notificationsListContainer {
-    width: 100%;
-  }
+.pagination span {
+  font-size: 0.9rem;
+  color: #495057;
+}
+/* SuperAdminNotifications.module.css */
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Spacing between checkboxes */
+  margin-top: 5px;
 }
 
-@media (max-width: 480px) {
-  .formContainer {
-    padding: 10px;
-  }
-  .notificationsListContainer {
-    padding: 10px;
-  }
-  .paginationButton {
-    padding: 5px 10px;
-  }
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 8px; /* Space between checkbox and text */
+  width: 18px;
+  height: 18px;
+  accent-color: #007bff; /* Color of the checkbox when checked */
 }

@@ -1,17 +1,12 @@
-
 import axios from "axios";
-// import Auth from "../Services/Auth.js";
-import Auth from "./Auth"; 
+import Auth from "./Auth";
 
 // Base API URL
-// const baseApiUrl = "http://13.127.161.242:8001/kimi/";
-// const baseApiUrl = "http://admediaagency.online/kimi/";
-const baseApiUrl = "http://209.74.89.83/erpbackend/";
+const baseApiUrl = "http://mvsdeals.online/";
 
 // Create Axios instance
 const axiosInstance = axios.create({
   baseURL: baseApiUrl,
- // timeout: 10000, // Set a 10-second timeout
 });
 
 // Add Authorization header using Axios interceptors
@@ -69,4 +64,3 @@ const Httpservices = {
 };
 
 export default Httpservices;
-

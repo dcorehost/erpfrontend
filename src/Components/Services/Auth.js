@@ -1,53 +1,42 @@
-
 const Auth = {
-  login: ({ token, username, typeOfUser, emailId, phone }) => {
+  login: ({ token, email }) => {
+    // Store token and email in localStorage
     localStorage.setItem("authToken", token);
-    localStorage.setItem("username", username);
-    localStorage.setItem("typeOfUser", typeOfUser);
-    localStorage.setItem("emailId", emailId);
-    localStorage.setItem("phone", phone);
-    // Store all user data together for easy retrieval
+    localStorage.setItem("email", email);
+
+    // Store user data together for easy retrieval
     localStorage.setItem("userData", JSON.stringify({
       token,
-      username,
-      typeOfUser,
-      emailId,
-      phone
+      email
     }));
   },
 
   logout: () => {
+    // Remove all auth-related data from localStorage
     localStorage.removeItem("authToken");
-    localStorage.removeItem("username");
-    localStorage.removeItem("typeOfUser");
-    localStorage.removeItem("emailId");
-    localStorage.removeItem("phone");
+    localStorage.removeItem("email");
     localStorage.removeItem("userData");
   },
 
   isAuthenticated: () => {
+    // Check if token exists in localStorage
     return !!localStorage.getItem("authToken");
   },
 
-  getUserType: () => {
-    return localStorage.getItem("typeOfUser");
-  },
-
   getAuthData: () => {
+    // Get user data from localStorage
     const userData = localStorage.getItem("userData");
     return userData ? JSON.parse(userData) : null;
   },
 
-  getUserDetails: () => {
-    return Auth.getAuthData();
-  },
-  
   getToken: () => {
+    // Return the stored auth token
     return localStorage.getItem("authToken");
   },
 
-  getUsername: () => {
-    return localStorage.getItem("username");
+  getemail: () => {
+    // Return the stored email
+    return localStorage.getItem("email");
   }
 };
 

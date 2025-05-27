@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ClientTasks.module.css";
+import styles from "./ClientTasks.module.css"
 import {
   FaCheck,
   FaTimes,
@@ -10,7 +10,7 @@ import {
   FaFilter,
   FaCalendarAlt,
   FaExclamationTriangle,
-  FaCheckCircle,
+  FaCheckCircle,  
 } from "react-icons/fa";
 import { format, parseISO, isBefore } from "date-fns";
 import Auth from "../Services/Auth";
@@ -55,12 +55,11 @@ const ClientTasks = () => {
         }
       );
 
-      // ✅ Expecting data to be { data: [...] }
       if (Array.isArray(response.data.data)) {
         setTasks(response.data.data);
       } else {
         console.warn("Unexpected response structure:", response.data);
-        setTasks([]); // fallback to prevent crashing
+        setTasks([]); 
       }
     } catch (err) {
       setError(err.message);
@@ -69,8 +68,7 @@ const ClientTasks = () => {
     }
   };
 
-  // API CALL: Create new task
-  // API CALL: Create new task
+
   const handleAddTask = async () => {
     if (taskFormData.title.trim()) {
       setLoading(true);
@@ -81,8 +79,8 @@ const ClientTasks = () => {
           dueDate: taskFormData.dueDate || undefined,
           priority: taskFormData.priority,
           completed: false,
-          assignedBy: "Admin", // ← Must match your backend expected field
-          attachments: ["https://example.com/design.jpg"], // ← Optional default
+          assignedBy: "Admin", 
+          attachments: ["https://example.com/design.jpg"], 
         };
 
         const response = await fetch(
