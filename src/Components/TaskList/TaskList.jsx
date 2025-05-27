@@ -1,29 +1,28 @@
 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './TaskList.module.css';
 import Auth from '../Services/Auth';
 import { toast } from 'react-toastify';
+import Loader from '../Loader/Loader';
 
 const TaskList = () => {
-  // Load tasks from localStorage if available, otherwise initialize empty
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('kanbanTasks');
-    return savedTasks ? JSON.parse(savedTasks) : {
-      todo: [],
-      inProgress: [],
-      done: [],
-      submitted: [],
-      completed: [],
-    };
+  const [tasks, setTasks] = useState({
+    todo: [],
+    inProgress: [],
+    done: [],
+    submitted: [],
+    completed: [],
   });
-
-  const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [movingTask, setMovingTask] = useState(null);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const columnsContainerRef = useRef(null); // Ref for the columns container
 
+  // Define column order and display names
+  const columnOrder = ['todo', 'inProgress', 'done', 'submitted', 'completed'];
   const columnDisplayNames = {
     todo: 'To Do',
     inProgress: 'In Progress',
@@ -32,53 +31,49 @@ const TaskList = () => {
     completed: 'Completed'
   };
 
-  // Save tasks to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('kanbanTasks', JSON.stringify(tasks));
-  }, [tasks]);
+  // Map backend states to our column keys
+  const stateToColumnMap = {
+    'todo': 'todo',
+    'inprogress': 'inProgress',
+    'inProgress': 'inProgress',
+    'done': 'done',
+    'submitted': 'submitted',
+    'completed': 'completed',
+    'review': 'submitted'
+  };
 
-  // Fetch tasks from the backend and merge with localStorage
   useEffect(() => {
     const fetchTasks = async () => {
       const token = Auth.getToken();
       if (!token) {
         toast.error('User not authenticated.');
+        setLoading(false);
         return;
       }
 
+      setLoader(true)
       try {
-        // Fetch regular tasks
-        const tasksResponse = await axios.get(
-          'http://209.74.89.83/erpbackend/get-tasks',
-          {
+        // Fetch all task types in parallel
+        const [tasksResponse, submittedResponse, completedResponse] = await Promise.all([
+          axios.get('http://209.74.89.83/erpbackend/get-tasks', {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-          }
-        );
-
-        // Fetch submitted tasks
-        const submittedResponse = await axios.get(
-          'http://209.74.89.83/erpbackend/get-submittedTasks-forUser',
-          {
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-submittedTasks-forUser', {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-          }
-        );
-
-        // Fetch completed tasks
-        const completedResponse = await axios.get(
-          'http://209.74.89.83/erpbackend/get-completedTasks-forUser',
-          {
+          }),
+          axios.get('http://209.74.89.83/erpbackend/get-completedTasks-forUser', {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-          }
-        );
+          })
+        ]);
 
         const serverTasks = {
           todo: [],
@@ -89,7 +84,7 @@ const TaskList = () => {
         };
 
         // Process regular tasks
-        if (tasksResponse.data.message === 'task details fetched successfully') {
+        if (tasksResponse.data?.message === 'task details fetched successfully') {
           tasksResponse.data.taskDetails.forEach((task) => {
             const taskObj = {
               id: task._id,
@@ -99,16 +94,17 @@ const TaskList = () => {
               user: task.userId?.username || 'Unassigned',
               email: task.userId?.contact?.emailId || 'No email',
               state: task.state || 'todo',
-              timeSpent: task.timeSpent,
-              isRunning: task.isRunning,
+              timeSpent: task.timeSpent || '0h 0m 0s',
+              isRunning: task.isRunning || false,
               createdAt: task.createdAt,
               updatedAt: task.updatedAt,
               startTime: task.startTime
             };
 
-            const column = task.state ?
-              task.state.toLowerCase().replace(/\s+/g, '') : 'todo';
-
+            // Normalize the state and map to our columns
+            const normalizedState = String(taskObj.state).toLowerCase().replace(/\s+/g, '');
+            const column = stateToColumnMap[normalizedState] || 'todo';
+            
             if (serverTasks[column]) {
               serverTasks[column].push(taskObj);
             } else {
@@ -118,9 +114,9 @@ const TaskList = () => {
         }
 
         // Process submitted tasks
-        if (submittedResponse.data.message === 'task details fetched successfully') {
+        if (submittedResponse.data?.message === 'task details fetched successfully') {
           submittedResponse.data.taskDetails.forEach((task) => {
-            const taskObj = {
+            serverTasks.submitted.push({
               id: task._id,
               name: task.taskName,
               description: task.description,
@@ -128,21 +124,19 @@ const TaskList = () => {
               user: task.userId?.username || 'Unassigned',
               email: task.userId?.contact?.emailId || 'No email',
               state: 'submitted',
-              timeSpent: task.timeSpent,
-              isRunning: task.isRunning,
+              timeSpent: task.timeSpent || '0h 0m 0s',
+              isRunning: task.isRunning || false,
               createdAt: task.createdAt,
               updatedAt: task.updatedAt,
               startTime: task.startTime
-            };
-
-            serverTasks.submitted.push(taskObj);
+            });
           });
         }
 
         // Process completed tasks
-        if (completedResponse.data.message === 'task details fetched successfully') {
+        if (completedResponse.data?.message === 'task details fetched successfully') {
           completedResponse.data.taskDetails.forEach((task) => {
-            const taskObj = {
+            serverTasks.completed.push({
               id: task._id,
               name: task.taskName,
               description: task.description,
@@ -150,72 +144,37 @@ const TaskList = () => {
               user: task.userId?.username || 'Unassigned',
               email: task.userId?.contact?.emailId || 'No email',
               state: 'completed',
-              timeSpent: task.timeSpent,
-              isRunning: task.isRunning,
+              timeSpent: task.timeSpent || '0h 0m 0s',
+              isRunning: task.isRunning || false,
               createdAt: task.createdAt,
               updatedAt: task.updatedAt,
               startTime: task.startTime
-            };
-
-            serverTasks.completed.push(taskObj);
+            });
           });
         }
 
-        // Merge with locally stored tasks (preserving any local changes)
-        setTasks(prev => {
-          const mergedTasks = {...serverTasks};
-
-          // Preserve the order and status of tasks that exist in both
-          Object.keys(prev).forEach(column => {
-            prev[column].forEach(localTask => {
-              const existsInServer = Object.values(serverTasks)
-                .flat()
-                .some(serverTask => serverTask.id === localTask.id);
-
-              if (!existsInServer) {
-                mergedTasks[localTask.state] = [
-                  ...(mergedTasks[localTask.state] || []),
-                  localTask
-                ];
-              }
-            });
-          });
-
-          return mergedTasks;
-        });
+        setTasks(serverTasks);
+        setLoading(false);
+        setLoader(false);
       } catch (error) {
         console.error('Error fetching tasks:', error);
         toast.error('Error fetching tasks.');
+        setLoading(false);
+        setLoader(false);
       }
     };
 
     fetchTasks();
   }, []);
 
-  const handleDragStart = (e, taskId, sourceColumn) => {
-    e.dataTransfer.setData('taskId', taskId);
-    e.dataTransfer.setData('sourceColumn', sourceColumn);
-    setIsDragging(true);
-  };
+  const moveTaskToNextColumn = async (taskId, currentColumn) => {
+    const currentIndex = columnOrder.indexOf(currentColumn);
+    if (currentIndex === -1 || currentIndex === columnOrder.length - 1) {
+      return; // Already in the last column or invalid column
+    }
 
-  const handleDragEnd = () => {
-    setIsDragging(false);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = async (e, targetColumn) => {
-    e.preventDefault();
-    setIsDragging(false);
-
-    const taskId = e.dataTransfer.getData('taskId');
-    const sourceColumn = e.dataTransfer.getData('sourceColumn');
-
-    if (!taskId || sourceColumn === targetColumn) return;
-
-    const task = tasks[sourceColumn].find(t => t.id === taskId);
+    const nextColumn = columnOrder[currentIndex + 1];
+    const task = tasks[currentColumn].find(t => t.id === taskId);
     if (!task) return;
 
     const token = Auth.getToken();
@@ -224,25 +183,13 @@ const TaskList = () => {
       return;
     }
 
-    // Save original tasks for potential rollback
-    const originalTasks = {...tasks};
+    setMovingTask(taskId);
 
     try {
-      // Optimistic UI update
-      setTasks(prev => {
-        const newTasks = {...prev};
-        newTasks[sourceColumn] = newTasks[sourceColumn].filter(t => t.id !== taskId);
-        const updatedTask = {
-          ...task,
-          state: targetColumn
-        };
-        newTasks[targetColumn] = [...newTasks[targetColumn], updatedTask];
-        return newTasks;
-      });
+      // First update the backend
 
-      // API call to update status
       const response = await axios.put(
-        `http://209.74.89.83/erpbackend/update-task-state?_id=${taskId}&state=${encodeURIComponent(columnDisplayNames[targetColumn])}`,
+        `http://209.74.89.83/erpbackend/update-task-state?_id=${taskId}&state=${encodeURIComponent(columnDisplayNames[nextColumn])}`,
         {},
         {
           headers: {
@@ -256,12 +203,24 @@ const TaskList = () => {
         throw new Error('Status update failed');
       }
 
-      toast.success('Task status updated successfully');
+      // Only update UI after successful backend update
+      setTasks(prev => {
+        const newTasks = {...prev};
+        newTasks[currentColumn] = newTasks[currentColumn].filter(t => t.id !== taskId);
+        const updatedTask = {
+          ...task,
+          state: nextColumn
+        };
+        newTasks[nextColumn] = [...newTasks[nextColumn], updatedTask];
+        return newTasks;
+      });
+
+      toast.success(`Task moved to ${columnDisplayNames[nextColumn]}`);
     } catch (error) {
-      // Rollback on error
-      setTasks(originalTasks);
-      console.error('Error updating task status:', error);
-      toast.error('Failed to update task status');
+      console.error('Error moving task:', error);
+      toast.error('Failed to move task');
+    } finally {
+      setMovingTask(null);
     }
   };
 
@@ -271,8 +230,17 @@ const TaskList = () => {
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Not available';
-    return new Date(dateString).toLocaleString();
+    try {
+      return new Date(dateString).toLocaleString();
+    } catch {
+      return 'Invalid date';
+    }
   };
+
+  if (loader) {
+        return <Loader />;
+
+  }
 
   return (
     <div className={styles.board}>
@@ -280,39 +248,41 @@ const TaskList = () => {
         + Create Task
       </button>
 
-      <div ref={columnsContainerRef} className={styles.columnsContainer}>
-        {Object.keys(tasks).map((column) => (
-          <div
-            key={column}
-            className={`${styles.column} ${isDragging ? styles.dragging : ''}`}
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, column)}
-          >
-            <h3>{columnDisplayNames[column]}</h3>
+      <div className={styles.columnsContainer}>
+        {columnOrder.map((column) => (
+          <div key={column} className={styles.column}>
+            <h3>{columnDisplayNames[column]} ({tasks[column].length})</h3>
             <div className={styles.taskList}>
-              {tasks[column].map((task) => (
-                <div
-                  key={task.id}
-                  className={styles.taskCard}
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, task.id, column)}
-                  onDragEnd={handleDragEnd}
-                >
-                  <h4>{task.name}</h4>
-                  <p>{task.description}</p>
-                  <div className={styles.taskDetails}>
-                    <p><strong>Project:</strong> {task.project}</p>
-                    <p><strong>Assigned to:</strong> {task.user}</p>
-                    <p><strong>Email:</strong> {task.email}</p>
-                    <p><strong>Time Spent:</strong> {task.timeSpent || '0h 0m 0s'}</p>
-                    <p><strong>Status:</strong> {columnDisplayNames[column]}</p>
-                    <p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
-                    <p><strong>Updated:</strong> {formatDate(task.updatedAt)}</p>
-                    {task.startTime && <p><strong>Started:</strong> {formatDate(task.startTime)}</p>}
-                    <p><strong>Timer:</strong> {task.isRunning ? 'Running' : 'Stopped'}</p>
+              {tasks[column].length > 0 ? (
+                tasks[column].map((task) => (
+                  <div key={task.id} className={styles.taskCard}>
+                    <h4>{task.name}</h4>
+                    <p className={styles.taskDescription}>{task.description}</p>
+                    <div className={styles.taskDetails}>
+                      <p><strong>Project:</strong> {task.project}</p>
+                      <p><strong>Assigned to:</strong> {task.user}</p>
+                      <p><strong>Email:</strong> {task.email}</p>
+                      <p><strong>Time Spent:</strong> {task.timeSpent}</p>
+                      <p><strong>Status:</strong> {columnDisplayNames[column]}</p>
+                      <p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
+                      <p><strong>Updated:</strong> {formatDate(task.updatedAt)}</p>
+                      {task.startTime && <p><strong>Started:</strong> {formatDate(task.startTime)}</p>}
+                      <p><strong>Timer:</strong> {task.isRunning ? 'Running' : 'Stopped'}</p>
+                    </div>
+                    {column !== 'completed' && (
+                      <button 
+                        className={styles.moveButton}
+                        onClick={() => moveTaskToNextColumn(task.id, column)}
+                        disabled={movingTask === task.id}
+                      >
+                        {movingTask === task.id ? 'Moving...' : `Move to ${columnDisplayNames[columnOrder[columnOrder.indexOf(column) + 1]]}`}
+                      </button>
+                    )}
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className={styles.emptyColumn}>No tasks in this column</div>
+              )}
             </div>
           </div>
         ))}

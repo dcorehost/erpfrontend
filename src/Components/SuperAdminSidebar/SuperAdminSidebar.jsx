@@ -17,6 +17,7 @@ import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
 import { FaBullhorn } from 'react-icons/fa';
 import { FaClipboardList } from 'react-icons/fa';
 import { FaCalendarAlt, FaFileAlt, FaUserClock } from 'react-icons/fa';
+import { title } from "framer-motion/client";
 
 const SuperAdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,7 @@ const SuperAdminSidebar = ({ children }) => {
       submenus: [
         { title: "User List", icon: <FaBuildingUser />, link: "/superadmin-userlist" },
         { title: "User Leaves ", icon: <GrTasks />, link: "/superadmin-userleave" },
+        { title:"Notifications"  ,icon: <FaBuildingUser />, link: "/superadmin-notifications"}
       ],
     },
     {

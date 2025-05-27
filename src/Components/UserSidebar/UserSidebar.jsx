@@ -150,10 +150,24 @@ const UserSidebar = ({ children }) => {
   };
   const isActive = (path) => pathname === path;
 
+  const handleLogout = () => {
+    console.log("Logout clicked! Clearing localStorage...");
+    localStorage.clear();
+    sessionStorage.clear();
+    setIsLoggedOut(true);
+    window.location.href = "/";
+  };
+
   return (
-    <div className={`${styles.sidebarWrapper}`}>
-      <div className={`${styles.sidebarContainer}`}>
-        <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+    <div>
+      <Navbar isOpen={isOpen} />
+      <div className={`${styles.sidebarWrapper}`}>
+        {/* <div className={`${styles.sidebarContainer}`}> */}
+        <div
+          className={`${styles.sidebar} ${
+            isOpen ? styles.open : styles.closed
+          }`}
+        >
           <button
             className={styles.hamburgerButton}
             style={isOpen ? { left: "190px" } : { left: "10px" }}
@@ -165,14 +179,14 @@ const UserSidebar = ({ children }) => {
             <nav className={styles.menu}>
               {menus.map((item, index) => (
                 <div
-                  key={item.title}
-                  data-title={item.title}
+                  key={item?.title}
+                  data-title={item?.title}
                   className={styles.menuItem}
                 >
-                  {item.submenus ? (
+                  {item?.submenus ? (
                     <div>
                       <button
-                        onClick={() => toggleExpand(item.title)}
+                        onClick={() => toggleExpand(item?.title)}
                         className={`${styles.menuButton} ${
                           isActive(item.link) ? styles.active : ""
                         }`}
@@ -182,7 +196,7 @@ const UserSidebar = ({ children }) => {
                             className={styles.sidebarIcon}
                             style={{ marginRight: "8px" }}
                           >
-                            {item.icon}
+                            {item?.icon}
                           </span>
                           <span
                             className={`${styles.sidebarTitle} ${
@@ -192,14 +206,16 @@ const UserSidebar = ({ children }) => {
                               flexGrow: 1,
                             }} /* Ensure text takes available space */
                           >
-                            {item.title}
+                            {item?.title}
                           </span>
                           <FaChevronRight
                             size={12}
                             className={`${styles.chevronIcon} ${
                               isOpen ? styles.open : ""
                             } ${
-                              expandedItem === item.title ? styles.expanded : ""
+                              expandedItem === item?.title
+                                ? styles.expanded
+                                : ""
                             }`}
                             style={{
                               marginLeft: "auto",
@@ -208,21 +224,21 @@ const UserSidebar = ({ children }) => {
                         </div>
                       </button>
 
-                      {expandedItem === item.title && isOpen && (
+                      {expandedItem === item?.title && isOpen && (
                         <div className={styles.sidebarChildrenWrapper}>
-                          {item.submenus.map((child) => (
+                          {item?.submenus.map((child) => (
                             <Link
-                              key={child.link}
-                              to={child.link}
+                              key={child?.link}
+                              to={child?.link}
                               className={`${styles.sidebarChildLink} ${
-                                isActive(child.link) ? styles.active : ""
+                                isActive(child?.link) ? styles.active : ""
                               }`}
                             >
                               <span className={styles.childIcon}>
-                                {child.icon}
+                                {child?.icon}
                               </span>
                               <span className={styles.childTitle}>
-                                {child.title}
+                                {child?.title}
                               </span>
                             </Link>
                           ))}
@@ -231,18 +247,18 @@ const UserSidebar = ({ children }) => {
                     </div>
                   ) : (
                     <Link
-                      to={item.link}
+                      to={item?.link}
                       className={`${styles.navLink} ${
-                        isActive(item.link) ? styles.active : ""
+                        isActive(item?.link) ? styles.active : ""
                       }`}
                     >
-                      <span className={styles.navIcon}>{item.icon}</span>
+                      <span className={styles.navIcon}>{item?.icon}</span>
                       <span
                         className={`${styles.navTitle} ${
                           isOpen ? styles.open : ""
                         }`}
                       >
-                        {item.title}
+                        {item?.title}
                       </span>
                     </Link>
                   )}
@@ -250,11 +266,18 @@ const UserSidebar = ({ children }) => {
               ))}
             </nav>
           </div>
+          <div className={styles.logoutContainer}>
+            <button className={styles.logoutSidebar} onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={styles.contentMenu}>
-        <Navbar isOpen={isOpen} />
-        {children}
+        {/* </div> */}
+        <div
+          className={`${styles.contentMenu} ${isOpen ? "" : styles.fullWidth}`}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

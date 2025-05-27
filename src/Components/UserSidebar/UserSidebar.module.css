@@ -3,10 +3,14 @@
 }
 
 .sidebarWrapper {
+  display: flex;
   margin-top: 70px;
+  height: calc(100vh - 70px); /* Full height excluding the navbar */
 }
 
 .sidebar {
+    display: flex;
+  flex-direction: column;
   position: fixed;
   top: 60.4px;
   left: -100%;
@@ -25,8 +29,22 @@
   width: 250px;
 }
 
+.sidebar.closed{
+  width: 0px;
+}
+
 .sidebar.hidden {
   left: -100%;
+}
+
+.contentMenu {
+  flex-grow: 1;
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  margin-left: 250px; /* Same width as sidebar when open */
+}
+
+.contentMenu.fullWidth {
+  margin-left: 0; /* Full width when sidebar is closed */
 }
 
 /* Hamburger Menu */
@@ -279,6 +297,28 @@
   background-color: transparent; 
 }
 
+.logoutContainer {
+  margin-top: auto; /* Pushes the logout button to the bottom */
+  padding: 1rem; /* Optional padding around the button */
+  text-align: center; /* Centers the logout button */
+}
+
+.logoutSidebar {
+  text-align: center;
+  color: white;
+  background-color: #e74c3c !important; /* Button color */
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Adjust the button width */
+  margin: 0 auto; /* Center the button horizontally */
+}
+
+.logoutSidebar:hover {
+  background-color: #c0392b !important; /* Hover effect */
+}
+
 /* Responsive Design */
 @media (max-width: 480px) {
   .sidebar {
@@ -322,10 +362,6 @@
 
   .hamburgerButton {
     left: 10px;
-  }
-
-  .contentMenu {
-    width: calc(100% - 70px);
   }
 
   .menuItem {

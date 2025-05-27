@@ -1,81 +1,84 @@
-
-
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
-import SideBar from './Components/AdminSideBar/AdminSideBar';
-import Signup from './Components/Signup/Signup';
-import SignIn from './Components/SignIn/SignIn';
-import Logout from './Components/Logout/Logout';
-import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import UserProfile from './Components/ownUserProfile/ownUserProfile';
-import ResetPassword from './Components/ResetPassword/ResetPassword';
-import UserSidebar from './Components/UserSidebar/UserSidebar';
-import SuperAdminSidebar from './Components/SuperAdminSidebar/SuperAdminSidebar';
-import LeaveSummary from './Components/LeaveSummary/LeaveSummary';
-import AddTask from './Components/AddTask/AddTask';
-import TaskList from './Components/TaskList/TaskList';
-import ApplyLeaveTable from './Components/ApplyLeaveTable/ApplyLeaveTable';
-import PastLeaveTable from './Components/PastLeaveTable/PastLeaveTable';
-import MarkAttendance from './Components/MarkAttendance/MarkAttendance';
-import AttendanceSummary from './Components/AttendanceSummary/AttendanceSummary';
-import TaskAndProjectDetails from './Components/TaskAndProjectDetails/TaskAndProjectDetails';
-import LeavePolicy from './Components/LeavePolicy/LeavePolicy';
-import PendingLeaves from './Components/PendingLeaves/PendingLeaves';
-import PayrollSummary from './Components/PayrollSummary/PayrollSummary';
-import Deductions from './Components/Deductions/Deductions';
-import PaymentMethods from './Components/PaymentMethod/PaymentMethod';
-import CreatePayrolls from './Components/CreatePayrolls/CreatePayrolls';
-import CreateUser from './Components/CreateUser/CreateUser';
-import TaskAssignment from './Components/TaskAssignment/TaskAssignment';
-import AdminPayroll from './Components/AdminPayroll/AdminPayroll';
-import AdminTaskSummary from './Components/AdminTaskSummary/AdminTaskSummary';
-import UserTaskList from './Components/UserTaskList/UserTaskList';
-import AdminUserTable from './Components/AdminUserTable/AdminUserTable';
-import UserTaskProgress from './Components/UserTaskProgress/UserTaskProgress';
-import CompletedLeaves from './Components/CompletedLeaves/CompletedLeaves';
-import RejectedLeaves from './Components/RejectedLeaves/RejectedLeaves';
-import UserTask from './Components/UserTask/UserTask';
-import CreateNewProject from './Components/CreateNewProject/CreateNewProject';
+import React from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar";
+import SideBar from "./Components/AdminSideBar/AdminSideBar";
+import Signup from "./Components/Signup/Signup";
+import SignIn from "./Components/SignIn/SignIn";
+import Logout from "./Components/Logout/Logout";
+import AdminDashboard from "./Pages/AdminDashboard/AdminDashboard";
+import UserProfile from "./Components/ownUserProfile/ownUserProfile";
+import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import UserSidebar from "./Components/UserSidebar/UserSidebar";
+import SuperAdminSidebar from "./Components/SuperAdminSidebar/SuperAdminSidebar";
+import LeaveSummary from "./Components/LeaveSummary/LeaveSummary";
+import AddTask from "./Components/AddTask/AddTask";
+import TaskList from "./Components/TaskList/TaskList";
+import ApplyLeaveTable from "./Components/ApplyLeaveTable/ApplyLeaveTable";
+import PastLeaveTable from "./Components/PastLeaveTable/PastLeaveTable";
+import MarkAttendance from "./Components/MarkAttendance/MarkAttendance";
+import AttendanceSummary from "./Components/AttendanceSummary/AttendanceSummary";
+import TaskAndProjectDetails from "./Components/TaskAndProjectDetails/TaskAndProjectDetails";
+import LeavePolicy from "./Components/LeavePolicy/LeavePolicy";
+import PendingLeaves from "./Components/PendingLeaves/PendingLeaves";
+import PayrollSummary from "./Components/PayrollSummary/PayrollSummary";
+import Deductions from "./Components/Deductions/Deductions";
+import PaymentMethods from "./Components/PaymentMethod/PaymentMethod";
+import CreatePayrolls from "./Components/CreatePayrolls/CreatePayrolls";
+import CreateUser from "./Components/CreateUser/CreateUser";
+import TaskAssignment from "./Components/TaskAssignment/TaskAssignment";
+import AdminPayroll from "./Components/AdminPayroll/AdminPayroll";
+import AdminTaskSummary from "./Components/AdminTaskSummary/AdminTaskSummary";
+import UserTaskList from "./Components/UserTaskList/UserTaskList";
+import AdminUserTable from "./Components/AdminUserTable/AdminUserTable";
+import UserTaskProgress from "./Components/UserTaskProgress/UserTaskProgress";
+import CompletedLeaves from "./Components/CompletedLeaves/CompletedLeaves";
+import RejectedLeaves from "./Components/RejectedLeaves/RejectedLeaves";
+import UserTask from "./Components/UserTask/UserTask";
+import CreateNewProject from "./Components/CreateNewProject/CreateNewProject";
 // import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
 // import HolidayList from './Components/HolidaysList/HolidaysList'
 // import TaskStatus from  './Components/TaskStatus/TaskStatus'
-import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
-import UserDashboard from './Pages/UserDashboard/DashboardUser';
-import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
-import HolidayList from './Components/HolidaysList/HolidaysList';
-import OwnUserProfile from './Pages/OwnUserProfile/OwnUserProfile';
-import UserAttendance from './Components/UserAttendance/UserAttendance';
-import TaskStatus from './Components/TaskStatus/TaskStatus';
-import AdminNotificationsHistory from './Components/AdminNotificationsHistory/AdminNotificationsHistory';
-import AdminNotification from './Components/AdminNotifications/AdminNotifications';
-import SuperAdminDashboard from './Pages/SuperAdminDashboard/SuperAminDashboard';
-import SuperAdminNotifications from './Components/SuperAdminNotifications/SuperAdminNotifications';
-import SuperAdminHistory from './Components/SuperAdminHistory/SuperAdminHistory';
-import UserNotifications from './Components/UserNotifications/UserNotifications'; 
-import UserList from './Components/UserList/UserList';
-import AdminList from './Components/AdminList/AdminList';
-import ApplyLeaveAdmin from './Components/ApplyLeaveAdmin/ApplyLeaveAdmin';
-import UserLeavesPage from './Components/UserLeavesPage/UserLeavesPage';
-import PendingLeavesPage from './Components/PendingLeavesPage/PendingLeavesPage';
-import CompletedLeavesPage from './Components/CompletedLeavesPage/CompletedLeavesPage';
-import ClientSideBar from './Components/ClientSideBar/ClientSideBar';
-import ClientDashboard from './Pages/ClientDashboard/ClientDashboard';
-import ClientProjects from './Components/ClientProjects/ClientProjects';
-import ClientProjectDetails from './Components/ClientProjectDetails/ClientProjectDetails';
-import ClientProjectRequest from './Components/ClientProjectsRequests/ClientProjectsRequests'; 
-import ClientTasks from './Components/ClientTasks/ClientTasks'; // ✅ Correct import
-import MyProfile from './Pages/MyProfile/MyProfile';
-import UpdateUserProfile from './Components/UpdateUserProfile/UpdateUserProfile';
-// import ClientTasks from './Components/ClientTasks/ClientTasks'; 
-import CLientSidebar from './Components/ClientSideBar/ClientSideBar';
-import RedirectBasedOnUser from './RedirectBasedOnUser';
-import ClientCreateProject from './Components/ClientCreateProject/ClientCreateProject';
-import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
-import CreateClient from './Components/CreateClient/CreateClient';
-import ClientCommunication from './Components/ClientCommunication/ClientCommunication';
-import ClientMessages from './Components/ClientMessageDetails/ClientMessageDetails';
+import ProjectDetails from "./Components/ProjectDetails/ProjectDetails";
+import UserDashboard from "./Pages/UserDashboard/DashboardUser";
+import CreateHolidays from "./Components/CreateHolidays/CreateHolidays";
+import HolidayList from "./Components/HolidaysList/HolidaysList";
+import OwnUserProfile from "./Pages/OwnUserProfile/OwnUserProfile";
+import UserAttendance from "./Components/UserAttendance/UserAttendance";
+import TaskStatus from "./Components/TaskStatus/TaskStatus";
+import AdminNotificationsHistory from "./Components/AdminNotificationsHistory/AdminNotificationsHistory";
+import AdminNotification from "./Components/AdminNotifications/AdminNotifications";
+import SuperAdminDashboard from "./Pages/SuperAdminDashboard/SuperAminDashboard";
+import SuperAdminNotifications from "./Components/SuperAdminNotifications/SuperAdminNotifications";
+import SuperAdminHistory from "./Components/SuperAdminHistory/SuperAdminHistory";
+import UserNotifications from "./Components/UserNotifications/UserNotifications";
+import UserList from "./Components/UserList/UserList";
+import AdminList from "./Components/AdminList/AdminList";
+import ApplyLeaveAdmin from "./Components/ApplyLeaveAdmin/ApplyLeaveAdmin";
+import UserLeavesPage from "./Components/UserLeavesPage/UserLeavesPage";
+import PendingLeavesPage from "./Components/PendingLeavesPage/PendingLeavesPage";
+import CompletedLeavesPage from "./Components/CompletedLeavesPage/CompletedLeavesPage";
+import ClientSideBar from "./Components/ClientSideBar/ClientSideBar";
+import ClientDashboard from "./Pages/ClientDashboard/ClientDashboard";
+import ClientProjects from "./Components/ClientProjects/ClientProjects";
+import ClientProjectDetails from "./Components/ClientProjectDetails/ClientProjectDetails";
+import ClientProjectRequest from "./Components/ClientProjectsRequests/ClientProjectsRequests";
+import ClientTasks from "./Components/ClientTasks/ClientTasks"; // ✅ Correct import
+import MyProfile from "./Pages/MyProfile/MyProfile";
+import UpdateUserProfile from "./Components/UpdateUserProfile/UpdateUserProfile";
+// import ClientTasks from './Components/ClientTasks/ClientTasks';
+import CLientSidebar from "./Components/ClientSideBar/ClientSideBar";
+import RedirectBasedOnUser from "./RedirectBasedOnUser";
+import ClientCreateProject from "./Components/ClientCreateProject/ClientCreateProject";
+import ClientNewRequest from "./Components/ClientNewRequest/ClientNewRequest";
+import CreateClient from "./Components/CreateClient/CreateClient";
+import ClientCommunication from "./Components/ClientCommunication/ClientCommunication";
+import ClientMessages from "./Components/ClientMessageDetails/ClientMessageDetails";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -85,7 +88,7 @@ const App = () => {
     <Router>
       {!token ? (
         <>
-          <Navbar />
+          {/* <Navbar /> */}
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<Signup />} />
@@ -95,14 +98,14 @@ const App = () => {
       ) : (
         <>
           {/* Show Sidebar based on user type */}
-          {typeOfUser === "Admin" && <SideBar />}
-          {typeOfUser === "User" && <UserSidebar />}
+          {/* {typeOfUser === "Admin" && <SideBar />} */}
+          {/* {typeOfUser === "User" && <UserSidebar />} */}
           {typeOfUser === "superadmin" && <SuperAdminSidebar />}
           {typeOfUser === "Client" && <CLientSidebar />}
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
-            <Route
+            {/* <Route
               path="/"
               element={
                 <Navigate to={
@@ -115,8 +118,28 @@ const App = () => {
                       : "/user-dashboard"
                 } />
               }
+            /> */}
+            <Route
+              path="/"
+              element={
+                !typeOfUser ? (
+                  <div>Loading...</div> // Show loader while checking user type
+                ) : (
+                  <Navigate
+                    to={
+                      typeOfUser === "Admin"
+                        ? "/admin-dashboard"
+                        : typeOfUser === "superadmin"
+                        ? "/superadmin-dashboard"
+                        : typeOfUser === "Client"
+                        ? "/client-dashboard"
+                        : "/user-dashboard"
+                    }
+                    replace // Important: prevents history stack buildup
+                  />
+                )
+              }
             />
-
 
             {/* //common routes */}
 
@@ -124,104 +147,364 @@ const App = () => {
             <Route path="/logout" element={<Logout />} />
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/my-profile" element={<MyProfile />} />
-            <Route path='/Own-User-Profile' element={<OwnUserProfile />} />
+            <Route path="/Own-User-Profile" element={<OwnUserProfile />} />
             <Route path="/mark-attendance" element={<MarkAttendance />} />
-
-
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
               <>
-                <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path='/Admin/Leave/Pending-Leaves' element={<PendingLeaves />} />
-                <Route path='/CompletedLeaves' element={<CompletedLeaves />} />
-                <Route path='/RejectedLeaves' element={<RejectedLeaves />} />
-                <Route path='/Admin/Leave/ApplyLeave'  element={<ApplyLeaveAdmin />}></Route>
+                <Route
+                  path="/admin-dashboard"
+                  element={
+                    <SideBar>
+                      <AdminDashboard />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin/Leave/Pending-Leaves"
+                  element={
+                    <SideBar>
+                      <PendingLeaves />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/CompletedLeaves"
+                  element={
+                    <SideBar>
+                      <CompletedLeaves />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/RejectedLeaves"
+                  element={
+                    <SideBar>
+                      <RejectedLeaves />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin/Leave/ApplyLeave"
+                  element={
+                    <SideBar>
+                      <ApplyLeaveAdmin />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/CreateNewProject"
+                  element={
+                    <SideBar>
+                      <CreateNewProject />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/ProjectDetails"
+                  element={
+                    <SideBar>
+                      <ProjectDetails />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin/Leave/Task-Assignment"
+                  element={
+                    <SideBar>
+                      <TaskAssignment />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin/Assignment/task-status"
+                  element={
+                    <SideBar>
+                      <TaskStatus />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin-Task-Summary"
+                  element={
+                    <SideBar>
+                      <AdminTaskSummary />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/create-user"
+                  element={
+                    <SideBar>
+                      <CreateUser />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/AdminUserTable"
+                  element={
+                    <SideBar>
+                      <AdminUserTable />
+                    </SideBar>
+                  }
+                />
 
+                <Route
+                  path="/attendance-summary"
+                  element={
+                    <SideBar>
+                      <AttendanceSummary />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin-user-attendance"
+                  element={
+                    <SideBar>
+                      <UserAttendance />
+                    </SideBar>
+                  }
+                />
 
-                <Route path='/CreateNewProject' element={<CreateNewProject />} />
-                <Route path='/ProjectDetails' element={<ProjectDetails />} />
-                <Route path='/Admin/Leave/Task-Assignment' element={<TaskAssignment />} />
-                <Route path='/Admin/Assignment/task-status' element={<TaskStatus />} />
-                <Route path='/Admin-Task-Summary' element={<AdminTaskSummary />} />
-                <Route path='/create-user' element={<CreateUser />} />
-                <Route path='/AdminUserTable' element={<AdminUserTable />} />
+                <Route
+                  path="/Create-User-Payrolls"
+                  element={
+                    <SideBar>
+                      <CreatePayrolls />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/Admin-Payroll"
+                  element={
+                    <SideBar>
+                      <AdminPayroll />
+                    </SideBar>
+                  }
+                />
 
-                <Route path="/attendance-summary" element={<AttendanceSummary />} />
-                <Route path='/Admin-user-attendance' element={<UserAttendance />} />
-
-                <Route path='/Create-User-Payrolls' element={<CreatePayrolls />} />
-                <Route path='/Admin-Payroll' element={<AdminPayroll />} />
-
-
-
-                <Route path="/admin-notifications" element={<AdminNotification />} />
-                <Route path="/admin-notifications-history" element={<AdminNotificationsHistory />} />
-                
+                <Route
+                  path="/admin-notifications"
+                  element={
+                    <SideBar>
+                      <AdminNotification />
+                    </SideBar>
+                  }
+                />
+                <Route
+                  path="/admin-notifications-history"
+                  element={
+                    <SideBar>
+                      <AdminNotificationsHistory />
+                    </SideBar>
+                  }
+                />
               </>
             )}
 
             {/* User Routes */}
             {typeOfUser === "User" && (
               <>
-                <Route path="/user-dashboard" element={<UserDashboard />} />
-                <Route path="/leave-summary" element={<LeaveSummary />} />
-                <Route path="/ApplyLeaveTable" element={<ApplyLeaveTable />} />
-                <Route path="/PastLeaveTable" element={<PastLeaveTable />} />
-                <Route path="/Leave-policy" element={<LeavePolicy />} />
-
-
-                <Route path="/add-task" element={<AddTask />} />
-                <Route path="/task-list" element={<TaskList />} />
-                <Route path='/User-Task-List' element={<UserTaskList />} />
-                <Route path='/UserTaskProgress' element={<UserTaskProgress />} />  
-
-
-                <Route path="/attendance-summary" element={<AttendanceSummary />} />
-
-                <Route path="/user-notifications" element={<UserNotifications />} />
-
-                <Route path='/payroll-summary' element={<PayrollSummary />} />
-                {/* <Route path="/TaskAndProjectDetails" element={<TaskAndProjectDetails />} /> */}
-                <Route path='/deductions' element={<Deductions />} />
-                {/* <Route path='/payment-methods' element={<PaymentMethods />} /> */}
-                <Route path='/Create-Payrolls' element={<CreatePayrolls />} />
-                <Route path='/UserTask' element={<UserTask />} />
+                <Route
+                  path="/user-dashboard"
+                  element={
+                    <UserSidebar>
+                      <UserDashboard />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/leave-summary"
+                  element={
+                    <UserSidebar>
+                      <LeaveSummary />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/ApplyLeaveTable"
+                  element={
+                    <UserSidebar>
+                      <ApplyLeaveTable />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/PastLeaveTable"
+                  element={
+                    <UserSidebar>
+                      <PastLeaveTable />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/Leave-policy"
+                  element={
+                    <UserSidebar>
+                      <LeavePolicy />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/add-task"
+                  element={
+                    <UserSidebar>
+                      <AddTask />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/task-list"
+                  element={
+                    <UserSidebar>
+                      <TaskList />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/User-Task-List"
+                  element={
+                    <UserSidebar>
+                      <UserTaskList />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/UserTaskProgress"
+                  element={
+                    <UserSidebar>
+                      <UserTaskProgress />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/attendance-summary"
+                  element={
+                    <UserSidebar>
+                      <AttendanceSummary />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/user-notifications"
+                  element={
+                    <UserSidebar>
+                      <UserNotifications />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/payroll-summary"
+                  element={
+                    <UserSidebar>
+                      <PayrollSummary />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/deductions"
+                  element={
+                    <UserSidebar>
+                      <Deductions />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/Create-Payrolls"
+                  element={
+                    <UserSidebar>
+                      <CreatePayrolls />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/UserTask"
+                  element={
+                    <UserSidebar>
+                      <UserTask />
+                    </UserSidebar>
+                  }
+                />
               </>
             )}
 
             {/* Super Admin Routes */}
             {typeOfUser === "superadmin" && (
               <>
-                <Route path="/superadmin-dashboard" element={<SuperAdminDashboard />} />
+                <Route
+                  path="/superadmin-dashboard"
+                  element={<SuperAdminDashboard />}
+                />
                 <Route path="/create-holidays" element={<CreateHolidays />} />
                 <Route path="/holiday-list" element={<HolidayList />} />
-                <Route path="/superadmin-notifications" element={<SuperAdminNotifications />} />
-                <Route path="/superadmin-notifications-history" element={<SuperAdminHistory />} />
+                <Route
+                  path="/superadmin-notifications"
+                  element={<SuperAdminNotifications />}
+                />
+                <Route
+                  path="/superadmin-notifications-history"
+                  element={<SuperAdminHistory />}
+                />
                 <Route path="/superadmin-userlist" element={<UserList />} />
                 <Route path="/superadmin-adminlist" element={<AdminList />} />
-                <Route path="/superadmin-userleave" element={<UserLeavesPage />} />
-                <Route path="/superadmin-adminleave" element={<PendingLeavesPage />} />
-                <Route path="/superadmin-userupdate" element={<UpdateUserProfile />} />
-                <Route path="/superadmin-adminleave-summary" element={<CompletedLeavesPage />} />
-                <Route path="/superadmin-clientsection-createproject" element={<ClientCreateProject />} /> 
-                <Route path="/superadmin-clientsection-clientrequest" element={<ClientNewRequest />} /> 
-                <Route path="/superadmin-clientsection-Createclient" element={<CreateClient />} /> 
-                <Route path="/superadmin-client-messages" element={<ClientMessages />} /> {/* ✅ Correctly linked */}
-
+                <Route
+                  path="/superadmin-userleave"
+                  element={<UserLeavesPage />}
+                />
+                <Route
+                  path="/superadmin-adminleave"
+                  element={<PendingLeavesPage />}
+                />
+                <Route
+                  path="/superadmin-userupdate"
+                  element={<UpdateUserProfile />}
+                />
+                <Route
+                  path="/superadmin-adminleave-summary"
+                  element={<CompletedLeavesPage />}
+                />
+                <Route
+                  path="/superadmin-clientsection-createproject"
+                  element={<ClientCreateProject />}
+                />
+                <Route
+                  path="/superadmin-clientsection-clientrequest"
+                  element={<ClientNewRequest />}
+                />
+                <Route
+                  path="/superadmin-clientsection-Createclient"
+                  element={<CreateClient />}
+                />
+                <Route
+                  path="/superadmin-client-messages"
+                  element={<ClientMessages />}
+                />{" "}
+                {/* ✅ Correctly linked */}
               </>
             )}
 
-              {typeOfUser === "Client" && (
+            {typeOfUser === "Client" && (
               <>
                 <Route path="/client-dashboard" element={<ClientDashboard />} />
                 <Route path="/client-projects" element={<ClientProjects />} />
-                <Route path="/client-project-details" element={<ClientProjectDetails />} />
-                <Route path="/client-project-requests" element={<ClientProjectRequest/>} /> {/* Add this route */}
-                <Route path="/client-tasks" element={<ClientTasks />} /> {/* ✅ Correctly linked */}
-                <Route path="/client-communication" element={<ClientCommunication />} /> {/* ✅ Correctly linked */}
-
-                </>
+                <Route
+                  path="/client-project-details"
+                  element={<ClientProjectDetails />}
+                />
+                <Route
+                  path="/client-project-requests"
+                  element={<ClientProjectRequest />}
+                />{" "}
+                {/* Add this route */}
+                <Route path="/client-tasks" element={<ClientTasks />} />{" "}
+                {/* ✅ Correctly linked */}
+                <Route
+                  path="/client-communication"
+                  element={<ClientCommunication />}
+                />{" "}
+                {/* ✅ Correctly linked */}
+              </>
             )}
 
             {/* Default catch-all */}
@@ -234,4 +517,3 @@ const App = () => {
 };
 
 export default App;
-
