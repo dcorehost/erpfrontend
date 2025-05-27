@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './SuperAdminNotifications.module.css';
-import Auth from '../Services/Auth';
+import styles from './SuperAdminNotifications.module.css'; // Assuming you have this CSS module
+import Auth from '../Services/Auth'; // Assuming you have an Auth service for token management
 import { useNavigate } from 'react-router-dom';
 
-const SuperAdminCreateNotification = () => {
+const SuperAdminNotification = () => {
   const [formData, setFormData] = useState({
     title: '',
     message: '',
@@ -20,14 +20,18 @@ const SuperAdminCreateNotification = () => {
 
   const navigate = useNavigate();
 
-  // Define the roles here
-  const roles = ['user', 'admin', 'superadmin', 'client']; // Add roles here
+  // Define the roles here. Ensure these match the roles expected by your backend.
+  const roles = ['User', 'Admin', 'Superadmin', 'Client']; // Added capitalized roles based on your output example
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const token = Auth.getToken();
-        if (!token) return;
+        if (!token) {
+          // Redirect to login or handle unauthorized access
+          navigate('/login'); // Example: navigate to login page
+          return;
+        }
 
         const response = await axios.get(
           `http://209.74.89.83/erpbackend/notifications?page=${currentPage}&limit=${itemsPerPage}`,
@@ -41,20 +45,36 @@ const SuperAdminCreateNotification = () => {
         setNotifications(response.data.notifications);
         setTotalPages(response.data.totalPages);
       } catch (err) {
+        console.error("Failed to fetch notifications:", err);
         toast.error('Failed to fetch notifications.');
+        // Optionally handle token expiration or invalid token here
+        if (err.response && err.response.status === 401) {
+          Auth.logout(); // Example: clear token and logout
+          navigate('/login');
+        }
       }
     };
 
     fetchNotifications();
-  }, [currentPage]);
+  }, [currentPage, navigate]); // Added navigate to dependency array
 
   // Handle input change for the form fields
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
     if (name === 'targetRoles') {
-      const selectedRoles = Array.from(e.target.selectedOptions, option => option.value); // Handle multiple selections
-      setFormData(prev => ({ ...prev, [name]: selectedRoles }));
+      // If the input is a checkbox
+      if (type === 'checkbox') {
+        setFormData(prev => ({
+          ...prev,
+          targetRoles: checked
+            ? [...prev.targetRoles, value] // Add role if checked
+            : prev.targetRoles.filter(role => role !== value) // Remove role if unchecked
+        }));
+      } else {
+        // Fallback for other input types with the same name if any
+        setFormData(prev => ({ ...prev, [name]: value }));
+      }
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -63,20 +83,28 @@ const SuperAdminCreateNotification = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, message, notificationType, targetRoles } = formData;
+    const { title, message, targetRoles } = formData; // Removed notificationType from destructuring as it's handled by select
 
     if (!title || !message) {
       toast.error('Title and message are required!');
       return;
     }
+    if (targetRoles.length === 0) {
+      toast.error('At least one target role must be selected!');
+      return;
+    }
 
     try {
       const token = Auth.getToken();
-      if (!token) throw new Error('Unauthorized');
+      if (!token) {
+        toast.error('Unauthorized. Please log in.');
+        navigate('/login');
+        return;
+      }
 
       await axios.post(
         'http://209.74.89.83/erpbackend/create-notifications',
-        formData, // Send the whole form data with targetRoles
+        formData, // formData directly contains title, message, notificationType, and targetRoles
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -88,13 +116,17 @@ const SuperAdminCreateNotification = () => {
       // Reset form data after successful submission
       setFormData({ title: '', message: '', notificationType: 'announcement', targetRoles: [] });
       toast.success('Notification created successfully!');
-      
-      // Refresh notifications list
-      setCurrentPage(1);
-      navigate('/superadmin-notifications-history');
+
+      // Refresh notifications list and navigate
+      setCurrentPage(1); // Reset to first page to see new notification if pagination is active
+      navigate('/superadmin-notifications-history'); // Navigate to a history page
     } catch (err) {
-      console.error(err.message);
-      toast.error('Failed to create notification.');
+      console.error("Failed to create notification:", err.response ? err.response.data : err.message);
+      toast.error('Failed to create notification. Please check your input and try again.');
+      if (err.response && err.response.status === 401) {
+        Auth.logout();
+        navigate('/login');
+      }
     }
   };
 
@@ -143,21 +175,21 @@ const SuperAdminCreateNotification = () => {
         </div>
 
         <div className={styles['form-group']}>
-          <label htmlFor="targetRoles">Target Roles</label>
-          <select
-            id="targetRoles"
-            name="targetRoles"
-            value={formData.targetRoles}  // Ensure this is an array
-            onChange={handleChange}
-            multiple // Allow multiple selections
-            required
-          >
+          <label>Target Roles</label>
+          <div className={styles['checkbox-group']}> {/* Add a div for styling checkboxes */}
             {roles.map(role => (
-              <option key={role} value={role}>
+              <label key={role} className={styles['checkbox-label']}>
+                <input
+                  type="checkbox"
+                  name="targetRoles"
+                  value={role}
+                  checked={formData.targetRoles.includes(role)}
+                  onChange={handleChange}
+                />
                 {role}
-              </option>
+              </label>
             ))}
-          </select>
+          </div>
         </div>
 
         <button type="submit" className={styles['submit-button']}>
@@ -212,4 +244,4 @@ const SuperAdminCreateNotification = () => {
   );
 };
 
-export default SuperAdminCreateNotification;
+export default SuperAdminNotification;

@@ -1,7 +1,7 @@
 /* TaskList.module.css */
-
+    
 /* Base Styles */
-
+     
 .board {
   padding: 1rem;
   max-width: 70%;
@@ -10,7 +10,7 @@
   height: 500px;
   overflow-y: auto; 
   margin: 0px auto;
-  border: 5px dashed #8fbc8f; 
+  border: 1px solid #8fbc8f; 
   border-radius: 10px;
 }
 
