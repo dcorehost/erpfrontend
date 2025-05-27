@@ -17,6 +17,7 @@ import { BiSolidCoinStack, BiSolidMessageSquareDots } from "react-icons/bi";
 import { FaBullhorn } from 'react-icons/fa';
 import { FaClipboardList } from 'react-icons/fa';
 import { FaCalendarAlt, FaFileAlt, FaUserClock } from 'react-icons/fa';
+import { title } from "framer-motion/client";
 
 const SuperAdminSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,7 @@ const SuperAdminSidebar = ({ children }) => {
       submenus: [
         { title: "User List", icon: <FaBuildingUser />, link: "/superadmin-userlist" },
         { title: "User Leaves ", icon: <GrTasks />, link: "/superadmin-userleave" },
+        { title:"Notifications"  ,icon: <FaBuildingUser />, link: "/superadmin-notifications"}
       ],
     },
     {
@@ -70,7 +72,7 @@ const SuperAdminSidebar = ({ children }) => {
         { title: "Admin List", icon: <FaUser />, link: "/superadmin-adminlist" },
         { title: "Pending Admin Leave", icon: <FaFileAlt />, link: "/superadmin-adminleave" },
         { title: "Admin Leave Summary", icon: <FaClipboardList />, link: "/superadmin-adminleave-summary" },
-        // { title: "Manage Roles", icon: <FcSalesPerformance />, link: "/manage-roles" },
+        { title: "Update User Profile", icon: <FcSalesPerformance />, link: "/superadmin-userupdate" },
         // { title: "System Logs", icon: <BiSolidCoinStack />, link: "/system-logs" },
         // { title: "Admin Messages", icon: <BiSolidMessageSquareDots />, link: "/admin-messages" },
         // { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
@@ -78,19 +80,15 @@ const SuperAdminSidebar = ({ children }) => {
     },
     {
       title: "Client Section",
-      icon: <RiAdminFill />,
+      icon: <FaCalendarAlt />,
       link: "/#",
       submenus: [
-
-        { title: "Client Projects", icon: <FaUser />, link: "/CreateClientProject" },
-        { title: "Client Request", icon: <FaFileAlt />, link: "/ClientProjectRequestsDetails" },
-        // { title: "Admin Leave Summary", icon: <FaClipboardList />, link: "/##" },
-        // { title: "Manage Roles", icon: <FcSalesPerformance />, link: "/manage-roles" },
-        // { title: "System Logs", icon: <BiSolidCoinStack />, link: "/system-logs" },
-        // { title: "Admin Messages", icon: <BiSolidMessageSquareDots />, link: "/admin-messages" },
-        // { title: "Settings", icon: <FaClipboardList />, link: "/admin-settings" },
+        { title: "Create Project", icon: <FaCalendarAlt />, link: "/superadmin-clientsection-createproject" },
+        { title: "New Request", icon: <FaClipboardList />, link: "/superadmin-clientsection-clientrequest" },
+        { title: "CreateClient", icon: <FaClipboardList />, link: "/superadmin-clientsection-Createclient" },
+        { title: "Thinking", icon: <FaClipboardList />, link: "/" },
       ],
-    },
+    }
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);

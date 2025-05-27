@@ -43,8 +43,8 @@ const AdminSidebar = ({ children }) => {
         { title: "User Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
         { title: "User Completed Leaves", link: "/CompletedLeaves" },
         { title: "User Rejected Leaves", link: "/RejectedLeaves" },
-        // { title: "Apply Leave", link:"/leave-summary" },
-        { title: "Admin User", link:"Own-Admin-Profile" },
+        { title: "Apply Leave", link:"/Admin/Leave/ApplyLeave" },
+        // { title: "Admin User", link:"Own-Admin-Profile" },
       ],
     },
     {
@@ -55,7 +55,7 @@ const AdminSidebar = ({ children }) => {
         { title: "Create New Project", link: "/CreateNewProject", icon: <FaPlus /> },
         { title: "Project Details", link: "/ProjectDetails", icon: <FaListUl /> },
         { title: "Task Assignment", link: "/Admin/Leave/Task-Assignment", icon: <FaTasks /> },
-        { title: "Update Task Progress", link: "/Admin/Assignment/task-status", icon: <FaCheckSquare /> }, // Shortened title
+        { title: "Update Task Progress", link: "/Admin/Assignment/task-status", icon: <FaCheckSquare /> }, 
         { title: "Admin Task Summary", link: "/Admin-Task-Summary", icon: <FaClipboard /> },
       ],
     },

@@ -18,9 +18,9 @@ import {
   FaUsers,
   FaCalendarCheck,
   FaUserClock,
-  FaUserPlus, 
+  FaUserPlus,
   FaClipboard,
-  FaChartBar, 
+  FaChartBar,
   FaSignOutAlt,
   // ✅ Added these missing icons:
   FaTachometerAlt,
@@ -30,8 +30,9 @@ import {
   FaComments,
   FaEnvelope,
   FaFileInvoice,
-  FaMoneyBillWave
+  FaMoneyBillWave,
 } from "react-icons/fa"; // ✅ Fixed
+
 import { GrTasks } from "react-icons/gr";
 import styles from "./ClientSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -49,22 +50,22 @@ const CLientSidebar = ({ children }) => {
     },
     {
       title: "Projects",
-      link: "/projects",
-      icon: <FaProjectDiagram />, 
+      link: "/client-projects",
+      icon: <FaProjectDiagram />,
     },
     {
       title: "Tasks",
-      icon: <FaTasks />, 
+      icon: <FaTasks />,
       link: "/client-tasks",
     },
     {
       title: "New Request",
       icon: <FaFileAlt />,
       link: "/client-project-requests",
-      },
+    },
     {
       title: "Documents",
-      icon: <FaFolder />, 
+      icon: <FaFolder />,
       link: "/client-documents",
     },
     {
@@ -73,59 +74,60 @@ const CLientSidebar = ({ children }) => {
       link: "/#",
       notificationCount: 3,
       submenus: [
-        { 
-          title: "Messages", 
+        {
+          title: "Messages",
           link: "/client-messages",
           icon: <FaEnvelope />,
-          notificationCount: 3
+          notificationCount: 3,
         },
-        { 
-          title: "Announcements", 
+        {
+          title: "Announcements",
           link: "/client-announcements",
-          icon: <FaBullhorn />
+          icon: <FaBullhorn />,
         },
-        { 
-          title: "Meetings", 
+        {
+          title: "Meetings",
           link: "/client-meetings",
-          icon: <FaCalendarAlt />
-        }
-      ]
+          icon: <FaCalendarAlt />,
+        },
+      ],
     },
     {
       title: "Financial",
       icon: <FaMoneyBillWave />,
       link: "/#",
       submenus: [
-        { 
-          title: "Invoices", 
+        {
+          title: "Invoices",
           link: "/client-invoices",
-          icon: <FaFileInvoice />
+          icon: <FaFileInvoice />,
         },
-        { 
-          title: "Payments", 
+        {
+          title: "Payments",
           link: "/client-payments",
-          icon: <FaMoneyBillWave />
+          icon: <FaMoneyBillWave />,
         },
-        { 
-          title: "Receipts", 
+        {
+          title: "Receipts",
           link: "/client-receipts",
-          icon: <FaFileAlt />
-        }
-      ]
-    }
+          icon: <FaFileAlt />,
+        },
+      ],
+    },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
-  const toggleSubmenu = (index) => setActiveMenu(activeMenu === index ? null : index);
+  const toggleSubmenu = (index) =>
+    setActiveMenu(activeMenu === index ? null : index);
 
   const handleLogout = () => {
     // Clear all authentication-related storage
     localStorage.clear();
     sessionStorage.clear();
-    
+
     // Redirect to login page
     navigate("/", { replace: true });
-    
+
     // Optional: Force a full page reload to ensure all state is cleared
     window.location.reload();
   };
@@ -141,37 +143,55 @@ const CLientSidebar = ({ children }) => {
             {menus.map((menu, index) => (
               <React.Fragment key={index}>
                 <li>
-                  <div className={styles.menuItem} onClick={() => toggleSubmenu(index)}>
-                    <div className={styles.icon}>{menu.icon}</div>
-                    <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>
-                      {menu.title}
-                    </span>
-                    {menu.submenus && menu.submenus.length > 0 && (
-                      <span className={styles.dropdownIcon}>
-                        {activeMenu === index ? <FaChevronUp /> : <FaChevronDown />}
+                  {menu.submenus ? (
+                    <div
+                      className={styles.menuItem}
+                      onClick={() => toggleSubmenu(index)}
+                    >
+                      <div className={styles.icon}>{menu.icon}</div>
+                      <span
+                        className={`${styles.title} ${
+                          !isOpen ? styles.hidden : ""
+                        }`}
+                      >
+                        {menu.title}
                       </span>
-                    )}
-                  </div>
-                  {activeMenu === index && menu.submenus && (
-                    <ul className={styles.submenu}>
-                      {menu.submenus.map((submenu, subIndex) => (
-                        <li key={subIndex} className={styles.submenuItem}>
-                          <Link to={submenu.link} className={styles.submenuLink}>
-                            {submenu.icon && <span className={styles.icon}>{submenu.icon}</span>}
-                            {submenu.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                      <span className={styles.dropdownIcon}>
+                        {activeMenu === index ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )}
+                      </span>
+                    </div>
+                  ) : (
+                    <Link to={menu.link} className={styles.menuItem}>
+                      <div className={styles.icon}>{menu.icon}</div>
+                      <span
+                        className={`${styles.title} ${
+                          !isOpen ? styles.hidden : ""
+                        }`}
+                      >
+                        {menu.title}
+                      </span>
+                    </Link>
                   )}
                 </li>
+
                 <hr className={styles.menuDivider} />
               </React.Fragment>
             ))}
             <li>
-              <button onClick={handleLogout} className={`${styles.menuItem} ${styles.logout}`}>
+              <button
+                onClick={handleLogout}
+                className={`${styles.menuItem} ${styles.logout}`}
+              >
                 <FaSignOutAlt className={styles.icon} />
-                <span className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}>Logout</span>
+                <span
+                  className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}
+                >
+                  Logout
+                </span>
               </button>
             </li>
           </ul>
