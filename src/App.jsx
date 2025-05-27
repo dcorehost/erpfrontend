@@ -160,7 +160,7 @@ const App = () => {
 
                 <Route path='/CreateNewProject' element={<CreateNewProject />} />
                 <Route path='/ProjectDetails' element={<ProjectDetails />} />
-                <Route path='/Admin/Leave/Task-Assignment' element={<TaskAssignment />} />
+                <Route path='/Task-Assignment' element={<TaskAssignment />} />
                 <Route path='/Admin/Assignment/task-status' element={<TaskStatus />} />
                 <Route path='/Admin-Task-Summary' element={<AdminTaskSummary />} />
                 <Route path='/create-user' element={<CreateUser />} />
