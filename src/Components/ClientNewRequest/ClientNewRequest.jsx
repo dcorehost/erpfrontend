@@ -1,34 +1,35 @@
-
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
-import styles from './ClientNewRequest.module.css';
-import Auth from '../Services/Auth';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
+import styles from "./ClientNewRequest.module.css";
+import Auth from "../Services/Auth";
 
 const ClientNewRequest = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [priorityFilter, setPriorityFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("all");
 
   useEffect(() => {
     const fetchRequests = async () => {
       try {
         const response = await axios.get(
-          'http://209.74.89.83/erpbackend/client-get-requests',
+          "http://209.74.89.83/erpbackend/client-get-requests",
           {
             headers: {
-              Authorization: `Bearer ${Auth.getToken()}`
-            }
+              Authorization: `Bearer ${Auth.getToken()}`,
+            },
           }
         );
         setRequests(response.data.requests);
       } catch (err) {
         NotificationManager.error(
-          err.response?.data?.message || 'Failed to fetch requests',
-          'Error',
+          err.response?.data?.message || "Failed to fetch requests",
+          "Error",
           5000
         );
       } finally {
@@ -39,24 +40,30 @@ const ClientNewRequest = () => {
     fetchRequests();
   }, []);
 
-  const filteredRequests = requests.filter(request => {
-    const matchesSearch = request.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         request.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesPriority = priorityFilter === 'all' || request.priority === priorityFilter;
+  const filteredRequests = requests?.filter((request) => {
+    const matchesSearch =
+      request?.title?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      request?.description?.toLowerCase().includes(searchTerm?.toLowerCase());
+    const matchesPriority =
+      priorityFilter === "all" || request?.priority === priorityFilter;
     return matchesSearch && matchesPriority;
   });
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString)?.toLocaleDateString(undefined, options);
   };
 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case 'high': return '#ff4444';
-      case 'medium': return '#ffbb33';
-      case 'low': return '#00C851';
-      default: return '#33b5e5';
+      case "high":
+        return "#ff4444";
+      case "medium":
+        return "#ffbb33";
+      case "low":
+        return "#00C851";
+      default:
+        return "#33b5e5";
     }
   };
 
@@ -119,25 +126,33 @@ const ClientNewRequest = () => {
               {filteredRequests.map((request, index) => (
                 <tr key={index} className={styles.tableRow}>
                   <td className={styles.titleCell}>{request.title}</td>
-                  <td className={styles.descriptionCell}>{request.description}</td>
+                  <td className={styles.descriptionCell}>
+                    {request.description}
+                  </td>
                   <td>
-                    <span 
+                    <span
                       className={styles.priorityBadge}
-                      style={{ backgroundColor: getPriorityColor(request.priority) }}
+                      style={{
+                        backgroundColor: getPriorityColor(request.priority),
+                      }}
                     >
                       {request.priority}
                     </span>
                   </td>
-                  <td className={styles.dateCell}>{formatDate(request.deadline)}</td>
-                  <td className={styles.dateCell}>{formatDate(request.createdAt)}</td>
+                  <td className={styles.dateCell}>
+                    {formatDate(request.deadline)}
+                  </td>
+                  <td className={styles.dateCell}>
+                    {formatDate(request.createdAt)}
+                  </td>
                   <td className={styles.attachmentsCell}>
                     {request.attachments.length > 0 ? (
                       <div className={styles.attachmentsList}>
                         {request.attachments.map((attachment, idx) => (
-                          <a 
-                            key={idx} 
-                            href={attachment} 
-                            target="_blank" 
+                          <a
+                            key={idx}
+                            href={attachment}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className={styles.attachmentLink}
                           >
