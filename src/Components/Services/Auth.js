@@ -90,6 +90,57 @@
 // export default Auth;
 
 
+// const Auth = {
+//   login: ({ token, email, username, typeOfUser, employeeId }) => {
+//     const userData = {
+//       token,
+//       email,
+//       username,
+//       typeOfUser,
+//       employeeId, // ✅ Store employeeId
+//     };
+
+//     localStorage.setItem("authToken", token);
+//     localStorage.setItem("email", email);
+//     localStorage.setItem("userData", JSON.stringify(userData));
+//   },
+
+//   logout: () => {
+//     localStorage.removeItem("authToken");
+//     localStorage.removeItem("email");
+//     localStorage.removeItem("userData");
+//     localStorage.clear();
+//   },
+
+//   isAuthenticated: () => {
+//     return !!localStorage.getItem("authToken");
+//   },
+
+//   getToken: () => {
+//     return localStorage.getItem("authToken");
+//   },
+
+//   getemail: () => {
+//     return localStorage.getItem("email");
+//   },
+
+//   getAuthData: () => {
+//     const userData = localStorage.getItem("userData");
+//     return userData ? JSON.parse(userData) : null;
+//   },
+
+//   getUser: function () {
+//     return this.getAuthData(); // ✅ alias
+//   },
+
+//   getUserDetails: function () {
+//     return this.getAuthData(); // ✅ legacy alias
+//   },
+// };
+
+// export default Auth;
+
+
 const Auth = {
   login: ({ token, email, username, typeOfUser, employeeId }) => {
     const userData = {
@@ -130,11 +181,17 @@ const Auth = {
   },
 
   getUser: function () {
-    return this.getAuthData(); // ✅ alias
+    return this.getAuthData();
   },
 
   getUserDetails: function () {
-    return this.getAuthData(); // ✅ legacy alias
+    return this.getAuthData();
+  },
+
+  // ✅ Add this method to fix your issue
+  getUserType: function () {
+    const data = this.getAuthData();
+    return data?.typeOfUser || null;
   },
 };
 
