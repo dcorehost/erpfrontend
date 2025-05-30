@@ -4,6 +4,7 @@ import axios from 'axios';
 import Auth from '../../Components/Services/Auth';
 import styles from './UserList.module.css';
 import Modal from 'react-modal';
+import Loader from '../Loader/Loader';
 
 
 
@@ -116,8 +117,9 @@ const UserList = () => {
   };
 
   // Loading state
-  if (loading) {
-    return <div className={styles.loading}>Loading user data...</div>;
+ 
+  if (loader) {
+    return <Loader />;
   }
 
   // Error state
