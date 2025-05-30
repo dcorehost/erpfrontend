@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './SuperAdminNotifications.module.css'; // Assuming you have this CSS module
-import Auth from '../Services/Auth'; // Assuming you have an Auth service for token management
+import styles from './SuperAdminNotifications.module.css'; 
+import Auth from '../Services/Auth'; 
 import { useNavigate } from 'react-router-dom';
 
 const SuperAdminNotification = () => {
@@ -21,7 +21,7 @@ const SuperAdminNotification = () => {
   const navigate = useNavigate();
 
   // Define the roles here. Ensure these match the roles expected by your backend.
-  const roles = ['User', 'Admin', 'Superadmin', 'Client']; // Added capitalized roles based on your output example
+  const roles = ['User', 'Admin', 'Superadmin', 'Client'];
 
   useEffect(() => {
     const fetchNotifications = async () => {
