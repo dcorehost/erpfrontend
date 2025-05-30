@@ -5,7 +5,7 @@
 .sidebarWrapper {
   display: flex;
   margin-top: 70px;
-  height: calc(100vh - 70px); /* Full height excluding the navbar */
+  height: calc(100vh - 70px);  
 }
 
 .sidebar {
@@ -152,7 +152,7 @@
 
 .sidebarItem {
   display: flex;
-  align-items: center; /* Align icon and text vertically */
+  align-items: center; /*  */
   padding: 0.5rem 1rem; /* Adjust padding for better spacing */
   width: 100%; /* Ensures the sidebar item takes full width */
   box-sizing: border-box; /* Ensures padding is included in the width */
