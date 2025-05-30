@@ -131,7 +131,7 @@ const AdminSidebar = ({ children }) => {
           icon: <FaClipboardList />,
           link: "/superadmin-clientsection-Createclient",
         },
-        { title: "Thinking", icon: <FaClipboardList />, link: "/" },
+        // { title: "Thinking", icon: <FaClipboardList />, link: "/" },
       ],
     },
   ];

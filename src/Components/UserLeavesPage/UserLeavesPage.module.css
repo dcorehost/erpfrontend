@@ -1,9 +1,8 @@
 .container {
-    padding: 20px;
+    /* padding: 20px; */
     font-family: Arial, sans-serif;
     max-width: 1200px;
     /* margin: 0 auto; */
-    margin-top: 300px;
   }
   
   .title {

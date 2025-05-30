@@ -587,16 +587,16 @@ const ClientProjectRequest = ({ onClose }) => {
           </div>
 
           <div className={styles.formActions}>
-            <button
+            <div
               type="button"
               onClick={handleClose}
               className={styles.cancelButton}
             >
               Cancel
-            </button>
-            <button type="submit" className={styles.submitButton} disabled={loading}>
+            </div>
+            <div type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? "Submitting..." : "Submit Request"}
-            </button>
+            </div>
           </div>
         </form>
       </motion.div>
