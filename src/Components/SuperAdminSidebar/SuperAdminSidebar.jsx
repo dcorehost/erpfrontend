@@ -187,7 +187,7 @@ const AdminSidebar = ({ children }) => {
         >
           <button
             className={styles.hamburgerButton}
-            style={isOpen ? { left: "190px" } : { left: "10px" }}
+            style={isOpen ? { left: "210px" } : { left: "10px" }}
             onClick={toggleSidebar}
           >
             {"☰"}
