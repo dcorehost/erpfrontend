@@ -1,13 +1,9 @@
-
-
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectDetails.module.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Auth from "../Services/Auth";
 import axios from "axios";
-
-
-
+import Loader from "../Loader/Loader";
 
 const ProjectDetails = () => {
   const [projectsData, setProjectsData] = useState([]);
@@ -21,7 +17,7 @@ const ProjectDetails = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const token = Auth.getToken();
       if (!token) {
         throw new Error("Please login to access this page");
@@ -31,9 +27,9 @@ const ProjectDetails = () => {
         "http://209.74.89.83/erpbackend/get-projects-for-user?employeeId=dcore5447",
         {
           headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -42,20 +38,24 @@ const ProjectDetails = () => {
       }
 
       // Transform the API data
-      const transformedData = response.data.projects.map(project => ({
+      const transformedData = response.data.projects.map((project) => ({
         id: project._id,
         projectName: project.name,
         description: project.description,
         status: project.status,
         priority: project.priority,
-        teamMembers: project.userIds.map(user => ({
+        teamMembers: project.userIds.map((user) => ({
           username: user.username,
           email: user.contact.emailId,
           phone: user.contact.phone,
-          employeeId: user.employeeId
+          employeeId: user.employeeId,
         })),
-        createdAt: project.createdAt ? new Date(project.createdAt).toLocaleDateString() : 'N/A',
-        deadline: project.deadline ? new Date(project.deadline).toLocaleDateString() : 'N/A'
+        createdAt: project.createdAt
+          ? new Date(project.createdAt).toLocaleDateString()
+          : "N/A",
+        deadline: project.deadline
+          ? new Date(project.deadline).toLocaleDateString()
+          : "N/A",
       }));
 
       setProjectsData(transformedData);
@@ -88,11 +88,7 @@ const ProjectDetails = () => {
   };
 
   if (loading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.loading}>Loading project data...</div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {
@@ -113,7 +109,11 @@ const ProjectDetails = () => {
       <div className={styles.header}>
         <h2>Project Management</h2>
         <div className={styles.summary}>
-          <span>Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, projectsData.length)} of {projectsData.length} projects</span>
+          <span>
+            Showing {indexOfFirstItem + 1}-
+            {Math.min(indexOfLastItem, projectsData.length)} of{" "}
+            {projectsData.length} projects
+          </span>
         </div>
       </div>
 
@@ -135,21 +135,33 @@ const ProjectDetails = () => {
               currentItems.map((project, index) => (
                 <tr key={project.id}>
                   <td>{project.projectName}</td>
-                  <td className={styles.descriptionCell}>{project.description}</td>
+                  <td className={styles.descriptionCell}>
+                    {project.description}
+                  </td>
                   <td>
-                    <span className={`${styles.status} ${styles[project.status.toLowerCase()]}`}>
+                    <span
+                      className={`${styles.status} ${
+                        styles[project.status.toLowerCase()]
+                      }`}
+                    >
                       {project.status}
                     </span>
                   </td>
                   <td>
-                    <span className={`${styles.priority} ${styles[project.priority.toLowerCase()]}`}>
+                    <span
+                      className={`${styles.priority} ${
+                        styles[project.priority.toLowerCase()]
+                      }`}
+                    >
                       {project.priority}
                     </span>
                   </td>
                   <td className={styles.teamMembersCell}>
                     {project.teamMembers.map((member, idx) => (
                       <div key={idx} className={styles.memberInfo}>
-                        <div className={styles.memberName}>{member.username}</div>
+                        <div className={styles.memberName}>
+                          {member.username}
+                        </div>
                         <div className={styles.memberDetails}>
                           {member.employeeId} | {member.email} | {member.phone}
                         </div>
@@ -181,19 +193,21 @@ const ProjectDetails = () => {
           >
             <FiChevronLeft />
           </button>
-          
+
           <div className={styles.pageNumbers}>
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i + 1}
                 onClick={() => handlePageChange(i + 1)}
-                className={`${styles.pageButton} ${currentPage === i + 1 ? styles.active : ''}`}
+                className={`${styles.pageButton} ${
+                  currentPage === i + 1 ? styles.active : ""
+                }`}
               >
                 {i + 1}
               </button>
             ))}
           </div>
-          
+
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
