@@ -181,25 +181,25 @@ import Auth from '../Services/Auth';
 const ClientNewRequest = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [priorityFilter, setPriorityFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("all");
 
   useEffect(() => {
     const fetchRequests = async () => {
       try {
         const response = await axios.get(
-          'http://209.74.89.83/erpbackend/client-get-requests',
+          "http://209.74.89.83/erpbackend/client-get-requests",
           {
             headers: {
-              Authorization: `Bearer ${Auth.getToken()}`
-            }
+              Authorization: `Bearer ${Auth.getToken()}`,
+            },
           }
         );
         setRequests(response.data.requests || []);
       } catch (err) {
         NotificationManager.error(
-          err.response?.data?.message || 'Failed to fetch requests',
-          'Error',
+          err.response?.data?.message || "Failed to fetch requests",
+          "Error",
           5000
         );
       } finally {
@@ -227,10 +227,14 @@ const ClientNewRequest = () => {
 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case 'high': return '#ff4444';
-      case 'medium': return '#ffbb33';
-      case 'low': return '#00C851';
-      default: return '#33b5e5';
+      case "high":
+        return "#ff4444";
+      case "medium":
+        return "#ffbb33";
+      case "low":
+        return "#00C851";
+      default:
+        return "#33b5e5";
     }
   };
 
@@ -295,23 +299,29 @@ const ClientNewRequest = () => {
                   <td className={styles.titleCell}>{request.title || 'Untitled'}</td>
                   <td className={styles.descriptionCell}>{request.description || 'No description'}</td>
                   <td>
-                    <span 
+                    <span
                       className={styles.priorityBadge}
-                      style={{ backgroundColor: getPriorityColor(request.priority) }}
+                      style={{
+                        backgroundColor: getPriorityColor(request.priority),
+                      }}
                     >
                       {request.priority || 'N/A'}
                     </span>
                   </td>
-                  <td className={styles.dateCell}>{formatDate(request.deadline)}</td>
-                  <td className={styles.dateCell}>{formatDate(request.createdAt)}</td>
+                  <td className={styles.dateCell}>
+                    {formatDate(request.deadline)}
+                  </td>
+                  <td className={styles.dateCell}>
+                    {formatDate(request.createdAt)}
+                  </td>
                   <td className={styles.attachmentsCell}>
                     {Array.isArray(request.attachments) && request.attachments.length > 0 ? (
                       <div className={styles.attachmentsList}>
                         {request.attachments.map((attachment, idx) => (
-                          <a 
-                            key={idx} 
-                            href={attachment} 
-                            target="_blank" 
+                          <a
+                            key={idx}
+                            href={attachment}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className={styles.attachmentLink}
                           >

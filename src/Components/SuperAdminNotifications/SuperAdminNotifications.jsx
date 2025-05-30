@@ -238,7 +238,6 @@ const SuperAdminNotification = () => {
           </button>
         </div>
       </div>
-
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );

@@ -212,14 +212,20 @@ const HolidayCalendar = () => {
         if (response.data?.holidays) {
           const expanded = [];
 
-          response.data.holidays.forEach(({ startDate, endDate, description }) => {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
+          response.data.holidays.forEach(
+            ({ startDate, endDate, description }) => {
+              const start = new Date(startDate);
+              const end = new Date(endDate);
 
-            for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-              expanded.push({ date: new Date(d), description });
+              for (
+                let d = new Date(start);
+                d <= end;
+                d.setDate(d.getDate() + 1)
+              ) {
+                expanded.push({ date: new Date(d), description });
+              }
             }
-          });
+          );
 
           setHolidays(expanded);
         }
@@ -254,9 +260,7 @@ const HolidayCalendar = () => {
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             inline
-            dayClassName={(date) =>
-              isHoliday(date) ? styles.holiday : null
-            }
+            dayClassName={(date) => (isHoliday(date) ? styles.holiday : null)}
           />
         </div>
         <div className={styles.holidayDetailsSection}>
@@ -269,7 +273,8 @@ const HolidayCalendar = () => {
                 <strong>Date:</strong> {selectedDate.toDateString()}
               </p>
               <p>
-                <strong>Holiday:</strong> {getHolidayDetails(selectedDate)?.description}
+                <strong>Holiday:</strong>{" "}
+                {getHolidayDetails(selectedDate)?.description}
               </p>
             </div>
           ) : (
@@ -371,8 +376,7 @@ const ApplyLeavePopup = ({ leaveType, onClose, onSuccess }) => {
           "Failed to submit leave application. Please try again later."
       );
       toast.error(
-        error.response?.data?.message ||
-          "Failed to submit leave application."
+        error.response?.data?.message || "Failed to submit leave application."
       );
     } finally {
       setIsSubmitting(false);

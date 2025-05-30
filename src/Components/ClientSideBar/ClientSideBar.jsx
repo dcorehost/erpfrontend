@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import {
   FaChartLine,
@@ -34,6 +32,7 @@ import {
   FaEnvelope,
   FaFileInvoice,
   FaMoneyBillWave,
+  FaChevronRight,
 } from "react-icons/fa"; // ✅ Fixed
 
 import { GrTasks } from "react-icons/gr";
@@ -41,8 +40,12 @@ import styles from "./ClientSidebar.module.css";
 import Navbar from "../Navbar/Navbar";
 
 const CLientSidebar = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = useLocation().pathname;
+  const [isOpen, setIsOpen] = useState(true);
   const [activeMenu, setActiveMenu] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [expandedItem, setExpandedItem] = useState(null);
+  const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
 
   const menus = [
@@ -119,90 +122,165 @@ const CLientSidebar = ({ children }) => {
     },
   ];
 
+  useEffect(() => {
+    const match = menus.find(
+      (item) =>
+        pathname === item.link ||
+        item.submenus?.some((child) => pathname === child.link)
+    );
+    if (match) setExpandedItem(match.title);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (expandedItem && scrollContainerRef.current) {
+      const expandedItemEl = scrollContainerRef.current.querySelector(
+        `[data-title="${expandedItem}"]`
+      );
+      if (expandedItemEl) {
+        expandedItemEl.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [expandedItem]);
+
   const toggleSidebar = () => setIsOpen(!isOpen);
   const toggleSubmenu = (index) =>
     setActiveMenu(activeMenu === index ? null : index);
+  const toggleExpand = (title) => {
+    setExpandedItem((prev) => (prev === title ? null : title));
+  };
+  const isActive = (path) => pathname === path;
 
   const handleLogout = () => {
-    // Clear all authentication-related storage
+    console.log("Logout clicked! Clearing localStorage...");
     localStorage.clear();
     sessionStorage.clear();
-
-    // Redirect to login page
-    navigate("/", { replace: true });
-
-    // Optional: Force a full page reload to ensure all state is cleared
-    window.location.reload();
+    setIsLoggedOut(true);
+    window.location.href = "/";
   };
 
   return (
-    <div className={styles.sidebarWrapper}>
-      <div className={styles.sidebarContainer}>
-        <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
-          <button className={styles.hamburgerButton} onClick={toggleSidebar}>
-            {isOpen ? "✖" : "☰"}
+    <div>
+      <Navbar isOpen={isOpen} />
+      <div className={`${styles.sidebarWrapper}`}>
+        {/* <div className={`${styles.sidebarContainer}`}> */}
+        <div
+          className={`${styles.sidebar} ${
+            isOpen ? styles.open : styles.closed
+          }`}
+        >
+          <button
+            className={styles.hamburgerButton}
+            style={isOpen ? { left: "190px" } : { left: "10px" }}
+            onClick={toggleSidebar}
+          >
+            {"☰"}
           </button>
-          <ul className={styles.menu}>
-            {menus.map((menu, index) => (
-              <React.Fragment key={index}>
-                <li>
-                  {menu.submenus ? (
-                    <div
-                      className={styles.menuItem}
-                      onClick={() => toggleSubmenu(index)}
-                    >
-                      <div className={styles.icon}>{menu.icon}</div>
-                      <span
-                        className={`${styles.title} ${
-                          !isOpen ? styles.hidden : ""
+          <div className={styles.scrollContainer} ref={scrollContainerRef}>
+            <nav className={styles.menu}>
+              {menus.map((item, index) => (
+                <div
+                  key={item?.title}
+                  data-title={item?.title}
+                  className={styles.menuItem}
+                >
+                  {item?.submenus ? (
+                    <div>
+                      <button
+                        onClick={() => toggleExpand(item?.title)}
+                        className={`${styles.menuButton} ${
+                          isActive(item.link) ? styles.active : ""
                         }`}
                       >
-                        {menu.title}
-                      </span>
-                      <span className={styles.dropdownIcon}>
-                        {activeMenu === index ? (
-                          <FaChevronUp />
-                        ) : (
-                          <FaChevronDown />
-                        )}
-                      </span>
+                        <div className={styles.sidebarItem}>
+                          <span
+                            className={styles.sidebarIcon}
+                            style={{ marginRight: "8px" }}
+                          >
+                            {item?.icon}
+                          </span>
+                          <span
+                            className={`${styles.sidebarTitle} ${
+                              isOpen ? styles.open : ""
+                            }`}
+                            style={{
+                              flexGrow: 1,
+                            }} /* Ensure text takes available space */
+                          >
+                            {item?.title}
+                          </span>
+                          <FaChevronRight
+                            size={12}
+                            className={`${styles.chevronIcon} ${
+                              isOpen ? styles.open : ""
+                            } ${
+                              expandedItem === item?.title
+                                ? styles.expanded
+                                : ""
+                            }`}
+                            style={{
+                              marginLeft: "auto",
+                            }} /* Push chevron to the right */
+                          />
+                        </div>
+                      </button>
+
+                      {expandedItem === item?.title && isOpen && (
+                        <div className={styles.sidebarChildrenWrapper}>
+                          {item?.submenus.map((child) => (
+                            <Link
+                              key={child?.link}
+                              to={child?.link}
+                              className={`${styles.sidebarChildLink} ${
+                                isActive(child?.link) ? styles.active : ""
+                              }`}
+                            >
+                              <span className={styles.childIcon}>
+                                {child?.icon}
+                              </span>
+                              <span className={styles.childTitle}>
+                                {child?.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ) : (
-                    <Link to={menu.link} className={styles.menuItem}>
-                      <div className={styles.icon}>{menu.icon}</div>
+                    <Link
+                      to={item?.link}
+                      className={`${styles.navLink} ${
+                        isActive(item?.link) ? styles.active : ""
+                      }`}
+                    >
+                      <span className={styles.navIcon}>{item?.icon}</span>
                       <span
-                        className={`${styles.title} ${
-                          !isOpen ? styles.hidden : ""
+                        className={`${styles.navTitle} ${
+                          isOpen ? styles.open : ""
                         }`}
                       >
-                        {menu.title}
+                        {item?.title}
                       </span>
                     </Link>
                   )}
-                </li>
-
-                <hr className={styles.menuDivider} />
-              </React.Fragment>
-            ))}
-            <li>
-              <button
-                onClick={handleLogout}
-                className={`${styles.menuItem} ${styles.logout}`}
-              >
-                <FaSignOutAlt className={styles.icon} />
-                <span
-                  className={`${styles.title} ${!isOpen ? styles.hidden : ""}`}
-                >
-                  Logout
-                </span>
-              </button>
-            </li>
-          </ul>
+                </div>
+              ))}
+            </nav>
+          </div>
+          <div className={styles.logoutContainer}>
+            <button className={styles.logoutSidebar} onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={styles.contentMenu}>
-        <Navbar isOpen={isOpen} />
-        {children}
+        {/* </div> */}
+        <div
+          className={`${styles.contentMenu} ${isOpen ? "" : styles.fullWidth}`}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
