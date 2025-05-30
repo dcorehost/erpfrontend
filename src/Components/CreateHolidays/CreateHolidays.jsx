@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Importing toast and ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Toastify CSS for styling
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import styles from './CreateHolidays.module.css';
 import Auth from '../Services/Auth';
 
 const CreateHoliday = () => {
   const [formData, setFormData] = useState({ startDate: '', endDate: '', description: '' });
   const [loading, setLoading] = useState(false);
-  const [isCreating, setIsCreating] = useState(false); // To track the creation process
+  const [isCreating, setIsCreating] = useState(false); 
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,8 +31,8 @@ const CreateHoliday = () => {
     //   return;
     // }
 
-    setLoading(true); // Start the loading spinner
-    setIsCreating(true); // Show loading spinner in button
+    setLoading(true); 
+    setIsCreating(true); 
 
     try {
       const res = await axios.post(
@@ -52,15 +52,15 @@ const CreateHoliday = () => {
       // Show success toast after creation
       toast.success(res.data.message);
       setFormData({ startDate: '', endDate: '', description: '' });
-      setIsCreating(false); // Hide spinner after submission
+      setIsCreating(false); 
     } catch (err) {
       // Show error toast if something goes wrong
       const msg = err.response?.data?.message || 'Something went wrong';
       toast.error(msg);
-      setIsCreating(false); // Hide spinner in case of error
+      setIsCreating(false); 
     }
 
-    setLoading(false); // End loading state
+    setLoading(false); 
   };
 
   return (
@@ -97,16 +97,16 @@ const CreateHoliday = () => {
         <button
           type="submit"
           className={styles.submitBtn}
-          disabled={loading} // Disable the button when loading
+          disabled={loading} 
         >
           {isCreating ? (
-            <div className={styles.spinner}></div> // Spinner when creating holiday
+            <div className={styles.spinner}></div> 
           ) : (
             'Create Holiday'
           )}
         </button>
       </form>
-      <ToastContainer /> {/* Toast container for notifications */}
+      <ToastContainer /> 
     </div>
   );
 };

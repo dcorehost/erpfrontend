@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from './SuperAdminHistory.module.css'; // You can rename this if used for Admin too
+import styles from './SuperAdminHistory.module.css'; 
 import Auth from '../Services/Auth';
+import Loader from '../Loader/Loader';
 
 const SuperAdminNotificationsHistory = () => {
+  const [loader, setLoader] = useState(false);
+  
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,6 +20,7 @@ const SuperAdminNotificationsHistory = () => {
         if (!token) {
           setError('Unauthorized: No token found');
           setLoading(false);
+          setLoader(false);
           return;
         }
 
@@ -28,15 +32,23 @@ const SuperAdminNotificationsHistory = () => {
 
         setNotifications(response.data);
         setLoading(false);
+        setLoader(false);
+
       } catch (err) {
         console.error('Error fetching notifications:', err.message);
         setError('Failed to fetch notifications.');
         setLoading(false);
+        setLoader(false);
+
       }
     };
 
     fetchNotifications();
   }, []);
+  if (loader) {
+    return <Loader />
+  }
+
 
   return (
     <div className={styles['history-container']}>

@@ -76,6 +76,7 @@ import ClientNewRequest from './Components/ClientNewRequest/ClientNewRequest';
 import CreateClient from './Components/CreateClient/CreateClient';
 import ClientCommunication from './Components/ClientCommunication/ClientCommunication';
 import ClientMessages from './Components/ClientMessageDetails/ClientMessageDetails';
+import ProjectAdmin from './Components/ProjectAdmin/ProjectAdmin';
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -156,10 +157,11 @@ const App = () => {
                 <Route path='/CompletedLeaves' element={<CompletedLeaves />} />
                 <Route path='/RejectedLeaves' element={<RejectedLeaves />} />
                 <Route path='/Admin/Leave/ApplyLeave'  element={<ApplyLeaveAdmin />}></Route>
+                <Route path='/Admin/Leave/pd'  element={<ProjectAdmin />}></Route>
 
 
                 <Route path='/CreateNewProject' element={<CreateNewProject />} />
-                <Route path='/ProjectDetails' element={<ProjectDetails />} />
+                {/* <Route path='/Admin/Leave/pd' element={<ProjectDetails />} /> */}
                 <Route path='/Admin/Leave/Task-Assignment' element={<TaskAssignment />} />
                 <Route path='/Admin/Assignment/task-status' element={<TaskStatus />} />
                 <Route path='/Admin-Task-Summary' element={<AdminTaskSummary />} />

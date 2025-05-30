@@ -53,7 +53,7 @@ const AdminSidebar = ({ children }) => {
       link: "/#",
       submenus: [
         { title: "Create New Project", link: "/CreateNewProject", icon: <FaPlus /> },
-        { title: "Project Details", link: "/ProjectDetails", icon: <FaListUl /> },
+        { title: "Project Details", link: "/Admin/Leave/pd", icon: <FaListUl /> },
         { title: "Task Assignment", link: "/Admin/Leave/Task-Assignment", icon: <FaTasks /> },
         { title: "Update Task Progress", link: "/Admin/Assignment/task-status", icon: <FaCheckSquare /> }, 
         { title: "Admin Task Summary", link: "/Admin-Task-Summary", icon: <FaClipboard /> },
