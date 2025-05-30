@@ -335,12 +335,9 @@ const Navbar = ({ isOpen }) => {
                   >
                     Settings
                   </Link>
-                  <button
-                    className={styles.profileMenuItem}
-                    onClick={handleLogout}
-                  >
+                  <div className={styles.logoutButton} onClick={handleLogout}>
                     Logout
-                  </button>
+                  </div>
                 </div>
               </div>
             )}
