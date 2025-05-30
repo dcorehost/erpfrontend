@@ -95,11 +95,11 @@ const UserLeavesPage = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>User Leave Management</h1>
-        {currentUser && (
+        {/* {currentUser && (
           <div className={styles.userInfo}>
             <span>Logged in as: {currentUser.email}</span>
           </div>
-        )}
+        )} */}
       </div>
 
       {leaveData.length === 0 ? (

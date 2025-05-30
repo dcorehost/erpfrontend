@@ -153,8 +153,7 @@ const App = () => {
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
               <>
-                <Route
-                  path="/admin-dashboard"
+                <Route   path="/admin-dashboard"
                   element={
                     <SideBar>
                       <AdminDashboard />

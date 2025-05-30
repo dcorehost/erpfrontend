@@ -73,7 +73,7 @@ const HolidayList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
-        <h2 className={styles.heading}>🌴 My Holidays</h2>
+        <h2 className={styles.heading}> My Holidays</h2>
         <div className={styles.searchBox}>
           <FiSearch className={styles.searchIcon} />
           <input

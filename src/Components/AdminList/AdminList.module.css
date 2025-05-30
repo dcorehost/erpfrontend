@@ -1,218 +1,105 @@
-/* AdminList.module.css */
+:root {
+  --primary: #4f46e5;
+  --background: #ffffff;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --border: #e5e7eb;
+  --radius: 10px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --highlight: #eef2ff;
+  --table-stripe: #f9fafb;
+  --danger: #dc2626;
+}
 
 .container {
-    padding: 2rem;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
+  max-width: 95%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: var(--background);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+  font-size: 0.95rem;
+}
+
+.adminTable thead {
+  background-color: var(--highlight);
+}
+
+.adminTable th,
+.adminTable td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.adminTable tbody tr:nth-child(even) {
+  background-color: var(--table-stripe);
+}
+
+.adminTable th {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.adminTable td {
+  color: var(--text-light);
+}
+
+.error {
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--danger);
+  font-weight: 500;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  background-color: #fef2f2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .title {
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    position: relative;
-    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
   }
-  
-  .title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: #4285F4;
-  }
-  
-  .loading,
-  .error {
-    text-align: center;
-    padding: 2rem;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-  }
-  
-  .loading {
-    color: #4285F4;
-  }
-  
-  .error {
-    color: #e74c3c;
-  }
-  
-  .tableContainer {
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    background: white;
-    margin-top: 1.5rem;
-  }
-  
-  .adminTable {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 0.95rem;
-    min-width: 1000px;
-  }
-  
-  .adminTable thead {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  
-  .adminTable thead tr {
-    background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
-    color: white;
-    text-align: left;
-  }
-  
-  .adminTable th {
-    padding: 1rem 1.2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
-    position: relative;
-  }
-  
-  .adminTable th:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 60%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
+
+  .adminTable th,
   .adminTable td {
-    padding: 0.8rem 1.2rem;
-    border-bottom: 1px solid #ecf0f1;
-    vertical-align: middle;
+    font-size: 0.85rem;
+    padding: 0.5rem;
   }
-  
-  .adminTable tbody tr {
-    transition: all 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  .adminTable {
+    font-size: 0.8rem;
   }
-  
-  .adminTable tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+
+  .container {
+    padding: 1rem;
   }
-  
-  .adminTable tbody tr:hover {
-    background-color: #e8f4fd;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  .title {
+    font-size: 1.25rem;
   }
-  
-  .adminTable tbody tr:last-child td {
-    border-bottom: none;
-  }
-  
-  /* Status badges */
-  .status-active {
-    background: #e8f5e9;
-    color: #34A853;
-    padding: 0.3rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: inline-block;
-  }
-  
-  .status-inactive {
-    background: #ffebee;
-    color: #EA4335;
-    padding: 0.3rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: inline-block;
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 1200px) {
-    .container {
-      padding: 1.5rem;
-    }
-  }
-  
-  @media (max-width: 992px) {
-    .adminTable {
-      min-width: 900px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-    
-    .title {
-      font-size: 1.5rem;
-    }
-    
-    .adminTable th,
-    .adminTable td {
-      padding: 0.7rem 1rem;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .title {
-      font-size: 1.3rem;
-    }
-    
-    .adminTable {
-      font-size: 0.85rem;
-    }
-    
-    .adminTable th,
-    .adminTable td {
-      padding: 0.6rem 0.8rem;
-    }
-  }
-  
-  /* Scrollbar styling for table container */
-  .tableContainer::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
-  }
-  
-  .tableContainer::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .tableContainer::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
-  }
-  
-  .tableContainer::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-  }
-  
-  /* Animation for loading state */
-  @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-  }
-  
-  .loading {
-    animation: pulse 1.5s infinite ease-in-out;
-  }
+}
