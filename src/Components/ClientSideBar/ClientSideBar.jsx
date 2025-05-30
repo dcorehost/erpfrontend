@@ -69,33 +69,33 @@ const CLientSidebar = ({ children }) => {
       icon: <FaFileAlt />,
       link: "/client-project-requests",
     },
-    {
-      title: "Documents",
-      icon: <FaFolder />,
-      link: "/client-documents",
-    },
+    // {
+    //   title: "Documents",
+    //   icon: <FaFolder />,
+    //   link: "/client-documents",
+    // },
     {
       title: "Communication",
       icon: <FaComments />,
       link: "/#",
       notificationCount: 3,
       submenus: [
-        {
-          title: "Messages",
-          link: "/client-messages",
-          icon: <FaEnvelope />,
-          notificationCount: 3,
-        },
-        {
-          title: "Announcements",
-          link: "/client-announcements",
-          icon: <FaBullhorn />,
-        },
-        {
-          title: "Meetings",
-          link: "/client-meetings",
-          icon: <FaCalendarAlt />,
-        },
+        // {
+        //   title: "Messages",
+        //   link: "/client-messages",
+        //   icon: <FaEnvelope />,
+        //   notificationCount: 3,
+        // },
+        // {
+        //   title: "Announcements",
+        //   link: "/client-announcements",
+        //   icon: <FaBullhorn />,
+        // },
+        // {
+        //   title: "Meetings",
+        //   link: "/client-meetings",
+        //   icon: <FaCalendarAlt />,
+        // },
       ],
     },
     {
@@ -103,21 +103,21 @@ const CLientSidebar = ({ children }) => {
       icon: <FaMoneyBillWave />,
       link: "/#",
       submenus: [
-        {
-          title: "Invoices",
-          link: "/client-invoices",
-          icon: <FaFileInvoice />,
-        },
-        {
-          title: "Payments",
-          link: "/client-payments",
-          icon: <FaMoneyBillWave />,
-        },
-        {
-          title: "Receipts",
-          link: "/client-receipts",
-          icon: <FaFileAlt />,
-        },
+        // {
+        //   title: "Invoices",
+        //   link: "/client-invoices",
+        //   icon: <FaFileInvoice />,
+        // },
+        // {
+        //   title: "Payments",
+        //   link: "/client-payments",
+        //   icon: <FaMoneyBillWave />,
+        // },
+        // {
+        //   title: "Receipts",
+        //   link: "/client-receipts",
+        //   icon: <FaFileAlt />,
+        // },
       ],
     },
   ];

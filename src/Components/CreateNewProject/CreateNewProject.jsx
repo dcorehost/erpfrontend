@@ -119,8 +119,7 @@ const CreateNewProject = () => {
         <h2 className={styles.title}>Create New Project</h2>
         <div className={styles.divider}></div>
         
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.scrollableSection}>
+        <form onSubmit={handleSubmit} className={styles.form}>      <div className={styles.scrollableSection}>
             <div className={styles.formGroup}>
               <label htmlFor="name" className={styles.label}>
                 Project Name <span className={styles.required}>*</span>
