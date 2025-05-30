@@ -148,7 +148,7 @@ const App = () => {
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/my-profile" element={<MyProfile />} />
             <Route path="/Own-User-Profile" element={<OwnUserProfile />} />
-            <Route path="/mark-attendance" element={<MarkAttendance />} />
+            {/* <Route path="/mark-attendance" element={<MarkAttendance />} /> */}
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
@@ -299,6 +299,14 @@ const App = () => {
                     </SideBar>
                   }
                 />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <SideBar>
+                      <MarkAttendance />
+                    </SideBar>
+                  }
+                />
               </>
             )}
 
@@ -422,6 +430,14 @@ const App = () => {
                   element={
                     <UserSidebar>
                       <UserTask />
+                    </UserSidebar>
+                  }
+                />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <UserSidebar>
+                      <MarkAttendance />
                     </UserSidebar>
                   }
                 />
@@ -550,6 +566,14 @@ const App = () => {
                       <ClientMessages />
                     </SuperAdminSidebar>
                   }
+                />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <SuperAdminSidebar>
+                      <MarkAttendance />
+                    </SuperAdminSidebar>
+                  }
                 />{" "}
                 {/* ✅ Correctly linked */}
               </>
@@ -604,6 +628,14 @@ const App = () => {
                   element={
                     <CLientSidebar>
                       <ClientCommunication />
+                    </CLientSidebar>
+                  }
+                />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <CLientSidebar>
+                      <MarkAttendance />
                     </CLientSidebar>
                   }
                 />{" "}

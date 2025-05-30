@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from "react";
 import styles from "./AdminPayroll.module.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Auth from "../Services/Auth";
 import axios from "axios";
+import Loader from "../Loader/Loader";
 
 const AdminPayroll = () => {
   const [payrollData, setPayrollData] = useState([]);
@@ -17,57 +17,76 @@ const AdminPayroll = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const token = Auth.getToken();
       if (!token) {
         throw new Error("Please login to access this page");
       }
 
-      const response = await axios.get("http://209.74.89.83/erpbackend/get-payroll-details", {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+      const response = await axios.get(
+        "http://209.74.89.83/erpbackend/get-payroll-details",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (!response.data || !response.data.users) {
         throw new Error("Failed to fetch payroll details");
       }
 
       // Transform the API data to match our table structure
-      const transformedData = response.data.users.flatMap(user => {
+      const transformedData = response.data.users.flatMap((user) => {
         // If user has no payroll data, create one entry with default values
         if (!user.payroll || user.payroll.length === 0) {
-          return [{
-            username: user.username || 'N/A',
-            email: user.contact?.emailId || 'N/A',
-            phone: user.contact?.phone || 'N/A',
-            employeeId: user.employeeId || 'N/A',
-            month: 'N/A',
-            year: 'N/A',
-            grossSalary: '₹0',
-            deductions: '₹0',
-            netSalary: '₹0',
-            pfAmount: '₹0',
-            healthInsuranceAmount: '₹0',
-            leaveAmount: '₹0'
-          }];
+          return [
+            {
+              username: user.username || "N/A",
+              email: user.contact?.emailId || "N/A",
+              phone: user.contact?.phone || "N/A",
+              employeeId: user.employeeId || "N/A",
+              month: "N/A",
+              year: "N/A",
+              grossSalary: "₹0",
+              deductions: "₹0",
+              netSalary: "₹0",
+              pfAmount: "₹0",
+              healthInsuranceAmount: "₹0",
+              leaveAmount: "₹0",
+            },
+          ];
         }
-        
+
         // Map each payroll entry for the user
-        return user.payroll.map(payroll => ({
-          username: user.username || 'N/A',
-          email: user.contact?.emailId || 'N/A',
-          phone: user.contact?.phone || 'N/A',
-          employeeId: user.employeeId || 'N/A',
-          month: payroll.month || 'N/A',
-          year: payroll.year || 'N/A',
-          grossSalary: `₹${payroll.grossSalary?.toLocaleString('en-IN') || '0'}`,
-          deductions: `₹${payroll.deductions?.toLocaleString('en-IN') || '0'}`,
-          netSalary: `₹${payroll.netSalary?.toLocaleString('en-IN') || '0'}`,
-          pfAmount: `₹${payroll.pfAmount?.toLocaleString('en-IN') || (payroll.deductions * 0.4)?.toLocaleString('en-IN') || '0'}`,
-          healthInsuranceAmount: `₹${payroll.healthInsuranceAmount?.toLocaleString('en-IN') || (payroll.deductions * 0.3)?.toLocaleString('en-IN') || '0'}`,
-          leaveAmount: `₹${payroll.leaveAmount?.toLocaleString('en-IN') || (payroll.deductions * 0.2)?.toLocaleString('en-IN') || '0'}`
+        return user.payroll.map((payroll) => ({
+          username: user.username || "N/A",
+          email: user.contact?.emailId || "N/A",
+          phone: user.contact?.phone || "N/A",
+          employeeId: user.employeeId || "N/A",
+          month: payroll.month || "N/A",
+          year: payroll.year || "N/A",
+          grossSalary: `₹${
+            payroll.grossSalary?.toLocaleString("en-IN") || "0"
+          }`,
+          deductions: `₹${payroll.deductions?.toLocaleString("en-IN") || "0"}`,
+          netSalary: `₹${payroll.netSalary?.toLocaleString("en-IN") || "0"}`,
+          pfAmount: `₹${
+            payroll.pfAmount?.toLocaleString("en-IN") ||
+            (payroll.deductions * 0.4)?.toLocaleString("en-IN") ||
+            "0"
+          }`,
+          healthInsuranceAmount: `₹${
+            payroll.healthInsuranceAmount?.toLocaleString("en-IN") ||
+            (payroll.deductions * 0.3)?.toLocaleString("en-IN") ||
+            "0"
+          }`,
+          leaveAmount: `₹${
+            payroll.leaveAmount?.toLocaleString("en-IN") ||
+            (payroll.deductions * 0.2)?.toLocaleString("en-IN") ||
+            "0"
+          }`,
         }));
       });
 
@@ -101,11 +120,7 @@ const AdminPayroll = () => {
   };
 
   if (loading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.loading}>Loading payroll data...</div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {
@@ -126,7 +141,11 @@ const AdminPayroll = () => {
       <div className={styles.header}>
         <h2>Payroll Summary</h2>
         <div className={styles.summary}>
-          <span>Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, payrollData.length)} of {payrollData.length} records</span>
+          <span>
+            Showing {indexOfFirstItem + 1}-
+            {Math.min(indexOfLastItem, payrollData.length)} of{" "}
+            {payrollData.length} records
+          </span>
         </div>
       </div>
 
@@ -179,19 +198,21 @@ const AdminPayroll = () => {
           >
             <FiChevronLeft />
           </button>
-          
+
           <div className={styles.pageNumbers}>
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i + 1}
                 onClick={() => handlePageChange(i + 1)}
-                className={`${styles.pageButton} ${currentPage === i + 1 ? styles.active : ''}`}
+                className={`${styles.pageButton} ${
+                  currentPage === i + 1 ? styles.active : ""
+                }`}
               >
                 {i + 1}
               </button>
             ))}
           </div>
-          
+
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}

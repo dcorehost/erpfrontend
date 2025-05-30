@@ -1,5 +1,3 @@
-
-
 // import React, { useState, useEffect } from "react";
 // import styles from "./AttendanceSummary.module.css";
 // import axios from "axios";
@@ -173,13 +171,6 @@
 
 // export default AttendanceSummary;
 
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Auth from "../Httpservices/Auth";
@@ -273,7 +264,10 @@ const AttendanceSummary = () => {
   // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = attendanceRecords.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = attendanceRecords.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(attendanceRecords.length / itemsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -281,7 +275,7 @@ const AttendanceSummary = () => {
   // Format time spent for better readability
   const formatTimeSpent = (time) => {
     if (!time) return "N/A";
-    const parts = time.split(':');
+    const parts = time.split(":");
     if (parts.length === 3) {
       return `${parts[0]}h ${parts[1]}m`;
     }
@@ -292,24 +286,30 @@ const AttendanceSummary = () => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <h1 className={styles.title}>
-          <span className={styles.titleIcon}>📊</span>
+          {/* <span className={styles.titleIcon}>📊</span> */}
           Attendance Summary
         </h1>
         <div className={styles.filterButtons}>
-          <button 
-            className={`${styles.filterButton} ${filter === "daily" ? styles.active : ""}`} 
+          <button
+            className={`${styles.filterButton} ${
+              filter === "daily" ? styles.active : ""
+            }`}
             onClick={() => setFilter("daily")}
           >
             <span className={styles.buttonIcon}>📅</span> Daily
           </button>
-          <button 
-            className={`${styles.filterButton} ${filter === "weekly" ? styles.active : ""}`} 
+          <button
+            className={`${styles.filterButton} ${
+              filter === "weekly" ? styles.active : ""
+            }`}
             onClick={() => setFilter("weekly")}
           >
             <span className={styles.buttonIcon}>🗓️</span> Weekly
           </button>
-          <button 
-            className={`${styles.filterButton} ${filter === "monthly" ? styles.active : ""}`} 
+          <button
+            className={`${styles.filterButton} ${
+              filter === "monthly" ? styles.active : ""
+            }`}
             onClick={() => setFilter("monthly")}
           >
             <span className={styles.buttonIcon}>📆</span> Monthly
@@ -350,7 +350,9 @@ const AttendanceSummary = () => {
           <div className={styles.resultsInfo}>
             {!isLoading && (
               <span className={styles.recordCount}>
-                Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, attendanceRecords.length)} of {attendanceRecords.length} records
+                Showing {indexOfFirstItem + 1}-
+                {Math.min(indexOfLastItem, attendanceRecords.length)} of{" "}
+                {attendanceRecords.length} records
               </span>
             )}
           </div>
@@ -382,24 +384,55 @@ const AttendanceSummary = () => {
                 <tbody>
                   {currentItems.length > 0 ? (
                     currentItems.map((record, index) => (
-                      <tr key={index} className={index % 2 === 0 ? styles.evenRow : styles.oddRow}>
+                      <tr
+                        key={index}
+                        className={
+                          index % 2 === 0 ? styles.evenRow : styles.oddRow
+                        }
+                      >
                         <td data-label="Employee ID">{record.employeeId}</td>
                         <td data-label="User">
                           <div className={styles.userCell}>
-                            <span className={styles.userName}>{record.displayName}</span>
-                            <span className={styles.userDetail}>@{record.username}</span>
+                            <span className={styles.userName}>
+                              {record.displayName}
+                            </span>
+                            <span className={styles.userDetail}>
+                              @{record.username}
+                            </span>
                           </div>
                         </td>
                         <td data-label="Email">{record.emailId}</td>
                         <td data-label="Status">
-                          <span className={`${styles.statusBadge} ${record.status === 'Present' ? styles.present : styles.absent}`}>
+                          <span
+                            className={`${styles.statusBadge} ${
+                              record.status === "Present"
+                                ? styles.present
+                                : styles.absent
+                            }`}
+                          >
                             {record.status}
                           </span>
                         </td>
-                        <td data-label="Check-in">{record.checkInStatus ? new Date(record.checkInStatus).toLocaleTimeString() : "N/A"}</td>
-                        <td data-label="Check-out">{record.checkOutStatus ? new Date(record.checkOutStatus).toLocaleTimeString() : "N/A"}</td>
-                        <td data-label="Time Spent">{formatTimeSpent(record.timeSpent)}</td>
-                        <td data-label="Date">{new Date(record.createdAt).toLocaleDateString()}</td>
+                        <td data-label="Check-in">
+                          {record.checkInStatus
+                            ? new Date(
+                                record.checkInStatus
+                              ).toLocaleTimeString()
+                            : "N/A"}
+                        </td>
+                        <td data-label="Check-out">
+                          {record.checkOutStatus
+                            ? new Date(
+                                record.checkOutStatus
+                              ).toLocaleTimeString()
+                            : "N/A"}
+                        </td>
+                        <td data-label="Time Spent">
+                          {formatTimeSpent(record.timeSpent)}
+                        </td>
+                        <td data-label="Date">
+                          {new Date(record.createdAt).toLocaleDateString()}
+                        </td>
                         <td>{new Date(record.createdAt).toLocaleString()}</td>
                         <td>{new Date(record.updatedAt).toLocaleString()}</td>
                       </tr>
@@ -417,14 +450,14 @@ const AttendanceSummary = () => {
 
             {totalPages > 1 && (
               <div className={styles.pagination}>
-                <button 
-                  onClick={() => setCurrentPage(currentPage - 1)} 
+                <button
+                  onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
                   className={styles.paginationButton}
                 >
                   &laquo; Previous
                 </button>
-                
+
                 <div className={styles.pageNumbers}>
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum;
@@ -437,34 +470,38 @@ const AttendanceSummary = () => {
                     } else {
                       pageNum = currentPage - 2 + i;
                     }
-                    
+
                     return (
                       <button
                         key={pageNum}
                         onClick={() => paginate(pageNum)}
-                        className={`${styles.pageButton} ${currentPage === pageNum ? styles.activePage : ""}`}
+                        className={`${styles.pageButton} ${
+                          currentPage === pageNum ? styles.activePage : ""
+                        }`}
                       >
                         {pageNum}
                       </button>
                     );
                   })}
-                  
+
                   {totalPages > 5 && currentPage < totalPages - 2 && (
                     <span className={styles.pageEllipsis}>...</span>
                   )}
-                  
+
                   {totalPages > 5 && currentPage < totalPages - 2 && (
                     <button
                       onClick={() => paginate(totalPages)}
-                      className={`${styles.pageButton} ${currentPage === totalPages ? styles.activePage : ""}`}
+                      className={`${styles.pageButton} ${
+                        currentPage === totalPages ? styles.activePage : ""
+                      }`}
                     >
                       {totalPages}
                     </button>
                   )}
                 </div>
-                
-                <button 
-                  onClick={() => setCurrentPage(currentPage + 1)} 
+
+                <button
+                  onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
                   className={styles.paginationButton}
                 >
