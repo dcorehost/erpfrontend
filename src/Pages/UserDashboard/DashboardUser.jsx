@@ -185,7 +185,7 @@ const UserDashboard = () => {
 
         {/* Tasks */}
         <motion.div className={styles.card} whileHover={{ scale: 1.05 }}>
-        <h3 style={{fontSize:"1rem" }}>Today's Tasks</h3>
+          <h3 style={{ fontSize: "1rem" }}>Today's Tasks</h3>
           <ul className={styles.taskList}>
             {todayTasks.length > 0 ? (
               todayTasks.map((task, index) => (
@@ -196,7 +196,9 @@ const UserDashboard = () => {
             )}
           </ul>
 
-          <h3 style={{ marginTop: "1rem",fontSize:"1rem" }}>Previous Pending Tasks</h3>
+          <h3 style={{ marginTop: "1rem", fontSize: "1rem" }}>
+            Previous Pending Tasks
+          </h3>
           {Object.keys(groupedPreviousTasks).length > 0 ? (
             Object.entries(groupedPreviousTasks).map(
               ([date, tasksForDate], idx) => (

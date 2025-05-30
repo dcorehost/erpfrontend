@@ -176,7 +176,7 @@
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  width: 150px;
+  width: 200px;
 }
 
 .profileDropdown ul {
@@ -223,7 +223,7 @@
 }
 
 .userIcon {
-  font-size: 1.5em;
+  font-size: 1em;
   margin-right: 10px;
   color: #555; /* Example color */
 }
@@ -304,7 +304,7 @@
   position: absolute;
   right: 0;
   top: 100%;
-  width: 280px;
+  width:200px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -320,7 +320,7 @@
 }
 
 .profileLargeIcon {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-right: 12px;
   color: #555;
 }
