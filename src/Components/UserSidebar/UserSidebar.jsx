@@ -76,9 +76,9 @@ const UserSidebar = ({ children }) => {
           icon: <RiUserShared2Fill />,
         },
         {
-          title: "Update Task Progress & Completion Status",
-          link: "/UserTaskProgress",
-          icon: <FaTasks />,
+          // title: "Update Task Progress & Completion Status",
+          // link: "/UserTaskProgress",
+          // icon: <FaTasks />,
         },
       ],
     },

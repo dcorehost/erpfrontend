@@ -4,20 +4,25 @@ import styles from "./ApplyLeaveTable.module.css";
 import httpServices from "../Httpservices/httpservices"; 
 import Auth from "../Services/Auth";
 import axios from "axios";
+import Loader from "../Loader/Loader";
 
 const ApplyLeaveTable = () => {
+  const [loader, setLoader] = useState(false);
+  
   const [leaveApplications, setLeaveApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Number of items per page
+  const [itemsPerPage] = useState(5); 
 
   // Fetch upcoming leave data
   useEffect(() => {
     const fetchUpcomingLeave = async () => {
+
       try {
+        setLoader(true)
         const token = Auth.getToken();
         const response = await axios.get("/get-upcoming-leave", {
           baseURL: "http://209.74.89.83/erpbackend",
@@ -29,10 +34,13 @@ const ApplyLeaveTable = () => {
         
         setLeaveApplications(response.data.leaveDetails); 
         setLoading(false);
+        setLoader(false);
       } catch (error) {
         console.error("Error fetching upcoming leave:", error);
         setError(error.response?.data?.message || error.message);
         setLoading(false);
+        setLoader(false);
+
       }
     };
 
@@ -61,8 +69,11 @@ const ApplyLeaveTable = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+  if (loader) {
+    return <Loader />;
   }
 
   if (error) {
