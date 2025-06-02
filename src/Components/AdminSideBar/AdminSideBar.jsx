@@ -63,7 +63,7 @@ const AdminSidebar = ({ children }) => {
         },
         {
           title: "Project Details",
-          link: "/ProjectDetails",
+          link: "/ProjectAdmin",
           icon: <FaListUl />,
         },
         {
