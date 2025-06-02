@@ -5,18 +5,17 @@
 .sidebarWrapper {
   display: flex;
   margin-top: 70px;
-  height: calc(100vh - 70px); /* Full height excluding the navbar */
+  min-height: calc(100vh - 70px); /* Full height excluding the navbar */
   width: 100vw;
-
 }
 
 .sidebar {
-    display: flex;
+  display: flex;
   flex-direction: column;
   position: fixed;
   top: 60.4px;
   left: -100%;
-  width: 250px;
+  width: 270px;
   height: calc(100% - 60px); 
   background-color: #fef9f8;
   color: #0d0d0d;
@@ -24,14 +23,11 @@
   padding: 8px 0px;
   overflow-x: hidden;
   z-index: 100;
-  padding: 20px; /* Optional spacing for content */
-  height: calc(100vh - 60px); /* Same height as sidebar */
-  overflow-y: auto; /* Scrollable if content overflows */
 }
 
 .sidebar.open {
   left: 0;
-  width: 250px;
+  width: 270px;
 }
 
 .sidebar.closed{
@@ -45,9 +41,11 @@
 .contentMenu {
   flex-grow: 1;
   transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
-  margin-left: 250px; /* Same width as sidebar when open */
+  margin-left: 270px; /* Same width as sidebar when open */
   padding: 40px 20px; /* Optional spacing for content */
   height: calc(100vh - 60px); /* Same height as sidebar */
+  margin-top: -40px;
+
   /* overflow-y: auto;  */
 }
 
@@ -110,7 +108,7 @@
 } */
 
 .sidebar .menu{
-  padding-inline: calc(var(--spacing) * 2) /* 0.5rem = 8px */;
+  /* padding-inline: calc(var(--spacing) * 2) */
   padding-block: calc(var(--spacing) * 4) /* 1rem = 16px */;
 }
 
@@ -394,7 +392,7 @@
   
 }
 
-@media (max-width: 500px) {
+@media (max-width: 769px) {
     .hamburgerButton{
     left: 150px !important;
   }

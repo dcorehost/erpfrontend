@@ -92,9 +92,6 @@ const PastLeaveTable = () => {
 
   return (
     <div className={styles.container}>
-      {/* <h4 style={{ backgroundColor: "green", width: "100%" }}>
-        Outside the container
-      </h4> */}
       <div className={styles.header}>
         <h2>Past Leave Records</h2>
         <div className={styles.summary}>

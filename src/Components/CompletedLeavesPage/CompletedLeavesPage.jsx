@@ -144,10 +144,10 @@ const CompletedLeavesPage = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Completed/Rejected Leaves</h1>
-        <div className={styles.userInfo}>
+        {/* <div className={styles.userInfo}>
           <span>Logged in as: {Auth.getAuthData().username}</span>
           <span>({Auth.getAuthData().typeOfUser})</span>
-        </div>
+        </div> */}
       </div>
 
       {leaveData.length === 0 ? (

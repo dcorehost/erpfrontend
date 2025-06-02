@@ -586,3 +586,98 @@
       grid-template-columns: 1fr;
     }
   }
+
+
+  /* Add these updates to your existing CSS */
+
+/* Update the expanded details section */
+.expandedDetails {
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+  max-height: 500px; /* Limit height and add scrolling */
+  overflow-y: auto;
+}
+
+/* Improve the details container layout */
+.detailsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0.5rem;
+}
+
+/* Make detail sections more spacious */
+.detailSection {
+  margin-bottom: 1.5rem;
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.detailSection h4 {
+  margin: 0 0 1rem;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Improve detail rows */
+.detailRow {
+  display: flex;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.detailLabel {
+  font-weight: 500;
+  color: #666;
+  min-width: 140px;
+  margin-bottom: 0.25rem;
+}
+
+.detailRow > span:not(.detailLabel) {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Enhance remarks section */
+.remarksText {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Make the action panel wider on larger screens */
+@media (min-width: 1200px) {
+  .requestsGrid {
+    grid-template-columns: 1fr 400px;
+  }
+}
+
+/* Improve scrolling behavior */
+.requestsList {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  max-height: calc(100vh - 200px);
+}
+
+/* Better handling of long text in cards */
+.changeValue, .changeField {
+  word-break: break-word;
+}
+
+/* Make the card body more spacious */
+.cardBody {
+  padding: 1.25rem;
+}
