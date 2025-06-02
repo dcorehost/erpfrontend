@@ -1,360 +1,11 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import styles from './ProjectDetailsPage.module.css';
-
-// const ProjectDetailsPage = ({ projectName }) => {
-//   const [projectData, setProjectData] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchProjectData = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://209.74.89.83/erpbackend/get-project-by-name?name=${projectName}`
-//         );
-//         setProjectData(response.data);
-//         setLoading(false);
-//       } catch (err) {
-//         setError(err.message);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchProjectData();
-//   }, [projectName]);
-
-//   if (loading) {
-//     return <div className={styles.loading}>Loading project details...</div>;
-//   }
-
-//   if (error) {
-//     return <div className={styles.error}>Error: {error}</div>;
-//   }
-
-//   if (!projectData || !projectData.projects || projectData.projects.length === 0) {
-//     return <div className={styles.error}>Project not found</div>;
-//   }
-
-//   const project = projectData.projects[0];
-//   const tasks = project.tasks || [];
-//   const userCreatedTasks = projectData.userCreatedTasks || [];
-
-//   // Format date for display
-//   const formatDate = (dateString) => {
-//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-//     return new Date(dateString).toLocaleDateString(undefined, options);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <header className={styles.header}>
-//         <h1>{project.name}</h1>
-//         <div className={styles.projectMeta}>
-//           <span className={`${styles.status} ${styles[project.status.toLowerCase()]}`}>
-//             {project.status}
-//           </span>
-//           <span className={`${styles.priority} ${styles[project.priority.toLowerCase()]}`}>
-//             {project.priority} Priority
-//           </span>
-//           <span className={styles.deadline}>
-//             Deadline: {formatDate(project.deadline)}
-//           </span>
-//         </div>
-//       </header>
-
-//       <section className={styles.section}>
-//         <h2>Description</h2>
-//         <p>{project.description}</p>
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>Team Members</h2>
-//         <div className={styles.teamGrid}>
-//           {project.userIds.map((user, index) => (
-//             <div key={index} className={styles.teamMember}>
-//               <h3>{user.username}</h3>
-//               <p>Employee ID: {user.employeeId}</p>
-//               <p>Email: {user.contact.emailId}</p>
-//               <p>Phone: {user.contact.phone}</p>
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>Project Tasks ({tasks.length})</h2>
-//         <div className={styles.taskList}>
-//           {tasks.map((task) => (
-//             <div key={task._id} className={styles.taskCard}>
-//               <div className={styles.taskHeader}>
-//                 <h3>{task.taskName}</h3>
-//                 <span className={`${styles.taskStatus} ${styles[task.status.toLowerCase()]}`}>
-//                   {task.status}
-//                 </span>
-//               </div>
-//               <p className={styles.taskDescription}>{task.description}</p>
-//               <div className={styles.taskDetails}>
-//                 <div>
-//                   <strong>Subtask:</strong> {task.subTask}
-//                 </div>
-//                 <div>
-//                   <strong>Deadline:</strong> {formatDate(task.deadline)}
-//                 </div>
-//                 <div>
-//                   <strong>Estimated Time:</strong> {task.estimatedTime}
-//                 </div>
-//                 <div>
-//                   <strong>Priority:</strong> 
-//                   <span className={`${styles.taskPriority} ${styles[task.priority.toLowerCase()]}`}>
-//                     {task.priority}
-//                   </span>
-//                 </div>
-//               </div>
-//               {task.additionalNotes && (
-//                 <div className={styles.notes}>
-//                   <strong>Notes:</strong> {task.additionalNotes}
-//                 </div>
-//               )}
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>User Created Tasks ({userCreatedTasks.length})</h2>
-//         <div className={styles.taskList}>
-//           {userCreatedTasks.map((task) => (
-//             <div key={task._id} className={styles.taskCard}>
-//               <div className={styles.taskHeader}>
-//                 <h3>{task.taskName}</h3>
-//                 <span className={`${styles.taskStatus} ${styles[task.state.toLowerCase()]}`}>
-//                   {task.state}
-//                 </span>
-//               </div>
-//               <p className={styles.taskDescription}>{task.description}</p>
-//               <div className={styles.taskDetails}>
-//                 <div>
-//                   <strong>Assigned to:</strong> {task.userId.username}
-//                 </div>
-//                 <div>
-//                   <strong>Time Spent:</strong> {task.timeSpent} minutes
-//                 </div>
-//                 <div>
-//                   <strong>Created:</strong> {formatDate(task.createdAt)}
-//                 </div>
-//                 {task.updatedAt && (
-//                   <div>
-//                     <strong>Last Updated:</strong> {formatDate(task.updatedAt)}
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default ProjectDetailsPage;
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import Auth from '../Services/Auth'; 
-// import styles from './ProjectDetailsPage.module.css';
-
-// const ProjectDetailsPage = ({ projectName }) => {
-//   const [projectData, setProjectData] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchProjectData = async () => {
-//       try {
-//         const token = Auth.getToken();
-//         if (!token) {
-//           throw new Error('Authentication token not found');
-//         }
-
-//         const response = await axios.get(
-//           `http://209.74.89.83/erpbackend/get-project-by-name?name=${encodeURIComponent(projectName)}`,
-//           {
-//             headers: {
-//               'Authorization': `Bearer ${token}`,
-//               'Content-Type': 'application/json'
-//             }
-//           }
-//         );
-        
-//         if (response.data && response.data.projects && response.data.projects.length > 0) {
-//           setProjectData(response.data);
-//         } else {
-//           throw new Error('Project not found');
-//         }
-//         setLoading(false);
-//       } catch (err) {
-//         setError(err.response?.data?.message || err.message || 'Failed to fetch project data');
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchProjectData();
-//   }, [projectName]);
-
-//   if (loading) {
-//     return <div className={styles.loading}>Loading project details...</div>;
-//   }
-
-//   if (error) {
-//     return <div className={styles.error}>Error: {error}</div>;
-//   }
-
-//   if (!projectData) {
-//     return <div className={styles.error}>No project data available</div>;
-//   }
-
-//   const project = projectData.projects[0];
-//   const tasks = project.tasks || [];
-//   const userCreatedTasks = projectData.userCreatedTasks || [];
-
-//   // Format date for display
-//   const formatDate = (dateString) => {
-//     if (!dateString) return 'N/A';
-//     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-//     return new Date(dateString).toLocaleDateString(undefined, options);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <header className={styles.header}>
-//         <h1>{project.name}</h1>
-//         <div className={styles.projectMeta}>
-//           <span className={`${styles.status} ${styles[project.status.toLowerCase()]}`}>
-//             {project.status}
-//           </span>
-//           <span className={`${styles.priority} ${styles[project.priority.toLowerCase()]}`}>
-//             {project.priority} Priority
-//           </span>
-//           <span className={styles.deadline}>
-//             Deadline: {formatDate(project.deadline)}
-//           </span>
-//         </div>
-//       </header>
-
-//       <section className={styles.section}>
-//         <h2>Description</h2>
-//         <p>{project.description || 'No description provided'}</p>
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>Team Members</h2>
-//         {project.userIds && project.userIds.length > 0 ? (
-//           <div className={styles.teamGrid}>
-//             {project.userIds.map((user, index) => (
-//               <div key={index} className={styles.teamMember}>
-//                 <h3>{user.username}</h3>
-//                 <p>Employee ID: {user.employeeId}</p>
-//                 <p>Email: {user.contact?.emailId || 'N/A'}</p>
-//                 <p>Phone: {user.contact?.phone || 'N/A'}</p>
-//               </div>
-//             ))}
-//           </div>
-//         ) : (
-//           <p>No team members assigned</p>
-//         )}
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>Project Tasks ({tasks.length})</h2>
-//         {tasks.length > 0 ? (
-//           <div className={styles.taskList}>
-//             {tasks.map((task) => (
-//               <div key={task._id} className={styles.taskCard}>
-//                 <div className={styles.taskHeader}>
-//                   <h3>{task.taskName}</h3>
-//                   <span className={`${styles.taskStatus} ${styles[task.status.toLowerCase()]}`}>
-//                     {task.status}
-//                   </span>
-//                 </div>
-//                 <p className={styles.taskDescription}>{task.description || 'No description'}</p>
-//                 <div className={styles.taskDetails}>
-//                   <div>
-//                     <strong>Subtask:</strong> {task.subTask || 'N/A'}
-//                   </div>
-//                   <div>
-//                     <strong>Deadline:</strong> {formatDate(task.deadline)}
-//                   </div>
-//                   <div>
-//                     <strong>Estimated Time:</strong> {task.estimatedTime || 'N/A'}
-//                   </div>
-//                   <div>
-//                     <strong>Priority:</strong> 
-//                     <span className={`${styles.taskPriority} ${styles[task.priority.toLowerCase()]}`}>
-//                       {task.priority}
-//                     </span>
-//                   </div>
-//                 </div>
-//                 {task.additionalNotes && (
-//                   <div className={styles.notes}>
-//                     <strong>Notes:</strong> {task.additionalNotes}
-//                   </div>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-//         ) : (
-//           <p>No tasks found for this project</p>
-//         )}
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>User Created Tasks ({userCreatedTasks.length})</h2>
-//         {userCreatedTasks.length > 0 ? (
-//           <div className={styles.taskList}>
-//             {userCreatedTasks.map((task) => (
-//               <div key={task._id} className={styles.taskCard}>
-//                 <div className={styles.taskHeader}>
-//                   <h3>{task.taskName}</h3>
-//                   <span className={`${styles.taskStatus} ${styles[task.state.toLowerCase()]}`}>
-//                     {task.state}
-//                   </span>
-//                 </div>
-//                 <p className={styles.taskDescription}>{task.description || 'No description'}</p>
-//                 <div className={styles.taskDetails}>
-//                   <div>
-//                     <strong>Assigned to:</strong> {task.userId?.username || 'N/A'}
-//                   </div>
-//                   <div>
-//                     <strong>Time Spent:</strong> {task.timeSpent || 0} minutes
-//                   </div>
-//                   <div>
-//                     <strong>Created:</strong> {formatDate(task.createdAt)}
-//                   </div>
-//                   {task.updatedAt && (
-//                     <div>
-//                       <strong>Last Updated:</strong> {formatDate(task.updatedAt)}
-//                     </div>
-//                   )}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         ) : (
-//           <p>No user created tasks found</p>
-//         )}
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default ProjectDetailsPage;
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Auth from '../Services/Auth';
 import styles from './ProjectDetailsPage.module.css';
+import { FaArrowLeft, FaCalendarAlt, FaUsers, FaTasks, FaClock, FaStickyNote, FaInfoCircle } from 'react-icons/fa';
+import { MdPriorityHigh } from 'react-icons/md';
 
 const ProjectDetailsPage = () => {
   const { projectName } = useParams();
@@ -367,12 +18,11 @@ const ProjectDetailsPage = () => {
     const fetchProjectData = async () => {
       try {
         const token = Auth.getToken();
-        if (!token) {
-          throw new Error('Authentication token not found');
-        }
+        if (!token) throw new Error('Authentication token not found');
 
+        const decodedProjectName = decodeURIComponent(projectName);
         const response = await axios.get(
-          `http://209.74.89.83/erpbackend/get-project-by-name?name=${encodeURIComponent(projectName)}`,
+          `http://209.74.89.83/erpbackend/get-project-by-name?name=${encodeURIComponent(decodedProjectName)}`,
           {
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -380,15 +30,15 @@ const ProjectDetailsPage = () => {
             }
           }
         );
-        
-        if (response.data && response.data.projects && response.data.projects.length > 0) {
+
+        if (response.data?.projects?.length > 0) {
           setProjectData(response.data);
         } else {
           throw new Error('Project not found');
         }
-        setLoading(false);
       } catch (err) {
-        setError(err.response?.data?.message || err.message || 'Failed to fetch project data');
+        setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -397,68 +47,222 @@ const ProjectDetailsPage = () => {
   }, [projectName]);
 
   const handleBackToProjects = () => {
-    navigate('/projects');
+    navigate(-1);
   };
 
-  if (loading) {
-    return <div className={styles.loading}>Loading project details...</div>;
-  }
+  const formatDate = (date) => date ? new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }) : 'N/A';
 
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <div className={styles.error}>Error: {error}</div>
-        <button onClick={handleBackToProjects} className={styles.backButton}>
-          Back to Projects
-        </button>
-      </div>
-    );
-  }
+  const formatTime = (time) => {
+    if (!time) return 'N/A';
+    const parts = time.split(':');
+    if (parts.length >= 2) {
+      return `${parts[0]}h ${parts[1]}m`;
+    }
+    return time;
+  };
 
-  if (!projectData) {
-    return (
-      <div className={styles.errorContainer}>
-        <div className={styles.error}>No project data available</div>
-        <button onClick={handleBackToProjects} className={styles.backButton}>
-          Back to Projects
-        </button>
-      </div>
-    );
-  }
+  if (loading) return <div className={styles.loading}>Loading project details...</div>;
+  if (error) return (
+    <div className={styles.errorContainer}>
+      <p>{error}</p>
+      <button className={styles.errorButton} onClick={handleBackToProjects}>Back to Projects</button>
+    </div>
+  );
 
   const project = projectData.projects[0];
   const tasks = project.tasks || [];
   const userCreatedTasks = projectData.userCreatedTasks || [];
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'completed': return styles.statusCompleted;
+      case 'pending': return styles.statusPending;
+      case 'in progress': return styles.statusInProgress;
+      default: return styles.statusDefault;
+    }
+  };
+
+  const getPriorityColor = (priority) => {
+    switch (priority?.toLowerCase()) {
+      case 'high': return styles.priorityHigh;
+      case 'medium': return styles.priorityMedium;
+      case 'low': return styles.priorityLow;
+      default: return styles.priorityDefault;
+    }
+  };
+
+  const getStateColor = (state) => {
+    switch (state?.toLowerCase()) {
+      case 'completed': return styles.statusCompleted;
+      case 'done': return styles.statusCompleted;
+      case 'todo': return styles.statusPending;
+      case 'in progress': return styles.statusInProgress;
+      default: return styles.statusDefault;
+    }
   };
 
   return (
     <div className={styles.container}>
-      <button onClick={handleBackToProjects} className={styles.backButton}>
-        ← Back to Projects
+      <button className={styles.backButton} onClick={handleBackToProjects}>
+        <FaArrowLeft /> Back to Projects
       </button>
 
-      <header className={styles.header}>
-        <h1>{project.name}</h1>
-        <div className={styles.projectMeta}>
-          <span className={`${styles.status} ${styles[project.status.toLowerCase()]}`}>
+      <div className={styles.header}>
+        <h1 className={styles.projectTitle}>{project.name}</h1>
+        <div className={styles.metaContainer}>
+          <div className={`${styles.metaItem} ${getStatusColor(project.status)}`}>
             {project.status}
-          </span>
-          <span className={`${styles.priority} ${styles[project.priority.toLowerCase()]}`}>
-            {project.priority} Priority
-          </span>
-          <span className={styles.deadline}>
-            Deadline: {formatDate(project.deadline)}
-          </span>
+          </div>
+          <div className={`${styles.metaItem} ${getPriorityColor(project.priority)}`}>
+            <MdPriorityHigh /> {project.priority} Priority
+          </div>
+          <div className={`${styles.metaItem} ${styles.metaDeadline}`}>
+            <FaCalendarAlt /> Deadline: {formatDate(project.deadline)}
+          </div>
+          <div className={`${styles.metaItem} ${styles.metaCreated}`}>
+            <FaCalendarAlt /> Created: {formatDate(project.createdAt)}
+          </div>
         </div>
-      </header>
+      </div>
 
-      {/* Rest of the ProjectDetailsPage component remains the same */}
-      {/* ... */}
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}><FaInfoCircle /> Description</h2>
+        <p className={styles.description}>{project.description || "No description provided"}</p>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}><FaUsers /> Team Members</h2>
+        {project.userIds?.length > 0 ? (
+          <ul className={styles.teamList}>
+            {project.userIds.map((user, i) => (
+              <li key={i} className={styles.teamMember}>
+                <strong className={styles.memberName}>{user.username} ({user.employeeId})</strong>
+                <div className={styles.memberDetail}>
+                  <FaCalendarAlt /> Email: {user.contact?.emailId || 'No Email'}
+                </div>
+                <div className={styles.memberDetail}>
+                  <FaCalendarAlt /> Phone: {user.contact?.phone || 'No Phone'}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : <p className={styles.description}>No team members assigned</p>}
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}><FaTasks /> Project Tasks ({tasks.length})</h2>
+        {tasks.length > 0 ? (
+          <div className={styles.taskGrid}>
+            {tasks.map(task => (
+              <div key={task._id} className={`${styles.taskCard} ${getPriorityColor(task.priority)}`}>
+                <h3 className={styles.taskTitle}>{task.taskName}</h3>
+                
+                <div className={styles.taskDetail}>
+                  <FaInfoCircle /> Status: 
+                  <div className={`${styles.metaItem} ${getStatusColor(task.status)} ${styles.smallMeta}`}>
+                    {task.status}
+                  </div>
+                </div>
+                
+                <div className={styles.taskDetail}>
+                  <FaCalendarAlt /> Deadline: {formatDate(task.deadline)}
+                </div>
+                
+                <div className={styles.taskDetail}>
+                  <MdPriorityHigh /> Priority: 
+                  <div className={`${styles.metaItem} ${getPriorityColor(task.priority)} ${styles.smallMeta}`}>
+                    {task.priority}
+                  </div>
+                </div>
+                
+                <div className={styles.taskDetail}>
+                  <FaClock /> Estimated Time: {formatTime(task.estimatedTime)}
+                </div>
+                
+                {task.subTask && (
+                  <div className={styles.subTaskList}>
+                    <div className={styles.taskDetail}><strong>Sub-tasks:</strong></div>
+                    <div className={styles.subTaskItem}>{task.subTask}</div>
+                  </div>
+                )}
+                
+                {task.description && (
+                  <div className={styles.taskDetail}>
+                    <FaInfoCircle /> Description: {task.description}
+                  </div>
+                )}
+                
+                {task.additionalNotes && (
+                  <div className={styles.notesContainer}>
+                    <FaStickyNote /> <strong>Notes:</strong> {task.additionalNotes}
+                  </div>
+                )}
+                
+                {task.userIds?.length > 0 && (
+                  <div className={styles.assignedTo}>
+                    <div className={styles.taskDetail}><strong>Assigned to:</strong></div>
+                    {task.userIds.map((user, i) => (
+                      <div key={i} className={styles.taskDetail}>
+                        {user.username} ({user.employeeId})
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : <p className={styles.description}>No tasks found</p>}
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}><FaTasks /> User Created Tasks ({userCreatedTasks.length})</h2>
+        {userCreatedTasks.length > 0 ? (
+          <div className={styles.taskGrid}>
+            {userCreatedTasks.map(task => (
+              <div key={task._id} className={styles.taskCard}>
+                <h3 className={styles.taskTitle}>{task.taskName}</h3>
+                
+                <div className={styles.taskDetail}>
+                  <FaInfoCircle /> State: 
+                  <div className={`${styles.metaItem} ${getStateColor(task.state)} ${styles.smallMeta}`}>
+                    {task.state}
+                  </div>
+                </div>
+                
+                <div className={styles.taskDetail}>
+                  <FaCalendarAlt /> Created: {formatDate(task.createdAt)}
+                </div>
+                
+                {task.updatedAt && (
+                  <div className={styles.taskDetail}>
+                    <FaCalendarAlt /> Updated: {formatDate(task.updatedAt)}
+                  </div>
+                )}
+                
+                <div className={styles.taskDetail}>
+                  <FaClock /> Time Spent: {task.timeSpent} minutes
+                </div>
+                
+                {task.description && (
+                  <div className={styles.taskDetail}>
+                    <FaInfoCircle /> Description: {task.description}
+                  </div>
+                )}
+                
+                {task.userId && (
+                  <div className={styles.taskDetail}>
+                    <FaUsers /> Assigned To: {task.userId.username} ({task.userId.employeeId})
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : <p className={styles.description}>No user created tasks</p>}
+      </section>
     </div>
   );
 };

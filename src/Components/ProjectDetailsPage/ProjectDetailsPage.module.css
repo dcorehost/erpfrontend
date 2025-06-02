@@ -1,223 +1,305 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.loading, .error {
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
+/* Header and Back Button */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #4a6bff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 
-.error {
-  color: #d32f2f;
+.backButton:hover {
+  background: #f0f4ff;
 }
 
 .header {
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.header h1 {
-  margin: 0;
-  color: #2c3e50;
-  font-size: 2.5rem;
-}
-
-.projectMeta {
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.projectTitle {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Meta Information */
+.metaContainer {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
   flex-wrap: wrap;
 }
 
-.status, .priority, .deadline {
-  padding: 5px 10px;
-  border-radius: 4px;
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   font-size: 0.9rem;
-  font-weight: 500;
+  background: #f5f5f5;
+  color: #333;
 }
 
-.status {
-  background-color: #e3f2fd;
-  color: #1976d2;
+.smallMeta {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 }
 
-.status.pending {
-  background-color: #fff3e0;
-  color: #e65100;
+.metaDeadline {
+  background: #e3f2fd;
+  color: #4a6bff;
 }
 
-.status.completed {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+.metaCreated {
+  background: #f5f5f5;
+  color: #666;
 }
 
-.priority {
-  background-color: #f3e5f5;
-  color: #7b1fa2;
+/* Status Colors */
+.statusCompleted {
+  background: #e3f9e5;
+  color: #1dd1a1;
 }
 
-.priority.high {
-  background-color: #ffebee;
-  color: #c62828;
+.statusPending {
+  background: #fff3e0;
+  color: #ff9f43;
 }
 
-.priority.medium {
-  background-color: #fff8e1;
-  color: #f57f17;
+.statusInProgress {
+  background: #e3f2fd;
+  color: #4a6bff;
 }
 
-.priority.low {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+.statusDefault {
+  background: #f5f5f5;
+  color: #333;
 }
 
-.deadline {
-  background-color: #e0f7fa;
-  color: #00838f;
+/* Priority Colors */
+.priorityHigh {
+  background: #ffebee;
+  color: #ff6b6b;
 }
 
+.priorityMedium {
+  background: #fff8e1;
+  color: #ffb142;
+}
+
+.priorityLow {
+  background: #e8f5e9;
+  color: #66bb6a;
+}
+
+.priorityDefault {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Sections */
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 3rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.section h2 {
+.sectionTitle {
+  font-size: 1.5rem;
   color: #2c3e50;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.teamGrid {
+.description {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Team Members */
+.teamList {
+  list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 1rem;
 }
 
 .teamMember {
-  background-color: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 3px solid #4a6bff;
 }
 
-.teamMember h3 {
-  margin-top: 0;
+.memberName {
+  display: block;
+  margin-bottom: 0.5rem;
   color: #2c3e50;
 }
 
-.taskList {
+.memberDetail {
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Tasks */
+.taskGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .taskCard {
-  background-color: white;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-top: 3px solid #1dd1a1;
   transition: transform 0.2s;
 }
 
 .taskCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
 }
 
-.taskHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.taskCard.priorityHigh {
+  border-top-color: #ff6b6b;
 }
 
-.taskHeader h3 {
-  margin: 0;
+.taskCard.priorityMedium {
+  border-top-color: #feca57;
+}
+
+.taskCard.priorityLow {
+  border-top-color: #1dd1a1;
+}
+
+.taskTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
   color: #2c3e50;
 }
 
-.taskStatus {
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.taskStatus.pending {
-  background-color: #fff3e0;
-  color: #e65100;
-}
-
-.taskStatus.completed, .taskStatus.done {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.taskStatus.todo {
-  background-color: #e3f2fd;
-  color: #1976d2;
-}
-
-.taskDescription {
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.taskDetails {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.taskDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  margin-bottom: 10px;
+  color: #555;
 }
 
-.taskDetails div {
+/* Subtasks */
+.subTaskList {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #eee;
+}
+
+.subTaskItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.subTaskItem::before {
+  content: '•';
+  color: #4a6bff;
+}
+
+/* Notes */
+.notesContainer {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.assignedTo {
+  margin-top: 1rem;
+}
+
+/* Loading and Error States */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.errorContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ff6b6b;
+  gap: 1rem;
 }
 
-.taskPriority {
-  padding: 2px 6px;
-  border-radius: 3px;
-  margin-left: 5px;
-}
-
-.taskPriority.high {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-.taskPriority.medium {
-  background-color: #fff8e1;
-  color: #f57f17;
-}
-
-.taskPriority.low {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.notes {
-  background-color: #f5f5f5;
-  padding: 10px;
+.errorButton {
+  padding: 0.8rem 1.5rem;
+  background: #ff6b6b;
+  color: white;
+  border: none;
   border-radius: 4px;
-  font-size: 0.9rem;
-  border-left: 3px solid #1976d2;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+
+.errorButton:hover {
+  background: #ff5252;
+}
+
 
 @media (max-width: 768px) {
-  .teamGrid, .taskList {
-    grid-template-columns: 1fr;
+  .header {
+    flex-direction: column;
   }
   
-  .taskDetails {
+  .projectTitle {
+    font-size: 2rem;
+  }
+  
+  .taskGrid {
     grid-template-columns: 1fr;
   }
 }

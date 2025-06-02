@@ -215,11 +215,13 @@ const App = () => {
                     <ProjectAdmin />
                   </SideBar>
                 }></Route>
-                <Route path ="/Projectdetail" element ={
+                <Route path ="/Projectdetail/:projectName" element ={
                   <SideBar>
                     <ProjectDetailsPage />
                   </SideBar>
                 }></Route>
+                {/* <Route path="/Projectdetail/:projectName" element={<ProjectDetailsPage />} /> */}
+
                 <Route
                   path="/Admin/Leave/Task-Assignment"
                   element={
