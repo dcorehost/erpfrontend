@@ -1,0 +1,223 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header h1 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 2.5rem;
+}
+
+.projectMeta {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status, .priority, .deadline {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.status {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.status.pending {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.status.completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.priority {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.priority.high {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.priority.medium {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.priority.low {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.deadline {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  color: #2c3e50;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.teamMember {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.teamMember h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.taskList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.taskCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.taskCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.taskHeader h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.taskStatus {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.taskStatus.pending {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.taskStatus.completed, .taskStatus.done {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.taskStatus.todo {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.taskDescription {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.taskDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.taskDetails div {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskPriority {
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+.taskPriority.high {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.taskPriority.medium {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.taskPriority.low {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.notes {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  border-left: 3px solid #1976d2;
+}
+
+@media (max-width: 768px) {
+  .teamGrid, .taskList {
+    grid-template-columns: 1fr;
+  }
+  
+  .taskDetails {
+    grid-template-columns: 1fr;
+  }
+}

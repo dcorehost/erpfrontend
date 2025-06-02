@@ -188,7 +188,7 @@ const Auth = {
     return this.getAuthData();
   },
 
-  // ✅ Add this method to fix your issue
+  
   getUserType: function () {
     const data = this.getAuthData();
     return data?.typeOfUser || null;

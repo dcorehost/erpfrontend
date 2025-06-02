@@ -1,9 +1,14 @@
 
+
+
+
 // import React, { useState, useEffect } from "react";
 // import styles from "./ProjectAdmin.module.css";
-// import { FiChevronLeft, FiChevronRight, FiMapPin, FiCalendar, FiUsers, FiPlus } from "react-icons/fi";
+// import { FiChevronLeft, FiChevronRight, FiCalendar, FiFlag, FiClock, FiPlus, FiUsers } from "react-icons/fi";
 // import Auth from "../Services/Auth";
 // import axios from "axios";
+// import { Link } from "react-router-dom";
+
 
 // const ProjectAdmin = () => {
 //   const [projectsData, setProjectsData] = useState([]);
@@ -37,16 +42,16 @@
 //         throw new Error("Failed to fetch project details");
 //       }
 
-//       // Transform the API data
+//       // Transform the API data with all required fields
 //       const transformedData = response.data.projects.map(project => ({
 //         id: project._id,
-//         projectName: project.name,
+//         name: project.name,
 //         description: project.description,
-//         status: project.status || "In Progress",
-//         departments: project.departments || (project.userIds && project.userIds.length > 0 ? 
-//           project.userIds.map(user => user.department).filter(Boolean) : ["General"]),
-//         location: project.location || "Various locations",
-//         deadline: project.deadline
+//         deadline: project.deadline,
+//         status: project.status || "Pending",
+//         priority: project.priority || "Medium",
+//         createdAt: project.createdAt,
+//         teamMembers: project.userIds ? project.userIds.map(user => user.username) : []
 //       }));
 
 //       setProjectsData(transformedData);
@@ -85,8 +90,20 @@
 //     return date.toLocaleDateString("en-US", { 
 //       year: 'numeric', 
 //       month: 'short', 
-//       day: 'numeric' 
+//       day: 'numeric',
+//       hour: '2-digit',
+//       minute: '2-digit'
 //     });
+//   };
+
+//   // Get priority color
+//   const getPriorityColor = (priority) => {
+//     switch (priority.toLowerCase()) {
+//       case 'high': return '#ef4444';
+//       case 'medium': return '#f59e0b';
+//       case 'low': return '#10b981';
+//       default: return '#6b7280';
+//     }
 //   };
 
 //   if (loading) {
@@ -118,17 +135,28 @@
 //   return (
 //     <div className={styles.container}>
 //       <div className={styles.header}>
-//         <h1 className={styles.title}>DcoreHost</h1>
-//         <h2 className={styles.subtitle}>Projects Overview</h2>
+//         <h1 className={styles.title}>Project Dashboard</h1>
+//         <h2 className={styles.subtitle}>Manage and track your projects</h2>
         
-       
+//         {/* <div className={styles.actions}>
+//           <button className={styles.createButton}>
+//             <FiPlus className={styles.buttonIcon} />
+//             New Project
+//           </button>
+//         </div> */}
+//         <div className={styles.actions}>
+//   <Link to="/CreateNewProject" className={styles.createButton}>
+//     <FiPlus className={styles.buttonIcon} />
+//     New Project
+//   </Link>
+// </div>
+
         
 //         <div className={styles.projectCategories}>
 //           <span className={styles.categoryActive}>All Projects</span>
-//           <span className={styles.category}>Resource Management</span>
-//           <span className={styles.category}>Scheduling</span>
-//           <span className={styles.category}>Planning</span>
-//           <span className={styles.category}>Discussion</span>
+//           <span className={styles.category}>Pending</span>
+//           <span className={styles.category}>In Progress</span>
+//           <span className={styles.category}>Completed</span>
 //         </div>
 //       </div>
 
@@ -137,37 +165,50 @@
 //           currentItems.map((project) => (
 //             <div key={project.id} className={styles.projectCard}>
 //               <div className={styles.cardHeader}>
-//                 <h3 className={styles.projectTitle}>{project.projectName}</h3>
-//                 <div className={`${styles.statusBadge} ${styles[project.status.toLowerCase().replace(/\s+/g, '')]}`}>
-//                   {project.status}
+//                 <h3 className={styles.projectTitle}>{project.name}</h3>
+//                 <div 
+//                   className={styles.priorityBadge}
+//                   style={{ backgroundColor: getPriorityColor(project.priority) }}
+//                 >
+//                   {project.priority}
 //                 </div>
 //               </div>
               
-//               <p className={styles.projectDescription}>{project.description || "No description provided"}</p>
+//               <p className={styles.projectDescription}>
+//                 {project.description || "No description provided"}
+//               </p>
               
 //               <div className={styles.projectMeta}>
 //                 <div className={styles.metaItem}>
-//                   <FiUsers className={styles.metaIcon} />
-//                   <span>{project.departments.join(", ") || "Not specified"}</span>
-//                 </div>
-//                 <div className={styles.metaItem}>
-//                   <FiMapPin className={styles.metaIcon} />
-//                   <span>{project.location}</span>
-//                 </div>
-//                 <div className={styles.metaItem}>
 //                   <FiCalendar className={styles.metaIcon} />
-//                   <span>{formatDate(project.deadline)}</span>
+//                   <div>
+//                     <span className={styles.metaLabel}>Deadline:</span>
+//                     <span>{formatDate(project.deadline)}</span>
+//                   </div>
+//                 </div>
+                
+//                 <div className={styles.metaItem}>
+//                   <FiClock className={styles.metaIcon} />
+//                   <div>
+//                     <span className={styles.metaLabel}>Created:</span>
+//                     <span>{formatDate(project.createdAt)}</span>
+//                   </div>
+//                 </div>
+                
+//                 <div className={styles.metaItem}>
+//                   <FiUsers className={styles.metaIcon} />
+//                   <div>
+//                     <span className={styles.metaLabel}>Team:</span>
+//                     <span>{project.teamMembers.join(", ") || "Not assigned"}</span>
+//                   </div>
 //                 </div>
 //               </div>
               
 //               <div className={styles.cardFooter}>
-//                 <button className={styles.viewButton}>View Details</button>
-//                 <div className={styles.progressBar}>
-//                   <div 
-//                     className={styles.progressFill} 
-//                     style={{ width: `${project.status === 'Completed' ? 100 : project.status === 'In Progress' ? 50 : 10}%` }}
-//                   ></div>
+//                 <div className={`${styles.statusBadge} ${styles[project.status.toLowerCase().replace(/\s+/g, '')]}`}>
+//                   {project.status}
 //                 </div>
+//                 <button className={styles.viewButton}>View Details</button>
 //               </div>
 //             </div>
 //           ))
@@ -223,15 +264,12 @@
 // export default ProjectAdmin;
 
 
-
-
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectAdmin.module.css";
 import { FiChevronLeft, FiChevronRight, FiCalendar, FiFlag, FiClock, FiPlus, FiUsers } from "react-icons/fi";
 import Auth from "../Services/Auth";
 import axios from "axios";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const ProjectAdmin = () => {
   const [projectsData, setProjectsData] = useState([]);
@@ -239,6 +277,7 @@ const ProjectAdmin = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+  const navigate = useNavigate();
 
   // Fetch project data from API
   const fetchProjectsData = async () => {
@@ -329,6 +368,11 @@ const ProjectAdmin = () => {
     }
   };
 
+  // Handle view details click
+  const handleViewDetails = (projectName) => {
+    navigate(`/projects/${encodeURIComponent(projectName)}`);
+  };
+
   if (loading) {
     return (
       <div className={styles.container}>
@@ -361,19 +405,12 @@ const ProjectAdmin = () => {
         <h1 className={styles.title}>Project Dashboard</h1>
         <h2 className={styles.subtitle}>Manage and track your projects</h2>
         
-        {/* <div className={styles.actions}>
-          <button className={styles.createButton}>
+        <div className={styles.actions}>
+          <Link to="/CreateNewProject" className={styles.createButton}>
             <FiPlus className={styles.buttonIcon} />
             New Project
-          </button>
-        </div> */}
-        <div className={styles.actions}>
-  <Link to="/CreateNewProject" className={styles.createButton}>
-    <FiPlus className={styles.buttonIcon} />
-    New Project
-  </Link>
-</div>
-
+          </Link>
+        </div>
         
         <div className={styles.projectCategories}>
           <span className={styles.categoryActive}>All Projects</span>
@@ -431,7 +468,12 @@ const ProjectAdmin = () => {
                 <div className={`${styles.statusBadge} ${styles[project.status.toLowerCase().replace(/\s+/g, '')]}`}>
                   {project.status}
                 </div>
-                <button className={styles.viewButton}>View Details</button>
+                <button 
+                  className={styles.viewButton}
+                  onClick={() => handleViewDetails(project.name)}
+                >
+                  View Details
+                </button>
               </div>
             </div>
           ))
@@ -440,10 +482,10 @@ const ProjectAdmin = () => {
             <div className={styles.noProjectsIcon}>📋</div>
             <h3>No projects found</h3>
             <p>Create a new project to get started</p>
-            <button className={styles.createButton}>
+            <Link to="/CreateNewProject" className={styles.createButton}>
               <FiPlus className={styles.buttonIcon} />
               Create Project
-            </button>
+            </Link>
           </div>
         )}
       </div>

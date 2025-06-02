@@ -10,8 +10,8 @@
   transition: transform 0.2s;
   border: 2px dashed red; 
   box-sizing: border-box;
-  margin-left: 73px;
-  padding-top: 500px;
+  margin-left: 43px;
+  /* padding-top: 500px; */
 }
 
 /* Header Styles */
