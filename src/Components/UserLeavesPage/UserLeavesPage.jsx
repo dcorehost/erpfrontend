@@ -1,9 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
-import Httpservices from '../Services/Httpservices';
+import axios from 'axios'; 
 import Auth from '../Services/Auth';
 import styles from './UserLeavesPage.module.css';
+import Loader from '../Loader/Loader';
 
 const UserLeavesPage = () => {
+  const [loader, setLoader] = useState(false);
+  
   const [leaveData, setLeaveData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,6 +20,7 @@ const UserLeavesPage = () => {
         if (!Auth.isAuthenticated()) {
           setError('Please login to view leave details');
           setLoading(false);
+          setLoader(false)
           return;
         }
 
@@ -23,8 +28,16 @@ const UserLeavesPage = () => {
         const userData = Auth.getAuthData();
         setCurrentUser(userData);
 
-        // Fetch leave data using HttpServices
-        const response = await Httpservices.get('get-user-leaves-for-Superadmin');
+        // Create Axios instance with base URL and authorization header
+        const api = axios.create({
+          baseURL: 'http://209.74.89.83/erpbackend', 
+          headers: {
+            'Authorization': `Bearer ${Auth.getToken()}`
+          }
+        });
+
+        // Fetch leave data using Axios
+        const response = await api.get('get-user-leaves-for-Superadmin');
         
         if (response.data && response.data.leaveDetails) {
           setLeaveData(response.data.leaveDetails);
@@ -36,6 +49,7 @@ const UserLeavesPage = () => {
         setError(err.response?.data?.message || err.message || 'Failed to fetch leave data');
       } finally {
         setLoading(false);
+        setLoader(false);
       }
     };
 
@@ -57,12 +71,7 @@ const UserLeavesPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.spinner}></div>
-        <p>Loading leave data...</p>
-      </div>
-    );
+    return (<Loader /> );
   }
 
   if (error) {
@@ -86,18 +95,11 @@ const UserLeavesPage = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>User Leave Management</h1>
-        {currentUser && (
+        {/* {currentUser && (
           <div className={styles.userInfo}>
-            <span>Logged in as: {currentUser.username}</span>
-            <span>({currentUser.typeOfUser})</span>
-            {/* <button 
-              className={styles.logoutButton}
-              onClick={Auth.logout}
-            >
-              Logout
-            </button> */}
+            <span>Logged in as: {currentUser.email}</span>
           </div>
-        )}
+        )} */}
       </div>
 
       {leaveData.length === 0 ? (

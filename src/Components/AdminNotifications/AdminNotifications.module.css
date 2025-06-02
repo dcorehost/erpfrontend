@@ -78,22 +78,28 @@
   }
   
   .form-group {
-    margin-bottom: 1.25rem;
+    margin: 1.25rem;
   }
   
   .form-group label {
     display: block;
     margin-bottom: 0.4rem;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: var(--text-medium);
+  }
+
+  .form-group small{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 20px 0px;
   }
   
   .form-group input,
   .form-group textarea,
   .form-group select {
     width: 100%;
-    padding: 0.6rem;
+    padding: 1rem;
     border: 1px solid #e9ecef;
     border-radius: 6px;
     font-size: 0.7rem;
@@ -107,6 +113,18 @@
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
     outline: none;
   }
+
+  .form-group input::placeholder, .form-group textarea::placeholder {
+  font-size: 1.2rem; /* Adjust size as needed */
+  color: #a9a9a9; /* Optional: Change placeholder text color */
+}
+
+.form-group select {
+  font-size: 1rem; /* Increases the size of the selected value */
+  padding: 0.5rem; /* Optional: Adds spacing inside the dropdown */
+}
+
+
   
   .form-group textarea {
     min-height: 100px;

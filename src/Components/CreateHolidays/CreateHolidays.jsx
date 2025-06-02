@@ -1,14 +1,16 @@
+
+
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify'; // Importing toast and ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Toastify CSS for styling
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import styles from './CreateHolidays.module.css';
 import Auth from '../Services/Auth';
 
 const CreateHoliday = () => {
   const [formData, setFormData] = useState({ startDate: '', endDate: '', description: '' });
   const [loading, setLoading] = useState(false);
-  const [isCreating, setIsCreating] = useState(false); // To track the creation process
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -18,30 +20,17 @@ const CreateHoliday = () => {
     e.preventDefault();
     const token = Auth.getToken();
 
-    // If not authenticated, show error toast
     if (!token) {
       toast.error('User not authenticated.');
       return;
     }
 
-    // Optional: check if the user is a superadmin (this can be uncommented if needed)
-    // const user = Auth.getUser();
-    // if (user?.typeOfUser !== 'superadmin') {
-    //   toast.error("You don't have permission to create holidays.");
-    //   return;
-    // }
-
-    setLoading(true); // Start the loading spinner
-    setIsCreating(true); // Show loading spinner in button
+    setLoading(true);
 
     try {
       const res = await axios.post(
         'http://209.74.89.83/erpbackend/create-holiday',
-        {
-          startDate: formData.startDate,
-          endDate: formData.endDate,
-          description: formData.description,
-        },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,64 +38,60 @@ const CreateHoliday = () => {
         }
       );
 
-      // Show success toast after creation
       toast.success(res.data.message);
       setFormData({ startDate: '', endDate: '', description: '' });
-      setIsCreating(false); // Hide spinner after submission
     } catch (err) {
-      // Show error toast if something goes wrong
-      const msg = err.response?.data?.message || 'Something went wrong';
-      toast.error(msg);
-      setIsCreating(false); // Hide spinner in case of error
+      toast.error(err.response?.data?.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false); // End loading state
   };
 
   return (
     <div className={styles.holidayContainer}>
-      <h2 className={styles.holidayTitle}>🎉 Create a Holiday</h2>
+      <h2 className={styles.holidayTitle}> Create a Holiday</h2>
       <form className={styles.holidayForm} onSubmit={handleSubmit}>
-        <label htmlFor="startDate">Start Date</label>
-        <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          required
-        />
+        <div className={styles.inputGroup}>
+          <label htmlFor="startDate">Start Date</label>
+          <input
+            type="date"
+            name="startDate"
+            id="startDate"
+            value={formData.startDate}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label htmlFor="endDate">End Date</label>
-        <input
-          type="date"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          required
-        />
+        <div className={styles.inputGroup}>
+          <label htmlFor="endDate">End Date</label>
+          <input
+            type="date"
+            name="endDate"
+            id="endDate"
+            value={formData.endDate}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label htmlFor="description">Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Holiday details..."
-          required
-        ></textarea>
+        <div className={styles.inputGroup}>
+          <label htmlFor="description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Holiday details..."
+            required
+          ></textarea>
+        </div>
 
-        <button
-          type="submit"
-          className={styles.submitBtn}
-          disabled={loading} // Disable the button when loading
-        >
-          {isCreating ? (
-            <div className={styles.spinner}></div> // Spinner when creating holiday
-          ) : (
-            'Create Holiday'
-          )}
+        <button type="submit" className={styles.submitBtn} disabled={loading}>
+          {loading ? <span className={styles.spinner}></span> : 'Create Holiday'}
         </button>
       </form>
-      <ToastContainer /> {/* Toast container for notifications */}
+      <ToastContainer />
     </div>
   );
 };

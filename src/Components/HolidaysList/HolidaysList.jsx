@@ -4,8 +4,11 @@ import styles from "./HolidaysList.module.css";
 import Auth from "../Services/Auth";
 import { toast } from "react-toastify";
 import { FiSearch } from "react-icons/fi";
+import Loader from "../Loader/Loader";
 
 const HolidayList = () => {
+   const [loader, setLoader] = useState(false);
+  
   const [holidays, setHolidays] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,6 +19,7 @@ const HolidayList = () => {
     if (!token) {
       toast.error("User not authenticated.");
       setLoading(false);
+      setLoader(false);
       return;
     }
 
@@ -35,6 +39,7 @@ const HolidayList = () => {
         toast.error("Failed to fetch holidays.");
       } finally {
         setLoading(false);
+        setLoader(false);
       }
     };
 
@@ -61,11 +66,14 @@ const HolidayList = () => {
   };
 
   if (!token) return null;
+  if (loader) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
-        <h2 className={styles.heading}>🌴 My Holidays</h2>
+        <h2 className={styles.heading}> My Holidays</h2>
         <div className={styles.searchBox}>
           <FiSearch className={styles.searchIcon} />
           <input
@@ -75,9 +83,7 @@ const HolidayList = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className={styles.searchInput}
           />
-          {/* <button onClick={handleSearch} className={styles.searchButton}>
-            Search
-          </button> */}
+         
         </div>
       </div>
 

@@ -178,15 +178,15 @@ const Navbar = ({ isOpen }) => {
   const [userData, setUserData] = useState(null);
   const bellRef = useRef(null);
   const profileRef = useRef(null);
-  const navigate = useNavigate(); // Use useNavigate for navigation
+  const navigate = useNavigate();
 
-  // Fetching data only when component mounts
+  // ✅ Fetch user data and notifications
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = Auth.getUserDetails();
         if (data) {
-          setUserData(data); // Set user data if present
+          setUserData(data);
         }
 
         if (Auth.isAuthenticated()) {
@@ -208,9 +208,9 @@ const Navbar = ({ isOpen }) => {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures this only runs once after mount
+  }, []);
 
-  // Handling click outside dropdown to close it
+  // Handle click outside dropdowns to close them
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (bellRef.current && !bellRef.current.contains(e.target)) {
@@ -223,9 +223,8 @@ const Navbar = ({ isOpen }) => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []); // Empty dependency array ensures this is only set up once
+  }, []);
 
-  // Determine the notification route based on the user's type
   const getNotificationRoute = () => {
     if (!userData) return "/";
     switch (userData.typeOfUser) {
@@ -289,9 +288,7 @@ const Navbar = ({ isOpen }) => {
                       >
                         <strong>{notification.title}</strong>
                         <p>{notification.message}</p>
-                        <small>
-                          {new Date(notification.createdAt).toLocaleString()}
-                        </small>
+                        <small>{new Date(notification.createdAt).toLocaleString()}</small>
                       </li>
                     ))}
                   </ul>
@@ -319,10 +316,8 @@ const Navbar = ({ isOpen }) => {
                   <FaUserCircle className={styles.profileLargeIcon} />
                   <div>
                     <h4>{userData?.username}</h4>
-                    <p className={styles.userRole}>
-                      {userData?.typeOfUser || "User"}
-                    </p>
-                    <p className={styles.userEmail}>{userData?.emailId}</p>
+                    <p className={styles.userRole}>{userData?.typeOfUser || "User"}</p>
+                    <p className={styles.userEmail}>{userData?.email}</p>
                   </div>
                 </div>
                 <div className={styles.profileMenu}>
@@ -335,12 +330,9 @@ const Navbar = ({ isOpen }) => {
                   >
                     Settings
                   </Link>
-                  <button
-                    className={styles.profileMenuItem}
-                    onClick={handleLogout}
-                  >
+                  <div className={styles.logoutButton} onClick={handleLogout}>
                     Logout
-                  </button>
+                  </div>
                 </div>
               </div>
             )}

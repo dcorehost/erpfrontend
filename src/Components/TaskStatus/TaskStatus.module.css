@@ -7,7 +7,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* Remove horizontal scroll from here */
   overflow-x: visible;
-  margin-top: 450px; /* keep if intentional */
   width: 100%;
   box-sizing: border-box;
 }

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import styles from "./PastLeaveTable.module.css";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -19,18 +17,21 @@ const PastLeaveTable = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const token = Auth.getToken();
       if (!token) {
         throw new Error("Please login to access this page");
       }
 
-      const response = await axios.get("http://209.74.89.83/erpbackend/get-past-leave", {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+      const response = await axios.get(
+        "http://209.74.89.83/erpbackend/get-past-leave",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (!response.data.leaveDetails) {
         throw new Error("Failed to fetch leave details");
@@ -57,8 +58,8 @@ const PastLeaveTable = () => {
   }, []);
 
   const formatDate = (dateString) => {
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   const totalLeaves = leaveData.length || 0;
@@ -120,12 +121,18 @@ const PastLeaveTable = () => {
                 <td>
                   <div className={styles.employeeInfo}>
                     <div className={styles.avatar}>
-                      {leave.userId?.username?.charAt(0).toUpperCase() || 'U'}
+                      {leave.userId?.username?.charAt(0).toUpperCase() || "U"}
                     </div>
                     <div>
-                      <div className={styles.name}>{leave.userId?.username || 'N/A'}</div>
-                      <div className={styles.email}>{leave.userId?.contact?.emailId || 'N/A'}</div>
-                      <div className={styles.userType}>{leave.userId?.typeOfUser || 'N/A'}</div>
+                      <div className={styles.name}>
+                        {leave.userId?.username || "N/A"}
+                      </div>
+                      <div className={styles.email}>
+                        {leave.userId?.contact?.emailId || "N/A"}
+                      </div>
+                      <div className={styles.userType}>
+                        {leave.userId?.typeOfUser || "N/A"}
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -137,19 +144,29 @@ const PastLeaveTable = () => {
                   </div>
                 </td>
                 <td>
-                  <span className={`${styles.leaveType} ${
-                    leave.leaveType === 'Sick Leave' ? styles.sickLeave : 
-                    leave.leaveType === 'Casual Leave' ? styles.casualLeave : 
-                    styles.otherLeave}`}>
+                  <span
+                    className={`${styles.leaveType} ${
+                      leave.leaveType === "Sick Leave"
+                        ? styles.sickLeave
+                        : leave.leaveType === "Casual Leave"
+                        ? styles.casualLeave
+                        : styles.otherLeave
+                    }`}
+                  >
                     {leave.leaveType}
                   </span>
                 </td>
-                <td className={styles.reason}>{leave.reason || '-'}</td>
+                <td className={styles.reason}>{leave.reason || "-"}</td>
                 <td>
-                  <span className={`${styles.status} ${
-                    leave.state === 'Completed' ? styles.completed : 
-                    leave.state === 'Approved' ? styles.approved : 
-                    styles.rejected}`}>
+                  <span
+                    className={`${styles.status} ${
+                      leave.state === "Completed"
+                        ? styles.completed
+                        : leave.state === "Approved"
+                        ? styles.approved
+                        : styles.rejected
+                    }`}
+                  >
                     {leave.state}
                   </span>
                 </td>
@@ -164,7 +181,7 @@ const PastLeaveTable = () => {
       {totalPages > 1 && (
         <div className={styles.pagination}>
           <button
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
             className={styles.paginationButton}
           >
@@ -174,7 +191,9 @@ const PastLeaveTable = () => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
             className={styles.paginationButton}
           >

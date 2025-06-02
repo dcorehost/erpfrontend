@@ -43,7 +43,7 @@ const AdminSidebar = ({ children }) => {
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
-        { title: "Apply Leave", link: "/leave-summary" },
+        // { title: "Apply Leave", link: "/leave-summary" },
         { title: "User Pending Leaves", link: "/Admin/Leave/Pending-Leaves" },
         { title: "User Completed Leaves", link: "/CompletedLeaves" },
         { title: "User Rejected Leaves", link: "/RejectedLeaves" },
@@ -209,7 +209,7 @@ const AdminSidebar = ({ children }) => {
         >
           <button
             className={styles.hamburgerButton}
-            style={isOpen ? { left: "190px" } : { left: "10px" }}
+            style={isOpen ? { left: "210px" } : { left: "10px" }}
             onClick={toggleSidebar}
           >
             {"☰"}

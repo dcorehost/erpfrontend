@@ -2,7 +2,7 @@ import axios from "axios";
 import Auth from "./Auth";
 
 // Base API URL
-const baseApiUrl = "http://mvsdeals.online/";
+const baseApiUrl = "http://209.74.89.83/erpbackend";
 
 // Create Axios instance
 const axiosInstance = axios.create({

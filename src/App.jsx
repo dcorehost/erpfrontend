@@ -100,8 +100,8 @@ const App = () => {
           {/* Show Sidebar based on user type */}
           {/* {typeOfUser === "Admin" && <SideBar />} */}
           {/* {typeOfUser === "User" && <UserSidebar />} */}
-          {typeOfUser === "superadmin" && <SuperAdminSidebar />}
-          {typeOfUser === "Client" && <CLientSidebar />}
+          {/* {typeOfUser === "superadmin" && <SuperAdminSidebar />} */}
+          {/* {typeOfUser === "Client" && <CLientSidebar />} */}
 
           <Routes>
             {/* Redirect '/' to appropriate dashboard */}
@@ -148,13 +148,12 @@ const App = () => {
             <Route path="/userProfile" element={<UserProfile />} />
             <Route path="/my-profile" element={<MyProfile />} />
             <Route path="/Own-User-Profile" element={<OwnUserProfile />} />
-            <Route path="/mark-attendance" element={<MarkAttendance />} />
+            {/* <Route path="/mark-attendance" element={<MarkAttendance />} /> */}
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
               <>
-                <Route
-                  path="/admin-dashboard"
+                <Route   path="/admin-dashboard"
                   element={
                     <SideBar>
                       <AdminDashboard />
@@ -300,6 +299,14 @@ const App = () => {
                     </SideBar>
                   }
                 />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <SideBar>
+                      <MarkAttendance />
+                    </SideBar>
+                  }
+                />
               </>
             )}
 
@@ -426,6 +433,14 @@ const App = () => {
                     </UserSidebar>
                   }
                 />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <UserSidebar>
+                      <MarkAttendance />
+                    </UserSidebar>
+                  }
+                />
               </>
             )}
 
@@ -434,51 +449,131 @@ const App = () => {
               <>
                 <Route
                   path="/superadmin-dashboard"
-                  element={<SuperAdminDashboard />}
+                  element={
+                    <SuperAdminSidebar>
+                      <SuperAdminDashboard />
+                    </SuperAdminSidebar>
+                  }
                 />
-                <Route path="/create-holidays" element={<CreateHolidays />} />
-                <Route path="/holiday-list" element={<HolidayList />} />
+                <Route
+                  path="/create-holidays"
+                  element={
+                    <SuperAdminSidebar>
+                      <CreateHolidays />
+                    </SuperAdminSidebar>
+                  }
+                />
+                <Route
+                  path="/holiday-list"
+                  element={
+                    <SuperAdminSidebar>
+                      <HolidayList />
+                    </SuperAdminSidebar>
+                  }
+                />
                 <Route
                   path="/superadmin-notifications"
-                  element={<SuperAdminNotifications />}
+                  element={
+                    <SuperAdminSidebar>
+                      <SuperAdminNotifications />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-notifications-history"
-                  element={<SuperAdminHistory />}
+                  element={
+                    <SuperAdminSidebar>
+                      <SuperAdminHistory />
+                    </SuperAdminSidebar>
+                  }
                 />
-                <Route path="/superadmin-userlist" element={<UserList />} />
-                <Route path="/superadmin-adminlist" element={<AdminList />} />
+                <Route
+                  path="/superadmin-userlist"
+                  element={
+                    <SuperAdminSidebar>
+                      <UserList />
+                    </SuperAdminSidebar>
+                  }
+                />
+                <Route
+                  path="/superadmin-adminlist"
+                  element={
+                    <SuperAdminSidebar>
+                      <AdminList />
+                    </SuperAdminSidebar>
+                  }
+                />
                 <Route
                   path="/superadmin-userleave"
-                  element={<UserLeavesPage />}
+                  element={
+                    <SuperAdminSidebar>
+                      <UserLeavesPage />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-adminleave"
-                  element={<PendingLeavesPage />}
+                  element={
+                    <SuperAdminSidebar>
+                      <PendingLeavesPage />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-userupdate"
-                  element={<UpdateUserProfile />}
+                  element={
+                    <SuperAdminSidebar>
+                      <UpdateUserProfile />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-adminleave-summary"
-                  element={<CompletedLeavesPage />}
+                  element={
+                    <SuperAdminSidebar>
+                      <CompletedLeavesPage />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-clientsection-createproject"
-                  element={<ClientCreateProject />}
+                  element={
+                    <SuperAdminSidebar>
+                      <ClientCreateProject />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-clientsection-clientrequest"
-                  element={<ClientNewRequest />}
+                  element={
+                    <SuperAdminSidebar>
+                      <ClientNewRequest />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-clientsection-Createclient"
-                  element={<CreateClient />}
+                  element={
+                    <SuperAdminSidebar>
+                      <CreateClient />
+                    </SuperAdminSidebar>
+                  }
                 />
                 <Route
                   path="/superadmin-client-messages"
-                  element={<ClientMessages />}
+                  element={
+                    <SuperAdminSidebar>
+                      <ClientMessages />
+                    </SuperAdminSidebar>
+                  }
+                />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <SuperAdminSidebar>
+                      <MarkAttendance />
+                    </SuperAdminSidebar>
+                  }
                 />{" "}
                 {/* ✅ Correctly linked */}
               </>
@@ -486,22 +581,63 @@ const App = () => {
 
             {typeOfUser === "Client" && (
               <>
-                <Route path="/client-dashboard" element={<ClientDashboard />} />
-                <Route path="/client-projects" element={<ClientProjects />} />
+                <Route
+                  path="/client-dashboard"
+                  element={
+                    <CLientSidebar>
+                      <ClientDashboard />
+                    </CLientSidebar>
+                  }
+                />
+                <Route
+                  path="/client-projects"
+                  element={
+                    <CLientSidebar>
+                      <ClientProjects />
+                    </CLientSidebar>
+                  }
+                />
                 <Route
                   path="/client-project-details"
-                  element={<ClientProjectDetails />}
+                  element={
+                    <CLientSidebar>
+                      <ClientProjectDetails />
+                    </CLientSidebar>
+                  }
                 />
                 <Route
                   path="/client-project-requests"
-                  element={<ClientProjectRequest />}
+                  element={
+                    <CLientSidebar>
+                      <ClientProjectRequest />
+                    </CLientSidebar>
+                  }
                 />{" "}
                 {/* Add this route */}
-                <Route path="/client-tasks" element={<ClientTasks />} />{" "}
+                <Route
+                  path="/client-tasks"
+                  element={
+                    <CLientSidebar>
+                      <ClientTasks />
+                    </CLientSidebar>
+                  }
+                />{" "}
                 {/* ✅ Correctly linked */}
                 <Route
                   path="/client-communication"
-                  element={<ClientCommunication />}
+                  element={
+                    <CLientSidebar>
+                      <ClientCommunication />
+                    </CLientSidebar>
+                  }
+                />
+                <Route
+                  path="/mark-attendance"
+                  element={
+                    <CLientSidebar>
+                      <MarkAttendance />
+                    </CLientSidebar>
+                  }
                 />{" "}
                 {/* ✅ Correctly linked */}
               </>
