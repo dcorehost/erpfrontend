@@ -1,0 +1,305 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header and Back Button */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #4a6bff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  background: #f0f4ff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.projectTitle {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Meta Information */
+.metaContainer {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.smallMeta {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.metaDeadline {
+  background: #e3f2fd;
+  color: #4a6bff;
+}
+
+.metaCreated {
+  background: #f5f5f5;
+  color: #666;
+}
+
+/* Status Colors */
+.statusCompleted {
+  background: #e3f9e5;
+  color: #1dd1a1;
+}
+
+.statusPending {
+  background: #fff3e0;
+  color: #ff9f43;
+}
+
+.statusInProgress {
+  background: #e3f2fd;
+  color: #4a6bff;
+}
+
+.statusDefault {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Priority Colors */
+.priorityHigh {
+  background: #ffebee;
+  color: #ff6b6b;
+}
+
+.priorityMedium {
+  background: #fff8e1;
+  color: #ffb142;
+}
+
+.priorityLow {
+  background: #e8f5e9;
+  color: #66bb6a;
+}
+
+.priorityDefault {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 3rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.description {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Team Members */
+.teamList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.teamMember {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 3px solid #4a6bff;
+}
+
+.memberName {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.memberDetail {
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Tasks */
+.taskGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.taskCard {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-top: 3px solid #1dd1a1;
+  transition: transform 0.2s;
+}
+
+.taskCard:hover {
+  transform: translateY(-3px);
+}
+
+.taskCard.priorityHigh {
+  border-top-color: #ff6b6b;
+}
+
+.taskCard.priorityMedium {
+  border-top-color: #feca57;
+}
+
+.taskCard.priorityLow {
+  border-top-color: #1dd1a1;
+}
+
+.taskTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.taskDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Subtasks */
+.subTaskList {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #eee;
+}
+
+.subTaskItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.subTaskItem::before {
+  content: '•';
+  color: #4a6bff;
+}
+
+/* Notes */
+.notesContainer {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.assignedTo {
+  margin-top: 1rem;
+}
+
+/* Loading and Error States */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ff6b6b;
+  gap: 1rem;
+}
+
+.errorButton {
+  padding: 0.8rem 1.5rem;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.errorButton:hover {
+  background: #ff5252;
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+  
+  .projectTitle {
+    font-size: 2rem;
+  }
+  
+  .taskGrid {
+    grid-template-columns: 1fr;
+  }
+}
