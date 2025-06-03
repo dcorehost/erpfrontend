@@ -22,7 +22,7 @@
   padding: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1400px; /* Max width for the entire board */
-  width: 85%; /* Responsive width */
+  width: 80%; /* Responsive width */
   background-color: var(--bg-light);
   border-radius: 12px;
   box-shadow: 0 6px 15px var(--shadow-light);
