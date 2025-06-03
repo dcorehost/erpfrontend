@@ -133,7 +133,7 @@ const SuperAdminNotification = () => {
   return (
     <div className={`${styles['notifications-container']} ${styles['superadmin-panel']}`}>
       <form onSubmit={handleSubmit} className={styles['notification-form']}>
-        <h2>Create Notification</h2>
+        <h2>New Announcement</h2>
 
         <div className={styles['form-group']}>
           <label htmlFor="title">Title</label>
@@ -143,7 +143,7 @@ const SuperAdminNotification = () => {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            placeholder="Enter notification title"
+            placeholder="Enter Announcement title"
             required
           />
         </div>
@@ -155,13 +155,13 @@ const SuperAdminNotification = () => {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Enter notification message"
+            placeholder="Enter Announcement message"
             required
           />
         </div>
 
         <div className={styles['form-group']}>
-          <label htmlFor="notificationType">Notification Type</label>
+          <label htmlFor="notificationType">Announcement Type</label>
           <select
             id="notificationType"
             name="notificationType"
@@ -198,7 +198,7 @@ const SuperAdminNotification = () => {
       </form>
 
       <div className={styles.notificationsList}>
-        <h3>Existing Notifications</h3>
+        <h3>New Announcement</h3>
         <table className={styles.notificationsTable}>
           <thead>
             <tr>
