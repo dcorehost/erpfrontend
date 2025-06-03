@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-:root {
+/* :root {
   --primary-color: #4361ee;
   --secondary-color: #3f37c9;
   --accent-color: #4895ef;
@@ -14,7 +14,7 @@
   --border-radius: 8px;
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -58,6 +58,8 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+    color: white;
+
 }
 
 .profileIcon {

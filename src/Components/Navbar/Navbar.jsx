@@ -324,7 +324,7 @@ const Navbar = ({ isOpen }) => {
                     to="/Own-User-Profile"
                     className={styles.profileMenuItem}
                   >
-                    Settings
+                    Update Profile
                   </Link>
                   <div className={styles.logoutButton} onClick={handleLogout}>
                     Logout
