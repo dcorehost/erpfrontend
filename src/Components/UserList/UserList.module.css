@@ -41,13 +41,23 @@
   background-color: #f9f9f9;
 }
 
+/* --- Buttons in Actions Column --- */
+.userTable td:last-child { /* Target the last column (Actions) */
+    display: flex;
+    gap: 8px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens if necessary */
+    align-items: center;
+}
+
+
 /* === Buttons === */
-.nameButton, .viewButton {
+.nameButton, .viewButton, .loginAsUserButton { /* Added .loginAsUserButton here */
   cursor: pointer;
   font: inherit;
   text-decoration: none;
   background: none;
   border: none;
+  white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .nameButton {
@@ -56,7 +66,8 @@
 }
 
 .nameButton:hover,
-.viewButton:hover {
+.viewButton:hover,
+.loginAsUserButton:hover { /* Added .loginAsUserButton here */
   color: #2980b9;
 }
 
@@ -67,6 +78,26 @@
   border-radius: 4px;
   text-decoration: none;
   font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.loginAsUserButton { /* New style for Login as User button */
+  background-color: #28a745; /* A pleasant green color */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: background-color 0.2s ease;
+}
+
+.loginAsUserButton:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.loginAsUserButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 /* === Modals === */
@@ -84,6 +115,7 @@
   overflow-y: auto;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease-out; /* Add a subtle fade-in animation */
 }
 
 .overlay {
@@ -94,27 +126,11 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  animation: overlayFadeIn 0.3s ease-out; /* Add fade-in for overlay */
 }
 
-.passwordModal {
-  text-align: center;
-}
+/* Removed password modal specific styles as it's no longer used */
 
-.passwordInput {
-  width: 80%;
-  max-width: 400px;
-  padding: 10px;
-  margin: 15px 0;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.buttonGroup {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
 
 .submitButton,
 .cancelButton {
@@ -142,98 +158,148 @@
   background-color: #ccc;
 }
 
-/* === User Details Modal === */
+/* --- User Details Modal Enhancements --- */
 .userDetails {
   position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern font */
 }
 
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+  border-bottom: 1px solid #eee; /* Lighter border */
+  padding-bottom: 15px; /* More space */
+  margin-bottom: 20px;
+}
+
+.modalHeader h2 {
+    font-size: 1.8rem; /* Larger title */
+    color: #34495e; /* Darker, more professional title color */
+    margin: 0;
 }
 
 .closeButton {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 30px; /* Larger close button */
   cursor: pointer;
-  color: #666;
+  color: #95a5a6; /* Softer color for close button */
+  line-height: 1; /* Align 'x' properly */
+  transition: color 0.2s ease;
 }
 
 .closeButton:hover {
-  color: #333;
+  color: #7f8c8d; /* Darker on hover */
 }
 
 .detailsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Use auto-fit for better responsiveness */
+  gap: 25px; /* Increased gap */
 }
 
 .detailsSection {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: #ffffff; /* White background for sections */
+  padding: 20px; /* More padding */
+  border-radius: 8px; /* Softer corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+  border: 1px solid #f0f0f0; /* Subtle border */
 }
 
 .detailsSection h3 {
   margin-top: 0;
-  color: #2c3e50;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 8px;
-  margin-bottom: 12px;
+  color: #34495e; /* Consistent heading color */
+  border-bottom: 2px solid #3498db; /* Blue underline for headings */
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 1.25rem; /* Slightly larger heading */
+}
+
+.detailsSection p {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.detailsSection strong {
+    color: #333;
 }
 
 /* === Leave Balance & Lists === */
 .leaveBalance {
   display: flex;
-  gap: 20px;
+  gap: 15px; /* Slightly less gap */
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .leaveType {
   flex: 1;
-  padding: 10px;
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 120px; /* Ensure minimum width for smaller screens */
+  padding: 12px; /* More padding */
+  background: #ecf0f1; /* Light grey background */
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+}
+
+.leaveType h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.leaveType p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #444;
 }
 
 .leaveList, .attendanceList {
   display: grid;
-  gap: 10px;
+  gap: 12px; /* Increased gap for clarity */
+  margin-top: 10px;
 }
 
 .leaveItem, .attendanceItem {
-  background: white;
-  padding: 10px;
-  border-left: 4px solid transparent;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background: #ffffff; /* White background */
+  padding: 12px;
+  border-left: 5px solid transparent; /* Thicker border */
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* More prominent shadow */
 }
 
+.leaveItem p, .attendanceItem p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.leaveItem strong {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Leave status colors */
 .leaveItem.completed {
-  border-left-color: #2ecc71;
+  border-left-color: #27ae60; /* Darker green */
 }
 
 .leaveItem.rejected {
-  border-left-color: #e74c3c;
+  border-left-color: #c0392b; /* Darker red */
 }
 
 .leaveItem.pending {
-  border-left-color: #f39c12;
+  border-left-color: #f39c12; /* Orange */
 }
 
 /* === States === */
 .loading, .error {
   text-align: center;
   padding: 20px;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Slightly larger font */
+  font-weight: 500;
 }
 
 .loading {
@@ -244,19 +310,30 @@
   color: #e74c3c;
 }
 
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 /* === Responsive Design === */
 @media screen and (max-width: 768px) {
   .userTable {
-    font-size: 0.85rem;
-    min-width: 600px;
+    font-size: 0.8rem; /* Slightly smaller font for table on small screens */
+    min-width: unset; /* Allow table to shrink */
+  }
+
+  .userTable th, .userTable td {
+      padding: 10px; /* Smaller padding */
   }
 
   .detailsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .passwordInput {
-    width: 100%;
   }
 
   .buttonGroup {
@@ -267,4 +344,82 @@
   .leaveBalance {
     flex-direction: column;
   }
+
+  .modal {
+      width: 95%; /* Make modal wider on smaller screens */
+      padding: 15px;
+  }
+
+  .modalHeader h2 {
+      font-size: 1.5rem;
+  }
+
+  .detailsSection {
+      padding: 15px;
+  }
+
+  .detailsSection h3 {
+      font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+    .userTable td:last-child {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        align-items: flex-start;
+    }
+}
+
+/* --- Task Specific Styles (Add to your UserList.module.css) --- */
+.taskList {
+    display: grid;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.taskItem {
+    background: #ffffff;
+    padding: 12px;
+    border-left: 5px solid transparent;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.taskItem p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.taskItem strong {
+    font-size: 1rem;
+    color: #333;
+}
+
+.taskDescription {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 8px;
+    border-top: 1px dashed #eee;
+    padding-top: 8px;
+}
+
+/* Task Status Colors (Example - adjust based on your task statuses) */
+.taskItem.pending {
+    border-left-color: #f39c12; /* Orange */
+}
+
+.taskItem.in_progress { /* Assuming status can be 'in_progress' */
+    border-left-color: #3498db; /* Blue */
+}
+
+.taskItem.completed {
+    border-left-color: #27ae60; /* Green */
+}
+
+.taskItem.deferred { /* Assuming status can be 'deferred' */
+    border-left-color: #95a5a6; /* Grey */
+}
+.taskItem.cancelled { /* Assuming status can be 'cancelled' */
+    border-left-color: #e74c3c; /* Red */
 }

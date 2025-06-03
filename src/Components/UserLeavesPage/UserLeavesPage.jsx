@@ -162,3 +162,212 @@ const UserLeavesPage = () => {
 };
 
 export default UserLeavesPage;
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import Auth from '../Services/Auth';
+// import styles from './UserLeavesPage.module.css';
+// import Loader from '../Loader/Loader';
+
+// const UserLeavesPage = () => {
+//   const [loader, setLoader] = useState(false);
+//   const [leaveData, setLeaveData] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [currentUser, setCurrentUser] = useState(null);
+
+//   // State for the Remarks modal
+//   const [showRemarksModal, setShowRemarksModal] = useState(false);
+//   const [currentRemarks, setCurrentRemarks] = useState('');
+//   const [currentReason, setCurrentReason] = useState(''); // To show the original reason
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         if (!Auth.isAuthenticated()) {
+//           setError('Please login to view leave details');
+//           setLoading(false);
+//           setLoader(false)
+//           return;
+//         }
+
+//         const userData = Auth.getAuthData();
+//         setCurrentUser(userData);
+
+//         const api = axios.create({
+//           baseURL: 'http://209.74.89.83/erpbackend',
+//           headers: {
+//             'Authorization': `Bearer ${Auth.getToken()}`
+//           }
+//         });
+
+//         const response = await api.get('get-user-leaves-for-Superadmin');
+
+//         if (response.data && response.data.leaveDetails) {
+//           setLeaveData(response.data.leaveDetails);
+//         } else {
+//           setError('No leave data available');
+//         }
+//       } catch (err) {
+//         console.error('Error fetching leave data:', err);
+//         setError(err.response?.data?.message || err.message || 'Failed to fetch leave data');
+//       } finally {
+//         setLoading(false);
+//         setLoader(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const formatDate = (dateString) => {
+//     const date = new Date(dateString);
+//     return date.toLocaleDateString('en-IN', {
+//       day: '2-digit',
+//       month: '2-digit',
+//       year: 'numeric'
+//     });
+//   };
+
+//   const renderStatusBadge = (status) => {
+//     const statusClass = status.toLowerCase();
+//     return <span className={styles[`status-${statusClass}`]}>{status}</span>;
+//   };
+
+//   // Function to handle opening the remarks modal
+//   const handleShowRemarks = (remarks, reason) => {
+//     setCurrentRemarks(remarks);
+//     setCurrentReason(reason);
+//     setShowRemarksModal(true);
+//   };
+
+//   // Function to handle closing the remarks modal
+//   const handleCloseRemarksModal = () => {
+//     setShowRemarksModal(false);
+//     setCurrentRemarks('');
+//     setCurrentReason('');
+//   };
+
+
+//   if (loading) {
+//     return (<Loader />);
+//   }
+
+//   if (error) {
+//     return (
+//       <div className={styles.errorContainer}>
+//         <h3>Error</h3>
+//         <p>{error}</p>
+//         {!Auth.isAuthenticated() && (
+//           <button
+//             className={styles.loginButton}
+//             onClick={() => window.location.href = '/login'}
+//           >
+//             Go to Login
+//           </button>
+//         )}
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className={styles.container}>
+//       <div className={styles.header}>
+//         <h1>User Leave Management</h1>
+//       </div>
+
+//       {leaveData.length === 0 ? (
+//         <div className={styles.noData}>No leave records found</div>
+//       ) : (
+//         leaveData.map(user => (
+//           <div key={user._id} className={styles.userSection}>
+//             <h2 className={styles.userName}>
+//               {user.username}
+//               <span className={styles.userType}>{user.typeOfUser}</span>
+//             </h2>
+//             <div className={styles.userDetails}>
+//               <span>Email: {user.contact.emailId}</span>
+//               {user.contact.phone && <span>Phone: {user.contact.phone}</span>}
+//             </div>
+
+//             <div className={styles.tableResponsive}>
+//               <table className={styles.leaveTable}>
+//                 <thead>
+//                   <tr>
+//                     <th>Leave Type</th>
+//                     <th>Period</th>
+//                     <th>Days</th>
+//                     <th>Reason</th>
+//                     <th>Status</th>
+//                     <th>Remarks</th>
+//                     <th>Applied On</th>
+//                     <th>Last Updated</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {user.userLeaves.map(leave => {
+//                     const fromDate = new Date(leave.from);
+//                     const toDate = new Date(leave.to);
+//                     const days = Math.ceil((toDate - fromDate) / (1000 * 60 * 60 * 24)) + 1;
+
+//                     const leaveTypeClass = leave.leaveType.toLowerCase().replace(/\s/g, '');
+
+//                     return (
+//                       <tr key={leave._id} className={styles[leave.state.toLowerCase()]}>
+//                         <td className={`${styles.leaveType} ${styles[leaveTypeClass]}`}>
+//                           {leave.leaveType}
+//                         </td>
+//                         <td>
+//                           {formatDate(leave.from)} to {formatDate(leave.to)}
+//                         </td>
+//                         <td>{days} day{days > 1 ? 's' : ''}</td>
+//                         {/* Make Reason clickable too if desired, or just show text */}
+//                         <td>{leave.reason}</td>
+//                         <td>{renderStatusBadge(leave.state)}</td>
+//                         <td>
+//                           {leave.remarks ? (
+//                             <button
+//                               className={styles.remarksButton}
+//                               onClick={() => handleShowRemarks(leave.remarks, leave.reason)}
+//                             >
+//                               View Remarks
+//                             </button>
+//                           ) : (
+//                             '-'
+//                           )}
+//                         </td>
+//                         <td>{formatDate(leave.createdAt)}</td>
+//                         <td>{formatDate(leave.updatedAt)}</td>
+//                       </tr>
+//                     );
+//                   })}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         ))
+//       )}
+
+//       {/* Remarks Modal */}
+//       {showRemarksModal && (
+//         <div className={styles.modalOverlay} onClick={handleCloseRemarksModal}>
+//           <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+//             <span className={styles.closeButton} onClick={handleCloseRemarksModal}>&times;</span>
+//             <h2>Leave Details</h2>
+//             <div className={styles.modalDetail}>
+//               <strong>Reason:</strong> <p>{currentReason || 'N/A'}</p>
+//             </div>
+//             <div className={styles.modalDetail}>
+//               <strong>Remarks from Admin:</strong> <p>{currentRemarks || 'No remarks provided.'}</p>
+//             </div>
+//             <button className={styles.modalCloseBtn} onClick={handleCloseRemarksModal}>Close</button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default UserLeavesPage;
+
