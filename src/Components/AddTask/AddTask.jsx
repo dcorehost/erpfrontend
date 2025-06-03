@@ -227,7 +227,7 @@ if (loader) {
       />
 
       <div className={styles.container}>
-        <h1>Add Task</h1>
+        <h1>Create Task</h1>
 
         <div className={styles.taskForm}>
           <div className={styles.taskRow}>
@@ -267,7 +267,7 @@ if (loader) {
             className={styles.addButton}
             disabled={createdTasks.some(task => task.isRunning) || loading}
           >
-            {loading ? 'Loading...' : 'Add Task'}
+            {loading ? 'Loading...' : 'Create'}
           </button>
         </div>
 

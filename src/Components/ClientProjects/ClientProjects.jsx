@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import styles from "./ClientProjects.module.css";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Auth from "../Services/Auth";
-import { toast } from "react-toastify"; // ✅ make sure toast is configured in your app
-import ProjectDetailsModal from "../ClientProjectDetails/ClientProjectDetails"; // ✅ Import the modal component
+import { toast } from "react-toastify"; 
+import ProjectDetailsModal from "../ClientProjectDetails/ClientProjectDetails"; 
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null); // ✅ State to hold the selected project
+  const [selectedProject, setSelectedProject] = useState(null); 
 
-  // ✅ Fetch projects from backend on mount
+  // Fetch projects from backend on mount
   useEffect(() => {
     const fetchProjects = async () => {
       const token = Auth.getToken();
@@ -74,11 +74,11 @@ const Projects = () => {
   };
 
   const handleViewDetails = (project) => {
-    setSelectedProject(project); // ✅ Set the selected project to open the modal
+    setSelectedProject(project); 
   };
 
   const handleCloseModal = () => {
-    setSelectedProject(null); // ✅ Clear the selected project to close the modal
+    setSelectedProject(null); 
   };
 
 
@@ -108,7 +108,7 @@ const Projects = () => {
         <ul className={styles.projectList}>
           {filteredProjects.map(project => (
             <li key={project.id} className={styles.projectItem}>
-              <div className={styles.projectLink}> {/* ✅ Changed Link to div */}
+              <div className={styles.projectLink}> 
                 <div className={styles.projectName}>{project.name}</div>
                 <div className={styles.projectDetails}>
                   <span className={styles.status} data-status={project.status.toLowerCase()}>
@@ -125,20 +125,17 @@ const Projects = () => {
                   <span>Team Size: {project.teamSize}</span>
                   <span className={styles.lastUpdated}>Updated: {project.lastUpdated}</span>
                 </div>
-                <div className={styles.overlay} onClick={() => handleViewDetails(project)}> {/* ✅ Added onClick to the overlay */}
+                <div className={styles.overlay} onClick={() => handleViewDetails(project)}> 
                   <p className={styles.overlayText}>View Details</p>
                 </div>
-                {/* Optional: Add a separate Link for navigating to a dedicated details page if needed */}
-                {/* <Link to={`/client-project-details/${project.id}`} className={styles.viewDetailsPageLink}>
-                  View Full Details
-                </Link> */}
+               
               </div>
             </li>
           ))}
         </ul>
       )}
 
-      {/* ✅ Render the modal if a project is selected */}
+     
       {selectedProject && (
         <ProjectDetailsModal project={selectedProject} onClose={handleCloseModal} />
       )}

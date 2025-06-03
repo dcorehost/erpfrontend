@@ -67,7 +67,7 @@ const AdminSidebar = ({ children }) => {
           icon: <FaListUl />,
         },
         {
-          title: "Task Assignment",
+          title: "Create Assignment",
           link: "/Admin/Leave/Task-Assignment",
           icon: <FaTasks />,
         },
