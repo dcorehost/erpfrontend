@@ -1,9 +1,12 @@
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './SuperAdminNotifications.module.css'; 
-import Auth from '../Services/Auth'; 
+import styles from './SuperAdminNotifications.module.css';
+import Auth from '../Services/Auth';
 import { useNavigate } from 'react-router-dom';
 
 const SuperAdminNotification = () => {
@@ -11,16 +14,16 @@ const SuperAdminNotification = () => {
     title: '',
     message: '',
     notificationType: 'announcement',
-    targetRoles: [], // Array to store selected roles
+    targetRoles: [],
   });
   const [notifications, setNotifications] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false); // New state to track initial load
   const itemsPerPage = 5;
 
   const navigate = useNavigate();
 
-  // Define the roles here. Ensure these match the roles expected by your backend.
   const roles = ['User', 'Admin', 'Superadmin', 'Client'];
 
   useEffect(() => {
@@ -28,8 +31,7 @@ const SuperAdminNotification = () => {
       try {
         const token = Auth.getToken();
         if (!token) {
-          // Redirect to login or handle unauthorized access
-          navigate('/login'); // Example: navigate to login page
+          navigate('/login');
           return;
         }
 
@@ -44,35 +46,37 @@ const SuperAdminNotification = () => {
 
         setNotifications(response.data.notifications);
         setTotalPages(response.data.totalPages);
+        setInitialLoadComplete(true); // Mark initial load as complete on success
       } catch (err) {
-        console.error("Failed to fetch notifications:", err);
-        toast.error('Failed to fetch notifications.');
-        // Optionally handle token expiration or invalid token here
+        console.error("Failed to fetch Announcement:", err);
+        // Only show toast if it's not the very first attempt on load,
+        // or if it's a critical auth error.
+        if (initialLoadComplete || (err.response && err.response.status === 401)) {
+            toast.error('Failed to fetch Announcement.');
+        }
+
         if (err.response && err.response.status === 401) {
-          Auth.logout(); // Example: clear token and logout
+          Auth.logout();
           navigate('/login');
         }
       }
     };
 
     fetchNotifications();
-  }, [currentPage, navigate]); // Added navigate to dependency array
+  }, [currentPage, navigate, initialLoadComplete]); // Add initialLoadComplete to dependency array
 
-  // Handle input change for the form fields
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (name === 'targetRoles') {
-      // If the input is a checkbox
       if (type === 'checkbox') {
         setFormData(prev => ({
           ...prev,
           targetRoles: checked
-            ? [...prev.targetRoles, value] // Add role if checked
-            : prev.targetRoles.filter(role => role !== value) // Remove role if unchecked
+            ? [...prev.targetRoles, value]
+            : prev.targetRoles.filter(role => role !== value)
         }));
       } else {
-        // Fallback for other input types with the same name if any
         setFormData(prev => ({ ...prev, [name]: value }));
       }
     } else {
@@ -80,10 +84,9 @@ const SuperAdminNotification = () => {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, message, targetRoles } = formData; // Removed notificationType from destructuring as it's handled by select
+    const { title, message, targetRoles } = formData;
 
     if (!title || !message) {
       toast.error('Title and message are required!');
@@ -104,7 +107,7 @@ const SuperAdminNotification = () => {
 
       await axios.post(
         'http://209.74.89.83/erpbackend/create-notifications',
-        formData, // formData directly contains title, message, notificationType, and targetRoles
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -113,13 +116,17 @@ const SuperAdminNotification = () => {
         }
       );
 
-      // Reset form data after successful submission
       setFormData({ title: '', message: '', notificationType: 'announcement', targetRoles: [] });
       toast.success('Notification created successfully!');
 
-      // Refresh notifications list and navigate
-      setCurrentPage(1); // Reset to first page to see new notification if pagination is active
-      navigate('/superadmin-notifications-history'); // Navigate to a history page
+      setCurrentPage(1);
+      // To ensure the list is refreshed, we should refetch notifications after creation
+      // rather than navigating away immediately if you want to see it in the same list.
+      // If `superadmin-notifications-history` is a separate component showing all history,
+      // then navigating is fine. If this component needs to show the newly created one,
+      // you'll want to re-run fetchNotifications.
+      // For now, I'll assume navigating is the desired behavior for displaying the history.
+      navigate('/superadmin-notifications-history');
     } catch (err) {
       console.error("Failed to create notification:", err.response ? err.response.data : err.message);
       toast.error('Failed to create notification. Please check your input and try again.');
@@ -133,7 +140,7 @@ const SuperAdminNotification = () => {
   return (
     <div className={`${styles['notifications-container']} ${styles['superadmin-panel']}`}>
       <form onSubmit={handleSubmit} className={styles['notification-form']}>
-        <h2>Create Notification</h2>
+        <h2>New Announcement</h2>
 
         <div className={styles['form-group']}>
           <label htmlFor="title">Title</label>
@@ -143,7 +150,7 @@ const SuperAdminNotification = () => {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            placeholder="Enter notification title"
+            placeholder="Enter Announcement title"
             required
           />
         </div>
@@ -155,13 +162,13 @@ const SuperAdminNotification = () => {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Enter notification message"
+            placeholder="Enter Announcement message"
             required
           />
         </div>
 
         <div className={styles['form-group']}>
-          <label htmlFor="notificationType">Notification Type</label>
+          <label htmlFor="notificationType">Announcement Type</label>
           <select
             id="notificationType"
             name="notificationType"
@@ -170,13 +177,12 @@ const SuperAdminNotification = () => {
           >
             <option value="announcement">Announcement</option>
             <option value="activity">Activity</option>
-            {/* You can add more types here */}
           </select>
         </div>
 
         <div className={styles['form-group']}>
           <label>Target Roles</label>
-          <div className={styles['checkbox-group']}> {/* Add a div for styling checkboxes */}
+          <div className={styles['checkbox-group']}>
             {roles.map(role => (
               <label key={role} className={styles['checkbox-label']}>
                 <input
@@ -198,7 +204,7 @@ const SuperAdminNotification = () => {
       </form>
 
       <div className={styles.notificationsList}>
-        <h3>Existing Notifications</h3>
+        <h3>New Announcement</h3>
         <table className={styles.notificationsTable}>
           <thead>
             <tr>
@@ -216,7 +222,7 @@ const SuperAdminNotification = () => {
                 <td>{notification.message}</td>
                 <td>{notification.notificationType}</td>
                 <td>{new Date(notification.createdAt).toLocaleDateString()}</td>
-                <td>{notification.targetRoles.join(', ')}</td> {/* Display target roles */}
+                <td>{notification.targetRoles.join(', ')}</td>
               </tr>
             ))}
           </tbody>

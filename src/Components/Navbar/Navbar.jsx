@@ -274,7 +274,7 @@ const Navbar = ({ isOpen }) => {
               <div className={styles.dropdown}>
                 <h4>Notifications</h4>
                 {notifications.length === 0 ? (
-                  <p className={styles.noNotifications}>No new notifications</p>
+                  <p className={styles.noNotifications}>No new Announcement</p>
                 ) : (
                   <ul>
                     {notifications.map((notification) => (
@@ -290,7 +290,7 @@ const Navbar = ({ isOpen }) => {
                   </ul>
                 )}
                 <Link to={getNotificationRoute()} className={styles.viewAll}>
-                  View All Notifications
+                  View All Announcement
                 </Link>
               </div>
             )}

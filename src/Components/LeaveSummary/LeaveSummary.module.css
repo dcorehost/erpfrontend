@@ -1,52 +1,118 @@
+/* CSS Variables for colors */
+:root {
+  --primary-color: #ef9273;
+  --primary-hover-color: #d87b5f;
+  --cancel-button-color: red;
+  --cancel-button-hover-color: #c74e42;
+  --text-color: #333;
+  --border-color: #ccc;
+  --background-light: #f8f9fa;
+  --background-lighter: #f9f9f9;
+  --white-color: white;
+  --blue-color: blue;
+  --green-color: green;
+  --holiday-background: #ffcccc;
+  --holiday-text-color: #cc0000;
+  --success-color: green;
+  --error-color: red;
+}
+
 /* General Container Styling */
 .container {
-  padding: 10px;
+  padding: 20px; /* Increased padding */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 2px solid #ef9273;
+  border: 1px solid var(--primary-color);
   border-radius: 8px;
-  background-color: #f8f9fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px auto;
-  max-width: 1500px;  
-  width: 95%;  
+  background-color: var(--background-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+  margin: 40px auto;
+  max-width: 1200px;
+  width: 95%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
-  transform: scale(1.02); 
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-3px); /* Slightly lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
-/* Header Styling */
-.header {
+/* Header Container */
+.headerContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Align to end for action buttons */
   align-items: center;
+  margin-bottom: 20px; /* More space below header */
+}
+
+.actionButtons {
+  position: relative; /* For positioning calendar popup if needed */
+}
+
+.applyButton {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px; /* Larger button */
+  border-radius: 5px; /* Slightly more rounded */
+  cursor: pointer;
+  font-size: 16px; /* Larger font */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.applyButton:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Leave Summary Cards */
+.summary {
+  display: flex;
+  justify-content: center; /* Center the cards */
+  gap: 20px; /* Increased gap between cards */
+  margin-bottom: 30px; /* More space below summary */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.card {
+  border: 1px solid; /* Border color set dynamically by JS */
+  padding: 15px 20px; /* More padding */
+  border-radius: 10px; /* More rounded corners */
+  min-width: 280px; /* Minimum width for cards */
+  max-width: 45%; /* Max width to allow two columns on larger screens */
+  flex-grow: 1; /* Allow cards to grow */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.6; /* Improved line height */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--text-color);
+  font-size: 22px; /* Larger heading */
   margin-bottom: 10px;
-  flex-wrap: wrap;
 }
 
-/* Calendar Popup */
-.calendarPopup {
-  position: absolute;
-  top: 40px;
-  right: 10px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.card p {
+  margin: 5px 0;
+  font-size: 18px; /* Larger text for readability */
 }
 
-.calendarPopup.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+.card:hover {
+  background-color: var(--background-lighter);
+  transform: translateY(-5px); /* More pronounced lift on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* Enhanced shadow on hover */
+}
+
+.available {
+  color: var(--green-color);
+  font-weight: bold;
+}
+
+.booked {
+  color: var(--error-color);
+  font-weight: bold;
 }
 
 /* Popup Overlay */
@@ -56,265 +122,327 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* Darker overlay */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
-}
-
-/* Holiday Calendar Styles */
-.holidayCalendarWrapper {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 10px;
-  background-color: #f9f9f9;
-}
-
-.holidayCalendarContainer {
-  display: flex;
-  gap: 10px;
-}
-
-.calendarSection {
-  flex: 1;
-}
-
-.holidayDetailsSection {
-  flex: 1;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.holiday {
-  background-color: #ffcccc;
-  color: #cc0000;
-  border-radius: 50%;
-  padding: 4px;
-  transition: transform 0.3s ease;
-}
-
-.holiday:hover {
-  transform: scale(1.1);
-}
-
-/* Leave Summary Cards */
-.summary {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-.card {
-  border: 2px solid;
-  padding: 12px;
-  border-radius: 8px;
-  width: 200px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.card:hover {
-  background-color: #f1f1f1;
-  transform: translateY(-3px);
-}
-
-.available {
-  color: green;
-  font-weight: bold;
-}
-
-.booked {
-  color: red;
-  font-weight: bold;
+  z-index: 1000; /* Ensure it's on top */
+  backdrop-filter: blur(3px); /* Subtle blur effect */
 }
 
 /* Popup Styles */
 .popup {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  width: 600px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-out;
-}
-
-select, input, textarea {
-  width: 100%;
-  margin: 15px 0;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
-
-select:focus, input:focus, textarea:focus {
-  border-color: #ef9273;
-  outline: none;
+  background: var(--white-color);
+  padding: 30px; /* More padding */
+  border-radius: 12px; /* More rounded corners */
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Max width for larger screens */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  animation: fadeIn 0.4s ease-out; /* Slightly faster animation */
+  position: relative; /* For positioning close icon */
 }
 
 .popupHeader {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Space between title and icon */
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color); /* Separator line */
 }
 
 .popupHeader h3 {
-  font-size: 24px;
-  text-align: center;
-  color: #333;
+  font-size: 28px; /* Larger popup title */
+  color: var(--text-color);
+  margin: 0;
 }
 
 .closeIcon {
-  position: absolute;
-  right: 10px;
-  top: 10px;
   cursor: pointer;
-  font-size: 18px;
-  color: #333;
-  z-index: 1100;
+  font-size: 24px; /* Larger close icon */
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .closeIcon:hover {
-  color: #ef9273;
+  color: var(--primary-color);
+}
+
+.popup form label {
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 15px;
+  font-weight: bold;
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.popup form select,
+.popup form input,
+.popup form textarea {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px; /* More padding */
+  font-size: 16px; /* Larger font size */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.popup form select:focus,
+.popup form input:focus,
+.popup form textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(239, 146, 115, 0.3); /* Focus ring */
+  outline: none;
+}
+
+.popup form textarea {
+  min-height: 80px; /* Minimum height for textarea */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.dateInput {
+  width: 100%; /* Ensure date picker input takes full width */
+}
+
+.errorMessage {
+  color: var(--error-color);
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.successMessage {
+  color: var(--success-color);
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .popupActions {
+
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  justify-content: space-between; /* Align buttons to the right */
+  align-items: center;
+  gap: 15px; /* Space between buttons */
+ 
+  
 }
 
-.submitButton, .cancelButton {
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 14px;
+.submitButton,
+.cancelButton {
+  padding: 10px 10px;
+  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border: none; /* Remove default button border */
 }
 
 .submitButton {
-  background-color: #ef9273;
-  color: white;
-  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+
 }
 
 .submitButton:hover {
-  background-color: #d87b5f;
+  background-color: var(--primary-hover-color);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cancelButton {
-  background-color: red;
-  color: white;
-  border: none;
+  background-color: var(--cancel-button-color);
+  color: var(--white-color);
+  
 }
 
 .cancelButton:hover {
-  background-color: #c74e42;
+  background-color: var(--cancel-button-hover-color);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Container */
-.headerContainer {
+/* Holiday Calendar Styles */
+.holidayCalendarWrapper {
+ 
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+  background-color: var(--background-lighter);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+
+}
+
+.holidayCalendarContainer {
+  
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px; /* Increased gap */
+  flex-wrap: wrap; /* Allow wrapping */
+
+}
+
+.calendarSection {
+  
+  width: 260px; /* Ensure calendar has enough space */
+  
+}
+
+.holidayDetailsSection {
+  flex: 1;
+  border: 1px solid black;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--white-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 280px; /* Ensure details section has enough space */
+}
+
+.holidayDetailsSection h3 {
+  margin-top: 0;
+  color: var(--text-color);
+  font-size: 20px;
   margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color); /* Separator */
+  padding-bottom: 8px;
 }
 
-.statsText {
-  font-size: 12px;
-  color: #333;
-}
-
-.dateNavigator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.navButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.applyButton {
-  background-color: #ef9273;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.applyButton:hover {
-  background-color: #d87b5f;
-}
-
-@media (max-width: 768px) {
-  .headerContainer {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .dateNavigator {
-    margin-top: 5px;
-  }
-
-  .applyButton {
-    margin-left: 0;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  select, input, textarea {
-    width: 100%;
-  }
-}
-
-.statsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.leftIcons {
-  display: flex;
-  gap: 8px;
-}
-
-.iconButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+.holidayDetailsSection p {
+  margin: 8px 0;
   font-size: 16px;
+  color: var(--text-color);
 }
+
+/* DatePicker specific holiday styling */
+.react-datepicker__day--highlighted-custom-1 { /* Assuming this is for your .holiday class */
+  background-color: var(--holiday-background) !important;
+  color: var(--holiday-text-color) !important;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.react-datepicker__day--highlighted-custom-1:hover {
+  transform: scale(1.1);
+}
+
 
 /* Animation for fading elements */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px); /* Start further down */
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start; /* Align action buttons to left */
+  }
+
+  .actionButtons {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-bottom: 15px;
+  }
+
+  .applyButton {
+    width: 100%; /* Full width button */
+    margin-left: 0;
+  }
+
+  .summary {
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center; /* Center stacked cards */
+  }
+
+  .card {
+    max-width: 100%; /* Full width for cards */
+    min-width: unset; /* Remove min-width constraint */
+  }
+
+  .popup {
+    padding: 20px;
+  }
+
+  .popupHeader h3 {
+    font-size: 22px;
+  }
+
+  .closeIcon {
+    font-size: 20px;
+  }
+
+  .popup form select,
+  .popup form input,
+  .popup form textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .popupActions {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%; /* Full width buttons */
+  }
+
+  .holidayCalendarContainer {
+    flex-direction: column; /* Stack calendar and details vertically */
+  }
+
+  .calendarSection,
+  .holidayDetailsSection {
+    min-width: unset; /* Remove min-width constraint */
+    width: 100%; /* Full width */
+  }
+}
+
+/* Smallest screens adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .popup {
+    padding: 15px;
+  }
+
+  .popupHeader h3 {
+    font-size: 20px;
+  }
+
+  .closeIcon {
+    font-size: 18px;
+  }
+
+  .popup form select,
+  .popup form input,
+  .popup form textarea {
+    font-size: 13px;
+    padding: 7px;
+  }
+
+  .submitButton,
+  .cancelButton {
+    padding: 8px 15px;
+    font-size: 14px;
   }
 }

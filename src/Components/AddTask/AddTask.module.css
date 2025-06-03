@@ -2,7 +2,7 @@
   
   padding: 20px;
   font-family: Arial, sans-serif;
-  width: 800px;
+  max-width: 1400px;
   overflow: auto; 
   margin-top: 20px; 
   margin-bottom: 20px; 

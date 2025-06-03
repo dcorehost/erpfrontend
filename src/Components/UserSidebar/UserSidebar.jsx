@@ -164,9 +164,8 @@ const UserSidebar = ({ children }) => {
       <div className={`${styles.sidebarWrapper}`}>
         {/* <div className={`${styles.sidebarContainer}`}> */}
         <div
-          className={`${styles.sidebar} ${
-            isOpen ? styles.open : styles.closed
-          }`}
+          className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed
+            }`}
         >
           <button
             className={styles.hamburgerButton}
@@ -187,9 +186,8 @@ const UserSidebar = ({ children }) => {
                     <div>
                       <button
                         onClick={() => toggleExpand(item?.title)}
-                        className={`${styles.menuButton} ${
-                          isActive(item.link) ? styles.active : ""
-                        }`}
+                        className={`${styles.menuButton} ${isActive(item.link) ? styles.active : ""
+                          }`}
                       >
                         <div className={styles.sidebarItem}>
                           <span
@@ -199,9 +197,8 @@ const UserSidebar = ({ children }) => {
                             {item?.icon}
                           </span>
                           <span
-                            className={`${styles.sidebarTitle} ${
-                              isOpen ? styles.open : ""
-                            }`}
+                            className={`${styles.sidebarTitle} ${isOpen ? styles.open : ""
+                              }`}
                             style={{
                               flexGrow: 1,
                             }} /* Ensure text takes available space */
@@ -210,13 +207,11 @@ const UserSidebar = ({ children }) => {
                           </span>
                           <FaChevronRight
                             size={12}
-                            className={`${styles.chevronIcon} ${
-                              isOpen ? styles.open : ""
-                            } ${
-                              expandedItem === item?.title
+                            className={`${styles.chevronIcon} ${isOpen ? styles.open : ""
+                              } ${expandedItem === item?.title
                                 ? styles.expanded
                                 : ""
-                            }`}
+                              }`}
                             style={{
                               marginLeft: "auto",
                             }} /* Push chevron to the right */
@@ -230,9 +225,8 @@ const UserSidebar = ({ children }) => {
                             <Link
                               key={child?.link}
                               to={child?.link}
-                              className={`${styles.sidebarChildLink} ${
-                                isActive(child?.link) ? styles.active : ""
-                              }`}
+                              className={`${styles.sidebarChildLink} ${isActive(child?.link) ? styles.active : ""
+                                }`}
                             >
                               <span className={styles.childIcon}>
                                 {child?.icon}
@@ -248,15 +242,13 @@ const UserSidebar = ({ children }) => {
                   ) : (
                     <Link
                       to={item?.link}
-                      className={`${styles.navLink} ${
-                        isActive(item?.link) ? styles.active : ""
-                      }`}
+                      className={`${styles.navLink} ${isActive(item?.link) ? styles.active : ""
+                        }`}
                     >
                       <span className={styles.navIcon}>{item?.icon}</span>
                       <span
-                        className={`${styles.navTitle} ${
-                          isOpen ? styles.open : ""
-                        }`}
+                        className={`${styles.navTitle} ${isOpen ? styles.open : ""
+                          }`}
                       >
                         {item?.title}
                       </span>

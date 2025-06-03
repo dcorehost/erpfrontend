@@ -40,7 +40,7 @@ const AdminSidebar = ({ children }) => {
           link: "/superadmin-userleave",
         },
         {
-          title: "Notifications",
+          title: "Announcement",
           icon: <FaBuildingUser />,
           link: "/superadmin-notifications",
         },
