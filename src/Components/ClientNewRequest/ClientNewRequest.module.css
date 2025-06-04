@@ -187,7 +187,6 @@
 .noAttachments {
     color: #95a5a6;
     font-style: italic;
-<<<<<<< HEAD
   }
 
   /* Scoped module classes */
@@ -222,7 +221,6 @@ padding: 0.3rem 0.85rem;
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-=======
 }
 
 /* New styles for State and Actions columns */
@@ -388,7 +386,6 @@ padding: 0.3rem 0.85rem;
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
->>>>>>> 33a19e22e30d60fb6855febf3bd2d9acc270a589
     .container {
         padding: 1rem;
     }
