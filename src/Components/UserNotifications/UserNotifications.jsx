@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './UserNotifications.module.css';
+import styles from './UserNotifications.module.css'; // This is correct
 import Auth from '../Services/Auth';
 
 const UserPanel = () => {
@@ -35,19 +35,24 @@ const UserPanel = () => {
   }, []);
 
   return (
-    <div className="notifications-container">
+    // CHANGE 1: Use styles.notificationsContainer
+    <div className={styles['notifications-container']}>
       <h1>User Panel</h1>
 
-      {error && <div className="error-message">{error}</div>}
+      {/* CHANGE 2: Use styles.errorMessage */}
+      {error && <div className={styles['error-message']}>{error}</div>}
       {loading ? (
-        <div className="loading">Loading notifications...</div>
+        // CHANGE 3: Use styles.loading
+        <div className={styles.loading}>Loading notifications...</div>
       ) : (
-        <div className="notifications-list">
+        // CHANGE 4: Use styles.notificationsList
+        <div className={styles['notifications-list']}>
           {notifications.length === 0 ? (
             <p>No notifications available.</p>
           ) : (
             notifications.map((notification) => (
-              <div key={notification._id} className="notification-item">
+              // CHANGE 5: Use styles.notificationItem
+              <div key={notification._id} className={styles['notification-item']}>
                 <h3>{notification.title}</h3>
                 <p>{notification.message}</p>
                 <span>

@@ -83,6 +83,28 @@ const AdminSidebar = ({ children }) => {
         },
       ],
     },
+     {
+          title: "Announcements",
+          icon: <FaBullhorn />,
+          link: "/#",
+          submenus: [
+            {
+              title: "New Announcements",
+              icon: <FaClipboardList />,
+              link: "/AdminAnnouncement",
+            },
+            {
+          title: "Announcements History",
+          icon: <GrTasks />,
+          link: "/admin-notifications-history",
+        },
+         {
+          title: "view Announcements",
+          icon: <FaClipboardList />,
+          link: "/admin-notifications",
+        },
+          ],
+        },
     {
       title: "User Creation",
       icon: <FaUsers />,
@@ -139,23 +161,7 @@ const AdminSidebar = ({ children }) => {
         },
       ],
     },
-    {
-      title: "Announcements",
-      icon: <FaBullhorn />,
-      link: "/#",
-      submenus: [
-        {
-          title: "New Announcements",
-          icon: <FaClipboardList />,
-          link: "/admin-notifications",
-        },
-        {
-          title: "Announcements History",
-          icon: <GrTasks />,
-          link: "/admin-notifications-history",
-        },
-      ],
-    },
+   
   ];
 
   useEffect(() => {
