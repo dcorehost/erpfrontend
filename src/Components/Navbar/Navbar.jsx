@@ -242,9 +242,9 @@ const Navbar = ({ isOpen }) => {
     console.log("Logout clicked! Clearing localStorage...");
     localStorage.clear();
     sessionStorage.clear();
-    Auth.logout(); // Ensure any Auth service cleanup is done
-    navigate("/login", { replace: true }); // Added replace: true to prevent going back
-    window.location.reload(); // Optional: refresh to ensure clean state
+    Auth.logout(); 
+    navigate("/login", { replace: true }); 
+    window.location.reload(); 
   };
 
   return (

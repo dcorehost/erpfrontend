@@ -97,6 +97,11 @@ const UserSidebar = ({ children }) => {
           link: "/attendance-summary",
           icon: <FaChartPie />,
         },
+        {
+          title: "My Attendance",
+          link: "/attendance-user",
+          icon: <FaChartPie />,
+        },
       ],
     },
     {

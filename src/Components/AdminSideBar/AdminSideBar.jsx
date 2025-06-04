@@ -114,6 +114,12 @@ const AdminSidebar = ({ children }) => {
           icon: <FaChartLine />,
         },
         {
+          title: "My Attendance",
+          link: "/attendance-admin",
+          description: "View daily, weekly, and monthly attendance records.",
+          icon: <FaChartLine />,
+        },
+        {
           title: "User Attendance",
           link: "/Admin-user-attendance",
           description:

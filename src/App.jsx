@@ -41,9 +41,6 @@ import CompletedLeaves from "./Components/CompletedLeaves/CompletedLeaves";
 import RejectedLeaves from "./Components/RejectedLeaves/RejectedLeaves";
 import UserTask from "./Components/UserTask/UserTask";
 import CreateNewProject from "./Components/CreateNewProject/CreateNewProject";
-// import CreateHolidays from './Components/CreateHolidays/CreateHolidays';
-// import HolidayList from './Components/HolidaysList/HolidaysList'
-// import TaskStatus from  './Components/TaskStatus/TaskStatus'
 import ProjectDetails from "./Components/ProjectDetails/ProjectDetails";
 import UserDashboard from "./Pages/UserDashboard/DashboardUser";
 import CreateHolidays from "./Components/CreateHolidays/CreateHolidays";
@@ -68,7 +65,7 @@ import ClientDashboard from "./Pages/ClientDashboard/ClientDashboard";
 import ClientProjects from "./Components/ClientProjects/ClientProjects";
 import ClientProjectDetails from "./Components/ClientProjectDetails/ClientProjectDetails";
 import ClientProjectRequest from "./Components/ClientProjectsRequests/ClientProjectsRequests";
-import ClientTasks from "./Components/ClientTasks/ClientTasks"; // ✅ Correct import
+import ClientTasks from "./Components/ClientTasks/ClientTasks"; 
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import UpdateUserProfile from "./Components/UpdateUserProfile/UpdateUserProfile";
 // import ClientTasks from './Components/ClientTasks/ClientTasks';
@@ -81,6 +78,8 @@ import ClientCommunication from "./Components/ClientCommunication/ClientCommunic
 import ClientMessages from "./Components/ClientMessageDetails/ClientMessageDetails";
 import ProjectAdmin from "./Components/ProjectAdmin/ProjectAdmin";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage/ProjectDetailsPage";
+import AttendanceAdmin from "./Components/AttendanceAdmin/AttendanceAdmin";
+import AttendanceUser from "./Components/AttendanceUser/AttendanceUser";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -98,29 +97,9 @@ const App = () => {
           </Routes>
         </>
       ) : (
-        <>
-          {/* Show Sidebar based on user type */}
-          {/* {typeOfUser === "Admin" && <SideBar />} */}
-          {/* {typeOfUser === "User" && <UserSidebar />} */}
-          {/* {typeOfUser === "superadmin" && <SuperAdminSidebar />} */}
-          {/* {typeOfUser === "Client" && <CLientSidebar />} */}
+        <>       
 
-          <Routes>
-            {/* Redirect '/' to appropriate dashboard */}
-            {/* <Route
-              path="/"
-              element={
-                <Navigate to={
-                  typeOfUser === "Admin"
-                    ? "/admin-dashboard"
-                    : typeOfUser === "superadmin"
-                      ? "/superadmin-dashboard"
-                      : typeOfUser === "Client"
-                      ? "/client-dashboard"
-                      : "/user-dashboard"
-                } />
-              }
-            /> */}
+          <Routes>         
             <Route  path="/" element={ !typeOfUser ? (  <div>Loading...</div>  ) : (
                   <Navigate
                     to={
@@ -132,7 +111,7 @@ const App = () => {
                         ? "/client-dashboard"
                         : "/user-dashboard"
                     }
-                    replace // Important: prevents history stack buildup
+                    replace 
                   />
                 )
               }
@@ -176,6 +155,7 @@ const App = () => {
                 <Route path="/admin-notifications"  element={ <SideBar> <AdminNotification /> </SideBar> } />
                 <Route path="/admin-notifications-history" element={ <SideBar> <AdminNotificationsHistory /> </SideBar> } />
                 <Route path="/mark-attendance" element={ <SideBar> <MarkAttendance /> </SideBar> } />
+                <Route path="/attendance-admin" element={ <SideBar> <AttendanceAdmin /> </SideBar> } />
               </>
             )}
 
@@ -198,6 +178,7 @@ const App = () => {
                 <Route  path="/Create-Payrolls"  element={ <UserSidebar> <CreatePayrolls /> </UserSidebar> }  />
                 <Route  path="/UserTask" element={ <UserSidebar> <UserTask /> </UserSidebar> } />
                 <Route  path="/mark-attendance" element={<UserSidebar>  <MarkAttendance /> </UserSidebar> } />
+                <Route  path="/attendance-user" element={<UserSidebar>  <AttendanceUser /> </UserSidebar> } />
               </>
             )}
 
@@ -220,7 +201,7 @@ const App = () => {
                 <Route path="/superadmin-clientsection-Createclient"  element={ <SuperAdminSidebar> <CreateClient />  </SuperAdminSidebar> } />
                 <Route path="/superadmin-client-messages" element={ <SuperAdminSidebar> <ClientMessages /> </SuperAdminSidebar> } />
                 <Route path="/mark-attendance" element={ <SuperAdminSidebar> <MarkAttendance /> </SuperAdminSidebar> } />{" "}
-                {/* ✅ Correctly linked */}
+                {/*  Correctly linked */}
               </>
             )}
 
@@ -232,10 +213,10 @@ const App = () => {
                 <Route path="/client-project-requests" element={ <CLientSidebar> <ClientProjectRequest /> </CLientSidebar> } />{" "}
                 {/* Add this route */}
                 <Route path="/client-tasks" element={ <CLientSidebar> <ClientTasks /> </CLientSidebar> } />{" "}
-                {/* ✅ Correctly linked */}
+                {/* Correctly linked */}
                 <Route path="/client-communication" element={ <CLientSidebar>  <ClientCommunication /> </CLientSidebar>  } />
                 <Route path="/mark-attendance"  element={ <CLientSidebar> <MarkAttendance /> </CLientSidebar> } />{" "}
-                {/* ✅ Correctly linked */}
+                {/*  Correctly linked */}
               </>
             )}
 
@@ -248,3 +229,5 @@ const App = () => {
   );
 };
 export default App;
+
+
