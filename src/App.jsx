@@ -81,6 +81,7 @@ import ClientCommunication from "./Components/ClientCommunication/ClientCommunic
 import ClientMessages from "./Components/ClientMessageDetails/ClientMessageDetails";
 import ProjectAdmin from "./Components/ProjectAdmin/ProjectAdmin";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage/ProjectDetailsPage";
+import AdminAnnouncement from "./Components/AdminAnnouncement/AdminAnnouncement";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -132,10 +133,10 @@ const App = () => {
                       typeOfUser === "Admin"
                         ? "/admin-dashboard"
                         : typeOfUser === "superadmin"
-                        ? "/superadmin-dashboard"
-                        : typeOfUser === "Client"
-                        ? "/client-dashboard"
-                        : "/user-dashboard"
+                          ? "/superadmin-dashboard"
+                          : typeOfUser === "Client"
+                            ? "/client-dashboard"
+                            : "/user-dashboard"
                     }
                     replace // Important: prevents history stack buildup
                   />
@@ -155,7 +156,7 @@ const App = () => {
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
               <>
-                <Route   path="/admin-dashboard"
+                <Route path="/admin-dashboard"
                   element={
                     <SideBar>
                       <AdminDashboard />
@@ -210,12 +211,12 @@ const App = () => {
                     </SideBar>
                   }
                 /> */}
-                <Route path ="/ProjectAdmin" element ={
+                <Route path="/ProjectAdmin" element={
                   <SideBar>
                     <ProjectAdmin />
                   </SideBar>
                 }></Route>
-                <Route path ="/Projectdetail/:projectName" element ={
+                <Route path="/Projectdetail/:projectName" element={
                   <SideBar>
                     <ProjectDetailsPage />
                   </SideBar>
@@ -263,6 +264,14 @@ const App = () => {
                   }
                 />
 
+                <Route
+                  path="/AdminAnnouncement"
+                  element={
+                    <SideBar>
+                      <AdminAnnouncement />
+                    </SideBar>
+                  }
+                />
                 <Route
                   path="/attendance-summary"
                   element={

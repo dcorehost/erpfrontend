@@ -310,7 +310,7 @@ const Navbar = ({ isOpen }) => {
                 {userData?.username || "Profile"}
               </span>
             </div>
-            {showProfileDropdown && (
+            {showProfileDropdown && ( 
               <div className={styles.profileDropdown}>
                 <div className={styles.profileHeader}>
                   <FaUserCircle className={styles.profileLargeIcon} />
