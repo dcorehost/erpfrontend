@@ -213,8 +213,8 @@ const ClientNewRequest = () => {
   const filteredRequests = requests.filter(request => {
     const title = request.title || '';
     const description = request.description || '';
-    const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesPriority = priorityFilter === 'all' || request.priority === priorityFilter;
     return matchesSearch && matchesPriority;
   });
@@ -291,6 +291,7 @@ const ClientNewRequest = () => {
                 <th>Deadline</th>
                 <th>Created</th>
                 <th>Attachments</th>
+                <th>State</th>
               </tr>
             </thead>
             <tbody>
@@ -333,6 +334,17 @@ const ClientNewRequest = () => {
                       <span className={styles.noAttachments}>None</span>
                     )}
                   </td>
+
+                  <td className={styles.state}>
+  <span
+    className={`${styles.stateBadge} ${styles[request.state ? request.state.toLowerCase() : 'pending']}`}
+  >
+    {request.state || 'Pending'}
+  </span>
+</td>
+
+
+
                 </tr>
               ))}
             </tbody>

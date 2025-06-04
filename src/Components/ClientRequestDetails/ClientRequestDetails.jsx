@@ -212,6 +212,12 @@ const ClientNewRequest = () => {
                     Created {getSortIcon('createdAt')}
                   </div>
                 </th>
+                <th onClick={() => handleSort('state')}>
+  <div className={styles.sortableHeader}>
+    State {getSortIcon('state')}
+  </div>
+</th>
+
                 <th>Actions</th>
               </tr>
             </thead>
@@ -265,6 +271,14 @@ const ClientNewRequest = () => {
                           {formatDate(request.createdAt)}
                         </div>
                       </td>
+                     <td>
+  <span className={`${styles.stateBadge} ${styles[request.state?.toLowerCase() || 'default']}`}>
+    {request.state || 'Unknown'}
+  </span>
+</td>
+
+
+
                       <td className={styles.actionsCell}>
                         <motion.button
                           className={styles.expandButton}
@@ -304,7 +318,7 @@ const ClientNewRequest = () => {
                                 <div className={styles.detailItem}>
                                   <strong>Status:</strong> 
                                   <span className={styles.statusBadge}>
-                                    {request.status || 'Unknown'}
+                                    {request.state || 'Unknown'}
                                   </span>
                                 </div>
                                 {request.deadline && (
