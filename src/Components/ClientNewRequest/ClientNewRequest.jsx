@@ -692,6 +692,7 @@ const ClientNewRequest = () => {
                 <th>State</th>
                 <th>Remarks</th>
                 <th>Actions</th>
+                <th>State</th>
               </tr>
             </thead>
             <tbody>
@@ -754,6 +755,17 @@ const ClientNewRequest = () => {
                       Reject
                     </button>
                   </td>
+
+                  <td className={styles.state}>
+  <span
+    className={`${styles.stateBadge} ${styles[request.state ? request.state.toLowerCase() : 'pending']}`}
+  >
+    {request.state || 'Pending'}
+  </span>
+</td>
+
+
+
                 </tr>
               ))}
             </tbody>

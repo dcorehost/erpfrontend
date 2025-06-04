@@ -79,6 +79,7 @@ import ClientNewRequest from "./Components/ClientNewRequest/ClientNewRequest";
 import CreateClient from "./Components/CreateClient/CreateClient";
 import ClientCommunication from "./Components/ClientCommunication/ClientCommunication";
 import ClientMessages from "./Components/ClientMessageDetails/ClientMessageDetails";
+import ClientProjectRequestDetails from "./Components/ClientRequestDetails/ClientRequestDetails"
 import ProjectAdmin from "./Components/ProjectAdmin/ProjectAdmin";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage/ProjectDetailsPage";
 import AdminAnnouncement from "./Components/AdminAnnouncement/AdminAnnouncement";
@@ -633,6 +634,15 @@ const App = () => {
                   element={
                     <CLientSidebar>
                       <ClientProjectRequest />
+                    </CLientSidebar>
+                  }
+                />{" "}
+                {/* Add this route */}
+                <Route
+                  path="/client-project-request-details"
+                  element={
+                    <CLientSidebar>
+                      <ClientProjectRequestDetails />
                     </CLientSidebar>
                   }
                 />{" "}
