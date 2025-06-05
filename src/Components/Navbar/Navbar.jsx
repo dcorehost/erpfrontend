@@ -163,6 +163,7 @@
 
 // export default Navbar;
 
+
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBell, FaUserCircle } from "react-icons/fa";
@@ -180,7 +181,7 @@ const Navbar = ({ isOpen }) => {
   const profileRef = useRef(null);
   const navigate = useNavigate();
 
-  // ✅ Fetch user data and notifications
+  // Fetch user data and notifications
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -237,18 +238,13 @@ const Navbar = ({ isOpen }) => {
     }
   };
 
-  // const handleLogout = () => {
-  //   localStorage.clear();
-  //   sessionStorage.clear();
-  //   navigate("/"); // Navigate back to the login or home page
-  // };
-
   const handleLogout = () => {
     console.log("Logout clicked! Clearing localStorage...");
     localStorage.clear();
     sessionStorage.clear();
-    setIsLoggedOut(true);
-    window.location.href = "/";
+    Auth.logout(); 
+    navigate("/login", { replace: true }); 
+    window.location.reload(); 
   };
 
   return (
@@ -328,7 +324,7 @@ const Navbar = ({ isOpen }) => {
                     to="/Own-User-Profile"
                     className={styles.profileMenuItem}
                   >
-                    Settings
+                    Update Profile
                   </Link>
                   <div className={styles.logoutButton} onClick={handleLogout}>
                     Logout
@@ -344,3 +340,4 @@ const Navbar = ({ isOpen }) => {
 };
 
 export default Navbar;
+

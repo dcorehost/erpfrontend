@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./ClientProjectDetails.module.css";
-import { FaTimesCircle, FaUsers, FaCalendarAlt, FaSync, FaChartLine, FaTasks } from "react-icons/fa";
+import styles from "./ClientProjectDetails.module.css"; // ✅ Reused same CSS
+import { FaTimesCircle, FaUserCheck, FaFlag, FaClock, FaInfoCircle, FaChartLine } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ProjectDetailsModal = ({ project, onClose }) => {
+// ✅ Renamed project to task
+const TaskDetailsModal = ({ task, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const modalRef = useRef();
 
   useEffect(() => {
     setIsVisible(true);
-    
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         handleClose();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -24,25 +23,28 @@ const ProjectDetailsModal = ({ project, onClose }) => {
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(onClose, 300); // Wait for animation to complete
+    setTimeout(onClose, 300);
   };
 
-  if (!project) return null;
+  if (!task) return null;
 
-  // Progress bar animation
   const progressBarVariants = {
     initial: { width: 0 },
-    animate: { width: `${project.progress}%`, transition: { duration: 1 } }
+    animate: { width: `${task.progress}%`, transition: { duration: 1 } },
   };
 
-  // Status colors
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
-      case 'in progress': return '#007bff';
-      case 'completed': return '#28a745';
-      case 'on hold': return '#dc3545';
-      case 'planning': return '#ffc107';
-      default: return '#6c757d';
+      case "in progress":
+        return "#007bff";
+      case "completed":
+        return "#28a745";
+      case "pending":
+        return "#ffc107";
+      case "overdue":
+        return "#dc3545";
+      default:
+        return "#6c757d";
     }
   };
 
@@ -64,8 +66,8 @@ const ProjectDetailsModal = ({ project, onClose }) => {
             exit={{ y: 50, opacity: 0 }}
             transition={{ type: "spring", damping: 25 }}
           >
-            <button 
-              className={styles.closeButton} 
+            <button
+              className={styles.closeButton}
               onClick={handleClose}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -73,24 +75,45 @@ const ProjectDetailsModal = ({ project, onClose }) => {
               <FaTimesCircle />
             </button>
 
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              {project.name}
+              {task.title} {/* ✅ Changed from project.name */}
             </motion.h2>
 
             <div className={styles.detailsGrid}>
-              <DetailItem 
-                icon={<FaTasks />}
-                label="Status"
-                value={project.status}
-                color={getStatusColor(project.status)}
+              <DetailItem
+                icon={<FaUserCheck />}
+                label="Assigned To"
+                value={task.assignedTo}
                 delay={0.2}
               />
-              
-              <DetailItem 
+
+              <DetailItem
+                icon={<FaFlag />}
+                label="Priority"
+                value={task.priority}
+                delay={0.3}
+              />
+
+              <DetailItem
+                icon={<FaClock />}
+                label="Deadline"
+                value={task.deadline}
+                delay={0.4}
+              />
+
+              <DetailItem
+                icon={<FaInfoCircle />}
+                label="Status"
+                value={task.status}
+                color={getStatusColor(task.status)}
+                delay={0.5}
+              />
+
+              <DetailItem
                 icon={<FaChartLine />}
                 label="Progress"
                 value={
@@ -100,63 +123,35 @@ const ProjectDetailsModal = ({ project, onClose }) => {
                       variants={progressBarVariants}
                       initial="initial"
                       animate="animate"
-                      style={{ backgroundColor: getStatusColor(project.status) }}
+                      style={{ backgroundColor: getStatusColor(task.status) }}
                     />
-                    <span className={styles.progressText}>{project.progress}%</span>
+                    <span className={styles.progressText}>{task.progress}%</span>
                   </div>
                 }
-                delay={0.3}
-              />
-              
-              <DetailItem 
-                icon={<FaUsers />}
-                label="Team Size"
-                value={project.teamSize}
-                delay={0.4}
-              />
-              
-              <DetailItem 
-                icon={<FaCalendarAlt />}
-                label="Start Date"
-                value={project.startDate}
-                delay={0.5}
-              />
-              
-              <DetailItem 
-                icon={<FaCalendarAlt />}
-                label="End Date"
-                value={project.endDate}
                 delay={0.6}
-              />
-              
-              <DetailItem 
-                icon={<FaSync />}
-                label="Last Updated"
-                value={project.lastUpdated}
-                delay={0.7}
               />
             </div>
 
-            {project.description && (
+            {task.description && (
               <motion.div
                 className={styles.description}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.7 }}
               >
-                <h3>Project Description</h3>
-                <p>{project.description}</p>
+                <h3>Task Description</h3>
+                <p>{task.description}</p>
               </motion.div>
             )}
 
-            <motion.div 
+            <motion.div
               className={styles.buttonGroup}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
+              transition={{ delay: 0.8 }}
             >
-              <button className={styles.secondaryButton}>View Documents</button>
-              <button className={styles.primaryButton}>Contact Team</button>
+              <button className={styles.secondaryButton}>Add Comments</button>
+              <button className={styles.primaryButton}>Mark as Done</button>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -166,7 +161,7 @@ const ProjectDetailsModal = ({ project, onClose }) => {
 };
 
 const DetailItem = ({ icon, label, value, color, delay }) => (
-  <motion.div 
+  <motion.div
     className={styles.detailItem}
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
@@ -177,11 +172,9 @@ const DetailItem = ({ icon, label, value, color, delay }) => (
     </div>
     <div className={styles.detailContent}>
       <span className={styles.detailLabel}>{label}</span>
-      <span className={styles.detailValue} style={{ color }}>
-        {value}
-      </span>
+      <span className={styles.detailValue} style={{ color }}>{value}</span>
     </div>
   </motion.div>
 );
 
-export default ProjectDetailsModal;
+export default TaskDetailsModal;

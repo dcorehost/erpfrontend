@@ -67,7 +67,7 @@ const AdminSidebar = ({ children }) => {
           icon: <FaListUl />,
         },
         {
-          title: "Task Assignment",
+          title: "Create Assignment",
           link: "/Admin/Leave/Task-Assignment",
           icon: <FaTasks />,
         },
@@ -132,6 +132,12 @@ const AdminSidebar = ({ children }) => {
         {
           title: "My Attendance Summary",
           link: "/attendance-summary",
+          description: "View daily, weekly, and monthly attendance records.",
+          icon: <FaChartLine />,
+        },
+        {
+          title: "My Attendance",
+          link: "/attendance-admin",
           description: "View daily, weekly, and monthly attendance records.",
           icon: <FaChartLine />,
         },

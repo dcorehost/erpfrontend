@@ -68,19 +68,18 @@ const UserSidebar = ({ children }) => {
       icon: <GrTasks />,
       link: "/#",
       submenus: [
-        { title: "Add Task", link: "/add-task", icon: <FaPlus /> },
+        { title: "Create Task", link: "/add-task", icon: <FaPlus /> },
         { title: "All Tasks Status", link: "/task-list", icon: <FaListUl /> },
         {
           title: "AssignedTaskList",
           link: "/User-Task-List",
           icon: <RiUserShared2Fill />,
         },
-           { title: "Daily Task", link: "/task-list", icon: <FaListUl /> },
-        {
-          // title: "Update Task Progress & Completion Status",
-          // link: "/UserTaskProgress",
-          // icon: <FaTasks />,
-        },
+        // {
+        //   title: "Update Task Progress & Completion Status",
+        //   link: "/UserTaskProgress",
+        //   icon: <FaTasks />,
+        // },
       ],
     },
     {
@@ -96,6 +95,11 @@ const UserSidebar = ({ children }) => {
         {
           title: "Attendance Summary",
           link: "/attendance-summary",
+          icon: <FaChartPie />,
+        },
+        {
+          title: "My Attendance",
+          link: "/attendance-user",
           icon: <FaChartPie />,
         },
       ],
