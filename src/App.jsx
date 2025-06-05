@@ -195,14 +195,14 @@ const App = () => {
                     </SideBar>
                   }
                 />
-                <Route
+                {/* <Route
                   path="/CreateNewProject"
                   element={
                     <SideBar>
                       <CreateNewProject />
                     </SideBar>
                   }
-                />
+                /> */}
                 {/* <Route
                   path="/ProjectDetails"
                   element={

@@ -56,11 +56,11 @@ const AdminSidebar = ({ children }) => {
       icon: <GrTasks />,
       link: "/#",
       submenus: [
-        {
-          title: "Create New Project",
-          link: "/CreateNewProject",
-          icon: <FaPlus />,
-        },
+        // {
+        //   title: "Create New Project",
+        //   link: "/CreateNewProject",
+        //   icon: <FaPlus />,
+        // },
         {
           title: "Project Details",
           link: "/ProjectAdmin",
