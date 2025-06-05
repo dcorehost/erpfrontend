@@ -689,7 +689,6 @@ const ClientNewRequest = () => {
                 <th>Deadline</th>
                 <th>Created</th>
                 <th>Attachments</th>
-                <th>State</th>
                 <th>Remarks</th>
                 <th>Actions</th>
                 <th>State</th>
@@ -735,9 +734,7 @@ const ClientNewRequest = () => {
                       <span className={styles.noAttachments}>None</span>
                     )}
                   </td>
-                  <td className={styles.stateCell}>
-                    {request.state || 'Pending'}
-                  </td>
+                 
                   <td className={styles.remarksCell}>
                     {request.remarks || 'N/A'}
                   </td>

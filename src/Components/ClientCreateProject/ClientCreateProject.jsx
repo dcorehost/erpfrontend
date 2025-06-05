@@ -1,340 +1,141 @@
-
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import styles from './ClientCreateProject.module.css';
-// import Auth from '../Services/Auth';
-
-// const ClientCreateProject = () => {
-//   const [formData, setFormData] = useState({
-//     name: '',
-//     description: '',
-//     employeeIds: '',
-//     deadline: '',
-//     status: 'pending',
-//     priority: 'medium'
-//   });
-
-//   const [message, setMessage] = useState('');
-//   const [projectId, setProjectId] = useState('');
-//   const [error, setError] = useState('');
-//   const [loading, setLoading] = useState(false);
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError('');
-//     setMessage('');
-
-//     try {
-//       const employeeIds = formData.employeeIds
-//         .split(',')
-//         .map(id => id.trim())
-//         .filter(id => id !== '');
-
-//       if (employeeIds.length === 0) {
-//         throw new Error('Please enter at least one valid employee ID');
-//       }
-
-//       if (!formData.deadline) {
-//         throw new Error('Please select a deadline date');
-//       }
-
-//       const response = await axios.post(
-//         'http://209.74.89.83/erpbackend/create-project',
-//         {
-//           name: formData.name.trim(),
-//           description: formData.description.trim(),
-//           deadline: formData.deadline,
-//           status: formData.status,
-//           priority: formData.priority
-//         },
-//         {
-//           params: { employeeIds: employeeIds.join(',') },
-//           headers: {
-//             Authorization: `Bearer ${Auth.getToken()}`
-//           }
-//         }
-//       );
-
-//       if (response.data.message) {
-//         setMessage(response.data.message);
-//         setProjectId(response.data.projectId);
-//         setFormData({ 
-//           name: '', 
-//           description: '', 
-//           employeeIds: '',
-//           deadline: '',
-//           status: 'pending',
-//           priority: 'medium'
-//         });
-//       }
-//     } catch (err) {
-//       const errorMessage = err.response?.data?.message || 
-//                          err.message || 
-//                          'Failed to create project';
-//       setError(errorMessage);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.title}>Create New Project</h2>
-      
-//       <form onSubmit={handleSubmit} className={styles.form}>
-//         <div className={styles.scrollableSection}>
-//           <div className={styles.formGroup}>
-//             <label htmlFor="name" className={styles.label}>
-//               Project Name *
-//             </label>
-//             <input
-//               type="text"
-//               id="name"
-//               name="name"
-//               value={formData.name}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//               minLength="3"
-//               maxLength="50"
-//             />
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="description" className={styles.label}>
-//               Description *
-//             </label>
-//             <textarea
-//               id="description"
-//               name="description"
-//               value={formData.description}
-//               onChange={handleChange}
-//               className={styles.textarea}
-//               rows="4"
-//               required
-//               minLength="10"
-//               maxLength="500"
-//             />
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="employeeIds" className={styles.label}>
-//               Employee IDs (comma-separated) *
-//             </label>
-//             <input
-//               type="text"
-//               id="employeeIds"
-//               name="employeeIds"
-//               value={formData.employeeIds}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//               pattern="^[a-zA-Z0-9, ]+$"
-//               placeholder="dcore5447, dcore3246"
-//             />
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="deadline" className={styles.label}>
-//               Deadline *
-//             </label>
-//             <input
-//               type="date"
-//               id="deadline"
-//               name="deadline"
-//               value={formData.deadline}
-//               onChange={handleChange}
-//               className={styles.input}
-//               required
-//               min={new Date().toISOString().split('T')[0]}
-//             />
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="priority" className={styles.label}>
-//               Priority *
-//             </label>
-//             <select
-//               id="priority"
-//               name="priority"
-//               value={formData.priority}
-//               onChange={handleChange}
-//               className={styles.select}
-//               required
-//             >
-//               <option value="medium">Medium</option>
-//               <option value="high">High</option>
-//               <option value="low">Low</option>
-//               <option value="urgent">Urgent</option>
-//             </select>
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label htmlFor="status" className={styles.label}>
-//               Status *
-//             </label>
-//             <select
-//               id="status"
-//               name="status"
-//               value={formData.status}
-//               onChange={handleChange}
-//               className={styles.select}
-//               required
-//             >
-//               <option value="pending">Pending</option>
-//               <option value="in-progress">In Progress</option>
-//               <option value="completed">Completed</option>
-//               <option value="on-hold">On Hold</option>
-//               <option value="canceled">Canceled</option>
-//             </select>
-//           </div>
-//         </div>
-
-//         <div className={styles.fixedSection}>
-//           {error && <div className={styles.error}>{error}</div>}
-//           {message && (
-//             <div className={styles.success}>
-//               {message} - Project ID: {projectId}
-//             </div>
-//           )}
-
-//           <button
-//             type="submit"
-//             className={styles.button}
-//             disabled={loading}
-//           >
-//             {loading ? (
-//               <span className={styles.spinner}></span>
-//             ) : (
-//               'Create Project'
-//             )}
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default ClientCreateProject;
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './ClientCreateProject.module.css';
 import Auth from '../Services/Auth';
 import { toast, ToastContainer } from 'react-toastify';
+import Select from 'react-select';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ClientCreateProject = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    employeeIds: '',
+    employeeIds: [],
     deadline: '',
     status: 'pending',
-    priority: 'medium'
+    priority: 'Medium'
   });
 
-  const [projectId, setProjectId] = useState('');
-  const [error, setError] = useState('');
+  const [employeeOptions, setEmployeeOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  // Fetch employees
+  const fetchEmployeeIds = async () => {
+    try {
+      const response = await axios.get('http://209.74.89.83/erpbackend/get-emp-ids', {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      });
+
+      console.log("Employee fetch response:", response.data);
+      const employees = response.data.employees || [];
+
+      const options = employees.map(emp => ({
+        value: emp.employeeId,
+        label: emp.employeeId
+      }));
+
+      setEmployeeOptions(options);
+      console.log("Dropdown employee options set:", options);
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+      toast.error('Failed to load employee list');
+    }
   };
 
+  useEffect(() => {
+    fetchEmployeeIds();
+  }, []);
+
+  // Input field changes
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  // Select field for employee IDs
+  const handleEmployeeSelect = (selected) => {
+    const selectedIds = selected.map(opt => opt.value);
+    setFormData(prev => ({
+      ...prev,
+      employeeIds: selectedIds
+    }));
+    console.log("Selected employee IDs:", selectedIds);
+  };
+
+  // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
-    setProjectId('');
+    setLoading(true);
+
+    console.log("Submitting project with data:", formData);
+
+    // Validate before submission
+    if (!formData.name || formData.name.trim().length < 3) {
+      setError("Project name must be at least 3 characters.");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.description || formData.description.trim().length < 10) {
+      setError("Project description must be at least 10 characters.");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.deadline) {
+      setError("Please provide a project deadline.");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.employeeIds.length) {
+      setError("Select at least one employee.");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const employeeIds = formData.employeeIds
-        .split(',')
-        .map(id => id.trim())
-        .filter(id => id !== '');
-
-      if (employeeIds.length === 0) {
-        throw new Error('Please enter at least one valid employee ID');
-      }
-
-      if (!formData.deadline) {
-        throw new Error('Please select a deadline date');
-      }
-
       const response = await axios.post(
         'http://209.74.89.83/erpbackend/create-project',
         {
           name: formData.name.trim(),
           description: formData.description.trim(),
           deadline: formData.deadline,
-          status: formData.status,
-          priority: formData.priority
+          priority: formData.priority,
+          employeeIds: formData.employeeIds
         },
         {
-          params: { employeeIds: employeeIds.join(',') },
           headers: {
-            Authorization: `Bearer ${Auth.getToken()}`
+            Authorization: `Bearer ${Auth.getToken()}`,
+            'Content-Type': 'application/json'
           }
         }
       );
 
-      if (response.data.message && response.data.projectId) {
-        setProjectId(response.data.projectId);
-        toast.success('Project created successfully! Redirecting...', {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      console.log("API Response:", response.data);
 
-        // Reset form
-        setFormData({ 
-          name: '', 
-          description: '', 
-          employeeIds: '',
-          deadline: '',
-          status: 'pending',
-          priority: 'medium'
-        });
-
+      if (response.data?.projectId) {
+        toast.success("Project created successfully!", { position: "top-center" });
         setTimeout(() => {
           navigate('/Admin/Leave/pd');
         }, 2000);
+      } else {
+        throw new Error(response.data.message || "Unexpected response from server.");
       }
+
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                         err.message || 
-                         'Failed to create project';
-      setError(errorMessage);
-      toast.error(errorMessage, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      console.error("Create project error:", err);
+      const errMsg = err.response?.data?.message || err.message || "Server error";
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }
@@ -346,108 +147,80 @@ const ClientCreateProject = () => {
       <div className={styles.card}>
         <h2 className={styles.title}>Create New Project</h2>
         <div className={styles.divider}></div>
-        
-        <form onSubmit={handleSubmit} className={styles.form}>      <div className={styles.scrollableSection}>
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.scrollableSection}>
             <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.label}>
-                Project Name <span className={styles.required}>*</span>
-              </label>
+              <label className={styles.label}>Project Name *</label>
               <input
                 type="text"
-                id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 className={styles.input}
                 required
-                minLength="3"
-                maxLength="50"
                 placeholder="Enter project name"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="description" className={styles.label}>
-                Description <span className={styles.required}>*</span>
-              </label>
+              <label className={styles.label}>Description *</label>
               <textarea
-                id="description"
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
                 className={styles.textarea}
                 rows="4"
                 required
-                minLength="10"
-                maxLength="500"
-                placeholder="Describe the project details"
+                placeholder="Project details"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="employeeIds" className={styles.label}>
-                Employee IDs (comma-separated) <span className={styles.required}>*</span>
-              </label>
-              <input
-                type="text"
-                id="employeeIds"
-                name="employeeIds"
-                value={formData.employeeIds}
-                onChange={handleChange}
-                className={styles.input}
-                required
-                pattern="^[a-zA-Z0-9, ]+$"
-                placeholder="dcore5447, dcore3246"
+              <label className={styles.label}>Select Employees *</label>
+              <Select
+                isMulti
+                options={employeeOptions}
+                onChange={handleEmployeeSelect}
+                value={employeeOptions.filter(opt => formData.employeeIds.includes(opt.value))}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="deadline" className={styles.label}>
-                Deadline <span className={styles.required}>*</span>
-              </label>
+              <label className={styles.label}>Deadline *</label>
               <input
                 type="date"
-                id="deadline"
                 name="deadline"
                 value={formData.deadline}
                 onChange={handleChange}
                 className={styles.input}
-                required
                 min={new Date().toISOString().split('T')[0]}
+                required
               />
             </div>
 
             <div className={styles.formRow}>
               <div className={`${styles.formGroup} ${styles.halfWidth}`}>
-                <label htmlFor="priority" className={styles.label}>
-                  Priority <span className={styles.required}>*</span>
-                </label>
+                <label className={styles.label}>Priority *</label>
                 <select
-                  id="priority"
                   name="priority"
                   value={formData.priority}
                   onChange={handleChange}
                   className={styles.select}
-                  required
                 >
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                  <option value="low">Low</option>
-                  <option value="urgent">Urgent</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
                 </select>
               </div>
 
               <div className={`${styles.formGroup} ${styles.halfWidth}`}>
-                <label htmlFor="status" className={styles.label}>
-                  Status <span className={styles.required}>*</span>
-                </label>
+                <label className={styles.label}>Status</label>
                 <select
-                  id="status"
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
                   className={styles.select}
-                  required
                 >
                   <option value="pending">Pending</option>
                   <option value="in-progress">In Progress</option>
@@ -461,20 +234,8 @@ const ClientCreateProject = () => {
 
           <div className={styles.fixedSection}>
             {error && <div className={styles.error}>{error}</div>}
-
-            <button
-              type="submit"
-              className={styles.button}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className={styles.spinner}></span>
-                  Creating...
-                </>
-              ) : (
-                'Create Project'
-              )}
+            <button type="submit" className={styles.button} disabled={loading}>
+              {loading ? 'Creating...' : 'Create Project'}
             </button>
           </div>
         </form>
