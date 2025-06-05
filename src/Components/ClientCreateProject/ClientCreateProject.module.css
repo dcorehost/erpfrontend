@@ -98,9 +98,10 @@
   padding: 0.8rem 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.75rem;
   transition: all 0.3s ease;
   background-color: #f9f9f9;
+  margin-bottom: 20px;
 }
 
 .input:focus, .textarea:focus, .select:focus {
@@ -108,15 +109,19 @@
   border-color: #3498db;
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
   background-color: white;
+  
+  
 }
 
 .input::placeholder, .textarea::placeholder {
   color: #95a5a6;
+  
 }
 
 .textarea {
   resize: vertical;
   min-height: 100px;
+  
 }
 
 .select {
@@ -125,6 +130,7 @@
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 1em;
+  
 }
 
 .fixedSection {
@@ -133,6 +139,8 @@
   gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
+  
+  
 }
 
 .button {
@@ -149,6 +157,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  
 }
 
 .button:hover {
