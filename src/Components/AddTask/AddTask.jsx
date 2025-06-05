@@ -608,7 +608,7 @@ const AddTaskPage = () => {
             className={styles.addButton}
             disabled={createdTasks.some((task) => task.isRunning) || loading}
           >
-            {loading ? 'Loading...' : 'Add Task'}
+            {loading ? 'Loading...' : 'Create'}
           </button>
         </div>
 

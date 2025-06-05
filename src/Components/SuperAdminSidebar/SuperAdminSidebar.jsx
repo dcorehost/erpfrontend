@@ -40,6 +40,11 @@ const AdminSidebar = ({ children }) => {
           link: "/superadmin-userleave",
         },
         {
+          title: "Attendance",
+          icon: <GrTasks />,
+          link: "/superadmin-leave",
+        },
+        {
           title: "Announcement",
           icon: <FaBuildingUser />,
           link: "/superadmin-notifications",
@@ -90,6 +95,11 @@ const AdminSidebar = ({ children }) => {
           title: "Admin List",
           icon: <FaUser />,
           link: "/superadmin-adminlist",
+        },
+         {
+          title: "Attendance",
+          icon: <FaFileAlt />,
+          link: "/superadmin-attendance",
         },
         {
           title: "Pending Admin Leave",
