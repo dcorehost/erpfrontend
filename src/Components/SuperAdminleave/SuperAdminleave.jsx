@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import styles from './SuperAdminleave.module.css';
+import styles from './SuperAdminLeave.module.css';
 import Auth from '../Services/Auth'; 
 
 const SuperAdminleave = () => {
