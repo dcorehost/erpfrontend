@@ -225,7 +225,6 @@ const ClientNewRequest = () => {
                 <th>Attachments</th>
                 <th>Remarks</th>
                 <th>Actions</th>
-                <th>State</th>
               </tr>
             </thead>
             <tbody>

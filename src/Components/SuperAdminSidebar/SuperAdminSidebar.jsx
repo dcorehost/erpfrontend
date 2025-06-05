@@ -131,11 +131,21 @@ const AdminSidebar = ({ children }) => {
           icon: <FaCalendarAlt />,
           link: "/superadmin-clientsection-createproject",
         },
+       
+        
+        {
+          title: "Project Details",
+          icon: <FaClipboardList />,
+          link: "/SuperAdmin-ProjectDetails",
+        },
+
         {
           title: "New Request",
           icon: <FaClipboardList />,
           link: "/superadmin-clientsection-clientrequest",
         },
+
+
         {
           title: "CreateClient",
           icon: <FaClipboardList />,
