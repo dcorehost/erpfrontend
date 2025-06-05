@@ -83,6 +83,7 @@ import AttendanceAdmin from "./Components/AttendanceAdmin/AttendanceAdmin";
 import AttendanceUser from "./Components/AttendanceUser/AttendanceUser";
 import SuperAdminleave from "./Components/SuperAdminleave/SuperAdminleave";
 import SuperAdminAdmin from "./Components/SuperAdminAdmin/SuperAdminAdmin";
+import SuperAdminProjectDetails from "./Components/SuperAdminProjectDetails/SuperAdminProjectDetails";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -205,6 +206,7 @@ const App = () => {
                 <Route path="/superadmin-client-messages" element={ <SuperAdminSidebar> <ClientMessages /> </SuperAdminSidebar> } />
                 <Route path="/superadmin-leave" element={ <SuperAdminSidebar> <SuperAdminleave /> </SuperAdminSidebar> } />
                 <Route path="/superadmin-attendance" element={ <SuperAdminSidebar> <SuperAdminAdmin /> </SuperAdminSidebar> } />
+                <Route path="SuperAdmin-ProjectDetails" element={<SuperAdminSidebar><SuperAdminProjectDetails /></SuperAdminSidebar>}></Route>
                 <Route path="/mark-attendance" element={ <SuperAdminSidebar> <MarkAttendance /> </SuperAdminSidebar> } />{" "}
                 {/*  Correctly linked */}
               </>

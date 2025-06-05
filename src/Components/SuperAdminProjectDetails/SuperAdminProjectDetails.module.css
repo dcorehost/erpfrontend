@@ -1,0 +1,325 @@
+.projectsContainer {
+  padding: 16px; /* reduced from 20px */
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); /* slightly reduced shadow */
+  animation: fadeIn 0.4s ease forwards; /* reduced duration */
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px); /* reduced from -12px */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px; /* reduced from 24px */
+}
+
+.header h1 {
+  font-size: 20px; /* reduced from 24px */
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+  letter-spacing: 0.02em; /* reduced slightly */
+}
+
+.controls {
+  display: flex;
+  gap: 12px; /* reduced from 16px */
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1.2px solid #bbb; /* reduced border thickness */
+  border-radius: 5px; /* reduced from 6px */
+  padding: 5px 10px; /* reduced from 6px 12px */
+  height: 32px; /* reduced from 36px */
+  width: 200px; /* reduced from 220px */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* slightly lighter shadow */
+  transition: border-color 0.3s;
+}
+
+.searchBar:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+.searchIcon {
+  margin-right: 6px; /* reduced from 8px */
+  color: #666;
+  font-size: 0.9rem; /* reduced from 1rem */
+  user-select: none;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  font-size: 0.85rem; /* reduced from 0.9rem */
+  width: 100%;
+  padding: 3px 0; /* reduced from 4px */
+  color: #333;
+  background: transparent;
+  font-weight: 500;
+}
+
+.addProjectButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px; /* reduced from 6px */
+  padding: 8px 14px; /* reduced from 10px 16px */
+  font-size: 0.9rem; /* reduced from 1rem */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* reduced from 8px */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+}
+
+.addProjectButton:hover,
+.addProjectButton:focus-visible {
+  background-color: #0056b3;
+  box-shadow: 0 6px 12px rgba(0, 86, 179, 0.6);
+  outline: none;
+}
+
+.projectList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projectItem {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 14px; /* reduced from 16px */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04); /* reduced shadow */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.projectItem:hover,
+.projectItem:focus-within {
+  transform: translateY(-3px); /* reduced from -4px */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* reduced shadow */
+  outline: none;
+}
+
+.projectLink {
+  display: block;
+  padding: 14px 16px; /* reduced from 16px 20px */
+  text-decoration: none;
+  color: #2c3e50;
+  position: relative;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* reduced from 14px */
+  margin-bottom: 6px; /* reduced from 8px */
+}
+
+.projectName {
+  font-size: 1rem; /* reduced from 1.2rem */
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  color: #1a2733;
+}
+
+.projectDescription {
+  font-size: 0.9rem; /* reduced from 1rem */
+  color: #555;
+  margin-bottom: 8px; /* reduced from 10px */
+  line-height: 1.3;
+}
+
+.projectInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px; /* reduced from 10px 18px */
+  font-size: 0.8rem; /* reduced from 0.9rem */
+  color: #555;
+  align-items: center;
+}
+
+.status {
+  padding: 4px 8px; /* reduced */
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.7rem; /* reduced from 0.75rem */
+  text-transform: capitalize;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* reduced shadow */
+}
+
+.status[data-status="in progress"] {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status[data-status="planning"] {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status[data-status="completed"] {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status[data-status="on hold"] {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.priority {
+  font-size: 0.7rem; /* reduced from 0.75rem */
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 4px 10px; /* reduced from 5px 12px */
+  border-radius: 12px;
+  user-select: none;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* reduced shadow */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.priority.high {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.priority.normal {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.priority.low {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Deadline styling with tooltip */
+.deadline,
+.overdue {
+  font-weight: 700;
+  padding: 3px 8px; /* reduced */
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* reduced from 6px */
+  font-size: 0.8rem; /* reduced from 0.85rem */
+  user-select: none;
+  cursor: help;
+  position: relative;
+}
+
+.deadline {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.overdue {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Tooltip */
+.deadline[data-tooltip]:hover::after,
+.overdue[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+.projectInfo span {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* reduced from 6px */
+}
+
+.userName {
+  margin-right: 5px; /* reduced from 6px */
+  cursor: default;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Overlay on hover */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 62, 80, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem; /* reduced from 1.1rem */
+  letter-spacing: 0.03em;
+}
+
+.projectItem:hover .overlay {
+  opacity: 1;
+}
+
+.noProjects {
+  color: #999;
+  font-size: 0.9rem; /* reduced from 1rem */
+  font-style: italic;
+  margin-top: 28px; /* reduced from 36px */
+  text-align: center;
+}
+
+/* Accessible focus outline for keyboard navigation */
+.projectLink:focus-visible,
+.addProjectButton:focus-visible {
+  outline: 3px solid #007bff;
+  outline-offset: 2px;
+}
