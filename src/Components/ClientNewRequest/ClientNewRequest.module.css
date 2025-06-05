@@ -3,58 +3,58 @@
     margin: 0 auto;
     padding: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .header {
+}
+
+.header {
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-  }
-  
-  .header h1 {
+}
+
+.header h1 {
     color: #2c3e50;
     font-size: 2rem;
     margin: 0;
-  }
-  
-  .controls {
+}
+
+.controls {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-  }
-  
-  .searchContainer {
+}
+
+.searchContainer {
     position: relative;
     flex-grow: 1;
     min-width: 250px;
-  }
-  
-  .searchInput {
+}
+
+.searchInput {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
-  }
-  
-  .searchInput:focus {
+}
+
+.searchInput:focus {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-  }
-  
-  .searchIcon {
+}
+
+.searchIcon {
     position: absolute;
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: #7f8c8d;
-  }
-  
-  .filterSelect {
+}
+
+.filterSelect {
     padding: 0.75rem 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -62,57 +62,59 @@
     background-color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
-  
-  .filterSelect:focus {
+}
+
+.filterSelect:focus {
     outline: none;
     border-color: #3498db;
-  }
-  
-  .loadingContainer {
+}
+
+.loadingContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 200px;
     gap: 1rem;
-  }
-  
-  .spinner {
+}
+
+.spinner {
     width: 40px;
     height: 40px;
     border: 4px solid rgba(0, 0, 0, 0.1);
     border-left-color: #3498db;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  .noResults {
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.noResults {
     text-align: center;
     padding: 2rem;
     background-color: #f8f9fa;
     border-radius: 8px;
     color: #7f8c8d;
-  }
-  
-  .tableContainer {
+}
+
+.tableContainer {
     overflow-x: auto;
     margin-top: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .requestTable {
+}
+
+.requestTable {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-  }
-  
-  .requestTable th {
+}
+
+.requestTable th {
     background-color: #f8f9fa;
     color: #2c3e50;
     font-weight: 600;
@@ -120,31 +122,32 @@
     padding: 1rem;
     position: sticky;
     top: 0;
-  }
-  
-  .requestTable td {
+    white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+.requestTable td {
     padding: 1rem;
     border-bottom: 1px solid #eee;
     vertical-align: top;
-  }
-  
-  .tableRow:hover {
+}
+
+.tableRow:hover {
     background-color: #f8f9fa;
-  }
-  
-  .titleCell {
+}
+
+.titleCell {
     font-weight: 500;
     color: #2c3e50;
     min-width: 150px;
-  }
-  
-  .descriptionCell {
+}
+
+.descriptionCell {
     color: #34495e;
     max-width: 300px;
     word-wrap: break-word;
-  }
-  
-  .priorityBadge {
+}
+
+.priorityBadge {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     color: white;
@@ -152,72 +155,1632 @@
     font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
-  }
-  
-  .dateCell {
+}
+
+.dateCell {
     white-space: nowrap;
     color: #7f8c8d;
-  }
-  
-  .attachmentsCell {
+}
+
+.attachmentsCell {
     min-width: 120px;
-  }
-  
-  .attachmentsList {
+}
+
+.attachmentsList {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-  
-  .attachmentLink {
+}
+
+.attachmentLink {
     color: #3498db;
     text-decoration: none;
     font-size: 0.85rem;
     transition: color 0.2s;
-  }
-  
-  .attachmentLink:hover {
+}
+
+.attachmentLink:hover {
     color: #2874a6;
     text-decoration: underline;
-  }
-  
-  .noAttachments {
+}
+
+.noAttachments {
     color: #95a5a6;
     font-style: italic;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
+}
+
+/* New styles for State and Actions columns */
+.stateCell {
+    min-width: 100px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.remarksText {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+    word-break: break-word; /* Ensure remarks wrap */
+}
+
+.actionsCell {
+    min-width: 150px;
+    white-space: nowrap; /* Keep buttons on one line */
+}
+
+.approveButton,
+.rejectButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+.actionTakenText {
+    font-weight: 600;
+    color: #6c757d; /* Gray for actions already taken */
+    font-style: italic;
+}
+
+/* Popup for Reject Remarks */
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popupContent h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.remarksTextarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    resize: vertical; /* Allow vertical resizing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.remarksTextarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.popupActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.submitRejectButton,
+.cancelRejectButton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.submitRejectButton {
+    background-color: #007bff; /* Blue for submit */
+    color: white;
+}
+
+.submitRejectButton:hover {
+    background-color: #0056b3;
+}
+
+.cancelRejectButton {
+    background-color: #6c757d; /* Gray for cancel */
+    color: white;
+}
+
+.cancelRejectButton:hover {
+    background-color: #5a6268;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
     .container {
-      padding: 1rem;
+        padding: 1rem;
     }
-    
+
     .header {
-      margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
     }
-    
+
     .requestTable {
-      display: block;
+        display: block; /* Allows table to scroll horizontally */
     }
-    
-    .requestTable th, 
+
+    .requestTable th,
     .requestTable td {
-      padding: 0.75rem;
-      font-size: 0.9rem;
+        padding: 0.75rem;
+        font-size: 0.9rem;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .header h1 {
-      font-size: 1.5rem;
+        font-size: 1.5rem;
     }
-    
+
     .controls {
-      flex-direction: column;
-      align-items: stretch;
+        flex-direction: column;
+        align-items: stretch;
     }
-    
+
     .searchContainer {
-      min-width: auto;
+        min-width: auto;
     }
-  }
+
+    .approveButton,
+    .rejectButton {
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+
+    .actionsCell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .popupContent {
+        padding: 1.5rem;
+    }
+}
+
+.approveButton,
+.rejectButton {
+    /* Existing styles */
+    padding: 0.5rem 0.8rem; /* Reduced horizontal padding from 1rem to 0.8rem */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+/* ... rest of your CSS ... */
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    /* ... existing styles for small screens ... */
+    .approveButton,
+    .rejectButton {
+        padding: 0.5rem 0.6rem; /* Even smaller padding for very small screens */
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+}.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.searchContainer {
+    position: relative;
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+}
+
+.filterSelect {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.noResults {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+}
+
+.tableContainer {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.requestTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.requestTable th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+.requestTable td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.tableRow:hover {
+    background-color: #f8f9fa;
+}
+
+.titleCell {
+    font-weight: 500;
+    color: #2c3e50;
+    min-width: 150px;
+}
+
+.descriptionCell {
+    color: #34495e;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.priorityBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.dateCell {
+    white-space: nowrap;
+    color: #7f8c8d;
+}
+
+.attachmentsCell {
+    min-width: 120px;
+}
+
+.attachmentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attachmentLink {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.attachmentLink:hover {
+    color: #2874a6;
+    text-decoration: underline;
+}
+
+.noAttachments {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* New styles for State and Actions columns */
+.stateCell {
+    min-width: 100px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.remarksText {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+    word-break: break-word; /* Ensure remarks wrap */
+}
+
+.actionsCell {
+    min-width: 150px;
+    white-space: nowrap; /* Keep buttons on one line */
+}
+
+.approveButton,
+.rejectButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+.actionTakenText {
+    font-weight: 600;
+    color: #6c757d; /* Gray for actions already taken */
+    font-style: italic;
+}
+
+/* Popup for Reject Remarks */
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popupContent h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.remarksTextarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    resize: vertical; /* Allow vertical resizing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.remarksTextarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.popupActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.submitRejectButton,
+.cancelRejectButton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.submitRejectButton {
+    background-color: #007bff; /* Blue for submit */
+    color: white;
+}
+
+.submitRejectButton:hover {
+    background-color: #0056b3;
+}
+
+.cancelRejectButton {
+    background-color: #6c757d; /* Gray for cancel */
+    color: white;
+}
+
+.cancelRejectButton:hover {
+    background-color: #5a6268;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .requestTable {
+        display: block; /* Allows table to scroll horizontally */
+    }
+
+    .requestTable th,
+    .requestTable td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        min-width: auto;
+    }
+
+    .approveButton,
+    .rejectButton {
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+
+    .actionsCell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .popupContent {
+        padding: 1.5rem;
+    }
+}
+
+.approveButton,
+.rejectButton {
+    /* Existing styles */
+    padding: 0.5rem 0.8rem; /* Reduced horizontal padding from 1rem to 0.8rem */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+/* ... rest of your CSS ... */
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    /* ... existing styles for small screens ... */
+    .approveButton,
+    .rejectButton {
+        padding: 0.5rem 0.6rem; /* Even smaller padding for very small screens */
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+}.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.searchContainer {
+    position: relative;
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+}
+
+.filterSelect {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.noResults {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+}
+
+.tableContainer {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.requestTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.requestTable th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+.requestTable td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.tableRow:hover {
+    background-color: #f8f9fa;
+}
+
+.titleCell {
+    font-weight: 500;
+    color: #2c3e50;
+    min-width: 150px;
+}
+
+.descriptionCell {
+    color: #34495e;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.priorityBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.dateCell {
+    white-space: nowrap;
+    color: #7f8c8d;
+}
+
+.attachmentsCell {
+    min-width: 120px;
+}
+
+.attachmentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attachmentLink {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.attachmentLink:hover {
+    color: #2874a6;
+    text-decoration: underline;
+}
+
+.noAttachments {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* New styles for State and Actions columns */
+.stateCell {
+    min-width: 100px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.remarksText {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+    word-break: break-word; /* Ensure remarks wrap */
+}
+
+.actionsCell {
+    min-width: 150px;
+    white-space: nowrap; /* Keep buttons on one line */
+}
+
+.approveButton,
+.rejectButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+.actionTakenText {
+    font-weight: 600;
+    color: #6c757d; /* Gray for actions already taken */
+    font-style: italic;
+}
+
+/* Popup for Reject Remarks */
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popupContent h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.remarksTextarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    resize: vertical; /* Allow vertical resizing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.remarksTextarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.popupActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.submitRejectButton,
+.cancelRejectButton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.submitRejectButton {
+    background-color: #007bff; /* Blue for submit */
+    color: white;
+}
+
+.submitRejectButton:hover {
+    background-color: #0056b3;
+}
+
+.cancelRejectButton {
+    background-color: #6c757d; /* Gray for cancel */
+    color: white;
+}
+
+.cancelRejectButton:hover {
+    background-color: #5a6268;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .requestTable {
+        display: block; /* Allows table to scroll horizontally */
+    }
+
+    .requestTable th,
+    .requestTable td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        min-width: auto;
+    }
+
+    .approveButton,
+    .rejectButton {
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+
+    .actionsCell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .popupContent {
+        padding: 1.5rem;
+    }
+}
+
+.approveButton,
+.rejectButton {
+    /* Existing styles */
+    padding: 0.5rem 0.8rem; /* Reduced horizontal padding from 1rem to 0.8rem */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 0.5rem; /* Space between buttons */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+/* ... rest of your CSS ... */
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    /* ... existing styles for small screens ... */
+    .approveButton,
+    .rejectButton {
+        padding: 0.5rem 0.6rem; /* Even smaller padding for very small screens */
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+}.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.searchContainer {
+    position: relative;
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+}
+
+.filterSelect {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.noResults {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+}
+
+.tableContainer {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.requestTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.requestTable th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+.requestTable td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.tableRow:hover {
+    background-color: #f8f9fa;
+}
+
+.titleCell {
+    font-weight: 500;
+    color: #2c3e50;
+    min-width: 150px;
+}
+
+.descriptionCell {
+    color: #34495e;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.priorityBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.dateCell {
+    white-space: nowrap;
+    color: #7f8c8d;
+}
+
+.attachmentsCell {
+    min-width: 120px;
+}
+
+.attachmentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attachmentLink {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.attachmentLink:hover {
+    color: #2874a6;
+    text-decoration: underline;
+}
+
+.noAttachments {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* New styles for State and Actions columns */
+.stateCell {
+    min-width: 100px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.remarksText {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+    word-break: break-word; /* Ensure remarks wrap */
+}
+
+/* --- IMPORTANT CHANGES HERE --- */
+.actionsCell {
+    min-width: 150px;
+    display: flex;          /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    gap: 0.5rem;            /* Space between stacked buttons */
+    align-items: flex-start; /* Align buttons to the start of the cell */
+    white-space: normal;    /* Allow content to wrap */
+}
+
+.approveButton,
+.rejectButton {
+    /* Existing styles - keep the reduced padding you preferred */
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100px; /* Give buttons a fixed width to stack neatly */
+    margin-right: 0; /* Remove margin-right when stacking */
+}
+
+.approveButton {
+    background-color: #28a745; /* Green for approve */
+    color: white;
+}
+
+.approveButton:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.approveButton:active {
+    transform: translateY(0);
+}
+
+.rejectButton {
+    background-color: #dc3545; /* Red for reject */
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.rejectButton:active {
+    transform: translateY(0);
+}
+
+.actionTakenText {
+    font-weight: 600;
+    color: #6c757d; /* Gray for actions already taken */
+    font-style: italic;
+}
+
+/* Popup for Reject Remarks */
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popupContent h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.remarksTextarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    resize: vertical; /* Allow vertical resizing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.remarksTextarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.popupActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.submitRejectButton,
+.cancelRejectButton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.submitRejectButton {
+    background-color: #007bff; /* Blue for submit */
+    color: white;
+}
+
+.submitRejectButton:hover {
+    background-color: #0056b3;
+}
+
+.cancelRejectButton {
+    background-color: #6c757d; /* Gray for cancel */
+    color: white;
+}
+
+.cancelRejectButton:hover {
+    background-color: #5a6268;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .requestTable {
+        display: block; /* Allows table to scroll horizontally */
+    }
+
+    .requestTable th,
+    .requestTable td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        min-width: auto;
+    }
+
+    /* This media query block is now less critical for stacking, as .actionsCell handles it */
+    .approveButton,
+    .rejectButton {
+        /* You might want to keep these for very small screens if desired,
+           but the .actionsCell flex properties are doing the main stacking */
+        padding: 0.5rem 0.6rem; /* Even smaller padding for very small screens */
+        flex-grow: 1; /* Make buttons fill available space */
+        margin-right: 0;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
+
+    /* Important: This makes the actions cell use flex column on small screens as well */
+    .actionsCell {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .popupContent {
+        padding: 1.5rem;
+    }
+}

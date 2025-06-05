@@ -294,7 +294,7 @@ const AdminPanel = () => {
         >
           View Notifications
         </button>
-        <button
+        {/* <button
           className={`${styles["tab-button"]} ${
             currentPage === "create" ? styles.active : ""
           }`}
@@ -304,7 +304,7 @@ const AdminPanel = () => {
           }}
         >
           Create Notification
-        </button>
+        </button> */}
       </div>
 
       {currentPage === "create" ? (

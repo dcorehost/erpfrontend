@@ -254,6 +254,66 @@
 // export default Auth;
 
 
+// const Auth = {
+//   login: ({ token, email, username, typeOfUser, employeeId }) => {
+//     const userData = {
+//       token,
+//       email,
+//       username,
+//       typeOfUser,
+//       employeeId,
+//     };
+
+//     // Store essential data for the current window's session
+//     localStorage.setItem("token", token);
+//     localStorage.setItem("email", email);
+//     localStorage.setItem("typeOfUser", typeOfUser);
+//     localStorage.setItem("userData", JSON.stringify(userData));
+//   },
+
+//   logout: () => {
+//     // Only remove items related to the current session in this specific localStorage
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("email");
+//     localStorage.removeItem("typeOfUser");
+//     localStorage.removeItem("userData");
+//     // Do NOT use localStorage.clear() here, as it would clear other tabs/windows too.
+//   },
+
+//   isAuthenticated: () => {
+//     return !!localStorage.getItem("token");
+//   },
+
+//   getToken: () => {
+//     return localStorage.getItem("token");
+//   },
+
+//   getemail: () => {
+//     return localStorage.getItem("email");
+//   },
+
+//   getAuthData: () => {
+//     const userData = localStorage.getItem("userData");
+//     return userData ? JSON.parse(userData) : null;
+//   },
+
+//   getUser: function () {
+//     return this.getAuthData();
+//   },
+
+//   getUserDetails: function () {
+//     return this.getAuthData();
+//   },
+
+//   getUserType: function () {
+//     const data = this.getAuthData();
+//     return data?.typeOfUser || null;
+//   },
+// };
+
+// export default Auth;
+
+// auth.js
 const Auth = {
   login: ({ token, email, username, typeOfUser, employeeId }) => {
     const userData = {
@@ -265,7 +325,7 @@ const Auth = {
     };
 
     // Store essential data for the current window's session
-    localStorage.setItem("token", token);
+    localStorage.setItem("authToken", token); // Changed to authToken for consistency
     localStorage.setItem("email", email);
     localStorage.setItem("typeOfUser", typeOfUser);
     localStorage.setItem("userData", JSON.stringify(userData));
@@ -273,7 +333,7 @@ const Auth = {
 
   logout: () => {
     // Only remove items related to the current session in this specific localStorage
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken"); // Changed to authToken for consistency
     localStorage.removeItem("email");
     localStorage.removeItem("typeOfUser");
     localStorage.removeItem("userData");
@@ -281,14 +341,14 @@ const Auth = {
   },
 
   isAuthenticated: () => {
-    return !!localStorage.getItem("token");
+    return !!localStorage.getItem("authToken"); // Changed to authToken for consistency
   },
 
   getToken: () => {
-    return localStorage.getItem("token");
+    return localStorage.getItem("authToken"); // Changed to authToken for consistency
   },
 
-  getemail: () => {
+  getEmail: () => {
     return localStorage.getItem("email");
   },
 

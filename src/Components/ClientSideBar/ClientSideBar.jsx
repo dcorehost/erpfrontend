@@ -64,10 +64,27 @@ const CLientSidebar = ({ children }) => {
       icon: <FaTasks />,
       link: "/client-tasks",
     },
+    // {
+    //   title: "New Request",
+    //   icon: <FaFileAlt />,
+    //   link: "/client-project-requests",
+    // },
     {
       title: "New Request",
       icon: <FaFileAlt />,
-      link: "/client-project-requests",
+      submenus: [
+        {
+          title: "Make Request",
+          link: "/client-project-requests",
+          icon: <FaPlus />,
+        },
+        {
+          title: "Request Details",
+          link: "/client-project-request-details",
+          icon: <FaClipboard />,
+          notificationCount: 3, // optional
+        },
+      ],
     },
     // {
     //   title: "Documents",
@@ -167,9 +184,8 @@ const CLientSidebar = ({ children }) => {
       <div className={`${styles.sidebarWrapper}`}>
         {/* <div className={`${styles.sidebarContainer}`}> */}
         <div
-          className={`${styles.sidebar} ${
-            isOpen ? styles.open : styles.closed
-          }`}
+          className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed
+            }`}
         >
           <button
             className={styles.hamburgerButton}
@@ -190,9 +206,8 @@ const CLientSidebar = ({ children }) => {
                     <div>
                       <button
                         onClick={() => toggleExpand(item?.title)}
-                        className={`${styles.menuButton} ${
-                          isActive(item.link) ? styles.active : ""
-                        }`}
+                        className={`${styles.menuButton} ${isActive(item.link) ? styles.active : ""
+                          }`}
                       >
                         <div className={styles.sidebarItem}>
                           <span
@@ -202,9 +217,8 @@ const CLientSidebar = ({ children }) => {
                             {item?.icon}
                           </span>
                           <span
-                            className={`${styles.sidebarTitle} ${
-                              isOpen ? styles.open : ""
-                            }`}
+                            className={`${styles.sidebarTitle} ${isOpen ? styles.open : ""
+                              }`}
                             style={{
                               flexGrow: 1,
                             }} /* Ensure text takes available space */
@@ -213,13 +227,11 @@ const CLientSidebar = ({ children }) => {
                           </span>
                           <FaChevronRight
                             size={12}
-                            className={`${styles.chevronIcon} ${
-                              isOpen ? styles.open : ""
-                            } ${
-                              expandedItem === item?.title
+                            className={`${styles.chevronIcon} ${isOpen ? styles.open : ""
+                              } ${expandedItem === item?.title
                                 ? styles.expanded
                                 : ""
-                            }`}
+                              }`}
                             style={{
                               marginLeft: "auto",
                             }} /* Push chevron to the right */
@@ -233,9 +245,8 @@ const CLientSidebar = ({ children }) => {
                             <Link
                               key={child?.link}
                               to={child?.link}
-                              className={`${styles.sidebarChildLink} ${
-                                isActive(child?.link) ? styles.active : ""
-                              }`}
+                              className={`${styles.sidebarChildLink} ${isActive(child?.link) ? styles.active : ""
+                                }`}
                             >
                               <span className={styles.childIcon}>
                                 {child?.icon}
@@ -251,15 +262,13 @@ const CLientSidebar = ({ children }) => {
                   ) : (
                     <Link
                       to={item?.link}
-                      className={`${styles.navLink} ${
-                        isActive(item?.link) ? styles.active : ""
-                      }`}
+                      className={`${styles.navLink} ${isActive(item?.link) ? styles.active : ""
+                        }`}
                     >
                       <span className={styles.navIcon}>{item?.icon}</span>
                       <span
-                        className={`${styles.navTitle} ${
-                          isOpen ? styles.open : ""
-                        }`}
+                        className={`${styles.navTitle} ${isOpen ? styles.open : ""
+                          }`}
                       >
                         {item?.title}
                       </span>

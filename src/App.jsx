@@ -76,10 +76,13 @@ import ClientNewRequest from "./Components/ClientNewRequest/ClientNewRequest";
 import CreateClient from "./Components/CreateClient/CreateClient";
 import ClientCommunication from "./Components/ClientCommunication/ClientCommunication";
 import ClientMessages from "./Components/ClientMessageDetails/ClientMessageDetails";
+import ClientProjectRequestDetails from "./Components/ClientRequestDetails/ClientRequestDetails"
 import ProjectAdmin from "./Components/ProjectAdmin/ProjectAdmin";
 import ProjectDetailsPage from "./Components/ProjectDetailsPage/ProjectDetailsPage";
 import AttendanceAdmin from "./Components/AttendanceAdmin/AttendanceAdmin";
 import AttendanceUser from "./Components/AttendanceUser/AttendanceUser";
+import SuperAdminleave from "./Components/SuperAdminleave/SuperAdminleave";
+import SuperAdminAdmin from "./Components/SuperAdminAdmin/SuperAdminAdmin";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -106,10 +109,10 @@ const App = () => {
                       typeOfUser === "Admin"
                         ? "/admin-dashboard"
                         : typeOfUser === "superadmin"
-                        ? "/superadmin-dashboard"
-                        : typeOfUser === "Client"
-                        ? "/client-dashboard"
-                        : "/user-dashboard"
+                          ? "/superadmin-dashboard"
+                          : typeOfUser === "Client"
+                            ? "/client-dashboard"
+                            : "/user-dashboard"
                     }
                     replace 
                   />
@@ -200,6 +203,8 @@ const App = () => {
                 <Route path="/superadmin-clientsection-clientrequest" element={ <SuperAdminSidebar> <ClientNewRequest /> </SuperAdminSidebar> } />
                 <Route path="/superadmin-clientsection-Createclient"  element={ <SuperAdminSidebar> <CreateClient />  </SuperAdminSidebar> } />
                 <Route path="/superadmin-client-messages" element={ <SuperAdminSidebar> <ClientMessages /> </SuperAdminSidebar> } />
+                <Route path="/superadmin-leave" element={ <SuperAdminSidebar> <SuperAdminleave /> </SuperAdminSidebar> } />
+                <Route path="/superadmin-attendance" element={ <SuperAdminSidebar> <SuperAdminAdmin /> </SuperAdminSidebar> } />
                 <Route path="/mark-attendance" element={ <SuperAdminSidebar> <MarkAttendance /> </SuperAdminSidebar> } />{" "}
                 {/*  Correctly linked */}
               </>
