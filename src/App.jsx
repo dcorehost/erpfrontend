@@ -127,13 +127,17 @@ const App = () => {
             <Route path="/resetpassword" element={ <SideBar> <ResetPassword /> </SideBar>} />
             <Route path="/logout" element={<SideBar><Logout /></SideBar>} />
             <Route path="/userProfile" element={<SideBar><UserProfile /></SideBar>} />
-            <Route path="/my-profile" element={<SideBar> <MyProfile /></SideBar>} />
-            <Route path="/Own-User-Profile" element={<SideBar><OwnUserProfile /></SideBar>} />
+            {/* <Route path="/my-profile" element={<SideBar> <MyProfile /></SideBar>} /> */}
+            {/* <Route path="/Own-User-Profile" element={<SideBar><OwnUserProfile /></SideBar>} /> */}
             {/* <Route path="/mark-attendance" element={<MarkAttendance />} /> */}
 
             {/* Admin Routes */}
             {typeOfUser === "Admin" && (
               <>
+               <Route path="/my-profile" element={<SideBar> <MyProfile /></SideBar>} />
+               <Route path="/Own-User-Profile" element={<SideBar><OwnUserProfile /></SideBar>} />
+
+
                 <Route   path="/admin-dashboard"  element={ <SideBar> <AdminDashboard /> </SideBar> } />
                 <Route   path="/Admin/Leave/Pending-Leaves" element={ <SideBar> <PendingLeaves /> </SideBar> } />
                 <Route   path="/CompletedLeaves"  element={ <SideBar> <CompletedLeaves /> </SideBar> } />
@@ -167,6 +171,10 @@ const App = () => {
             {/* User Routes */}
             {typeOfUser === "User" && (
               <>
+                <Route path="/my-profile" element={<UserSidebar> <MyProfile /></UserSidebar>} />
+                <Route path="/Own-User-Profile" element={<UserSidebar><OwnUserProfile /></UserSidebar>} />
+
+
                 <Route  path="/user-dashboard" element={ <UserSidebar> <UserDashboard /> </UserSidebar> } />
                 <Route  path="/leave-summary"  element={ <UserSidebar>  <LeaveSummary /> </UserSidebar> } />
                 <Route  path="/ApplyLeaveTable" element={ <UserSidebar> <ApplyLeaveTable />  </UserSidebar> } />
@@ -190,6 +198,10 @@ const App = () => {
             {/* Super Admin Routes */}
             {typeOfUser === "superadmin" && (
               <>
+                <Route path="/my-profile" element={<SuperAdminSidebar> <MyProfile /></SuperAdminSidebar>} />
+                <Route path="/Own-User-Profile" element={<SuperAdminSidebar><OwnUserProfile /></SuperAdminSidebar>} />
+
+
                 <Route path="/superadmin-dashboard" element={  <SuperAdminSidebar> <SuperAdminDashboard /> </SuperAdminSidebar> } />
                 <Route path="/SuperAdmin-create-user" element={ <SuperAdminSidebar> <CreateUser /> </SuperAdminSidebar>  } />
 
@@ -218,6 +230,10 @@ const App = () => {
 
             {typeOfUser === "Client" && (
               <>
+
+               <Route path="/my-profile" element={<ClientSideBar> <MyProfile /></ClientSideBar>} />
+                <Route path="/Own-User-Profile" element={<ClientSideBar><OwnUserProfile /></ClientSideBar>} />
+
                 <Route path="/client-dashboard" element={ <CLientSidebar> <ClientDashboard /> </CLientSidebar> } />
                 <Route path="/client-projects" element={ <CLientSidebar> <ClientProjects />  </CLientSidebar> } />
                 <Route path="/client-project-details" element={ <CLientSidebar> <ClientProjectDetails /> </CLientSidebar> } />
