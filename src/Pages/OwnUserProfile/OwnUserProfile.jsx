@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styles from './OwnUserProfile.module.css';
@@ -19,9 +18,9 @@ const OwnUserProfile = () => {
     pincode: false,
     phone: false,
     emailId: false,
-    profilePhoto: false
+    profilePhoto: false,
+    // password and confirmPassword will be managed by editPasswordMode
   });
-
   const [formData, setFormData] = useState({
     employeeId: '',
     username: '',
@@ -36,7 +35,9 @@ const OwnUserProfile = () => {
     pincode: '',
     phone: '',
     emailId: '',
-    profilePhoto: null
+    profilePhoto: null,
+    password: '', // Initialize as empty string
+    confirmPassword: '', // Initialize as empty string
   });
 
   const [originalData, setOriginalData] = useState({});
@@ -47,6 +48,9 @@ const OwnUserProfile = () => {
   const [requestSent, setRequestSent] = useState(false);
   const fileInputRef = useRef(null);
 
+  // New state for password edit mode
+  const [editPasswordMode, setEditPasswordMode] = useState(false);
+
   const API_BASE_URL = 'http://209.74.89.83/erpbackend/';
 
   // Create axios instance with authorization token
@@ -55,7 +59,7 @@ const OwnUserProfile = () => {
       baseURL: API_BASE_URL,
       headers: {
         'Authorization': `Bearer ${Auth.getToken()}`,
-        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/json'
       }
     });
   };
@@ -67,7 +71,7 @@ const OwnUserProfile = () => {
         const axiosInstance = getAxiosInstance();
         const response = await axiosInstance.get('get-user-detail');
         const userData = response.data.users;
-        
+
         const userType = Auth.getUserType();
         setIsSuperAdmin(userType === 'Super Admin');
 
@@ -85,11 +89,13 @@ const OwnUserProfile = () => {
           pincode: userData.address?.pincode || '',
           phone: userData.contact?.phone || '',
           emailId: userData.contact?.emailId || '',
-          profilePhoto: userData.profilePhoto || null
+          profilePhoto: userData.profilePhoto || null,
+          password: '', // Passwords are not fetched, so keep them empty
+          confirmPassword: '',
         };
 
         setFormData(mappedData);
-        setOriginalData(mappedData);
+        setOriginalData(mappedData); // originalData won't store password
 
         if (userData.profilePhoto) {
           setPreviewUrl(userData.profilePhoto);
@@ -114,12 +120,56 @@ const OwnUserProfile = () => {
     }));
   };
 
+  const handlePasswordSave = async () => {
+    const password = formData.password.trim();
+    const confirmPassword = formData.confirmPassword.trim();
+
+    if (!password || !confirmPassword) {
+      alert('Both password and confirm password are required.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    try {
+      const axiosInstance = getAxiosInstance();
+      if (isSuperAdmin) {
+        // Super Admin can directly update password
+        await axiosInstance.put('update-user-profile', { password, confirmPassword }); // Send both for backend validation
+        alert('Password updated successfully');
+      } else {
+        // Normal user sends update request
+        await axiosInstance.put('request-profile-update', { password, confirmPassword }); // Send both for backend validation
+        setRequestSent(true);
+        alert('Password update request sent successfully');
+      }
+      // Reset password fields after successful update
+      setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
+      setEditPasswordMode(false); // Exit edit mode
+    } catch (err) {
+      console.error('Error updating password:', err);
+      alert('Failed to update password');
+    }
+  };
+
+  const handlePasswordCancel = () => {
+    // Reset both password and confirmPassword on cancel
+    setFormData(prev => ({
+      ...prev,
+      password: '',
+      confirmPassword: '',
+    }));
+    setEditPasswordMode(false); // Exit edit mode
+  };
+
   const handleMultiSelectChange = (e) => {
     const { name, options } = e.target;
     const selectedValues = Array.from(options)
       .filter(option => option.selected)
       .map(option => option.value);
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: selectedValues
@@ -153,50 +203,110 @@ const OwnUserProfile = () => {
     }));
   };
 
-  const handleFieldSave = async (fieldName) => {
-    if (JSON.stringify(formData[fieldName]) === JSON.stringify(originalData[fieldName])) {
-      alert('No changes detected');
-      toggleFieldEdit(fieldName);
-      return;
-    }
+const handleFieldSave = async (fieldName) => {
+    if (JSON.stringify(formData[fieldName]) === JSON.stringify(originalData[fieldName])) {
+      alert('No changes detected');
+      toggleFieldEdit(fieldName);
+      return;
+    }
 
-    try {
-      const axiosInstance = getAxiosInstance();
-      
-      if (isSuperAdmin) {
-        const formDataToSend = new FormData();
-        if (fieldName === 'profilePhoto') {
-          formDataToSend.append('profilePhoto', formData.profilePhoto);
-          await axiosInstance.put('update-user-profile', formDataToSend, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-        } else {
-          await axiosInstance.put('update-user-profile', { [fieldName]: formData[fieldName] });
-        }
-        alert('Field updated successfully');
-      } else {
-        // Create update payload with only the changed field
-        const updatePayload = { [fieldName]: formData[fieldName] };
-        
-        // Only include username if it's the field being updated
-        if (fieldName === 'username') {
-          updatePayload.username = formData.username;
-        }
-        
-        await axiosInstance.put('request-profile-update', updatePayload);
-        setRequestSent(true);
-        alert('Profile update request sent successfully');
-      }
-      
-      setOriginalData(prev => ({ ...prev, [fieldName]: formData[fieldName] }));
-      toggleFieldEdit(fieldName);
-    } catch (err) {
-      console.error('Error updating field:', err);
-      alert('Failed to update field');
-    }
-  };
+    try {
+      const axiosInstance = getAxiosInstance(); // Get a fresh instance
+
+      // Determine the correct API endpoint based on user type
+      const url = isSuperAdmin ? 'update-user-profile' : 'request-profile-update';
+
+      // *** START OF CRUCIAL CHANGES FOR handleFieldSave ***
+      if (fieldName === 'profilePhoto') {
+        // For profile photo, ALWAYS use FormData
+        const formDataToSend = new FormData();
+        if (formData.profilePhoto) {
+          // The key 'profilePhoto' must match Multer's upload.single('profilePhoto')
+          formDataToSend.append('profilePhoto', formData.profilePhoto);
+        } else {
+          // If the photo was removed, send an empty string or null for 'profilePhoto'
+          // This signals the backend to clear the photo. Adapt if your backend expects something else.
+          formDataToSend.append('profilePhoto', '');
+        }
+
+        await axiosInstance.put(url, formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data' // Explicitly set for FormData
+          }
+        });
+
+      } else {
+        // For all other fields (non-file fields), send as JSON payload
+        const updatePayload = { [fieldName]: formData[fieldName] };
+
+        await axiosInstance.put(url, updatePayload, {
+          headers: {
+            'Content-Type': 'application/json' // Explicitly set for JSON payloads
+          }
+        });
+      }
+      // *** END OF CRUCIAL CHANGES FOR handleFieldSave ***
+
+      if (isSuperAdmin) {
+        alert('Field updated successfully');
+      } else {
+        setRequestSent(true);
+        alert('Profile update request sent successfully');
+      }
+
+      // Update originalData only after successful submission
+      setOriginalData(prev => ({ ...prev, [fieldName]: formData[fieldName] }));
+      toggleFieldEdit(fieldName);
+    } catch (err) {
+      console.error('Error updating field:', err);
+      alert('Failed to update field: ' + (err.response?.data?.message || err.message));
+    }
+  };
+
+  // const handleFieldSave = async (fieldName) => {
+  //   if (JSON.stringify(formData[fieldName]) === JSON.stringify(originalData[fieldName])) {
+  //     alert('No changes detected');
+  //     toggleFieldEdit(fieldName);
+  //     return;
+  //   }
+
+  //   try {
+  //     const axiosInstance = getAxiosInstance();
+
+  //     if (isSuperAdmin) {
+  //       const formDataToSend = new FormData();
+  //       if (fieldName === 'profilePhoto') {
+  //         formDataToSend.append('profilePhoto', formData.profilePhoto);
+  //         await axiosInstance.put('update-user-profile', formDataToSend, {
+  //           headers: {
+  //             'Content-Type': 'multipart/form-data'
+  //           }
+  //         });
+  //       } else {
+  //         // Special handling for language and deductionType to send as arrays
+  //         if (fieldName === 'language' || fieldName === 'deductionType') {
+  //           await axiosInstance.put('update-user-profile', { [fieldName]: formData[fieldName] });
+  //         } else {
+  //           await axiosInstance.put('update-user-profile', { [fieldName]: formData[fieldName] });
+  //         }
+  //       }
+  //       alert('Field updated successfully');
+  //     } else {
+  //       // Create update payload with only the changed field
+  //       const updatePayload = { [fieldName]: formData[fieldName] };
+
+  //       await axiosInstance.put('request-profile-update', updatePayload);
+  //       setRequestSent(true);
+  //       alert('Profile update request sent successfully');
+  //     }
+
+  //     setOriginalData(prev => ({ ...prev, [fieldName]: formData[fieldName] }));
+  //     toggleFieldEdit(fieldName);
+  //   } catch (err) {
+  //     console.error('Error updating field:', err);
+  //     alert('Failed to update field');
+  //   }
+  // };
 
   const handleFieldCancel = (fieldName) => {
     setFormData(prev => ({
@@ -204,12 +314,15 @@ const OwnUserProfile = () => {
       [fieldName]: originalData[fieldName]
     }));
     toggleFieldEdit(fieldName);
-    
+
     if (fieldName === 'profilePhoto' && originalData.profilePhoto) {
       setPreviewUrl(originalData.profilePhoto);
     } else if (fieldName === 'profilePhoto') {
       setPreviewUrl(null);
     }
+    if (fieldName === 'profilePhoto' && fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   if (loading) {
@@ -245,7 +358,7 @@ const OwnUserProfile = () => {
                 Profile Photo
               </h2>
               {!editStates.profilePhoto ? (
-                <button 
+                <button
                   onClick={() => toggleFieldEdit('profilePhoto')}
                   className={styles.editButton}
                 >
@@ -268,15 +381,15 @@ const OwnUserProfile = () => {
                 </div>
               )}
             </div>
-            
+
             <div className={styles.photoContainer}>
               <div className={styles.photoWrapper}>
                 {previewUrl ? (
                   <>
                     <img src={previewUrl} alt="Profile" className={styles.profileImage} />
                     {editStates.profilePhoto && (
-                      <button 
-                        onClick={handleRemovePhoto} 
+                      <button
+                        onClick={handleRemovePhoto}
                         className={styles.removePhotoButton}
                       >
                         <i className="fas fa-trash"></i>
@@ -315,14 +428,14 @@ const OwnUserProfile = () => {
                 Basic Information
               </h2>
             </div>
-            
+
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
                 <label className={styles.inputLabel}>Employee ID</label>
                 <div className={styles.staticValue}>{formData.employeeId}</div>
               </div>
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="username"
                 label="Username"
                 type="text"
@@ -334,8 +447,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="emailId"
                 label="Email"
                 type="email"
@@ -358,9 +471,9 @@ const OwnUserProfile = () => {
                 Personal Details
               </h2>
             </div>
-            
+
             <div className={styles.formGrid}>
-              <EditableField 
+              <EditableField
                 fieldName="displayName"
                 label="Display Name"
                 type="text"
@@ -372,8 +485,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="gender"
                 label="Gender"
                 type="select"
@@ -391,8 +504,64 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              {/* Password Section - Replaced EditableField */}
+              <div className={styles.formGroup}>
+                <div className={styles.fieldHeader}>
+                  <label className={styles.inputLabel}>Password</label>
+                  {!editPasswordMode ? (
+                    <button
+                      onClick={() => setEditPasswordMode(true)}
+                      className={styles.editButton}
+                    >
+                      <i className="fas fa-pencil-alt"></i> Edit
+                    </button>
+                  ) : (
+                    <div className={styles.fieldActions}>
+                      <button
+                        onClick={handlePasswordSave}
+                        className={styles.saveButton}
+                      >
+                        <i className="fas fa-check"></i> {isSuperAdmin ? 'Save' : 'Send'}
+                      </button>
+                      <button
+                        onClick={handlePasswordCancel}
+                        className={styles.cancelButton}
+                      >
+                        <i className="fas fa-times"></i> Cancel
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {editPasswordMode ? (
+                  <>
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="New Password"
+                      className={styles.formInput}
+                      value={formData.password}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="Confirm New Password"
+                      className={`${styles.formInput} ${styles.marginTop}`}
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                    />
+                  </>
+                ) : (
+                  <div className={styles.staticValue}>
+                    ******** {/* Display masked password */}
+                  </div>
+                )}
+              </div>
+              {/* End of Password Section */}
+
+              <EditableField
                 fieldName="dateOfBirth"
                 label="Date of Birth"
                 type="date"
@@ -415,9 +584,9 @@ const OwnUserProfile = () => {
                 Contact Information
               </h2>
             </div>
-            
+
             <div className={styles.formGrid}>
-              <EditableField 
+              <EditableField
                 fieldName="phone"
                 label="Phone"
                 type="tel"
@@ -440,9 +609,9 @@ const OwnUserProfile = () => {
                 Location Information
               </h2>
             </div>
-            
+
             <div className={styles.formGrid}>
-              <EditableField 
+              <EditableField
                 fieldName="country"
                 label="Country"
                 type="select"
@@ -462,8 +631,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="state"
                 label="State/Province"
                 type="text"
@@ -475,8 +644,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="pincode"
                 label="ZIP/Postal Code"
                 type="text"
@@ -499,9 +668,9 @@ const OwnUserProfile = () => {
                 Preferences
               </h2>
             </div>
-            
+
             <div className={styles.formGrid}>
-              <EditableField 
+              <EditableField
                 fieldName="language"
                 label="Language"
                 type="select"
@@ -519,8 +688,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="deductionType"
                 label="Deduction Type"
                 type="select"
@@ -538,8 +707,8 @@ const OwnUserProfile = () => {
                 handleFieldCancel={handleFieldCancel}
                 isSuperAdmin={isSuperAdmin}
               />
-              
-              <EditableField 
+
+              <EditableField
                 fieldName="role"
                 label="Role"
                 type="text"
@@ -559,7 +728,7 @@ const OwnUserProfile = () => {
   );
 };
 
-// Reusable EditableField component
+// Reusable EditableField component (remains largely the same, but now only handles single fields)
 const EditableField = ({
   fieldName,
   label,
@@ -577,7 +746,7 @@ const EditableField = ({
     <div className={styles.fieldHeader}>
       <label className={styles.inputLabel}>{label}</label>
       {!editStates[fieldName] ? (
-        <button 
+        <button
           onClick={() => toggleFieldEdit(fieldName)}
           className={styles.editButton}
         >
@@ -600,13 +769,13 @@ const EditableField = ({
         </div>
       )}
     </div>
-    
+
     {editStates[fieldName] ? (
       type === 'select' ? (
         <select
           name={fieldName}
           className={styles.formInput}
-          value={formData[fieldName]}
+          value={Array.isArray(formData[fieldName]) ? formData[fieldName][0] || '' : formData[fieldName]}
           onChange={handleInputChange}
         >
           {options.map(option => (
@@ -624,24 +793,13 @@ const EditableField = ({
           onChange={handleInputChange}
         />
       )
-  //   ) : (
-  //     <div className={styles.staticValue}>
-  //       {Array.isArray(formData[fieldName]) 
-  //         ? formData[fieldName].join(', ') || 'Not specified'
-  //         : formData[fieldName] || 'Not specified'}
-  //     </div>
-  //   )}
-  // </div>
-) : (
-  <div className={styles.staticValue}>
-    {!Array.isArray(formData[fieldName])
-      ? formData[fieldName] || 'N/A'
-      : formData[fieldName].join(', ') || 'N/A'}
+    ) : (
+      <div className={styles.staticValue}>
+        {!Array.isArray(formData[fieldName])
+          ? formData[fieldName] || 'N/A'
+          : formData[fieldName].join(', ') || 'N/A'}
+      </div>
+    )}
   </div>
-)}
-</div>
 );
-
-
-
 export default OwnUserProfile;
