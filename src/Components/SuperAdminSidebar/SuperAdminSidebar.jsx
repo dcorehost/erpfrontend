@@ -24,11 +24,17 @@ const AdminSidebar = ({ children }) => {
   const navigate = useNavigate();
 
   const menus = [
+   
     {
       title: "User",
       icon: <FaChartLine />,
       link: "/#",
       submenus: [
+         {
+          title: "Create User",
+          icon: <FaBuildingUser />,
+          link: "/SuperAdmin-create-user",
+        },
         {
           title: "User List",
           icon: <FaBuildingUser />,
@@ -49,6 +55,7 @@ const AdminSidebar = ({ children }) => {
           icon: <FaBuildingUser />,
           link: "/superadmin-notifications",
         },
+       
       ],
     },
     {
@@ -91,6 +98,11 @@ const AdminSidebar = ({ children }) => {
       icon: <RiAdminFill />,
       link: "/#",
       submenus: [
+         {
+          title: "Create admin",
+          icon: <FaBuildingUser />,
+          link: "/superadmin-create-admin",
+        },
         {
           title: "Admin List",
           icon: <FaUser />,

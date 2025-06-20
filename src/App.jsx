@@ -84,6 +84,7 @@ import AttendanceUser from "./Components/AttendanceUser/AttendanceUser";
 import SuperAdminleave from "./Components/SuperAdminleave/SuperAdminleave";
 import SuperAdminAdmin from "./Components/SuperAdminAdmin/SuperAdminAdmin";
 import SuperAdminProjectDetails from "./Components/SuperAdminProjectDetails/SuperAdminProjectDetails";
+import CreateAdmin from "./Components/CreateAdmin/CreateAdmin";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -190,6 +191,9 @@ const App = () => {
             {typeOfUser === "superadmin" && (
               <>
                 <Route path="/superadmin-dashboard" element={  <SuperAdminSidebar> <SuperAdminDashboard /> </SuperAdminSidebar> } />
+                <Route path="/SuperAdmin-create-user" element={ <SuperAdminSidebar> <CreateUser /> </SuperAdminSidebar>  } />
+
+                <Route path="/superadmin-create-admin" element={  <SuperAdminSidebar> <CreateAdmin /> </SuperAdminSidebar> } />
                 <Route path="/create-holidays" element={ <SuperAdminSidebar> <CreateHolidays />  </SuperAdminSidebar> } />
                 <Route path="/holiday-list" element={<SuperAdminSidebar> <HolidayList /> </SuperAdminSidebar> } />
                 <Route path="/superadmin-notifications" element={ <SuperAdminSidebar> <SuperAdminNotifications /> </SuperAdminSidebar> } />
